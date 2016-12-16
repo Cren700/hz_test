@@ -1,0 +1,170 @@
+body {
+    position: relative;
+}
+.window-dialog {
+    border: 5px solid rgba(0, 0, 0, 0.5);
+    border: 5px solid #5d5d5d \9;
+    -ms-border: 5px solid rgba(0, 0, 0, 0.5);
+}
+.window-dialog, .window-dialog-mask, .window-confirm-mask, .window-dialog-border {
+    position: absolute;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    display: none;
+}
+.window-dialog-border {
+    background-color: #000;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+    padding: 5px;
+}
+.window-show {
+    display: block;
+}
+.window-dialog-mask {
+    background-color: #000;
+    bottom: 0px;
+    font-size: 14px;
+    height: 100%;
+    left: 0px;
+    opacity: 0.2;
+    filter: alpha(opacity=20);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(opacity=20)";
+    right: 0px;
+    top: 0px;
+    z-index: 11030;
+}
+.window-dialog-mask iframe {
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    filter: alpha(opacity=40);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(opacity=40)";
+    z-index: 1040;
+}
+.window-confirm-mask {
+    bottom: 0px;
+    font-size: 14px;
+    height: 100%;
+    left: 0px;
+    right: 0px;
+    top: 0px;
+    z-index: 1030;
+}
+.window-confirm-mask iframe {
+    width: 100%;
+    height: 100%;
+    z-index: 1040;
+    filter: alpha(opacity=0);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(opacity=0)";
+}
+.window-dialog, .window-dialog-border {
+    z-index: 11050;
+    left: 50%;
+    top: 50%;
+    margin-left: -200px;
+    background-color: #ffffff;
+    width: 440px;
+}
+.window-dialog-head {
+    cursor: default;
+    line-height: 100%;
+    font-size: 14px;
+    padding: 10px;
+    background: #f1f1f1;
+    color: #4b4b4b;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.window-dialog-close {
+    color: #999;
+    cursor: pointer;
+    font-family: tahoma;
+    font-size: 24px;
+    height: 20px;
+    _line-height: 14px !important;
+    width: 20px;
+    position: absolute;
+    right: 7px;
+    text-decoration: none;
+    top: 7px;
+    z-index: 10;
+    background: url('/static/images/close_ico.png') no-repeat -28px 0;
+    text-indent: -9999em;
+    overflow: hidden
+}
+.window-dialog-close:hover {
+    color: #e30;
+    text-decoration: none;
+    background-position: 0 0;
+}
+.window-dialog-loading {
+    position: absolute;
+    height: 32px;
+    width: 32px;
+    top: 50%;
+    left: 50%;
+    margin: -16px 0 0 -16px;
+    background: url(images/loading.gif) no-repeat;
+}
+.window-dialog-content {
+    background-color: #fff;
+    overflow-y: auto;
+}
+.window-dialog-content.noScroll {
+    overflow: hidden;
+}
+.window-confirm {
+    position: absolute;
+    bottom: 10px;
+    right: 20px;
+}
+.window-dialog-title {
+    font-weight: bold
+}
+.dialog-msg {
+    position: fixed !important;
+}
+.window-dialog-content {
+    padding: 30px 0 ;
+    margin: 10px auto;
+    text-align: center;
+}
+.window-dialog-btn {
+    height: 40px;
+    width: 205px;
+    margin: 10px auto;
+}
+.window-dialog-btn button {
+    display: inline-block;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    margin:0 auto;
+    width: 100px;
+    height: 40px;
+    font: normal 15px/40px 'hiragino sans gb', 'Microsoft YaHei';
+    background-color: #ffa101;
+    text-align: center;
+    vertical-align: middle;
+    color: #fff;
+    line-height: 30px;
+    padding: 0 20px;
+    -webkit-appearance: none;
+    border: 0 none;
+}
+.window-mask {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    opacity: .4;
+    filter: alpha(opacity=40);
+    z-index: 9998;
+}
