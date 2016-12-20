@@ -45,6 +45,8 @@
                                             <option value="">请选择证件类型</option>
                                             <option value="1" <{if isset($user['Fcert_type']) && $user['Fcert_type'] eq 1 }>selected<{/if}>>身份证</option>
                                             <option value="2" <{if isset($user['Fcert_type']) && $user['Fcert_type'] eq 2 }>selected<{/if}>>驾驶证</option>
+                                            <option value="3" <{if isset($user['Fcert_type']) && $user['Fcert_type'] eq 3 }>selected<{/if}>>护照</option>
+                                            <option value="4" <{if isset($user['Fcert_type']) && $user['Fcert_type'] eq 4 }>selected<{/if}>>港澳证</option>
                                         </select>
                                     </div>
                                 </div>

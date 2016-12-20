@@ -2,7 +2,7 @@ if (typeof (HZ) == "undefined" || !HZ) {
     var HZ = {}
 }
 
-HZ.Cate = (function() {
+HZ.PostCate = (function() {
     function _init(){
         $('#form').validate({
             submitHandler:function(form){
@@ -29,6 +29,7 @@ HZ.Cate = (function() {
                 $(element).parents('.control-group').removeClass('error');
             }
         });
+
     }
 
 
@@ -38,5 +39,5 @@ HZ.Cate = (function() {
 })();
 
 $(document).ready(function(){
-    HZ.Cate.init();
+    HZ.PostCate.init();
 })

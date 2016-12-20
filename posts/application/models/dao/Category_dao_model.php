@@ -16,42 +16,37 @@ class Category_dao_model extends HZ_Model
         $this->_news = $this->load->database('news', true);// 产品库
     }
 
-    public function lists()
+    public function lists($where)
     {
-        $query = $this->_news->get_where($this->_cate_table);
+        $query = $this->_news->get_where($this->_cate_table, $where);
         return $query->result_array();
     }
 
     public function getCategory($where)
     {
-        dbEscape($where);
         $query = $this->_news->get_where($this->_cate_table, $where);
         return $query->row_array();
     }
 
     public function getCateInfoByCateId($cate_id)
     {
-        $where = array('Fcategory_id' => $cate_id);
+        $where = array('Fpost_category_id' => $cate_id);
         $query = $this->_news->get_where($this->_cate_table, $where);
         return $query->row_array();
     }
 
     public function add($data)
     {
-        dbEscape($data);
         return $this->_news->insert($this->_cate_table, $data);
     }
 
     public function del($where)
     {
-        dbEscape($where);
         return $this->_news->delete($this->_cate_table, $where);
     }
 
     public function update($where, $data)
     {
-        dbEscape($data);
-        dbEscape($where);
         return $this->_news->update($this->_cate_table, $data, $where);
     }
 }

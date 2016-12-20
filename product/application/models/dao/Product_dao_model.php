@@ -17,7 +17,6 @@ class Product_dao_model extends HZ_Model
     }
 
     public function productNum($where, $like) {
-        dbEscape($where);
         $count = $this->p->select('count(*) as num')
             ->from($this->_product_table)
             ->where($where)
@@ -27,8 +26,6 @@ class Product_dao_model extends HZ_Model
     }
 
     public function productList($where, $like, $page, $page_size) {
-        dbEscape($like);
-        dbEscape($where);
         $query = $this->p->select('*')
                 ->from($this->_product_table)
                 ->where($where)
@@ -41,35 +38,28 @@ class Product_dao_model extends HZ_Model
 
     public function add($data)
     {
-        dbEscape($data);
         return $this->p->insert($this->_product_table, $data);
     }
 
 
     public function getProductInfoByFId($where)
     {
-        dbEscape($where);
         $query = $this->p->get_where($this->_product_table, $where);
         return $query->row_array();
     }
 
     public function update($where, $data)
     {
-        dbEscape($data);
-        dbEscape($where);
         return $this->p->update($this->_product_table, $data, $where);
     }
 
     public function del($where)
     {
-        dbEscape($where);
         return $this->p->delete($this->_product_table, $where);
     }
 
     public function changeStatus($data, $where)
     {
-        dbEscape($data);
-        dbEscape($where);
         return $this->p->update($this->_product_table, $data, $where);
     }
 

@@ -2,7 +2,7 @@ if (typeof (HZ) == "undefined" || !HZ) {
     var HZ = {}
 }
 
-HZ.Cate = (function() {
+HZ.ProductCate = (function() {
     function _init(){
         $('#form').validate({
             submitHandler:function(form){
@@ -38,5 +38,5 @@ HZ.Cate = (function() {
 })();
 
 $(document).ready(function(){
-    HZ.Cate.init();
+    HZ.ProductCate.init();
 })

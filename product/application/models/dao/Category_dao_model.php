@@ -24,7 +24,6 @@ class Category_dao_model extends HZ_Model
 
     public function getCategory($where)
     {
-        dbEscape($where);
         $query = $this->p->get_where($this->_cate_table, $where);
         return $query->row_array();
     }
@@ -38,20 +37,16 @@ class Category_dao_model extends HZ_Model
 
     public function add($data)
     {
-        dbEscape($data);
         return $this->p->insert($this->_cate_table, $data);
     }
 
     public function del($where)
     {
-        dbEscape($where);
         return $this->p->delete($this->_cate_table, $where);
     }
 
     public function update($where, $data)
     {
-        dbEscape($data);
-        dbEscape($where);
         return $this->p->update($this->_cate_table, $data, $where);
     }
 }

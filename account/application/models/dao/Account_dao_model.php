@@ -27,7 +27,6 @@ class Account_dao_model extends HZ_Model
     public function addAccount($data, $type = 'user')
     {
         $table = $type === 'admin' ? $this->_admin_table : $this->_user_table;
-        $data = dbEscape($data); // 转义输入数据
         return $this->account->insert($table, $data);
     }
 
@@ -36,45 +35,47 @@ class Account_dao_model extends HZ_Model
         return $this->account->update($this->_sel_table($type), $data, $where);
     }
 
-    public function getInfoByUserid($user_id, $type = 'user')
-    {
-        $where = array(
-            'Fuser_id'  => $user_id,
-        );
-        $where = dbEscape($where); // 转义输入数据
-        $query = $this->account->get_where($this->_sel_table($type), $where, 1);
-        return $query->row_array();
-    }
-
     public function addDetail($data)
     {
-        $data = dbEscape($data);
         return $this->account->insert($this->_user_detail_table, $data);
     }
 
     public function modifyDetail($where, $data)
     {
-        $where = dbEscape($where);
-        $data = dbEscape($data);
         return $this->account->update($this->_user_detail_table, $data, $where);
     }
 
     public function addAdminDetail($data)
     {
-        $data = dbEscape($data);
         return $this->account->insert($this->_admin_detail_table, $data);
     }
 
     public function modifyAdminDetail($where, $data)
     {
-        $where = dbEscape($where);
-        $data = dbEscape($data);
         return $this->account->update($this->_admin_detail_table, $data, $where);
     }
 
-    public function getDetailByUserId($user_id, $type = 'user')
+    /**
+     * 账户基础信息
+     * @param array $where
+     * @param string $type
+     * @return mixed
+     */
+    public function getInfoByOp($where, $type = 'user')
     {
-        $query = $this->account->get_where($this->_sel_detail_table($type), array('Fuser_id' => $user_id));
+        $query = $this->account->get_where($this->_sel_table($type), $where, 1);
+        return $query->row_array();
+    }
+
+    /**
+     * 账户详细信息
+     * @param $array
+     * @param string $type
+     * @return mixed
+     */
+    public function getDetailByOp($array, $type = 'user')
+    {
+        $query = $this->account->get_where($this->_sel_detail_table($type), $array);
         return $query->row_array();
     }
 

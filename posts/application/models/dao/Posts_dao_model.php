@@ -17,8 +17,6 @@ class Posts_dao_model extends HZ_Model
     }
 
     public function postsNum($where, $like) {
-        dbEscape($where);
-        dbEscape($like);
         $count = $this->_news->select('count(*) as num')
             ->from($this->_posts_table)
             ->where($where)
@@ -28,13 +26,11 @@ class Posts_dao_model extends HZ_Model
     }
 
     public function postsList($where, $like, $page, $page_size) {
-        dbEscape($like);
-        dbEscape($where);
         $query = $this->_news->select('*')
             ->from($this->_posts_table)
             ->where($where)
             ->like($like)
-            ->order_by('Fid', 'DESC')
+            ->order_by('Fupdate_time', 'DESC')
             ->limit($page_size, $page_size * ($page - 1))
             ->get();
         return $query->result_array();
@@ -42,36 +38,47 @@ class Posts_dao_model extends HZ_Model
 
     public function add($data)
     {
-        dbEscape($data);
         return $this->_news->insert($this->_posts_table, $data);
     }
 
 
     public function getPostsByPid($where)
     {
-        dbEscape($where);
         $query = $this->_news->get_where($this->_posts_table, $where);
         return $query->row_array();
     }
 
     public function update($where, $data)
     {
-        dbEscape($data);
-        dbEscape($where);
         return $this->_news->update($this->_posts_table, $data, $where);
     }
 
     public function del($where)
     {
-        dbEscape($where);
         return $this->_news->delete($this->_posts_table, $where);
     }
 
     public function changeStatus($data, $where)
     {
-        dbEscape($data);
-        dbEscape($where);
         return $this->_news->update($this->_posts_table, $data, $where);
     }
+
+    public function relatedPosts($like, $where)
+    {
+        $this->_news->select('Fid')
+            ->from($this->_posts_table)
+            ->where($where);
+        foreach($like as $l)
+        {
+            $this->_news->or_like($l);
+        }
+        $query = $this->_news->order_by('Fupdate_time', 'DESC')
+            ->limit(5)
+            ->get();
+        echo $this->_news->last_query();die;
+        return $query->result_array();
+
+    }
+
 
 }

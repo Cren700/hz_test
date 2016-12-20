@@ -48,7 +48,7 @@ class User extends BaseControllor
     }
 
     /**
-     * 用户详情
+     * 保存后台用户详情
      */
     public function save()
     {
@@ -151,25 +151,91 @@ class User extends BaseControllor
 
     /**
      * 查看用户信息
+     * @param string $uid
      */
-    public function info()
+    public function info($uid)
     {
-
+        $uid = $uid ? : $this->input->get('id');
         $jsArr = array(
             'plugin/jquery.placeholder.min.js',
             'plugin/jquery.validate.js',
             'uploadify/jquery.uploadify.min.js',
-            'user/detail.js'
+            'user/info.js'
         );
         $cssArr = array('uploadify.css');
         $option = array(
-            'id' => $this->input->get('id')
+            'id' => $uid
         );
-        !$option['id'] ? $this->jump404():'';
-        $info = $this->user_service->info();
+        !$uid ? $this->jump404():'';
+        $info = $this->user_service->getInfo($option);
         $this->smarty->assign('jsArr', $jsArr);
         $this->smarty->assign('cssArr', $cssArr);
-        $this->smarty->assign('user', $info);
-        $this->smarty->display('user/detail.tpl');
+        $this->smarty->assign('user', $info['data']);
+        $this->smarty->display('user/info.tpl');
     }
+
+    /**
+     * 保存用户信息
+     */
+    public function saveInfo()
+    {
+        $option = $this->input->post();//提交的数据
+        $res = $this->user_service->saveInfo($option);
+        echo json_encode_data($res);
+    }
+
+    /**
+     * 修改状态(认证、使用)
+     */
+    public function changeStatus()
+    {
+        $option = array(
+            'status' => $this->input->get('status'),
+            'atte_status' => $this->input->get('atte_status'),
+            'is_blackuser' => $this->input->get('is_blackuser'),
+            'id' => $this->input->get('id')
+        );
+        $res = $this->user_service->changeStatus($option);
+        echo json_encode_data($res);
+    }
+
+    /**
+     * 黑名单页面
+     */
+    public function blacklist()
+    {
+        $cssArr = array('datepicker.css');
+        $jsArr = array(
+            'plugin/bootstrap-datepicker.js',
+            'user/blacklist.js'
+        );
+        $cate = array('1'=> '内部管理用户', '2' => '合作商户', '3' => '媒体用户', '4' => '普通用户');
+        $this->smarty->assign('jsArr', $jsArr);
+        $this->smarty->assign('cssArr', $cssArr);
+        $this->smarty->assign('cate', $cate);
+        $this->smarty->display('user/blacklist.tpl');
+    }
+
+    /**
+     * 黑名单列表
+     */
+    public function queryBlackList()
+    {
+        $cate = array('1'=> '内部管理用户', '2' => '合作商户', '3' => '媒体用户', '4' => '普通用户');
+        $option = array(
+            'p' => $this->input->get('p') ? : 1 ,
+            'page_size' => $this->input->get('n') ? : 10,
+            'user_type' => $this->input->get('user_type'),
+            'user_id' => $this->input->get('user_id'),
+            'min_date' => $this->input->get('min_date'),
+            'max_date' => $this->input->get('max_date'),
+        );
+        $user = $this->user_service->queryBlackList($option);
+        $this->smarty->assign('info', $user['data']);
+        $this->smarty->assign('cate', $cate);
+        $this->smarty->assign('page', $this->page($user['data']['count'], $option['p'], $option['page_size'], ''));
+        echo $this->smarty->display('user/bu_list.tpl');
+
+    }
+
 }

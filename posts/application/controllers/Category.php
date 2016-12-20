@@ -14,7 +14,10 @@ class Category extends BaseController {
      */
 	public function lists()
     {
-        $res = $this->cate_service->lists();
+        $option = array(
+            'Fstatus' => $this->input->get('status')
+        );
+        $res = $this->cate_service->lists($option);
         echo outputResponse($res);
     }
 
@@ -70,5 +73,19 @@ class Category extends BaseController {
         echo outputResponse($res);
     }
 
+    /**
+     * 更新分类状态
+     */
+    public function cateStatus()
+    {
+        $data = array(
+            'Fstatus' => $this->input->post('status'),
+        );
+        $where = array(
+            'Fpost_category_id'   => $this->input->post('id')
+        );
+        $res = $this->cate_service->update($where, $data);
+        echo outputResponse($res);
+    }
 
 }

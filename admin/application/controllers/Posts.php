@@ -35,7 +35,7 @@ class Posts extends BaseControllor
             'page_size' => $this->input->get('n') ? : 10,
             'post_title'   => $this->input->get('post_title'),
             'post_author'   => $this->input->get('post_author'),
-            'category_id' => $this->input->get('category_id'),
+            'post_category_id' => $this->input->get('category_id'),
             'post_status' => $this->input->get('post_status'),
             'is_del' => $this->input->get('is_del'),
             'min_date' => $this->input->get('min_date'),
@@ -122,9 +122,11 @@ class Posts extends BaseControllor
             'post_author' => $this->input->post('post_author'),
             'category_id' => $this->input->post('category_id'),
             'post_excerpt' => $this->input->post('post_excerpt'),// 摘要
+            'post_keyword' => $this->input->post('post_keyword'),// 关键词
             'post_content' => $this->input->post('post_content'),
             'post_coverimage' => $this->input->post('post_coverimage'),
             'comment_status' => $this->input->post('comment_status'),
+            'remark' => $this->input->post('remark')
         );
         $res = $this->posts_service->save($data);
         echo json_encode_data($res);
@@ -157,6 +159,8 @@ class Posts extends BaseControllor
     public function cate()
     {
         $cate = $this->posts_service->category();
+        $jsArr = array('posts/cateStatus.js');
+        $this->smarty->assign('jsArr', $jsArr);
         $this->smarty->assign('cate', $cate['data']);
         $this->smarty->display('posts/cateList.tpl');
     }
@@ -204,6 +208,19 @@ class Posts extends BaseControllor
         if(!$res['code']) {
             $res['data']['url'] = getBaseUrl('/posts/cate.html');
         }
+        echo json_encode_data($res);
+    }
+
+    /**
+     * 修改状态(认证、使用)
+     */
+    public function cateStatus()
+    {
+        $option = array(
+            'status' => $this->input->get('status'),
+            'id' => $this->input->get('id')
+        );
+        $res = $this->posts_service->cateStatus($option);
         echo json_encode_data($res);
     }
 

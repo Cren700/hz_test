@@ -52,6 +52,14 @@
                             </div>
                             <div class="control-group">
                                 <div class="span12">
+                                    <label class="control-label">关键词</label>
+                                    <div class="controls">
+                                        <input type="text" class="span11" name="post_keyword" placeholder="关键词（多个关键词以'、'分割）" value="<{$posts['Fpost_keyword']|default:''}>">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="span12">
                                     <label class="control-label">摘要</label>
                                     <div class="controls">
                                         <input type="text" class="span11" name="post_excerpt" placeholder="摘要" value="<{$posts['Fpost_excerpt']|default:''}>">
@@ -85,6 +93,14 @@
                                     <label class="control-label">内容</label>
                                     <div class="controls">
                                         <textarea class="span11" id="ud-content" name="post_content" placeholder="内容"><{$posts['Fpost_content']|default:''}></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="span12">
+                                    <label class="control-label">资讯备注</label>
+                                    <div class="controls">
+                                        <textarea class="span11" name="remark" placeholder="资讯备注(例如:文章来源于<a href=''>XX</a>，版权归作者所有，如涉侵权请联系删除。)"><{$posts['Fremark']|default:''}></textarea>
                                     </div>
                                 </div>
                             </div>

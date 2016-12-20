@@ -17,11 +17,14 @@ $config = array(
             'loginAdmin'            => '/account/loginAdmin',            // 用户登录
             'modifyPwdAdmin'        => '/account/modifyPwdAdmin',        // 修改密码
             'detail'                => '/account/detail',                // 用户详情
-            'addDetail'             => '/account/addDetail',             // 添加用户详情
+            'saveDetail'             => '/account/saveUserDetail',             // 添加用户详情
             'modifyDetail'          => '/account/modifyDetail',          // 修改用户详情
             'addAdminDetail'        => '/account/addAdminDetail',             // 添加后台用户详情
             'modifyAdminDetail'     => '/account/modifyAdminDetail',          // 修改后台用户详情
-            'queryUser'             => '/info/query',                   // 查询用户
+            'queryUser'             => '/info/query',                   // 查询用户列表
+            'getInfo'               => '/info/getInfo',                 // 查询用户信息
+            'changeStatus'          => '/info/changeStatus',            // 修改用户状态
+            'queryBlackList'        => '/info/queryBlackList',          // 黑名单列表
         ),
     ),
     'product' => array(
@@ -51,13 +54,15 @@ $config = array(
             'addCategory'           => '/category/add',                 // add
             'updateCategory'        => '/category/update',              // 更新
             'delCategory'           => '/category/del',                 // 删除
+            'cateStatus'            => '/category/cateStatus',          // 更新状态   
             // 产品
             'queryPosts'          => '/posts/query',                // 列表list
             'getPostsByPid'       => '/posts/getPostsByPid',      // 某个product
             'addPosts'            => '/posts/add',                  // add
             'updatePosts'         => '/posts/update',               // 更新
             'delPosts'            => '/posts/del',                  // 删除
-            'changeStatus'        => '/posts/changeStatus'          // 更新状态
+            'changeStatus'        => '/posts/changeStatus',          // 更新状态
+            'relatedPosts'        => '/posts/relatedPosts'          // 相关新闻
         ),
     ),
 );

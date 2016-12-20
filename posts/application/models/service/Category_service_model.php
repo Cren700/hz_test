@@ -14,10 +14,14 @@ class Category_service_model extends HZ_Model
         $this->load->model('dao/category_dao_model', 'cate_dao');
     }
     
-    public function lists()
+    public function lists($option)
     {
         $ret = array('code' => 0);
-        $res = $this->cate_dao->lists();
+        $where = array();
+        if (!empty($option['Fstatus'])) {
+            $where['Fstatus'] = $option['Fstatus'];
+        }
+        $res = $this->cate_dao->lists($where);
         $ret['data'] = $res;
         return $ret;
     }
@@ -56,7 +60,7 @@ class Category_service_model extends HZ_Model
         if ($res) {
             return $ret;
         } else {
-            return $ret['code'] = 'product_error_4';
+            return $ret['code'] = 'posts_error_4';
         }
     }
 
@@ -69,14 +73,14 @@ class Category_service_model extends HZ_Model
         }
         $cate = $this->cate_dao->getCateInfoByCateId($where['Fpost_category_id']);
         if (empty($cate)) {
-            $ret['code'] = 'product_error_2'; // 不存在
+            $ret['code'] = 'posts_error_2'; // 不存在
             return $ret;
         }
         $res = $this->cate_dao->update($where, $data);
         if ($res) {
             return $ret;
         } else {
-            return $ret['code'] = 'product_error_5';
+            return $ret['code'] = 'posts_error_5';
         }
     }
 
@@ -89,15 +93,14 @@ class Category_service_model extends HZ_Model
         }
         $cate = $this->cate_dao->getCateInfoByCateId($where['Fpost_category_id']);
         if (empty($cate)) {
-            $ret['code'] = 'product_error_2'; // 不存在
+            $ret['code'] = 'posts_error_2'; // 不存在
             return $ret;
         }
         $res = $this->cate_dao->del($where);
         if ($res) {
             return $ret;
         } else {
-            return $ret['code'] = 'product_error_4';
+            return $ret['code'] = 'posts_error_4';
         }
     }
-
 }

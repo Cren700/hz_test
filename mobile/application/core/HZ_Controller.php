@@ -10,8 +10,10 @@ class HZ_Controller extends CI_Controller
 {
     protected $_uid = null;
     protected $_user_id = null;
+
     public function __construct(){
         parent::__construct();
+        $this->filterPostAndGet();
         $this->load->library("session");
         //Smarty
 
@@ -51,6 +53,33 @@ class HZ_Controller extends CI_Controller
         $this->_user_id = $this->session->userdata('username');
         $this->smarty->assign('username', $this->_user_id);
         $this->smarty->assign('uid', $this->_uid);
+    }
+
+    private function filterPostAndGet()
+    {
+        isset($_POST) && $_POST && $_POST = $this->filterInputData($_POST);
+        isset($_GET) && $_GET && $_GET = $this->filterInputData($_GET);
+    }
+
+    private function filterInputData($data)
+    {
+        if(is_array($data))
+        {
+            $tmp = array();
+            foreach($data as $i => $v)
+            {
+                $tmp[$i] = $this->filterInputData($v);
+            }
+        }
+        else if(is_numeric($data))
+        {
+            $tmp = $data;
+        }
+        else
+        {
+            $tmp = addslashes(trim($data));
+        }
+        return isset($tmp) ? $tmp : null;
     }
 
     public function jump($url)

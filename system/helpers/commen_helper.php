@@ -266,7 +266,7 @@ function doUpload($type)
             // 需要检验的数据
             $fileType = $type ? $fileTypes[$type] : array_merge($fileTypes['img'], $fileTypes['file']); // File extensions
             $fileParts = pathinfo($file['name']);
-            $fileSize = 3*1024*1024; // 3M
+            $fileSize = 1*1024*1024; // 1M
 
             if ($file['size'] > $fileSize) {
                 $data = array('code' => 1, 'msg' => '上传内容大小为:'. $fileSize / 1024 / 1024 . 'M');

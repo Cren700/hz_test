@@ -105,12 +105,12 @@ class Account extends BaseController {
     }
 
     /**
-     * 添加用户详情
+     * 保存用户详情
      */
-    public function addDetail()
+    public function saveUserDetail()
     {
         $data = array();
-        $data['Fuser_id'] = $this->input->post('user_id');
+        $data['Fid'] = $this->input->post('id');
         $data['Fnick_name'] = $this->input->post('nick_name');
         $data['Freal_name'] = $this->input->post('real_name');
         $data['Fcert_type'] = $this->input->post('cert_type');
@@ -124,33 +124,10 @@ class Account extends BaseController {
         $data['Faddress'] = $this->input->post('address');
         $data['Fatte_status'] = $this->input->post('atte_status') ? : 0;
         $data['Fimage_path'] = $this->input->post('image_path');
-        $data['Fcreate_time'] = time();
-        $res = $this->account_service->addDetail($data, 'user');
-        echo outputResponse($res);
-    }
-
-    /**
-     * 修改用户详情
-     */
-    public function modifyDetail()
-    {
-        $data = array();
-        $data['Fnick_name'] = $this->input->post('nick_name');
-        $data['Freal_name'] = $this->input->post('real_name');
-        $data['Fcert_type'] = $this->input->post('cert_type');
-        $data['Fcert_no'] = $this->input->post('cert_no');
-        $data['Fsex'] = $this->input->post('sex');
-        $data['Femail'] = $this->input->post('email');
-        $data['Fphone'] = $this->input->post('phone');
-        $data['Fcountry'] = $this->input->post('country');
-        $data['Fprovince'] = $this->input->post('province');
-        $data['Fcity'] = $this->input->post('city');
-        $data['Faddress'] = $this->input->post('address');
-        $data['Fatte_status'] = $this->input->post('atte_status') ? : 0;
-        $data['Fimage_path'] = $this->input->post('image_path');
+        $data['Fannex_path'] = $this->input->post('annex_path');
+        $data['Fremark'] = $this->input->post('remark');
         $data['Fupdate_time'] = time();
-        $where = array('Fuser_id' => $this->input->post('user_id'));
-        $res = $this->account_service->modifyDetail($where, $data, 'user');
+        $res = $this->account_service->saveUserDetail($data);
         echo outputResponse($res);
     }
 

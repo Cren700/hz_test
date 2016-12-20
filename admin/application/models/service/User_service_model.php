@@ -42,4 +42,26 @@ class User_service_model extends HZ_Model
     {
         return $this->myCurl('account', 'queryUser', $data, false);
     }
+
+    public function getInfo($data)
+    {
+        return $this->myCurl('account', 'getInfo', $data, false);
+    }
+    
+    public function saveInfo($data)
+    {
+        $res = $this->myCurl('account', 'saveDetail', $data, true);
+        return $res;
+    }
+
+    public function changeStatus($option)
+    {
+        return $this->myCurl('account', 'changeStatus', $option, false);
+    }
+
+    public function queryBlackList($data)
+    {
+        return $this->myCurl('account', 'queryBlackList', $data, false);
+    }
+
 }

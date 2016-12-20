@@ -56,7 +56,11 @@ class HZ_Model extends CI_Model
         }
 
         $res = curl_exec($ch);
-//        echo $res;die;
+//        
+        if($control == "relatedPosts")
+        {
+            p($res);
+        }
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);//print_r($httpCode);exit();
         curl_close($ch);
 

@@ -56,7 +56,7 @@ class HZ_Model extends CI_Model
         }
 
         $res = curl_exec($ch);
-
+        // if($control == "updatePosts")
         // if($control == "queryPosts")
         // {
         //     p($res);

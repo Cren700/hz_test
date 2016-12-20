@@ -29,7 +29,7 @@
                 <td><a href="<{"/posts/detail/"|cat:$i['Fid']|getBaseUrl}>" title="<{$i['Fpost_title']}>"><{$i['Fpost_title']}></a></td>
                 <td><{$i['Fuser_id']}></td>
                 <td><{$i['Fpost_author']}></td>
-                <td><{$cate[$i['Fpost_category_id']]}></td>
+                <td><{$cate[$i['Fpost_category_id']]|default:''}></td>
                 <td><img style="width: 100px; height:75px; <{if !isset($i['Fpost_coverimage']) || !$i['Fpost_coverimage']}>display: none<{/if}>" src="<{$i['Fpost_coverimage']|default:''}>" title ="<{$i['Fpost_title']}>" alt="<{$i['Fpost_title']}>" ></td>
                 <td class="js-posts-status"><{if $i['Fis_del']}>已删除<{elseif $i['Fpost_status'] eq 1 }>待审核<{elseif $i['Fpost_status'] eq 2}>审核不通过<{elseif $i['Fpost_status'] eq 3}>已发布<{else}>已下架<{/if}></td>
                 <td><{'y-m-d H:i'|date:$i['Fcreate_time']}></td>

@@ -12,6 +12,7 @@ class HZ_Controller extends CI_Controller
     protected $_user_id = null;
     public function __construct(){
         parent::__construct();
+        $this->filterPostAndGet();
         $this->load->library("session");
         //Smarty
 
@@ -55,6 +56,33 @@ class HZ_Controller extends CI_Controller
         // 目录结构
         $menu = $this->getMenu() ? : array();
         $this->smarty->assign('menu', $menu);
+    }
+
+    private function filterPostAndGet()
+    {
+        isset($_POST) && $_POST && $_POST = $this->filterInputData($_POST);
+        isset($_GET) && $_GET && $_GET = $this->filterInputData($_GET);
+    }
+
+    private function filterInputData($data)
+    {
+        if(is_array($data))
+        {
+            $tmp = array();
+            foreach($data as $i => $v)
+            {
+                $tmp[$i] = $this->filterInputData($v);
+            }
+        }
+        else if(is_numeric($data))
+        {
+            $tmp = $data;
+        }
+        else
+        {
+            $tmp = addslashes(trim($data));
+        }
+        return isset($tmp) ? $tmp : null;
     }
 
     public function jump($url)
@@ -239,6 +267,11 @@ class HZ_Controller extends CI_Controller
                         'selected'  => '0',
                         'name'      => '资讯发布',
                         'flagName'  => 'add'
+                    ),
+                    array(
+                        'selected'  => '0',
+                        'name'      => '资讯分类',
+                        'flagName'  => 'cate'
                     ),
                     array(
                         'selected'  => '0',

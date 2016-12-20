@@ -23,25 +23,26 @@
         <tbody>
         <{foreach $info['list'] as $i}>
             <tr rel="<{$i['Fid']}>">
-                <td><a href="<{"/user/detail/"|cat:$i['Fid']|getBaseUrl}>" title="<{$i['Fuser_id']}>"><{$i['Fid']}></a></td>
+                <td><a href="<{"/user/info/"|cat:$i['Fid']|getBaseUrl}>" title="<{$i['Fuser_id']}>"><{$i['Fid']}></a></td>
                 <td><{$i['Fuser_id']}></td>
                 <td><{$i['Freal_name']}></td>
                 <td><{$i['Fnick_name']}></td>
                 <td><{'Y-m-d H:i'|date:$i['Fcreate_time']}></td>
-                <td class="js-posts-status"><{if $i['Fstatus'] eq 0 }>禁用<{else}>使用中<{/if}></td>
-                <td class="js-posts-status"><{if $i['Fatte_status'] eq 0 }>未认证<{else}>已认证<{/if}></td>
+                <td class="js-user-status"><{if $i['Fstatus'] eq 0 }>禁用<{else}>使用中<{/if}></td>
+                <td class="js-user-atte-status"><{if $i['Fatte_status'] eq 0 }>未认证<{else}>已认证<{/if}></td>
                 <td>
-                    <a href="<{"/user/info/"|cat:$i['Fid']|getBaseUrl}>" title="点击查看用户详情">点击查看</a>
+                    <a href="<{"/user/info/"|cat:$i['Fid']|getBaseUrl}>" title="点击查看用户详情">查看</a>
                     <{if $i['Fstatus'] eq 0}>
-                        <button class="btn btn-danger btn-mini js-btn-recycle">启用</button>
+                        <button class="btn btn-primary btn-mini js-btn-status" data-status="1">启用</button>
                     <{else}>
-                        <button class="btn btn-primary btn-mini js-btn-status" data-status="1">禁用</button>
+                        <button class="btn btn-danger btn-mini js-btn-status" data-status="0">禁用</button>
                     <{/if}>
                     <{if $i['Fatte_status'] eq 0}>
-                    <button class="btn btn-danger btn-mini js-btn-recycle">通过认证</button>
+                    <button class="btn btn-primary btn-mini js-btn-atte-status" data-status="1">通过认证</button>
                     <{else}>
-                        <button class="btn btn-danger btn-mini js-btn-delete">取消认证</button>
+                        <button class="btn btn-danger btn-mini js-btn-atte-status" data-status="0">取消认证</button>
                     <{/if}>
+                    <button class="btn btn-danger btn-mini js-btn-black" data-status="1">移至黑名单</button>
                 </td>
             </tr>
             <{/foreach}>

@@ -47,7 +47,7 @@ class Account_service_model extends HZ_Model
             }
         }
 
-        $hasUserid = $this->account_dao_model->getInfoByUserid($data['Fuser_id'], $type);
+        $hasUserid = $this->account_dao_model->getInfoByOp(array('Fuser_id' => $data['Fuser_id']), $type);
         if( $hasUserid ) {
             return array('code' => 'account_error_2'); // 用户名已存在
         }
@@ -88,7 +88,7 @@ class Account_service_model extends HZ_Model
                 return $resValidation;
             }
         }
-        $info = $this->account_dao_model->getInfoByUserid($data['Fuser_id'], $type);
+        $info = $this->account_dao_model->getInfoByOp(array('Fuser_id' => $data['Fuser_id']), $type);
         if (!$info) return array('code' => 'account_error_0'); // 账户不存在
         $pwdCode = encodePwd($info['Fsalt'], $data['Fpasswd']);
         if ($info['Fpasswd'] !== $pwdCode) {
@@ -125,7 +125,7 @@ class Account_service_model extends HZ_Model
                 return $resValidation;
             }
         }
-        $info = $this->account_dao_model->getInfoByUserid($data['Fuser_id'], $type);
+        $info = $this->account_dao_model->getInfoByOp(array('Fuser_id' => $data['Fuser_id']), $type);
         if (!$info) return array('code' => 'account_error_0'); // 账户不存在
         $pwdCode = encodePwd($info['Fsalt'], $data['Fpasswd']);
         if ($info['Fpasswd'] !== $pwdCode) {
@@ -157,26 +157,26 @@ class Account_service_model extends HZ_Model
         if (empty($data['Fuser_id'])) {
             $ret['code'] = 'system_error_2'; // 操作出错
         } else {
-            $res = $this->account_dao_model->getDetailByUserId($data['Fuser_id'], $data['type']);
+            $res = $this->account_dao_model->getDetailByOp(array('Fuser_id' => $data['Fuser_id']), $data['type']);
             $ret['data'] = $res;
         }
         return $ret;
     }
 
     /**
-     * 添加用户详情
+     * 保存用户详情
      * @param $data
      * @return array
      */
-    public function addDetail($data)
+    public function saveUserDetail($data)
     {
         $ret = array('code' => 0);
         // 数据验证
         $validationConfig = array(
             array(
-                'value' => $data['Fuser_id'],
+                'value' => $data['Fid'],
                 'rules' => 'required',
-                'field' => '用户名'
+                'field' => '用户ID'
             )
         );
         foreach ($validationConfig as $v) {
@@ -186,39 +186,28 @@ class Account_service_model extends HZ_Model
             }
         }
 
-        $user = $this->account_dao_model->getDetailByUserId($this->_uid);
-        if (!empty($user)) {
-            $ret['code'] = 'account_error_6'; // 已经存在用户详情
+        $user = $this->account_dao_model->getInfoByOp(array('Fid' => $data['Fid']));
+        if (empty($user)) {
+            $ret['code'] = 'account_error_0'; // 不存在用户该用户
             return $ret;
         }
-        $res = $this->account_dao_model->addDetail($data);
+        $is_new = true;//新添加
+        $where = array();
+        $user2 = $this->account_dao_model->getDetailByOp(array('Fuser_id' => $user['Fid']));
+        if (!empty($user2)) {
+            $is_new = false;
+            $where['Fuser_id'] = $user['Fid'];
+        } else {
+            $data['Fcreate_time'] = time();
+            $data['Fuser_id'] = $user['Fid'];
+        }
+        unset($data['Fid']);
+        $res = $is_new ? $this->account_dao_model->addDetail($data) : $this->account_dao_model->modifyDetail($where, $data);
         if (!$res) {
             $ret['code'] = 'account_error_3';
         }
         return $ret;
     }
-
-    /**
-     * 修改用户详情
-     * @param $where
-     * @param $data
-     * @param $type 区分后台、用户
-     * @return array|string
-     */
-    public function modifyDetail($where, $data, $type)
-    {
-        $ret = array('code' => 0);
-        // 数据验证
-        if (!$where['Fuser_id']) {
-            return $ret['code'] = 'account_error_5';
-        }
-        $res = $this->account_dao_model->modifyDetail($where, $data, $type);
-        if (!$res) {
-            $ret['code'] = 'account_error_3';
-        }
-        return $ret;
-    }
-
 
     /**
      * 添加后台用户详情
@@ -242,7 +231,7 @@ class Account_service_model extends HZ_Model
                 return $resValidation;
             }
         }
-        $user = $this->account_dao_model->getDetailByUserId($this->_uid, 'admin');
+        $user = $this->account_dao_model->getInfoByOp(array('Fid' =>$this->_uid), 'admin');
         if (!empty($user)) {
             $ret['code'] = 'account_error_6'; // 已经存在用户详情
             return $ret;

@@ -47,9 +47,8 @@ class Posts_service_model extends HZ_Model
         if ($option['Fpost_author'] === '0' || !empty($option['Fpost_author'])) {
             $like['Fpost_author'] = $option['Fpost_author'];
         }
-//p($option);
         $page = $option['p'] ? : 1;
-        $page_size = $option['page_size'];
+        $page_size = $option['page_size'] ? : 10;
         $res['data']['count'] = $this->posts_dao->postsNum($where, $like);
         $res['data']['list'] = $this->posts_dao->postsList($where, $like, $page, $page_size);
 
@@ -207,6 +206,25 @@ class Posts_service_model extends HZ_Model
         } else {
             return $ret['code'] = 'posts_error_9';
         }
+    }
+
+    public function relatedPosts($option)
+    {
+        $ret = array('code' => 0);
+        $where = array(
+            'Fid !=' => $option['Fid'],
+            'Fpost_status' => 3,
+            'Fpost_category_id' => $option['Fpost_category_id'],
+        );
+        $like = array();
+        $keyword = explode('、', $option['Fpost_keyword']);
+        foreach($keyword as $k) {
+            $like[] = array('Fpost_keyword' => $k);
+        }
+        $res = $this->posts_dao->relatedPosts($like, $where);
+        $ret['data'] = $res;
+        return $ret;
+
     }
 
 }

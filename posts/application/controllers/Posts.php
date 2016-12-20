@@ -22,10 +22,10 @@ class Posts extends HZ_Controller
         $option = array(
             'Fpost_title' => $this->input->get('post_title'),
             'Fpost_author' => $this->input->get('post_author'),
-            'Fpost_category_id' => $this->input->get('category_id'),
+            'Fpost_category_id' => $this->input->get('post_category_id'),
             'Fpost_status' => $this->input->get('post_status'),
             'Fis_del' => $this->input->get('is_del'),
-            'p' => $this->input->get('p') ? : 1,
+            'p' => $this->input->get('p'),
             'page_size' => $this->input->get('page_size'),
             'min_date' => $this->input->get('min_date'),
             'max_date' => $this->input->get('max_date'),
@@ -58,9 +58,11 @@ class Posts extends HZ_Controller
             'Fpost_category_id' => $this->input->post('category_id'),
             'Fpost_content' => $this->input->post('post_content'),
             'Fpost_excerpt' => $this->input->post('post_excerpt'),// 摘要
+            'Fpost_keyword' => $this->input->post('post_keyword'),// 关键词
             'Fpost_coverimage' => $this->input->post('post_coverimage'),
             'Fcomment_status' => $this->input->post('comment_status') ? 1 : 0,//是否评论
             'Fpost_content' => $this->input->post('post_content'),
+            'Fremark' => $this->input->post('remark'),
             'Fcreate_time'  => time(),
             'Fupdate_time'  => time(),
         );
@@ -81,9 +83,11 @@ class Posts extends HZ_Controller
             'Fpost_category_id' => $this->input->post('category_id'),
             'Fpost_content' => $this->input->post('post_content'),
             'Fpost_excerpt' => $this->input->post('post_excerpt'),// 摘要
+            'Fpost_keyword' => $this->input->post('post_keyword'),// 关键词
             'Fpost_coverimage' => $this->input->post('post_coverimage'),
             'Fcomment_status' => $this->input->post('comment_status') ? 1 : 0,//是否评论
             'Fpost_content' => $this->input->post('post_content'),
+            'Fremark' => $this->input->post('remark'),
             'Fupdate_time'  => time(),
         );
         $res = $this->posts_service->update($where, $data);
@@ -113,6 +117,21 @@ class Posts extends HZ_Controller
             'Fid'   => $this->input->post('pid')
         );
         $res = $this->posts_service->changeStatus($data, $where);
+        echo outputResponse($res);
+    }
+
+    /**
+     * 相关新闻
+     * @param $option
+     */
+    public function relatedPosts()
+    {
+        $data = array(
+            'Fid' => $this->input->get('id'),
+            'Fpost_category_id' => $this->input->get('post_category_id'),
+            'Fpost_keyword' => $this->input->get('post_keyword')
+        );
+        $res = $this->posts_service->relatedPosts($data);
         echo outputResponse($res);
     }
 }

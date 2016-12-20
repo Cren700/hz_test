@@ -71,6 +71,11 @@ class Posts_service_model extends HZ_Model
         }
     }
 
+    public function cateStatus($data)
+    {
+        return $this->myCurl($this->_api, 'cateStatus', $data, true);
+    }
+
     public function delCate($data)
     {
         return $this->myCurl($this->_api, 'delCategory', $data, false);
