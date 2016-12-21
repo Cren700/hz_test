@@ -55,6 +55,17 @@ class Posts_service_model extends HZ_Model
         return $res;
     }
 
+    public function postsListByCate($option)
+    {
+        $res = array('code' => 0);
+        $where = $option['Fpost_category_id'];
+        $page = $option['p'] ? : 1;
+        $page_size = $option['page_size'] ? : 10;
+        $res['data']['count'] = $this->posts_dao->postsNumByCate($where);
+        $res['data']['list'] = $this->posts_dao->postsListByCate($where, $page, $page_size);
+        return $res;
+    }
+
     public function add($data)
     {
         $ret = array('code' => 0);
@@ -211,17 +222,13 @@ class Posts_service_model extends HZ_Model
     public function relatedPosts($option)
     {
         $ret = array('code' => 0);
-        $where = array(
-            'Fid !=' => $option['Fid'],
-            'Fpost_status' => 3,
-            'Fpost_category_id' => $option['Fpost_category_id'],
-        );
-        $like = array();
+        $where = ' Fpost_status = 3 AND Fpost_category_id = ' . $option['Fpost_category_id'];
         $keyword = explode('、', $option['Fpost_keyword']);
         foreach($keyword as $k) {
-            $like[] = array('Fpost_keyword' => $k);
+            $where .= ' OR Fpost_keyword like \'%'. $k .'%\'';
         }
-        $res = $this->posts_dao->relatedPosts($like, $where);
+        $where_not_in = ' Fid != ' .$option['Fid'];
+        $res = $this->posts_dao->relatedPosts($where, $where_not_in);
         $ret['data'] = $res;
         return $ret;
 

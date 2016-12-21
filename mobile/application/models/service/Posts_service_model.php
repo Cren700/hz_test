@@ -13,14 +13,14 @@ class Posts_service_model extends HZ_Model
         parent::__construct();
     }
 
-    public function getCate()
+    public function getCate($is_special = 0)
     {
-        return $this->myCurl('posts', 'category', array());
+        return $this->myCurl('posts', 'category', array('status' => '1', 'is_special' => $is_special));
     }
     
     public function getPostsList($option)
     {
-        return $this->myCurl('posts', 'queryPosts', $option, false);
+        return $this->myCurl('posts', 'postsListByCate', $option, false);
     }
 
     public function getPost($option)

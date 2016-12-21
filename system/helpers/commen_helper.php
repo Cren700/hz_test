@@ -320,7 +320,7 @@ function getSaveFilePath($type = 'img')
 function setFileRelaPath($type = 'img')
 {
     $type = $type . '/';
-    return '/files/'. $type .date('Ym', time());
+    return HOST_URL . '/files/'. $type .date('Ym', time());
 }
 
 /**

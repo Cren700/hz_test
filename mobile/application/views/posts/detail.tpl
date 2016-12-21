@@ -58,27 +58,35 @@
             <{/foreach}>
         </div>
         <{/if}>
+        <{if $info.Fcomment_status}>
         <h2>评论</h2>
-        <div class="comment_box">
-            <div class="comment_list">
-                <div class="avatar">
-                    <img src="">
+            <{if isset($comment) && count($comment) > 0}>
+            <div class="comment_box">
+                <div class="comment_list">
+                    <div class="avatar">
+                        <img src="">
+                    </div>
+                    <div class="comment_info">
+                        <p><span class='comment_name'>李博士</span> • <span>1周前</span></p>
+                        <p class="comment_txt">这市场规模是怎么计算的？做校园这么多年，可以负责的说绝大部分大学生都没有付费意愿和能力，有付费意愿的大学生里面能付到3000元的又得减一大截，此外真正参与职业前培训的学生也是少数，职业前培训480亿，太不现实了~~</p>
+                    </div>
                 </div>
-                <div class="comment_info">
-                    <p><span class='comment_name'>李博士</span> • <span>1周前</span></p>
-                    <p class="comment_txt">这市场规模是怎么计算的？做校园这么多年，可以负责的说绝大部分大学生都没有付费意愿和能力，有付费意愿的大学生里面能付到3000元的又得减一大截，此外真正参与职业前培训的学生也是少数，职业前培训480亿，太不现实了~~</p>
+                <div class="comment_list">
+                    <div class="avatar">
+                        <img src="">
+                    </div>
+                    <div class="comment_info">
+                        <p><span class='comment_name'>李博士</span> • <span>1周前</span></p>
+                        <p class="comment_txt">这市场规模是怎么计算的？做校园这么多年，可以负责的说绝大部分大学生都没有付费意愿和能力，有付费意愿的大学生里面能付到3000元的又得减一大截，此外真正参与职业前培训的学生也是少数，职业前培训480亿，太不现实了~~</p>
+                    </div>
                 </div>
             </div>
-            <div class="comment_list">
-                <div class="avatar">
-                    <img src="">
-                </div>
-                <div class="comment_info">
-                    <p><span class='comment_name'>李博士</span> • <span>1周前</span></p>
-                    <p class="comment_txt">这市场规模是怎么计算的？做校园这么多年，可以负责的说绝大部分大学生都没有付费意愿和能力，有付费意愿的大学生里面能付到3000元的又得减一大截，此外真正参与职业前培训的学生也是少数，职业前培训480亿，太不现实了~~</p>
-                </div>
+            <{else}>
+            <div class="comment_box" id="Discuss">
+                <div class="comment_list" id="nodate"> <p class="comment_txt" style="color: #00a0e9; font-size: 0.4rem;">暂无评论, 赶紧来抢沙发!</p></div>
             </div>
-        </div>
+            <{/if}>
+        <{/if}>
     </div>
 </section>
 <footer class="foot_comment">

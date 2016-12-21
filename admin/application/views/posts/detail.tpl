@@ -109,6 +109,7 @@
                                 <a href="<{'/posts.html'|getBaseUrl}>" class="btn" title="返回列表">返回列表</a>
                             </div>
                             <input type="hidden" name="id" value="<{$posts['Fid']|default:''}>">
+                            <input type="hidden" name="user_id" value="<{$posts['Fuser_id']|default:''}>">
                             <input type="hidden" name="is_new" value="<{$is_new}>">
                         </div>
                     </form>

@@ -62,7 +62,8 @@ $config = array(
             'updatePosts'         => '/posts/update',               // 更新
             'delPosts'            => '/posts/del',                  // 删除
             'changeStatus'        => '/posts/changeStatus',          // 更新状态
-            'relatedPosts'        => '/posts/relatedPosts'          // 相关新闻
+            'relatedPosts'        => '/posts/relatedPosts',          // 相关新闻
+            'postsListByCate'     => '/posts/postsListByCate',       // 根据分类获取数据
         ),
     ),
 );

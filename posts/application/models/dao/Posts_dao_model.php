@@ -36,6 +36,25 @@ class Posts_dao_model extends HZ_Model
         return $query->result_array();
     }
 
+
+    public function postsNumByCate($where) {
+        $count = $this->_news->select('count(*) as num')
+            ->from($this->_posts_table)
+            ->where_in('Fpost_category_id', $where)
+            ->count_all_results();
+        return $count;
+    }
+
+    public function postsListByCate($where, $page, $page_size) {
+        $query = $this->_news->select('*')
+            ->from($this->_posts_table)
+            ->where_in('Fpost_category_id', $where)
+            ->order_by('Fupdate_time', 'DESC')
+            ->limit($page_size, $page_size * ($page - 1))
+            ->get();
+        return $query->result_array();
+    }
+
     public function add($data)
     {
         return $this->_news->insert($this->_posts_table, $data);
@@ -63,19 +82,10 @@ class Posts_dao_model extends HZ_Model
         return $this->_news->update($this->_posts_table, $data, $where);
     }
 
-    public function relatedPosts($like, $where)
+    public function relatedPosts($where, $where_not_in)
     {
-        $this->_news->select('Fid')
-            ->from($this->_posts_table)
-            ->where($where);
-        foreach($like as $l)
-        {
-            $this->_news->or_like($l);
-        }
-        $query = $this->_news->order_by('Fupdate_time', 'DESC')
-            ->limit(5)
-            ->get();
-        echo $this->_news->last_query();die;
+        $sql = 'SELECT Fid, Fpost_title, Fpost_author, Fupdate_time, Fpost_coverimage FROM '. $this->_posts_table . ' WHERE ' . $where_not_in . ' AND ( ' . $where .') ORDER BY Fupdate_time DESC LIMIT 5 ';
+        $query = $this->_news->query($sql);
         return $query->result_array();
 
     }

@@ -117,7 +117,8 @@ class Posts extends BaseControllor
         $data = array(
             'is_new' => $this->input->post('is_new'),
             'id' => $this->input->post('id'),
-            'user_id' => $this->_uid,
+            'user_id' => $this->input->post('user_id') ? : $this->_uid,
+            'user_type' => 1,
             'post_title' => $this->input->post('post_title'),
             'post_author' => $this->input->post('post_author'),
             'category_id' => $this->input->post('category_id'),
@@ -202,6 +203,7 @@ class Posts extends BaseControllor
             'is_new' => $this->input->post('is_new'),
             'category_id' => $this->input->post('category_id'),
             'category_name' => $this->input->post('category_name'),
+            'is_special' => $this->input->post('is_special'),
             'remark' => $this->input->post('remark'),
         );
         $res = $this->posts_service->saveCate($data);

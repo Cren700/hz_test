@@ -18,8 +18,11 @@ class Category_service_model extends HZ_Model
     {
         $ret = array('code' => 0);
         $where = array();
-        if (!empty($option['Fstatus'])) {
+        if ($option['Fstatus'] == '0' || !empty($option['Fstatus'])) {
             $where['Fstatus'] = $option['Fstatus'];
+        }
+        if ($option['Fis_special'] == '0' || !empty($option['Fis_special'])) {
+            $where['Fis_special'] = $option['Fis_special'];
         }
         $res = $this->cate_dao->lists($where);
         $ret['data'] = $res;

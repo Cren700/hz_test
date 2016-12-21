@@ -37,11 +37,20 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="control-group">
+                                <div class="span12">
+                                    <label class="control-label">是否为专栏分类</label>
+                                    <div class="controls">
+                                        <span>是</span><input type="radio" name="is_special" value="1" <{if ($cate['Fis_special']|default:0) eq 1}>checked<{/if}>>
+                                        <span style="padding-left: 30px">否</span><input type="radio" name="is_special" value="0" <{if ($cate['Fis_special']|default:0) eq 0}>checked<{/if}>>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-actions">
                                 <input type="submit" class="btn btn-success" value="提 交" />
                                 <a href="<{'/posts/cate'|getBaseUrl}>" class="btn" title="返回列表">返回列表</a>
                             </div>
-                            <input type="hidden" name="category_id" value="<{$cate['Fcategory_id']|default:''}>">
+                            <input type="hidden" name="category_id" value="<{$cate['Fpost_category_id']|default:''}>">
                             <input type="hidden" name="is_new" value="<{$is_new}>">
                         </div>
                     </form>

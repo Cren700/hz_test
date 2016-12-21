@@ -30,6 +30,7 @@
                                     <th>ID</th>
                                     <th>资讯分类</th>
                                     <th>分类说明</th>
+                                    <th>是否为专栏</th>
                                     <th>状态</th>
                                     <th>操作</th>
                                 </tr>
@@ -39,6 +40,7 @@
                                     <td><{$c.Fpost_category_id}></td>
                                     <td><{$c.Fcategory_name}></td>
                                     <td><{$c.Fremark}></td>
+                                    <td><{if $c.Fis_special eq 0}>否<{else}>是<{/if}></td>
                                     <td class="js-status"><{if $c['Fstatus'] eq 0 }>禁用<{else}>使用中<{/if}></td>
                                     <td>
                                         <a href="<{'/posts/getcate/'|cat:$c.Fpost_category_id|getBaseUrl}>" class="btn btn-primary btn-mini js-btn-delete">编辑</a>

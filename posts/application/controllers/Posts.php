@@ -15,6 +15,20 @@ class Posts extends HZ_Controller
     }
 
     /**
+     * 根据分类获取posts
+     */
+    public function postsListByCate()
+    {
+        $option = array(
+            'p' => $this->input->get('p'),
+            'page_size' => $this->input->get('page_size'),
+            'Fpost_category_id' => $this->input->get('post_category_id'),
+        );
+        $res = $this->posts_service->postsListByCate($option);
+        echo outputResponse($res);
+    }
+
+    /**
      * 查询
      */
     public function query()
@@ -53,6 +67,7 @@ class Posts extends HZ_Controller
     {
         $data = array(
             'Fuser_id' => $this->input->post('user_id'),
+            'Fuser_type' => $this->input->post('user_type'),
             'Fpost_title' => $this->input->post('post_title'),
             'Fpost_author' => $this->input->post('post_author'),
             'Fpost_category_id' => $this->input->post('category_id'),
@@ -78,6 +93,7 @@ class Posts extends HZ_Controller
         $where = array('Fid' => $this->input->post('id'));
         $data = array(
             'Fuser_id' => $this->input->post('user_id'),
+            'Fuser_type' => $this->input->post('user_type'),
             'Fpost_title' => $this->input->post('post_title'),
             'Fpost_author' => $this->input->post('post_author'),
             'Fpost_category_id' => $this->input->post('category_id'),

@@ -15,7 +15,8 @@ class Category extends BaseController {
 	public function lists()
     {
         $option = array(
-            'Fstatus' => $this->input->get('status')
+            'Fstatus' => $this->input->get('status'),
+            'Fis_special' => $this->input->get('is_special'),
         );
         $res = $this->cate_service->lists($option);
         echo outputResponse($res);
@@ -41,6 +42,7 @@ class Category extends BaseController {
         $data = array();
         $data['Fcategory_name'] = $this->input->post('category_name');
         $data['Fremark'] = $this->input->post('remark');
+        $data['Fis_special'] = $this->input->post('is_special'); //是否为专栏分类
         $data['Fstatus'] = 1; //状态0:禁用，1启用
         $data['Fcreate_time'] = time();
         $data['Fupdate_time'] = time();
@@ -55,6 +57,7 @@ class Category extends BaseController {
     {
         $data = array(
             'Fcategory_name' => $this->input->post('category_name'),
+            'Fis_special' => $this->input->post('is_special'), //是否为专栏分类
             'Fremark' => $this->input->post('remark'),
             'Fupdate_time' => time(),
         );
