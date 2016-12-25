@@ -3,7 +3,7 @@
 <section class="general">
     <div class="plate_jj">
         <div class="pro_baner">
-            <img src="<{$info['Fcoverimage']}>">
+            <img src="<{$info['Fcoverimage']|default:''}>">
         </div>
         <div class="pro_join_info">
             <div class="join_info_nn">
@@ -21,27 +21,28 @@
             <div class="plan_item">
                 <i class="icon_plan_one">&nbsp;</i>
                 互助金额
-                <p><{$info['Fheight_amount']}></p>
+                <p><{$info['Fheight_amount']|default:''}></p>
             </div>
             <div class="plan_item">
                 <i class="icon_plan_two">&nbsp;</i>
                 保障范围
-                <p><{$info['Fscope_insurance']}></p>
+                <p><{$info['Fscope_insurance']|default:''}></p>
             </div>
         </div>
         <div class="plan_box">
             <div class="plan_item">
                 <i class="icon_plan_three">&nbsp;</i>
                 计划加入年龄
-                <p><{$info['Fscope_age']}></p>
+                <p><{$info['Fscope_age']|default:''}></p>
             </div>
             <div class="plan_item">
                 <i class="icon_plan_four">&nbsp;</i>
                 观察期
-                <p><{$info['Fobservation_period']}></p>
+                <p><{$info['Fobservation_period']|default:''}></p>
             </div>
         </div>
     </div>
+    <{if isset($info['Fplan_rule'])}>
     <div class="plate_plan_plan">
         <h5>计划规划</h5>
         <div class="plan_plan_box">
@@ -55,13 +56,15 @@
             <{/foreach}>
         </div>
     </div>
+    <{/if}>
     <div class="protection">
         <h5>运营保障</h5>
         <div class="protection_box">
-            <{$info['Fcontent']}>
+            <{$info['Fcontent']|default:''}>
         </div>
     </div>
 
+    <{if isset($info['Fapplication_process'])}>
     <div class="application_process">
         <h5>申请流程</h5>
         <div class="application_process_box">
@@ -75,6 +78,8 @@
             <{/foreach}>
         </div>
     </div>
+    <{/if}>
+    <{if isset($info['Fq_a'])}>
     <div class="problem">
         <h5>常见问题</h5>
         <div class="problem_box">
@@ -92,11 +97,13 @@
             <p>查看<a href="javascript:;" id="js-checkProblem">《<{$info['Fproduct_name']}>》</a></p>
         </div>
     </div>
+    <{/if}>
 </section>
 
 <div class="problem_section">
     <div class="problem">
         <div class="return_box"><a href="javascript:;" class="return_btn">返回详情</a></div>
+        <{if isset($info['Fjoint_pledge'])}>
         <div class="problem_box">
             <{foreach $info['Fjoint_pledge'] as $k => $pledge}>
             <div class="problem_item">
@@ -110,6 +117,7 @@
             </div>
             <{/foreach}>
         </div>
+        <{/if}>
     </div>
 </div>
 

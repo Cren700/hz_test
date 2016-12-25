@@ -121,7 +121,7 @@
                                 <div class="span12">
                                     <label class="control-label">计划规则</label>
                                     <div class="controls" id="js-box-rule">
-                                        <{if !isset($product['Fplan_rule'])}>
+                                        <{if !isset($product['Fplan_rule']) || (isset($product['Fplan_rule']) && empty($product['Fplan_rule']))}>
                                             <div class="span10">
                                                 <textarea type="text" class="span5" name="rule_title[0]" placeholder="标题"></textarea>
                                                 <textarea type="text" class="span7" name="rule_description[0]" placeholder="描述"></textarea>
@@ -153,7 +153,7 @@
                                 <div class="span12">
                                     <label class="control-label">申请流程</label>
                                     <div class="controls" id="js-box-process">
-                                        <{if !isset($product['Fapplication_process'])}>
+                                        <{if !isset($product['Fapplication_process']) || (isset($product['Fapplication_process']) && empty($product['Fapplication_process']))}>
                                             <div class="span10">
                                                 <textarea type="text" class="span5" name="process_title[0]" placeholder="标题"></textarea>
                                                 <textarea type="text" class="span7" name="process_description[0]" placeholder="描述"></textarea>
@@ -185,7 +185,7 @@
                                 <div class="span12">
                                     <label class="control-label">常见问题</label>
                                     <div class="controls ueditor-box" id="js-box-qa">
-                                        <{if !isset($product['Fq_a'])}>
+                                        <{if !isset($product['Fq_a']) || (isset($product['Fq_a']) && empty($product['Fq_a']))}>
                                         <div>
                                             <input type="text" class="span10" name="question[0]" placeholder="问题">
                                             <input type="button" class="span2 btn" id='js-btn-qa-add' value="添加">
@@ -223,7 +223,7 @@
                                 <div class="span12">
                                     <label class="control-label">公约内容</label>
                                     <div class="controls ueditor-box" id="js-box-pledge">
-                                    <{if !isset($product['Fjoint_pledge'])}>
+                                    <{if !isset($product['Fjoint_pledge']) || (isset($product['Fjoint_pledge']) && empty($product['Fjoint_pledge']))}>
                                         <div>
                                             <input type="text" class="span10" name="pledge_title[0]" placeholder="标题">
                                             <input type="button" class="span2 btn" id='js-btn-pledge-add' value="添加">

@@ -56,12 +56,11 @@ class HZ_Model extends CI_Model
         }
 
         $res = curl_exec($ch);
-        // if($control == "updateProduct")
-//        if($control == "getProductByPid")
-       // {
-       //     echo $res;
-       //     die;
-       // }
+        if($control == "updateProduct")
+       // if($control == "queryProduct")
+       {
+           echo $res;die;
+       }
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);//print_r($httpCode);exit();
         curl_close($ch);
 
