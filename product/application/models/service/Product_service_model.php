@@ -198,7 +198,7 @@ class Product_service_model extends HZ_Model
             $ret['code'] = 'product_error_2'; // 不存在
             return $ret;
         }
-        $product_detail = $this->product_dao->getProductDetailByFId($where);
+        $product_detail = $this->product_dao->getProductDetailByFId($where) ? : array();
         if (!empty($product_detail)) {
             $product_detail['Fplan_rule'] = isset($product_detail['Fplan_rule']) && !empty($product_detail['Fplan_rule']) ? json_decode($product_detail['Fplan_rule']) : '';
             $product_detail['Fapplication_process'] = isset($product_detail['Fapplication_process']) && !empty($product_detail['Fapplication_process']) ? json_decode($product_detail['Fapplication_process']) : '';
@@ -304,32 +304,36 @@ class Product_service_model extends HZ_Model
                 if (empty($r) && empty($data['Frule_description'][$k])) {
                     unset($r);
                     unset($data['Frule_description'][$k]);
+                } else {
+                    $plan_rule[] = array('title' => $r, 'desc' => $data['Frule_description'][$k]);
                 }
-                $plan_rule[] = array('title' => $r, 'desc' => $data['Frule_description'][$k]);
             }
             // 申请流程
             foreach ($data['Fprocess_title'] as $k => &$r) {
                 if (empty($r) && empty($data['Fprocess_description'][$k])) {
                     unset($r);
                     unset($data['Fprocess_description'][$k]);
+                } else {
+                    $process[] = array('title' => $r, 'desc' => $data['Fprocess_description'][$k]);
                 }
-                $process[] = array('title' => $r, 'desc' => $data['Fprocess_description'][$k]);
             }
             // 常见问题
             foreach ($data['Fquestion'] as $k => &$r) {
                 if (empty($r) && empty($data['Fanswer'][$k])) {
                     unset($r);
                     unset($data['Fanswer'][$k]);
+                } else {
+                    $q_a[] = array('title' => $r, 'desc' => $data['Fanswer'][$k]);
                 }
-                $q_a[] = array('title' => $r, 'desc' => $data['Fanswer'][$k]);
             }
             // 公约内容
             foreach ($data['Fpledge_title'] as $k => &$r) {
                 if (empty($r) && empty($data['Fpledge_content'][$k])) {
                     unset($r);
                     unset($data['Fpledge_content'][$k]);
+                } else {
+                    $pledge[] = array('title' => $r, 'desc' => $data['Fpledge_content'][$k]);
                 }
-                $pledge[] = array('title' => $r, 'desc' => $data['Fpledge_content'][$k]);
             }
 
             $product_detail = array(

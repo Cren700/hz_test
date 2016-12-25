@@ -21,23 +21,20 @@ class Product_dao_model extends HZ_Model
     public function productNum($where, $like, $where_in) {
         dbEscape($like);
         dbEscape($where);
-        $count = $this->p->select('count(*) as num')
-            ->from($this->_product_table)
-            ->where($where)
-            ->where_in('Fproduct_status', $where_in)
-            ->like($like)
-            ->count_all_results();
+        $this->p->select('count(*) as num')->from($this->_product_table)->where($where);
+        !empty($where_in) ? $this->p->where_in('Fproduct_status', $where_in) : '';
+        $count = $this->p->like($like)->count_all_results();
         return $count;
     }
 
     public function productList($where, $like, $where_in, $page, $page_size) {
         dbEscape($where);
         dbEscape($like);
-        $query = $this->p->select('*')
+        $this->p->select('*')
                 ->from($this->_product_table)
-                ->where($where)
-                ->where_in('Fproduct_status', $where_in)
-                ->like($like)
+                ->where($where);
+        !empty($where_in) ? $this->p->where_in('Fproduct_status', $where_in) : '';
+        $query = $this->p->like($like)
                 ->order_by('Fproduct_id', 'DESC')
                 ->limit($page_size, $page_size * ($page - 1))
                 ->get();
