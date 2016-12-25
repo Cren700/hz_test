@@ -36,7 +36,7 @@ class Product extends BaseControllor
             'product_name'   => $this->input->get('product_name'),
             'category_id' => $this->input->get('category_id'),
             'product_status' => $this->input->get('status'),
-            'store_id'  => $this->input->get('store_id') ? : $this->_uid,
+            'store_id'  => $this->input->get('store_id'),
             'is_del' => $this->input->get('is_del'),
             'min_date' => $this->input->get('min_date'),
             'max_date' => $this->input->get('max_date'),
@@ -69,7 +69,10 @@ class Product extends BaseControllor
         $jsArr = array(
             'plugin/jquery.placeholder.min.js',
             'plugin/jquery.validate.js',
-            'product/detail.js'
+            'product/detail.js',
+            'ueditor/ueditor.config.js',
+            'ueditor/ueditor.all.js',
+            'ueditor/lang/zh-cn/zh-cn.js',
         );
         $this->smarty->assign('is_new', 1);
         $this->smarty->assign('cate', $cate['data']);
@@ -86,16 +89,23 @@ class Product extends BaseControllor
         if (empty($product['data'])) {
             $this->jump404();
         }
+//        p($product);
         $cate = $this->product_service->category();
         $jsArr = array(
             'plugin/jquery.placeholder.min.js',
             'plugin/jquery.validate.js',
-            'product/detail.js'
+            'uploadify/jquery.uploadify.min.js',
+            'product/detail.js',
+            'ueditor/ueditor.config.js',
+            'ueditor/ueditor.all.js',
+            'ueditor/lang/zh-cn/zh-cn.js',
         );
+        $cssArr = array('uploadify.css');
         $this->smarty->assign('is_new', 0);
         $this->smarty->assign('cate', $cate['data']);
         $this->smarty->assign('product', $product['data']);
         $this->smarty->assign('jsArr', $jsArr);
+        $this->smarty->assign('cssArr', $cssArr);
         $this->smarty->display('product/detail.tpl');
     }
 
@@ -110,7 +120,22 @@ class Product extends BaseControllor
             'product_num' => $this->input->post('product_num'),
             'product_price' => $this->input->post('product_price'),
             'category_id' => $this->input->post('category_id'),
-            'remark' => $this->input->post('remark'),
+            'description' => $this->input->post('description'),
+            'coverimage' => $this->input->post('coverimage'),
+            'height_amount' => $this->input->post('height_amount'),
+            'scope_insurance' => $this->input->post('scope_insurance'),
+            'scope_age' => $this->input->post('scope_age'),
+            'observation_period' => $this->input->post('observation_period'),
+            'content' => $this->input->post('content'),
+            'rule_title' => $this->input->post('rule_title'), // 计划规则 标题
+            'rule_description' => $this->input->post('rule_description'), // 计划规则 描述
+            'process_title' => $this->input->post('process_title'), // 申请流程 标题
+            'process_description' => $this->input->post('process_description'), // 申请流程 描述
+            'question' => $this->input->post('question'),// 常见问题
+            'answer' => $this->input->post('answer'),// 常见问题
+            'pledge_title' => $this->input->post('pledge_title'), // 公约
+            'pledge_content' => $this->input->post('pledge_content'), // 公约
+
         );
         $res = $this->product_service->save($data);
         echo json_encode_data($res);

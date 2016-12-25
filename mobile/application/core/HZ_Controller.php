@@ -13,7 +13,7 @@ class HZ_Controller extends CI_Controller
 
     public function __construct(){
         parent::__construct();
-        $this->filterPostAndGet();
+//        $this->filterPostAndGet();
         $this->load->library("session");
         //Smarty
 

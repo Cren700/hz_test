@@ -4,9 +4,9 @@
     <{include file="public/header_box.tpl"}>
     <nav class="home_nav">
         <div class="nav_list">
-            <a href="<{''|getBaseUrl}>" class="header_nav <{if $cate_id eq ''}> select<{/if}>">最新</a>
+            <a href="<{'/product.html'|getBaseUrl}>" class="header_nav<{if $cate_id eq ''}> select<{/if}>">所有计划</a>
             <{foreach $cate as $c}>
-                <a href="<{'/home/index?id='|cat:$c['Fpost_category_id']|getBaseUrl}>" class="header_nav <{if $cate_id eq $c['Fpost_category_id']}> select<{/if}>"><{$c['Fcategory_name']}></a>
+            <a href="<{'/product?id='|cat:$c['Fcategory_id']|getBaseUrl}>" class="header_nav <{if $cate_id eq $c['Fcategory_id']}> select<{/if}>"><{$c['Fcategory_name']}></a>
             <{/foreach}>
         </div>
         <div class="top_menu_more">
@@ -14,14 +14,15 @@
             <a href="javascript:void(0);" class="more_btn"></a>
         </div>
     </nav>
+    <input type="hidden" name="cate_id" value="<{$cate_id}>">
 </div>
 <section class="content" id="section_content">
-    <div class="new_item_shape">
+    <div class="new_item">
 
     </div>
     <a href="javascript:;" class="js-next-page">Next</a>
-    <input type="hidden" name="cate_id" value="<{$cate_id|default:''}>">
 </section>
-<{include file="public/footer.tpl"}>
+
+<{include file='public/footer.tpl'}>
 </body>
 </html>

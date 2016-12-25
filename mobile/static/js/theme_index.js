@@ -2,7 +2,7 @@ if (typeof (HZ) == "undefined" || !HZ) {
     var HZ = {}
 }
 
-HZ.Home = (function() {
+HZ.Theme = (function() {
     var p = 1;
     function _init(){
 
@@ -25,15 +25,11 @@ HZ.Home = (function() {
 
         var cate_id = $('input[name="cate_id"]').val();
         $.ajax({
-            url: baseUrl+'/home/getPostsList',
+            url: baseUrl+'/theme/getPostsList',
             data: {p: p, post_category_id: cate_id, status: status},
             dataType: 'HTML',
             type: 'GET',
             success: function(res){
-                if(res === '') {
-                    $('.js-next-page').hide();
-                    return false;
-                }
                 $('.new_item_shape').append(res);
                 $('.js-date-dif').each(function(){
                     var u_time = $(this).attr('rel');
@@ -49,5 +45,5 @@ HZ.Home = (function() {
 })();
 
 $(document).ready(function(){
-    HZ.Home.init();
+    HZ.Theme.init();
 })

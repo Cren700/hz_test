@@ -18,35 +18,45 @@ class Category_dao_model extends HZ_Model
 
     public function lists($where)
     {
+        dbEscape($where);
         $query = $this->_news->get_where($this->_cate_table, $where);
-        return $query->result_array();
+        $res = $query->result_array();
+        return filterData($res);
     }
 
     public function getCategory($where)
     {
+        dbEscape($where);
         $query = $this->_news->get_where($this->_cate_table, $where);
-        return $query->row_array();
+        $res = $query->row_array();
+        return filterData($res);
     }
 
     public function getCateInfoByCateId($cate_id)
     {
         $where = array('Fpost_category_id' => $cate_id);
+        dbEscape($where);
         $query = $this->_news->get_where($this->_cate_table, $where);
-        return $query->row_array();
+        $res = $query->row_array();
+        return filterData($res);
     }
 
     public function add($data)
     {
+        dbEscape($data);
         return $this->_news->insert($this->_cate_table, $data);
     }
 
     public function del($where)
     {
+        dbEscape($where);
         return $this->_news->delete($this->_cate_table, $where);
     }
 
     public function update($where, $data)
     {
+        dbEscape($data);
+        dbEscape($where);
         return $this->_news->update($this->_cate_table, $data, $where);
     }
 }

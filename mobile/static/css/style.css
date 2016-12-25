@@ -937,10 +937,11 @@ section.general {
 .problem_section {
   height: 100%;
   background-color: #fff;
+  display: none;
 }
 .problem {
   background-color: #fff;
-  padding-top: 0.26666667rem;
+  padding-top: 0.27rem;
   padding-left: 0.32rem;
   padding-right: 0.32rem;
 }
@@ -2188,6 +2189,16 @@ section.change_info {
 /**/
 .srearch_jj > h3 span {
   color: #f24970;
+}
+.return_box {
+  height:1rem;
+}
+.return_btn {
+  display: inherit;
+  height: 1.30666667rem;
+  line-height: 1.30666667rem;
+  font-size: 0.45rem;
+  color: #fff;
 }
 /*keyframe*/
 @keyframes loading {

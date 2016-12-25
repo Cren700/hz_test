@@ -59,7 +59,20 @@ class Product extends HZ_Controller
             'Fproduct_price' => $this->input->post('product_price'),
             'Fproduct_num' => $this->input->post('product_num'),
             'Fcategory_id' => $this->input->post('category_id'),
-            'Fremark' => $this->input->post('remark'),
+            'Fdescription' => $this->input->post('description'),
+            'Fheight_amount' => $this->input->post('height_amount'),
+            'Fscope_insurance' => $this->input->post('scope_insurance'),
+            'Fscope_age' => $this->input->post('scope_age'),
+            'Fobservation_period' => $this->input->post('observation_period'),
+            'Fcontent' => $this->input->post('content'),
+            'Frule_title' => $this->input->post('rule_title'), // 计划规则 标题
+            'Frule_description' => $this->input->post('rule_description'), // 计划规则 描述
+            'Fprocess_title' => $this->input->post('process_title'), // 申请流程 标题
+            'Fprocess_description' => $this->input->post('process_description'), // 申请流程 描述
+            'Fquestion' => $this->input->post('question'),// 常见问题
+            'Fanswer' => $this->input->post('answer'),// 常见问题
+            'Fpledge_title' => $this->input->post('pledge_title'), // 公约
+            'Fpledge_content' => $this->input->post('pledge_content'), // 公约
             'Fcreate_time'  => time(),
             'Fupdate_time'  => time(),
         );
@@ -79,7 +92,21 @@ class Product extends HZ_Controller
             'Fproduct_price' => $this->input->post('product_price'),
             'Fproduct_num' => $this->input->post('product_num'),
             'Fcategory_id' => $this->input->post('category_id'),
-            'Fremark' => $this->input->post('remark'),
+            'Fdescription' => $this->input->post('description'),
+            'Fcoverimage' => $this->input->post('coverimage'),
+            'Fheight_amount' => $this->input->post('height_amount'),
+            'Fscope_insurance' => $this->input->post('scope_insurance'),
+            'Fscope_age' => $this->input->post('scope_age'),
+            'Fobservation_period' => $this->input->post('observation_period'),
+            'Fcontent' => $this->input->post('content'),
+            'Frule_title' => $this->input->post('rule_title'), // 计划规则 标题
+            'Frule_description' => $this->input->post('rule_description'), // 计划规则 描述
+            'Fprocess_title' => $this->input->post('process_title'), // 申请流程 标题
+            'Fprocess_description' => $this->input->post('process_description'), // 申请流程 描述
+            'Fquestion' => $this->input->post('question'),// 常见问题
+            'Fanswer' => $this->input->post('answer'),// 常见问题
+            'Fpledge_title' => $this->input->post('pledge_title'), // 公约
+            'Fpledge_content' => $this->input->post('pledge_content'), // 公约
             'Fupdate_time'  => time(),
         );
         $res = $this->product_service->update($where, $data);

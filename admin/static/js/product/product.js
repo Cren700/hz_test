@@ -20,6 +20,7 @@ HZ.Product = (function() {
             var _this = $(this);
             var url = baseUrl + '/product/status.html';
             var status = _this.data('status');
+            console.log(status);
             var data = {status: status, pid: _this.parents('tr').attr('rel')};
             HZ.Form.btnSubmit({
                 t: 'post',
@@ -29,34 +30,46 @@ HZ.Product = (function() {
                 callback: function(){
                     var _p = _this.parent();
                     var s1 = '\
+                        <button class="btn btn-warning btn-mini js-btn-status" data-status="5">审核不通过</button>\
                         <button class="btn btn-primary btn-mini js-btn-status" data-status="2">上架</button>\
-                        <button class="btn btn-warning btn-mini js-btn-status" data-status="3">下架</button>\
                         <button class="btn btn-danger btn-mini js-btn-delete">删除</button>';
                     var s2 = '\
                         <button class="btn btn-warning btn-mini js-btn-status" data-status="3">下架</button>\
                         <button class="btn btn-success btn-mini js-btn-status" data-status="4">已完成</button>\
                         <button class="btn btn-danger btn-mini js-btn-delete">删除</button>';
                     var s3 = '\
-                        <button class="btn btn-info btn-mini js-btn-status" data-status="1">审核不通过</button>\
-                        <button class="btn btn-primary btn-mini js-btn-status" data-status="2">上架</button>\
+                        <button class="btn btn-info btn-mini js-btn-status" data-status="1">待审核</button>\
+                        <button class="btn btn-primary btn-mini js-btn-status" data-status="2">重新上架</button>\
                         <button class="btn btn-danger btn-mini js-btn-delete">删除</button>';
-                    var s4 = '<button class="btn btn-danger btn-mini js-btn-delete">删除</button>';
+                    var s4 = '\
+                        <button class="btn btn-primary btn-mini js-btn-status" data-status="2">重新上架</button>\
+                        <button class="btn btn-danger btn-mini js-btn-delete">删除</button>';
+                    var s5 = '\
+                        <button class="btn btn-primary btn-mini js-btn-status" data-status="1">待审核</button>\
+                        <button class="btn btn-danger btn-mini js-btn-delete">删除</button>';
+
                     switch (status){
                         case 1:
                             _this.parents('tr').find('.js-product-status').text('待审核');
+                            console.log(s1);
                             _p.html(s1);
                             break;
                         case 2:
-                            _this.parents('tr').find('.js-product-status').text('上架');
+                            _this.parents('tr').find('.js-product-status').text('已上架');
                             _p.html(s2);
                             break;
                         case 3:
-                            _this.parents('tr').find('.js-product-status').text('下架');
+                            _this.parents('tr').find('.js-product-status').text('已下架');
                             _p.html(s3);
                             break;
                         case 4:
-                            _this.parents('tr').find('.js-product-status').text('已完成');
+                            _this.parents('tr').find('.js-product-status').text('已发布');
                             _p.html(s4);
+                            break;
+                        case 5:
+                            console.log(s5);
+                            _this.parents('tr').find('.js-product-status').text('审核不通过');
+                            _p.html(s5);
                             break;
                         default:
                             break;

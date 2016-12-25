@@ -107,22 +107,8 @@
         <input type="button" value="发表">
     </div>
 </footer>
-<a href="javascript:void(0);" class="menu_nav"></a>
-<div class="circle_box">
-    <div class="circle_remark">&nbsp;</div>
-    <div class="circle">
-        <div class="ring">
-            <a href="/m/index.html" class="menuItem">首页</a>
-            <a href="/m/play.html" class="menuItem">产品</a>
-            <a href="/m/vip/index.html" class="menuItem">我的</a>
-            <a href="/m/special-0.html" class="menuItem">专栏</a>
-        </div>
-        <a href="#" class="center">
-            <i>&nbsp;</i>
-        </a>
-    </div>
-</div>
 
+<{include file='public/menu.tpl'}>
 <{include file='public/no_nav_footer.tpl'}>
 </body>
 </html>

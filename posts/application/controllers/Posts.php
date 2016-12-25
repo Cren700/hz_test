@@ -86,7 +86,7 @@ class Posts extends HZ_Controller
     }
 
     /**
-     * 更新分类
+     * 更新资讯
      */
     public function update()
     {
@@ -111,7 +111,7 @@ class Posts extends HZ_Controller
     }
 
     /**
-     * 删除分类
+     * 删除资讯
      */
     public function del()
     {

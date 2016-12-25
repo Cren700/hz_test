@@ -25,6 +25,8 @@ class Info_dao_model extends HZ_Model
      * @return int
      */
     public function userCounts($where, $like) {
+        dbEscape($like);
+        dbEscape($where);
         $count = $this->u->select('count(*) as num')
                 ->from($this->_tabel_user . ' as u')
                 ->where($where)
@@ -34,6 +36,8 @@ class Info_dao_model extends HZ_Model
     }
 
     public function userList($where, $like, $page, $page_size) {
+        dbEscape($like);
+        dbEscape($where);
         $query = $this->u->select('u.Fid, u.Fuser_id, u.Fuser_type, u.Fcreate_time, u.Fstatus, ud.Fatte_status, ud.Fnick_name, ud.Freal_name')
             ->from($this->_tabel_user . ' as u')
             ->join($this->_tabel_user_detail . ' as ud', 'u.Fid = ud.Fuser_id', 'left')
@@ -42,41 +46,53 @@ class Info_dao_model extends HZ_Model
             ->order_by('u.Fid', 'DESC')
             ->limit($page_size, $page_size * ($page - 1))
             ->get();
-         return $query->result_array();
+         $res = $query->result_array();
+        return filterData($res);
     }
 
-    public function getInfo($option)
+    public function getInfo($where)
     {
+        dbEscape($where);
         $query = $this->u->select('u.Fid, u.Fuser_id, u.Fcreate_time, u.Fstatus, ud.*')
             ->from($this->_tabel_user . ' as u')
             ->join($this->_tabel_user_detail . ' as ud', 'u.Fid = ud.Fuser_id', 'left')
-            ->where($option)
+            ->where($where)
             ->get();
-        return $query->row_array();
+        $res = $query->row_array();
+        return filterData($res);
     }
 
     public function changeUserStatus($where, $data)
     {
+        dbEscape($data);
+        dbEscape($where);
         return $this->u->update($this->_tabel_user, $data, $where);
     }
 
     public function changeUserAtteStatus($where, $data)
     {
+        dbEscape($data);
+        dbEscape($where);
         return $this->u->update($this->_tabel_user_detail, $data, $where);
     }
 
     public function addBlackUser($data)
     {
+        dbEscape($data);
         return $this->u->insert($this->_tabel_blackUser, $data);
     }
 
     public function getBlackUsrByUid($where)
     {
+        dbEscape($where);
         $query = $this->u->get_where($this->_tabel_blackUser, $where);
-        return $query->row_array();
+        $res = $query->row_array();
+        return filterData($res);
     }
 
     public function blackUserCounts($where, $like) {
+        dbEscape($like);
+        dbEscape($where);
         $count = $this->u->select('count(*) as num')
             ->from($this->_tabel_user . ' as u')
             ->where($where)
@@ -86,6 +102,8 @@ class Info_dao_model extends HZ_Model
     }
 
     public function blackUserList($where, $like, $page, $page_size) {
+        dbEscape($like);
+        dbEscape($where);
         $query = $this->u->select('u.Fid, u.Fuser_id, u.Fuser_type, u.Fcreate_time, u.Fstatus, ud.Fatte_status, ud.Fnick_name, ud.Freal_name, b.Fcreate_time as bFcreate_time')
             ->from($this->_tabel_user . ' as u')
             ->join($this->_tabel_user_detail . ' as ud', 'u.Fid = ud.Fuser_id', 'left')
@@ -96,6 +114,7 @@ class Info_dao_model extends HZ_Model
             ->limit($page_size, $page_size * ($page - 1))
             ->get();
 //        echo $this->u->last_query();die;
-        return $query->result_array();
+        $res = $query->result_array();
+        return filterData($res);
     }
 }

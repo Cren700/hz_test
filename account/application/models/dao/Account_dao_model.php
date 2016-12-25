@@ -26,32 +26,41 @@ class Account_dao_model extends HZ_Model
      */
     public function addAccount($data, $type = 'user')
     {
+        dbEscape($data);
         $table = $type === 'admin' ? $this->_admin_table : $this->_user_table;
         return $this->account->insert($table, $data);
     }
 
     public function modifyPwd($where, $data, $type = 'user')
     {
+        dbEscape($data);
+        dbEscape($where);
         return $this->account->update($this->_sel_table($type), $data, $where);
     }
 
     public function addDetail($data)
     {
+        dbEscape($data);
         return $this->account->insert($this->_user_detail_table, $data);
     }
 
     public function modifyDetail($where, $data)
     {
+        dbEscape($data);
+        dbEscape($where);
         return $this->account->update($this->_user_detail_table, $data, $where);
     }
 
     public function addAdminDetail($data)
     {
+        dbEscape($data);
         return $this->account->insert($this->_admin_detail_table, $data);
     }
 
     public function modifyAdminDetail($where, $data)
     {
+        dbEscape($data);
+        dbEscape($where);
         return $this->account->update($this->_admin_detail_table, $data, $where);
     }
 
@@ -63,20 +72,24 @@ class Account_dao_model extends HZ_Model
      */
     public function getInfoByOp($where, $type = 'user')
     {
+        dbEscape($where);
         $query = $this->account->get_where($this->_sel_table($type), $where, 1);
-        return $query->row_array();
+        $res = $query->row_array();
+        return filterData($res);
     }
 
     /**
      * 账户详细信息
-     * @param $array
+     * @param $where
      * @param string $type
      * @return mixed
      */
-    public function getDetailByOp($array, $type = 'user')
+    public function getDetailByOp($where, $type = 'user')
     {
-        $query = $this->account->get_where($this->_sel_detail_table($type), $array);
-        return $query->row_array();
+        dbEscape($where);
+        $query = $this->account->get_where($this->_sel_detail_table($type), $where);
+        $res = $query->row_array();
+        return filterData($res);
     }
 
     private function _sel_table($type)

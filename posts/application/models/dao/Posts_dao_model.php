@@ -17,6 +17,9 @@ class Posts_dao_model extends HZ_Model
     }
 
     public function postsNum($where, $like) {
+
+        dbEscape($like);
+        dbEscape($where);
         $count = $this->_news->select('count(*) as num')
             ->from($this->_posts_table)
             ->where($where)
@@ -26,6 +29,8 @@ class Posts_dao_model extends HZ_Model
     }
 
     public function postsList($where, $like, $page, $page_size) {
+        dbEscape($like);
+        dbEscape($where);
         $query = $this->_news->select('*')
             ->from($this->_posts_table)
             ->where($where)
@@ -38,16 +43,20 @@ class Posts_dao_model extends HZ_Model
 
 
     public function postsNumByCate($where) {
+        dbEscape($where);
         $count = $this->_news->select('count(*) as num')
             ->from($this->_posts_table)
+            ->where(array('Fpost_status' => 3))
             ->where_in('Fpost_category_id', $where)
             ->count_all_results();
         return $count;
     }
 
     public function postsListByCate($where, $page, $page_size) {
+        dbEscape($where);
         $query = $this->_news->select('*')
             ->from($this->_posts_table)
+            ->where(array('Fpost_status' => 3))
             ->where_in('Fpost_category_id', $where)
             ->order_by('Fupdate_time', 'DESC')
             ->limit($page_size, $page_size * ($page - 1))
@@ -57,36 +66,46 @@ class Posts_dao_model extends HZ_Model
 
     public function add($data)
     {
+        dbEscape($data);
         return $this->_news->insert($this->_posts_table, $data);
     }
 
 
     public function getPostsByPid($where)
     {
+        dbEscape($where);
         $query = $this->_news->get_where($this->_posts_table, $where);
-        return $query->row_array();
+        $res = $query->row_array();
+        return filterData($res);
     }
 
     public function update($where, $data)
     {
+        dbEscape($data);
+        dbEscape($where);
         return $this->_news->update($this->_posts_table, $data, $where);
     }
 
     public function del($where)
     {
+        dbEscape($where);
         return $this->_news->delete($this->_posts_table, $where);
     }
 
     public function changeStatus($data, $where)
     {
+        dbEscape($data);
+        dbEscape($where);
         return $this->_news->update($this->_posts_table, $data, $where);
     }
 
     public function relatedPosts($where, $where_not_in)
     {
+        dbEscape($where);
         $sql = 'SELECT Fid, Fpost_title, Fpost_author, Fupdate_time, Fpost_coverimage FROM '. $this->_posts_table . ' WHERE ' . $where_not_in . ' AND ( ' . $where .') ORDER BY Fupdate_time DESC LIMIT 5 ';
         $query = $this->_news->query($sql);
-        return $query->result_array();
+        $res = $query->result_array();
+        return filterData($res);
 
     }
 

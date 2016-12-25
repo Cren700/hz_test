@@ -62,13 +62,13 @@ function dbEscape(&$data)
 /**
  * 去除\',入库前处理的数据
  * @param $data
- * @return $data
+ * @return mixed
  */
-function filterOutData(&$data)
+function filterData(&$data)
 {
     if(is_array($data)){
         foreach ($data as &$d){
-            filterOutData($d);
+            filterData($d);
         }
     }
     if(is_string($data)){
@@ -111,7 +111,6 @@ function outputResponse($data, $header = array())
     {
         $data['data'] = array('list' => $data['data']);
     }
-    filterOutData($data); //去除\',入库前处理的数据
     $data = json_encode($data, JSON_UNESCAPED_UNICODE);
     // 设置HTTP响应头信息
     $headerDefault = array(

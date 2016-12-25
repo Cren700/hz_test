@@ -18,7 +18,7 @@ class Product_service_model extends HZ_Model
     {
         $res = array('code' => 0);
         $where = array('Fis_del' => '0');
-        $like = array();
+        $where_in = $like = array();
 
         if ($option['Fproduct_id'] === '0' || !empty($option['Fproduct_id'])) {
             $where['Fproduct_id'] = $option['Fproduct_id'];
@@ -33,7 +33,7 @@ class Product_service_model extends HZ_Model
         }
 
         if ($option['Fproduct_status'] === '0' || !empty($option['Fproduct_status'])) {
-            $where['Fproduct_status'] = $option['Fproduct_status'];
+            $where_in = $option['Fproduct_status'];
         }
 
         if ($option['Fis_del'] === '0' || !empty($option['Fis_del'])) {
@@ -54,9 +54,8 @@ class Product_service_model extends HZ_Model
 
         $page = $option['p'] ? : 1;
         $page_size = $option['page_size'];
-
-        $res['data']['count'] = $this->product_dao->productNum($where, $like);
-        $res['data']['list'] = $this->product_dao->productList($where, $like, $page, $page_size);
+        $res['data']['count'] = $this->product_dao->productNum($where, $like, $where_in);
+        $res['data']['list'] = $this->product_dao->productList($where, $like, $where_in, $page, $page_size);
 
         return $res;
     }
@@ -90,6 +89,31 @@ class Product_service_model extends HZ_Model
                 'value' => $data['Fproduct_num'],
                 'rules' => 'required',
                 'field' => '产品库存'
+            ),
+            array(
+                'value' => $data['Fcoverimage'],
+                'rules' => 'required',
+                'field' => '产品封面'
+            ),
+            array(
+                'value' => $data['Fheight_amount'],
+                'rules' => 'required',
+                'field' => '最高额度'
+            ),
+            array(
+                'value' => $data['Fscope_insurance'],
+                'rules' => 'required',
+                'field' => '保障范围'
+            ),
+            array(
+                'value' => $data['Fscope_age'],
+                'rules' => 'required',
+                'field' => '年龄范围'
+            ),
+            array(
+                'value' => $data['Fobservation_period'],
+                'rules' => 'required',
+                'field' => '观察期'
             )
         );
         foreach ($validationConfig as $v) {
@@ -98,9 +122,70 @@ class Product_service_model extends HZ_Model
                 return $resValidation;
             }
         }
-        $res = $this->product_dao->add($data);
+        $product = array(
+            'Fstore_id' => $data['Fstore_id'],
+            'Fproduct_name' => $data['Fproduct_name'],
+            'Fproduct_price' => $data['Fproduct_price'],
+            'Fproduct_num' => $data['Fproduct_num'],
+            'Fcategory_id' => $data['Fcategory_id'],
+            'Fdescription' => $data['Fdescription'],
+            'Fcreate_time' => time(),
+            'Fupdate_time' => time(),
+        );
+        $res = $this->product_dao->add($product);
         if (!$res) {
             $ret['code'] = 'system_error_2'; //操作出错
+        } else {
+            $plan_rule = array();
+            $process = array();
+            $q_a = array();
+            $pledge = array();
+            // 规则
+            foreach ($data['Frule_title'] as $k => &$r) {
+                if (empty($r) && empty($data['Frule_description'][$k])) {
+                    unset($r);
+                    unset($data['Frule_description'][$k]);
+                }
+                $plan_rule[] = array('title' => $r, 'desc' => $data['Frule_description'][$k]);
+            }
+            // 申请流程
+            foreach ($data['Fprocess_title'] as $k => &$r) {
+                if (empty($r) && empty($data['Fprocess_description'][$k])) {
+                    unset($r);
+                    unset($data['Fprocess_description'][$k]);
+                }
+                $process[] = array('title' => $r, 'desc' => $data['Fprocess_description'][$k]);
+            }
+            // 常见问题
+            foreach ($data['Fquestion'] as $k => &$r) {
+                if (empty($r) && empty($data['Fanswer'][$k])) {
+                    unset($r);
+                    unset($data['Fanswer'][$k]);
+                }
+                $q_a[] = array('title' => $r, 'desc' => $data['Fanswer'][$k]);
+            }
+            // 公约内容
+            foreach ($data['Fpledge_title'] as $k => &$r) {
+                if (empty($r) && empty($data['Fpledge_content'][$k])) {
+                    unset($r);
+                    unset($data['Fpledge_content'][$k]);
+                }
+                $pledge[] = array('title' => $r, 'desc' => $data['Fpledge_content'][$k]);
+            }
+
+            $product_detail = array(
+                'Fproduct_id' => $res,
+                'Fheight_amount' => $data['Fheight_amount'],
+                'Fscope_insurance' => $data['Fscope_insurance'],
+                'Fscope_age' => $data['Fscope_age'],
+                'Fobservation_period' => $data['Fobservation_period'],
+                'Fcontent' => $data['Fcontent'],
+                'Fplan_rule' => json_encode_data($plan_rule),
+                'Fapplication_process' => json_encode_data($process),
+                'Fq_a' => json_encode_data($q_a),
+                'Fjoint_pledge' => json_encode_data($pledge),
+            );
+            $this->product_dao->addDetail($product_detail);
         }
         return $ret;
     }
@@ -108,7 +193,19 @@ class Product_service_model extends HZ_Model
     public function getProductByPid($where)
     {
         $ret = array('code' => 0);
-        $res = $this->product_dao->getProductInfoByFId($where);
+        $product = $this->product_dao->getProductInfoByFId($where);
+        if (empty($product)) {
+            $ret['code'] = 'product_error_2'; // 不存在
+            return $ret;
+        }
+        $product_detail = $this->product_dao->getProductDetailByFId($where);
+        if (!empty($product_detail)) {
+            $product_detail['Fplan_rule'] = isset($product_detail['Fplan_rule']) && !empty($product_detail['Fplan_rule']) ? json_decode($product_detail['Fplan_rule']) : '';
+            $product_detail['Fapplication_process'] = isset($product_detail['Fapplication_process']) && !empty($product_detail['Fapplication_process']) ? json_decode($product_detail['Fapplication_process']) : '';
+            $product_detail['Fq_a'] = isset($product_detail['Fq_a']) && !empty($product_detail['Fq_a']) ? json_decode($product_detail['Fq_a']) : '';
+            $product_detail['Fjoint_pledge'] = isset($product_detail['Fjoint_pledge']) && !empty($product_detail['Fjoint_pledge']) ? json_decode($product_detail['Fjoint_pledge']) : '';
+        }
+        $res = array_merge($product, $product_detail);
         $ret['data'] = $res;
         return $ret;
     }
@@ -125,7 +222,129 @@ class Product_service_model extends HZ_Model
             $ret['code'] = 'product_error_2'; // 不存在
             return $ret;
         }
-        $res = $this->product_dao->update($where, $data);
+        // 数据验证
+        $validationConfig = array(
+            array(
+                'value' => $data['Fstore_id'],
+                'rules' => 'required',
+                'field' => '操作者'
+            ),
+            array(
+                'value' => $data['Fproduct_name'],
+                'rules' => 'required',
+                'field' => '产品名称'
+            ),
+            array(
+                'value' => $data['Fcategory_id'],
+                'rules' => 'required',
+                'field' => '产品分类'
+            ),
+            array(
+                'value' => $data['Fproduct_price'],
+                'rules' => 'required|price',
+                'field' => '产品价格'
+            ),
+            array(
+                'value' => $data['Fproduct_num'],
+                'rules' => 'required',
+                'field' => '产品库存'
+            ),
+            array(
+                'value' => $data['Fcoverimage'],
+                'rules' => 'required',
+                'field' => '产品封面'
+            ),
+            array(
+                'value' => $data['Fheight_amount'],
+                'rules' => 'required',
+                'field' => '最高额度'
+            ),
+            array(
+                'value' => $data['Fscope_insurance'],
+                'rules' => 'required',
+                'field' => '保障范围'
+            ),
+            array(
+                'value' => $data['Fscope_age'],
+                'rules' => 'required',
+                'field' => '年龄范围'
+            ),
+            array(
+                'value' => $data['Fobservation_period'],
+                'rules' => 'required',
+                'field' => '观察期'
+            )
+        );
+        foreach ($validationConfig as $v) {
+            $resValidation = validationData($v['value'], $v['rules'], $v['field']);
+            if (!empty($resValidation)) {
+                return $resValidation;
+            }
+        }
+        $product = array(
+            'Fstore_id' => $data['Fstore_id'],
+            'Fproduct_name' => $data['Fproduct_name'],
+            'Fproduct_price' => $data['Fproduct_price'],
+            'Fproduct_num' => $data['Fproduct_num'],
+            'Fcategory_id' => $data['Fcategory_id'],
+            'Fdescription' => $data['Fdescription'],
+            'Fcoverimage' => $data['Fcoverimage'],
+            'Fupdate_time' => time(),
+        );
+        $res = $this->product_dao->update($where, $product);
+        if (!$res) {
+            $ret['code'] = 'system_error_2'; //操作出错
+        } else {
+            $plan_rule = array();
+            $process = array();
+            $q_a = array();
+            $pledge = array();
+            // 规则
+            foreach ($data['Frule_title'] as $k => &$r) {
+                if (empty($r) && empty($data['Frule_description'][$k])) {
+                    unset($r);
+                    unset($data['Frule_description'][$k]);
+                }
+                $plan_rule[] = array('title' => $r, 'desc' => $data['Frule_description'][$k]);
+            }
+            // 申请流程
+            foreach ($data['Fprocess_title'] as $k => &$r) {
+                if (empty($r) && empty($data['Fprocess_description'][$k])) {
+                    unset($r);
+                    unset($data['Fprocess_description'][$k]);
+                }
+                $process[] = array('title' => $r, 'desc' => $data['Fprocess_description'][$k]);
+            }
+            // 常见问题
+            foreach ($data['Fquestion'] as $k => &$r) {
+                if (empty($r) && empty($data['Fanswer'][$k])) {
+                    unset($r);
+                    unset($data['Fanswer'][$k]);
+                }
+                $q_a[] = array('title' => $r, 'desc' => $data['Fanswer'][$k]);
+            }
+            // 公约内容
+            foreach ($data['Fpledge_title'] as $k => &$r) {
+                if (empty($r) && empty($data['Fpledge_content'][$k])) {
+                    unset($r);
+                    unset($data['Fpledge_content'][$k]);
+                }
+                $pledge[] = array('title' => $r, 'desc' => $data['Fpledge_content'][$k]);
+            }
+
+            $product_detail = array(
+                'Fheight_amount' => $data['Fheight_amount'],
+                'Fscope_insurance' => $data['Fscope_insurance'],
+                'Fscope_age' => $data['Fscope_age'],
+                'Fobservation_period' => $data['Fobservation_period'],
+                'Fcontent' => $data['Fcontent'],
+                'Fplan_rule' => json_encode_data($plan_rule),
+                'Fapplication_process' => json_encode_data($process),
+                'Fq_a' => json_encode_data($q_a),
+                'Fjoint_pledge' => json_encode_data($pledge),
+            );
+            $res = $this->product_dao->updateDetail($where, $product_detail);
+        }
         if ($res) {
             return $ret;
         } else {

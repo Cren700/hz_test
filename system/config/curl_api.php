@@ -42,7 +42,7 @@ $config = array(
             'addProduct'            => '/product/add',                  // add
             'updateProduct'         => '/product/update',               // 更新
             'delProduct'            => '/product/del',                  // 删除
-            'changeStatus'          => '/product/changeStatus'          // 更新状态
+            'changeStatus'          => '/product/changeStatus',          // 更新状态
         ),
     ),
     'posts' => array(
