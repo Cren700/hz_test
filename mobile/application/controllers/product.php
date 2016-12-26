@@ -6,7 +6,7 @@
  * Date     : 2016/11/27
  * Time     : 下午4:01
  */
-class product extends HZ_Controller
+class Product extends HZ_Controller
 {
     public function __construct()
     {
