@@ -48,6 +48,7 @@
                         <button class="btn btn-primary btn-mini js-btn-status" data-status="4">下架</button>
                         <button class="btn btn-danger btn-mini js-btn-delete">删除</button>
                     <{else}>
+                        <button class="btn btn-warning btn-mini js-btn-status" data-status="1">提交审核</button>
                         <button class="btn btn-danger btn-mini js-btn-delete">删除</button>
                     <{/if}>
                 </td>

@@ -37,7 +37,7 @@ HZ.Posts = (function() {
                     var s3 = '\
                         <button class="btn btn-primary btn-mini js-btn-status" data-status="4">下架</button>\
                         <button class="btn btn-danger btn-mini js-btn-delete">删除</button>';
-                    var s4 = '<button class="btn btn-danger btn-mini js-btn-delete">删除</button>';
+                    var s4 = '<button class="btn btn-warning btn-mini js-btn-status" data-status="1">提交审核</button><button class="btn btn-danger btn-mini js-btn-delete">删除</button>';
                     switch (status){
                         case 1:
                             _this.parents('tr').find('.js-posts-status').text('待审核');
@@ -52,7 +52,7 @@ HZ.Posts = (function() {
                             _p.html(s3);
                             break;
                         case 4:
-                            _this.parents('tr').find('.js-posts-status').text('已发布');
+                            _this.parents('tr').find('.js-posts-status').text('已下架');
                             _p.html(s4);
                             break;
                         default:
