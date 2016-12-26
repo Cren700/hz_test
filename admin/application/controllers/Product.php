@@ -73,10 +73,13 @@ class Product extends BaseControllor
             'ueditor/ueditor.config.js',
             'ueditor/ueditor.all.js',
             'ueditor/lang/zh-cn/zh-cn.js',
+            'uploadify/jquery.uploadify.min.js',
         );
+        $cssArr = array('uploadify.css');
         $this->smarty->assign('is_new', 1);
         $this->smarty->assign('cate', $cate['data']);
         $this->smarty->assign('jsArr', $jsArr);
+        $this->smarty->assign('cssArr', $cssArr);
         $this->smarty->display('product/detail.tpl');
     }
 
