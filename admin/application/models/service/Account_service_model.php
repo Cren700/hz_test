@@ -34,7 +34,7 @@ class Account_service_model extends HZ_Model
         $res = $this->myCurl('account', 'loginAdmin', $post_data, true);
         if ($res['code'] === 0) {
             // 保存session
-            $session = array('uid' => $res['data']['uid'], 'username' => $res['data']['username']);
+            $session = array('a_uid' => $res['data']['uid'], 'a_username' => $res['data']['username'], 'a_user_type' => $res['data']['user_type']);
             $this->session->set_userdata($session);
         }
         return $res;

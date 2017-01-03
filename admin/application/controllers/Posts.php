@@ -22,7 +22,7 @@ class Posts extends BaseControllor
             'plugin/bootstrap-datepicker.js',
             'posts/index.js'
         );
-        $this->smarty->assign('cate', $cate['data']);
+        $this->smarty->assign('cate', isset($cate['data'])) ? $cate['data'] : array();
         $this->smarty->assign('jsArr', $jsArr);
         $this->smarty->assign('cssArr', $cssArr);
         $this->smarty->display('posts/index.tpl');
@@ -105,7 +105,7 @@ class Posts extends BaseControllor
         );
         $cssArr = array('uploadify.css');
         $this->smarty->assign('is_new', 0);
-        $this->smarty->assign('cate', $cate['data']);
+        $this->smarty->assign('cate', isset($cate['data'])) ? $cate['data'] : array();
         $this->smarty->assign('posts', $posts['data']);
         $this->smarty->assign('jsArr', $jsArr);
         $this->smarty->assign('cssArr', $cssArr);
@@ -162,7 +162,7 @@ class Posts extends BaseControllor
         $cate = $this->posts_service->category();
         $jsArr = array('posts/cateStatus.js');
         $this->smarty->assign('jsArr', $jsArr);
-        $this->smarty->assign('cate', $cate['data']);
+        $this->smarty->assign('cate', isset($cate['data'])) ? $cate['data'] : array();
         $this->smarty->display('posts/cateList.tpl');
     }
 
@@ -235,7 +235,7 @@ class Posts extends BaseControllor
         $jsArr = array(
             'product/product.js'
         );
-        $this->smarty->assign('cate', $cate['data']);
+        $this->smarty->assign('cate', isset($cate['data'])) ? $cate['data'] : array();
         $this->smarty->assign('jsArr', $jsArr);
         $this->smarty->display('posts/verify.tpl');
     }
@@ -249,8 +249,93 @@ class Posts extends BaseControllor
         $jsArr = array(
             'product/product.js'
         );
-        $this->smarty->assign('cate', $cate['data']);
+        $this->smarty->assign('cate', isset($cate['data'])) ? $cate['data'] : array();
         $this->smarty->assign('jsArr', $jsArr);
         $this->smarty->display('posts/recycle.tpl');
+    }
+
+    /**
+     * 评论列表页
+     */
+    public function comment()
+    {
+        $cate = $this->posts_service->category();
+        $cssArr = array('datepicker.css');
+        $jsArr = array(
+            'plugin/bootstrap-datepicker.js',
+            'posts/comment.js'
+        );
+        $this->smarty->assign('cate', isset($cate['data'])) ? $cate['data'] : array();
+        $this->smarty->assign('jsArr', $jsArr);
+        $this->smarty->assign('cssArr', $cssArr);
+        $this->smarty->display('posts/comment.tpl');
+    }
+
+    public function queryComment()
+    {
+        $option = array(
+            'p' => $this->input->get('p') ? : 1 ,
+            'page_size' => $this->input->get('n') ? : 10,
+            'post_id'   => $this->input->get('post_id'),
+            'author_name'   => $this->input->get('author_name'),
+            'comment_approved' => $this->input->get('comment_approved'),
+            'min_date' => $this->input->get('min_date'),
+            'max_date' => $this->input->get('max_date'),
+        );
+        $comment = $this->posts_service->queryComment($option);
+        $this->smarty->assign('info', $comment['data']);
+        $this->smarty->assign('page', $this->page($comment['data']['count'], $option['p'], $option['page_size'], ''));
+        echo $this->smarty->display('posts/commentList.tpl');
+    }
+
+    /**
+     * 评论状态
+     */
+    public function statusComment()
+    {
+        $data = array(
+            'status'    => $this->input->post('status'),
+            'comment_id'       => $this->input->post('comment_id'),
+        );
+        $res = $this->posts_service->statusComment($data);
+        echo json_encode_data($res);
+    }
+
+    /**
+     * 删除评论
+     */
+    public function delComment()
+    {
+        $data = array(
+            'comment_id' => $this->input->post('comment_id')
+        );
+        $res = $this->posts_service->delComment($data);
+        echo json_encode_data($res);
+    }
+
+    public function praise()
+    {
+        $cssArr = array('datepicker.css');
+        $jsArr = array(
+            'plugin/bootstrap-datepicker.js',
+            'posts/praise.js'
+        );
+        $this->smarty->assign('jsArr', $jsArr);
+        $this->smarty->assign('cssArr', $cssArr);
+        $this->smarty->display('posts/praise.tpl');
+    }
+
+    public function queryPraise()
+    {
+        $option = array(
+            'p' => $this->input->get('p') ? : 1 ,
+            'page_size' => $this->input->get('n') ? : 10,
+            'post_id'   => $this->input->get('post_id'),
+            'user_id'   => $this->input->get('user_id'),
+        );
+        $praise = $this->posts_service->queryPraise($option);
+        $this->smarty->assign('info', $praise['data']);
+        $this->smarty->assign('page', $this->page($praise['data']['count'], $option['p'], $option['page_size'], ''));
+        echo $this->smarty->display('posts/praiseList.tpl');
     }
 }

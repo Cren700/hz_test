@@ -282,6 +282,17 @@ function doUpload($type)
     return $data;
 }
 
+/**
+ * 生成orderSn
+ * yyyymmddhhiiss+毫秒4位+随机4位
+ */
+function createOrderSn()
+{
+    list($usec, $sec) = explode(" ", microtime());
+    $round = mt_rand(1000, 9999);
+    return date('YmdHis', $sec) . substr($usec, 2, 4) . $round;
+}
+
 // 获取URL
 function getBaseUrl($uri = '')
 {

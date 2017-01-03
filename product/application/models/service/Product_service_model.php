@@ -207,6 +207,18 @@ class Product_service_model extends HZ_Model
         }
         $res = array_merge($product, $product_detail);
         $ret['data'] = $res;
+
+        // 是否已经收藏
+        $where_collect = array(
+            'Fuser_id' => $this->_user_id,
+            'Fproduct_id' => $where['Fproduct_id']
+        );
+        $is_collect = $this->product_dao->is_collect($where_collect);
+        if ($is_collect) {
+            $ret['data']['is_collect'] = 1;
+        } else {
+            $ret['data']['is_collect'] = 0;
+        }
         return $ret;
     }
 
@@ -352,7 +364,8 @@ class Product_service_model extends HZ_Model
         if ($res) {
             return $ret;
         } else {
-            return $ret['code'] = 'product_error_5';
+            $ret['code'] = 'product_error_5';
+            return $ret;
         }
     }
 
@@ -372,7 +385,8 @@ class Product_service_model extends HZ_Model
         if ($res) {
             return $ret;
         } else {
-            return $ret['code'] = 'product_error_4';
+            $ret['code'] = 'product_error_4';
+            return $ret;
         }
     }
 
@@ -399,8 +413,86 @@ class Product_service_model extends HZ_Model
         if ($res) {
             return $ret;
         } else {
-            return $ret['code'] = 'product_error_9';
+            $ret['code'] = 'product_error_9';
+            return $ret;
         }
+    }
+
+    public function collect($option)
+    {
+        $ret = array('code' => 0);
+        if (empty($option['Fuser_id']) || empty($option['Fproduct_id'])) {
+            $ret['code'] = 'system_error_2'; // 无信息
+            return $ret;
+        }
+        // 是否已经收藏
+        $is_collect = $this->product_dao->is_collect($option);
+        if ($is_collect) {
+            $where = array('Fproduct_id' => $option['Fproduct_id']);
+            $this->product_dao->cancelCollect($where);
+        } else {
+            $option['Fcreate_time'] = time();
+            $res = $this->product_dao->collect($option);
+            if (!$res) {
+                $ret['code'] = 'product_error_9';
+                return $ret;
+            }
+        }
+        return $ret;
+    }
+
+    /**
+     * 关注列表
+     * @param $option
+     * @return array
+     */
+    public function queryCollect($option)
+    {
+        $res = array('code' => 0);
+        $like = array();
+        $where = array();
+
+        if (!empty($option['Fproduct_id'])) {
+            $where['f.Fproduct_id'] = $option['Fproduct_id'];
+        }
+        if (!empty($option['min_date'])) {
+            $where['f.Fcreate_time >= '] = strtotime($option['min_date']);
+        }
+        if (!empty($option['max_date'])) {
+            $where['f.Fcreate_time <= '] = strtotime($option['max_date'])+23*3600+3599;
+        }
+        // like
+        if (!empty($option['Fuser_id'])) {
+            $like['f.Fuser_id'] = $option['Fuser_id'];
+        }
+
+        $page = $option['p'] ? : 1;
+        $page_size = $option['page_size'] ? : 10;
+        $res['data']['count'] = $this->product_dao->postsCollectNum($where, $like);
+        $collectList = $this->product_dao->postsCollectList($where, $like, $page, $page_size);
+        $res['data']['list'] = $collectList;
+        return $res;
+    }
+
+    /**
+     * 我的收藏
+     * @param $option
+     * @return array
+     */
+    public function getCollectListByUid($option)
+    {
+        $ret = array('code' => 0);
+        if (empty($option['Fuser_id'])) {
+            $ret['code'] = 'system_error_2'; // 无信息
+            return $ret;
+        }
+        $res = $this->product_dao->getCollectListByUid($option);
+        if (!$res) {
+            $ret['code'] = 'product_error_11';
+        } else {
+            $ret['data'] = $res;
+        }
+        return $ret;
     }
 
 }

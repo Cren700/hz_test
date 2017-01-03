@@ -33,6 +33,8 @@ $config = array(
     'product_error_7' => array( 'code' => 20007, 'msg' => '添加产品详情出错'),                 // 添加产品详情出错
     'product_error_8' => array( 'code' => 20008, 'msg' => '更新产品详情出错'),                 // 更新产品详情出错
     'product_error_9' => array( 'code' => 20009, 'msg' => '更新产品状态出错'),                 // 更新产品状态出错
+    'product_error_10' => array( 'code' => 20010, 'msg' => '产品已经收藏咯'),                 // 产品已经收藏咯
+    'product_error_11' => array( 'code' => 20011, 'msg' => '我的收藏信息出错'),                 // 我的收藏信息出错
 
 
     // validation 30001 ~ 39999
@@ -55,5 +57,18 @@ $config = array(
     'posts_error_7' => array( 'code' => 40007, 'msg' => '添加资讯详情出错'),                 // 添加资讯详情出错
     'posts_error_8' => array( 'code' => 40008, 'msg' => '更新资讯详情出错'),                 // 更新资讯详情出错
     'posts_error_9' => array( 'code' => 40009, 'msg' => '更新资讯状态出错'),                 // 更新资讯状态出错
+    'posts_error_10' => array( 'code' => 400010, 'msg' => '评论出错'),                 // 评论出错
+    'posts_error_11' => array( 'code' => 400011, 'msg' => '获取评论列表出错'),                // 获取评论列表出错
+    'posts_error_12' => array( 'code' => 400012, 'msg' => '删除评论出错'),                // 删除评论出错
+    'posts_error_13' => array( 'code' => 40013, 'msg' => '我的关注信息出错'),                // 我的关注信息出错
     
+    // order 50000 ~ 59999
+    'order_error_1' => array( 'code' => 50001, 'msg' => '已经在购物车中'),                 // 已经在购物车中
+    'order_error_2' => array( 'code' => 50002, 'msg' => '保存订单出错'),  //保存订单出错 
+    'order_error_3' => array( 'code' => 50003, 'msg' => '获取购物车失败'), //获取购物车失败 
+    'order_error_4' => array( 'code' => 50004, 'msg' => 'oh,库存不足了'), //库存不足 
+    'order_error_5' => array( 'code' => 50005, 'msg' => '更改状态失败'), //更改状态失败 
+    'order_error_6' => array( 'code' => 50006, 'msg' => '获取订单列表失败'), //获取订单列表失败 
+    'order_error_7' => array( 'code' => 50007, 'msg' => '未通过认证'),                // 未通过认证
+
 );

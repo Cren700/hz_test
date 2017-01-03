@@ -10,11 +10,13 @@ class HZ_Model extends CI_Model
 {
     protected $_uid = null;
     protected $_user_id = null;
+    protected $_user_type = null;
     public function __construct()
     {
         parent::__construct();
-        $this->_uid = $this->session->userdata('uid');
-        $this->_user_id = $this->session->userdata('username');
+        $this->_uid = $this->session->userdata('a_uid');
+        $this->_user_id = $this->session->userdata('a_username');
+        $this->_user_type = $this->session->userdata('a_user_type');
     }
 
     protected function myCurl($host, $control, $data = array(), $is_post = false)
@@ -57,10 +59,10 @@ class HZ_Model extends CI_Model
 
         $res = curl_exec($ch);
         // if($control == "updateProduct")
-       // if($control == "queryProduct")
-       // {
-       //     echo $res;die;
-       // }
+        // if($control == "queryClaim")
+        // {
+        //     echo $res;die;
+        // }
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);//print_r($httpCode);exit();
         curl_close($ch);
 

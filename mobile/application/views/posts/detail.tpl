@@ -4,7 +4,7 @@
     <div class="article_cont">
         <h1><{$info.Fpost_title}></h1>
         <p class="article_info">•&nbsp;<span><{$info.Fpost_author}></span>&nbsp;<span class="js-date-dif" rel="<{$info.Fupdate_time}>"></span></p>
-        <article>
+        <article id="artContent">
             <{$info.Fpost_content}>
         </article>
         <p class="article_remarks"><{$info.Fremark}></p>
@@ -60,55 +60,80 @@
         <{/if}>
         <{if $info.Fcomment_status}>
         <h2>评论</h2>
-            <{if isset($comment) && count($comment) > 0}>
+            <{if isset($comment['data']) && count($comment['data']) > 0}>
             <div class="comment_box">
+                <{foreach $comment['data']['list'] as $c}>
                 <div class="comment_list">
                     <div class="avatar">
-                        <img src="">
+                        <img style="width:0.64rem" src="<{$c['Fcomment_authro_image']|default:''}>">
                     </div>
                     <div class="comment_info">
-                        <p><span class='comment_name'>李博士</span> • <span>1周前</span></p>
-                        <p class="comment_txt">这市场规模是怎么计算的？做校园这么多年，可以负责的说绝大部分大学生都没有付费意愿和能力，有付费意愿的大学生里面能付到3000元的又得减一大截，此外真正参与职业前培训的学生也是少数，职业前培训480亿，太不现实了~~</p>
+                        <p><span class='comment_name'><{$c['Fcomment_author_name']}></span> • <span class="js-date-dif" rel="<{$c['Fcomment_date']}>"></span></p>
+                        <p class="comment_txt"><{$c['Fcomment_content']}></p>
                     </div>
                 </div>
-                <div class="comment_list">
-                    <div class="avatar">
-                        <img src="">
-                    </div>
-                    <div class="comment_info">
-                        <p><span class='comment_name'>李博士</span> • <span>1周前</span></p>
-                        <p class="comment_txt">这市场规模是怎么计算的？做校园这么多年，可以负责的说绝大部分大学生都没有付费意愿和能力，有付费意愿的大学生里面能付到3000元的又得减一大截，此外真正参与职业前培训的学生也是少数，职业前培训480亿，太不现实了~~</p>
-                    </div>
-                </div>
+                <{/foreach}>
             </div>
             <{else}>
             <div class="comment_box" id="Discuss">
-                <div class="comment_list" id="nodate"> <p class="comment_txt" style="color: #00a0e9; font-size: 0.4rem;">暂无评论, 赶紧来抢沙发!</p></div>
+                <div class="comment_list" id="nodate">
+                    <div class="comment_txt_no">
+                        <p><i>&nbsp;</i>暂无评论</p>
+                    </div>
+                </div>
             </div>
             <{/if}>
         <{/if}>
     </div>
+    <input type="hidden" name="pid" value="<{$info['Fid']}>">
 </section>
 <footer class="foot_comment">
     <form class="comment_form">
-        <input type="text" class="foot_int" name="">
+        <input id="txtContent" type="text" class="foot_int" name="" placeholder="你怎么看...">
     </form>
     <div class="comment_quantity">
         <a href="javascript:void(0);" class="quantity_jj">
             <i class="icon_com1">&nbsp;</i>
-            <span>12</span>
+            <span class="js-txt-comment-count">
+            <{if isset($comment['data']) && count($comment['data']) > 0}><{count($comment['data']['list'])}><{else}>0<{/if}></span>
         </a>
-        <a href="javascript:void(0);" class="quantity_jj">
-            <i class="icon_com2">&nbsp;</i>
-            <span>12</span>
+        <a href="javascript:void(0);" class="quantity_jj" id="js-btn-praise">
+            <i class="<{if isset($is_Praise['count']) && $is_Praise['count']}>icon_com2<{/if}>">&nbsp;</i>
+            <span id="js-txt-praise-count"><{$praise['count']|default:0}></span>
         </a>
     </div>
     <div class="comment_publish hide">
-        <input type="button" value="发表">
+        <input type="button" id="js-btn-send" value="发表">
     </div>
 </footer>
-
 <{include file='public/menu.tpl'}>
 <{include file='public/no_nav_footer.tpl'}>
+
+<script>
+//    function ShowPLBtn(isShow) {
+//        if (isShow) {
+//            $(".comment_quantity").addClass("hide");
+//            $(".comment_publish").removeClass("hide");
+//            $('.foot_comment').css('position', 'static');
+//        } else {
+//            $(".comment_publish").addClass("hide");
+//            $(".comment_quantity").removeClass("hide");
+//            $('.foot_comment').css({ 'position': 'fixed', 'bottom': '0' });
+//        }
+//    }
+//    $(function () {
+//        $("*", "#artContent").css({ "font-size": "", "line-height": "", "height": "" });
+//        $("img", ".xh-art").attr("width", "100%");
+//        $("#txtContent").focus(function () {
+//            if (!checkloginJs()) {
+//                return false
+//            }
+//            ShowPLBtn(true);
+//        });
+//        $(".article").click(function () {
+//            ShowPLBtn(false);
+//        });
+//    });
+</script>
 </body>
 </html>

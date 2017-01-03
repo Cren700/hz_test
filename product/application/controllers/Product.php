@@ -138,4 +138,44 @@ class Product extends HZ_Controller
         $res = $this->product_service->changeStatus($data, $where);
         echo outputResponse($res);
     }
+
+    /**
+     * 收藏
+     */
+    public function collect()
+    {
+        $option = array(
+            'Fuser_id' => $this->input->get('user_id'),
+            'Fproduct_id' => $this->input->get('product_id')
+        );
+        $res = $this->product_service->collect($option);
+        echo outputResponse($res);
+    }
+
+    /**
+     * 收藏列表
+     */
+    public function queryCollect()
+    {
+        $option = array(
+            'p' => $this->input->get('p') ? : 1 ,
+            'page_size' => $this->input->get('n') ? : 10,
+            'Fproduct_id'   => $this->input->get('product_id'),
+            'Fuser_id'   => $this->input->get('user_id'),
+            'min_date' => $this->input->get('min_date'),
+            'max_date' => $this->input->get('max_date'),
+        );
+        $res = $this->product_service->queryCollect($option);
+        echo outputResponse($res);
+    }
+
+    /**
+     * 我的收藏
+     */
+    public function getCollectListByUid()
+    {
+        $option = array('Fuser_id' => $this->input->get('user_id'));
+        $res = $this->product_service->getCollectListByUid($option);
+        echo outputResponse($res);
+    }
 }

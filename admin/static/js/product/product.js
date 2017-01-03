@@ -51,7 +51,6 @@ HZ.Product = (function() {
                     switch (status){
                         case 1:
                             _this.parents('tr').find('.js-product-status').text('待审核');
-                            console.log(s1);
                             _p.html(s1);
                             break;
                         case 2:
@@ -67,7 +66,6 @@ HZ.Product = (function() {
                             _p.html(s4);
                             break;
                         case 5:
-                            console.log(s5);
                             _this.parents('tr').find('.js-product-status').text('审核不通过');
                             _p.html(s5);
                             break;
@@ -108,8 +106,8 @@ HZ.Product = (function() {
                 msg: "是否还原该产品?",
                 type: 'confirm',
                 btnConfirm: function(){
-                    var url = baseUrl + '/product/status.html';
-                    var data = {is_del: 0, pid: _this.parents('tr').attr('rel')};
+                    var url = baseUrl + '/order/orderStatus.html';
+                    var data = {pid: _this.parents('tr').attr('rel')};
                     HZ.Form.btnSubmit({
                         t: 'post',
                         u: url,

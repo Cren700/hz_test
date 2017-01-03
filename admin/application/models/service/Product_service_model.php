@@ -79,4 +79,10 @@ class Product_service_model extends HZ_Model
     {
         return $this->myCurl($this->_api, 'delCategory', $data, false);
     }
+
+    // 获取关注列表
+    public function queryCollect($data)
+    {
+        return $this->myCurl($this->_api, 'queryCollect', $data, false);
+    }
 }

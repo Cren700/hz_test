@@ -13,6 +13,7 @@ class HZ_Controller extends CI_Controller
 
     public function __construct(){
         parent::__construct();
+
 //        $this->filterPostAndGet();
         $this->load->library("session");
         //Smarty
@@ -49,37 +50,12 @@ class HZ_Controller extends CI_Controller
         $this->smarty->assign('cssArr', array());
         $this->smarty->assign('jsArr', array());
 
-        $this->_uid = $this->session->userdata('uid');
-        $this->_user_id = $this->session->userdata('username');
+//        $this->_uid = $this->session->userdata('m_uid');
+//        $this->_user_id = $this->session->userdata('m_username');
+        $this->_uid = 6;
+        $this->_user_id = 'user001';
         $this->smarty->assign('username', $this->_user_id);
         $this->smarty->assign('uid', $this->_uid);
-    }
-
-    private function filterPostAndGet()
-    {
-        isset($_POST) && $_POST && $_POST = $this->filterInputData($_POST);
-        isset($_GET) && $_GET && $_GET = $this->filterInputData($_GET);
-    }
-
-    private function filterInputData($data)
-    {
-        if(is_array($data))
-        {
-            $tmp = array();
-            foreach($data as $i => $v)
-            {
-                $tmp[$i] = $this->filterInputData($v);
-            }
-        }
-        else if(is_numeric($data))
-        {
-            $tmp = $data;
-        }
-        else
-        {
-            $tmp = addslashes(trim($data));
-        }
-        return isset($tmp) ? $tmp : null;
     }
 
     public function jump($url)
@@ -87,15 +63,40 @@ class HZ_Controller extends CI_Controller
         header("Location: {$url}", true, 302);
         exit();
     }
+
+    public function jump404()
+    {
+        $this->jump(getBaseUrl('/404.html'));
+        exit();
+    }
+
+    public function is_login()
+    {
+        if(empty($this->_uid)){
+            if (IS_AJAX) {
+                echo json_encode_data(array( 'code' => 10004, 'msg' => '请先登录'));
+                die;
+            } else {
+                $uri = rawurlencode($_SERVER['REQUEST_URI']);
+                $this->jump(getBaseUrl('/login?url='.$uri));
+                exit();
+            }
+        }
+    }
 }
 
 class BaseControllor extends HZ_Controller{
     public function __construct(){
         parent::__construct();
         if(empty($this->_uid)){
-            $uri = rawurlencode($_SERVER['REQUEST_URI']);
-            $this->jump('/login?url='.$uri);
-            exit();
+            if (IS_AJAX) {
+                echo json_encode_data(array( 'code' => 10004, 'msg' => '请先登录'));die;
+            } else {
+                $uri = rawurlencode($_SERVER['REQUEST_URI']);
+                $this->jump(getBaseUrl('/login?url='.$uri));
+                exit();
+            }
+
         }
     }
 

@@ -34,7 +34,7 @@ class HZ_Model extends CI_Model
         $header = array(
             'X-APP-CHANNEL: 4',
             "X-UID: {$this->_uid}",
-            "X-USER-ID: {$this->_userid}",
+            "X-USER-ID: {$this->_user_id}",
             "REMOTE-ADDR: {$ip}",
             "CLIENT-IP: {$ip}",
         );

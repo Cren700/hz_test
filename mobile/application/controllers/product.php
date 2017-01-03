@@ -18,6 +18,7 @@ class Product extends HZ_Controller
     {
         $cate_id = $this->input->get('id');
         $cate = $this->product_service->getCate();
+        $cateData = array();
         if ($cate['code']===0) {
             $cateData = $cate['data']['list'];
         }
@@ -40,14 +41,7 @@ class Product extends HZ_Controller
             'font-awesome.css'
         );
         if ($res['code'] !== 0) {
-            $cssArr = array(
-                'bootstrap.min.css',
-                'swiper.min.css',
-                'font-awesome.css'
-            );
-            $this->smarty->assign('cssArr', $cssArr);
-            $this->smarty->display('errors/page.tpl');
-            die;
+            $this->jump404();
         }
         $jsArr = array('product_detail.js');
         $this->smarty->assign('jsArr', $jsArr);
@@ -67,5 +61,16 @@ class Product extends HZ_Controller
         $res = $this->product_service->getProductList($option);
         $this->smarty->assign('info', $res['data']);
         $this->smarty->display('product/list.tpl');
+    }
+
+    public function collect()
+    {
+        $option = array(
+            'product_id' => $this->input->get('product_id'),
+            'user_id' => $this->_user_id
+        );
+        $res = $this->product_service->collect($option);
+        echo json_encode_data($res);
+
     }
 }

@@ -1,5 +1,13 @@
 <{include file="public/header.tpl"}>
 <body>
+<section class="mobile-common-title clearfix">
+    <a href="<{''|getBaseUrl}>" class="p_logo">
+        <img src="<{'logo.png'|baseImgUrl}>">
+    </a>
+    <span class="search-cart-common">
+        <a href="<{'/shop.html'|getBaseUrl}>" class="icon-cart1"></a>
+    </span>
+</section>
 <section class="general">
     <div class="plate_jj">
         <div class="pro_baner">
@@ -124,14 +132,16 @@
 <footer class="plan_join">
     <div class="plan_join_box">
         <div class="plan_join_jj">
-            <p>
-                <i>&nbsp;</i>
+            <p id="js-btn-collect">
+                <i class="<{if $info['is_collect']}>is_collect<{else}>no_collect<{/if}>">&nbsp;</i>
                 关注计划
             </p>
         </div>
-        <a href="javascript:;" class="plan_join_dd" id="js-btn-join">马上加入</a>
+        <a href="javascript:;" class="plan_join" id="js-btn-join-cart">放入购物车</a>
+        <a href="<{'/order/insPreview.html?pid='|cat:$info['Fproduct_id']|getBaseUrl}>" class="plan_join_dd" >马上加入</a>
     </div>
 </footer>
+<input type="hidden" name="pid" value="<{$info['Fproduct_id']}>">
 <{include file='public/menu.tpl'}>
 <{include file='public/no_nav_footer.tpl'}>
 </body>

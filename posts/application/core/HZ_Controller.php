@@ -94,12 +94,10 @@ class BaseController extends HZ_Controller{
         $this->load->config('login_uri');
         $loginUri = $this->config->item('uri');
         // 当前uri
-        $uri = strtolower(trim($this->input->server('REQUEST_URI'), '/'));
-        $uri = explode('?', $uri);
-        $uri = $uri[0];
-
-        if(in_array($uri, $loginUri)) {
-            $this->_uid || $this->outputResponse(array('code' => 'account_error_4'));// 未登录
+        $uri_string = $this->uri->rsegment(1) .'/'. $this->uri->rsegment(2);
+        if(in_array($uri_string, $loginUri) === true && !$this->_uid) {
+            echo $this->outputResponse(array('code' => 'account_error_4'));// 未登录
+            die;
         }
     }
 }

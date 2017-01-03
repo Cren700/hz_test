@@ -138,7 +138,6 @@ class Posts extends HZ_Controller
 
     /**
      * 相关新闻
-     * @param $option
      */
     public function relatedPosts()
     {
@@ -148,6 +147,143 @@ class Posts extends HZ_Controller
             'Fpost_keyword' => $this->input->get('post_keyword')
         );
         $res = $this->posts_service->relatedPosts($data);
+        echo outputResponse($res);
+    }
+
+    /**
+     * 提交评论
+     */
+    public function submitComment()
+    {
+        $data = array(
+            'Fcomment_post_id' => $this->input->post('post_id', true),
+            'Fcomment_author_id' => $this->input->post('author_id', true),
+            'Fcomment_author_name' => $this->input->post('author_name', true),
+            'Fcomment_author_ip' => $this->input->post('author_ip', true),
+            'Fcomment_date' => time(),
+            'Fcomment_content' => $this->input->post('content')
+        );
+        $res = $this->posts_service->submitComment($data);
+        echo outputResponse($res);
+    }
+
+    /**
+     * 产品评论列表
+     */
+    public function getCommentListByPid()
+    {
+        $option = array(
+            'Fcomment_post_id' => $this->input->get('post_id', true)
+        );
+        $res = $this->posts_service->getCommentListByPid($option);
+        echo outputResponse($res);
+    }
+
+    /**
+     * 关注数量
+     */
+    public function getPraiseCountByPid()
+    {
+        $option = array(
+            'Fpraise_post_id' => $this->input->get('post_id', true)
+        );
+        $res = $this->posts_service->getPraiseCountByPid($option);
+        echo outputResponse($res);
+    }
+
+    /**
+     * 是否关注
+     */
+    public function getIsPraise()
+    {
+        $option = array(
+            'Fpraise_post_id' => $this->input->get('post_id', true),
+            'Fuser_id' => $this->input->get('user_id', true)
+        );
+        $res = $this->posts_service->getIsPraise($option);
+        echo outputResponse($res);
+    }
+
+    /**
+     * 关注操作
+     */
+    public function doPraise()
+    {
+        $option = array(
+            'Fpraise_post_id' => $this->input->get('post_id', true),
+            'Fuser_id' => $this->input->get('user_id', true)
+        );
+        $res = $this->posts_service->doPraise($option);
+        echo outputResponse($res);
+    }
+
+    /**
+     * 评论列表
+     */
+    public function queryComment()
+    {
+        $option = array(
+            'p' => $this->input->get('p') ? : 1 ,
+            'page_size' => $this->input->get('n') ? : 10,
+            'Fcomment_post_id'   => $this->input->get('post_id'),
+            'Fcomment_author_name'   => $this->input->get('author_name'),
+            'Fcomment_approved' => $this->input->get('comment_approved'),
+            'min_date' => $this->input->get('min_date'),
+            'max_date' => $this->input->get('max_date'),
+        );
+        $res = $this->posts_service->queryComment($option);
+        echo outputResponse($res);
+    }
+
+    /**
+     * 更新评论状态
+     */
+    public function statusComment()
+    {
+        $data = array(
+            'Fcomment_approved' => $this->input->post('status'),
+        );
+        $where = array(
+            'Fcomment_id' => $this->input->post('comment_id'),
+        );
+        $res = $this->posts_service->statusComment($data, $where);
+        echo outputResponse($res);
+    }
+
+    /**
+     * 删除评论
+     */
+    public function delComment()
+    {
+        $where = array(
+            'Fcomment_id' => $this->input->post('comment_id'),
+        );
+        $res = $this->posts_service->delComment($where);
+        echo outputResponse($res);
+    }
+
+    /**
+     * 评论列表
+     */
+    public function queryPraise()
+    {
+        $option = array(
+            'p' => $this->input->get('p') ? : 1 ,
+            'page_size' => $this->input->get('n') ? : 10,
+            'Fpraise_post_id'   => $this->input->get('post_id'),
+            'Fuser_id'   => $this->input->get('user_id'),
+        );
+        $res = $this->posts_service->queryPraise($option);
+        echo outputResponse($res);
+    }
+
+    /**
+     * 我的关注
+     */
+    public function getPraiseListByUid()
+    {
+        $option = array('Fuser_id' => $this->input->get('user_id'));
+        $res = $this->posts_service->getPraiseListByUid($option);
         echo outputResponse($res);
     }
 }

@@ -10,6 +10,7 @@ class Product_dao_model extends HZ_Model
 {
     private $_product_table = 't_product';
     private $_product_detail_table = 't_product_detail';
+    private $_favourite_article_table = 't_favourite_article';
 
     private $p = null; // 产品库
     public function __construct()
@@ -99,6 +100,61 @@ class Product_dao_model extends HZ_Model
         dbEscape($data);
         dbEscape($where);
         return $this->p->update($this->_product_table, $data, $where);
+    }
+
+    public function collect($data)
+    {
+        dbEscape($data);
+        return $this->p->insert($this->_favourite_article_table, $data);
+    }
+
+    public function is_collect($where)
+    {
+        dbEscape($where);
+        return $this->p->get_where($this->_favourite_article_table, $where)->row_array();
+    }
+
+    public function cancelCollect($where){
+        return $this->p->delete($this->_favourite_article_table, $where);
+    }
+
+    public function postsCollectNum($where, $like) {
+
+        dbEscape($like);
+        dbEscape($where);
+        $count = $this->p->select('count(*) as num')
+            ->from($this->_favourite_article_table . ' as f')
+            ->where($where)
+            ->like($like)
+            ->count_all_results();
+        return $count;
+    }
+
+    public function postsCollectList($where, $like, $page, $page_size) {
+        dbEscape($like);
+        dbEscape($where);
+        $query = $this->p->select('f.*, p.Fproduct_name')
+            ->from($this->_favourite_article_table . ' as f')
+            ->join($this->_product_table.' as p', 'f.Fproduct_id = p.Fproduct_id', 'left')
+            ->where($where)
+            ->like($like)
+            ->order_by('f.Fid', 'DESC')
+            ->limit($page_size, $page_size * ($page - 1))
+            ->get();
+        $res = $query->result_array();
+        return filterData($res);
+    }
+
+    public function getCollectListByUid($where)
+    {
+        $res = $this->p->select('f.*, p.Fproduct_name')
+            ->from($this->_favourite_article_table . ' as f')
+            ->join($this->_product_table.' as p', 'f.Fproduct_id = p.Fproduct_id', 'left')
+            ->where($where)
+            ->order_by('f.Fid', 'DESC')
+            ->get()
+            ->result_array();
+        return filterData($res);
     }
 
 }

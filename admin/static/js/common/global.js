@@ -142,6 +142,10 @@ HZ.Dialog = (function() {
             $('.js-window-dialog').find('.modal-body').css('color', 'red');
         }
 
+        if(t.type !== 'confirm') {
+            setTimeout(closeMsg, 3000); //  3s关闭窗口
+        }
+
         $('.js-dialog-btn-sure').on('click', function () {
             closeMsg();
             t.btnConfirm();

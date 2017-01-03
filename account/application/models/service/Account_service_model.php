@@ -94,7 +94,7 @@ class Account_service_model extends HZ_Model
         if ($info['Fpasswd'] !== $pwdCode) {
             return array('code' => 'account_error_1');         // 账户密码不一致
         } else {
-            $resData = array('uid' => $info['Fid'], 'username' => $info['Fuser_id']);
+            $resData = array('uid' => $info['Fid'], 'username' => $info['Fuser_id'], 'user_type' => $info['Fuser_type']);
             return array('code' => 0, 'data' => $resData);
         }
     }
@@ -158,6 +158,18 @@ class Account_service_model extends HZ_Model
             $ret['code'] = 'system_error_2'; // 操作出错
         } else {
             $res = $this->account_dao_model->getDetailByOp(array('Fuser_id' => $data['Fuser_id']), $data['type']);
+            $ret['data'] = $res;
+        }
+        return $ret;
+    }
+
+    public function getUserDetailByFuserId($data)
+    {
+        $ret = array('code' => 0);
+        if (empty($data['Fuser_id'])) {
+            $ret['code'] = 'system_error_2'; // 操作出错
+        } else {
+            $res = $this->account_dao_model->getUserDetailByFuserId(array('Fuser_id' => $data['Fuser_id']));
             $ret['data'] = $res;
         }
         return $ret;

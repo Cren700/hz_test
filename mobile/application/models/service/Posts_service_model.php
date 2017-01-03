@@ -42,4 +42,33 @@ class Posts_service_model extends HZ_Model
         );
         return $this->myCurl('posts', 'relatedPosts', $option, false);
     }
+
+    public function submitComment($option)
+    {
+        return $this->myCurl('posts', 'submitComment', $option, true);
+    }
+
+    public function getCommentListByPid($pid)
+    {
+        $where = array('post_id' => $pid);
+        return $this->myCurl('posts', 'getCommentListByPid', $where);
+    }
+
+    public function getPraiseCountByPid($pid)
+    {
+        $where = array('post_id' => $pid);
+        return $this->myCurl('posts', 'getPraiseCountByPid', $where);
+    }
+
+    public function getIsPraise($pid)
+    {
+        $where = array('post_id' => $pid, 'user_id' => $this->_user_id);
+        return $this->myCurl('posts', 'getIsPraise', $where);
+    }
+
+    public function doPraise($option)
+    {
+        $where = array('post_id' => $option['post_id'], 'user_id' => $this->_user_id);
+        return $this->myCurl('posts', 'doPraise', $where);
+    }
 }

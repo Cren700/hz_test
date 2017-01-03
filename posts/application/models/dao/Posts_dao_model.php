@@ -9,6 +9,8 @@
 class Posts_dao_model extends HZ_Model
 {
     private $_posts_table = 't_posts';
+    private $_post_comments_table = 't_post_comments';
+    private $_post_praise_table = 't_praise';
     private $_news = null; // 资讯库
     public function __construct()
     {
@@ -38,9 +40,9 @@ class Posts_dao_model extends HZ_Model
             ->order_by('Fupdate_time', 'DESC')
             ->limit($page_size, $page_size * ($page - 1))
             ->get();
-        return $query->result_array();
+        $res = $query->result_array();
+        return filterData($res);
     }
-
 
     public function postsNumByCate($where) {
         dbEscape($where);
@@ -61,7 +63,8 @@ class Posts_dao_model extends HZ_Model
             ->order_by('Fupdate_time', 'DESC')
             ->limit($page_size, $page_size * ($page - 1))
             ->get();
-        return $query->result_array();
+        $res = $query->result_array();
+        return filterData($res);
     }
 
     public function add($data)
@@ -101,13 +104,128 @@ class Posts_dao_model extends HZ_Model
 
     public function relatedPosts($where, $where_not_in)
     {
-        dbEscape($where);
         $sql = 'SELECT Fid, Fpost_title, Fpost_author, Fupdate_time, Fpost_coverimage FROM '. $this->_posts_table . ' WHERE ' . $where_not_in . ' AND ( ' . $where .') ORDER BY Fupdate_time DESC LIMIT 5 ';
         $query = $this->_news->query($sql);
         $res = $query->result_array();
         return filterData($res);
-
     }
 
+    public function submitComment($data)
+    {
+        dbEscape($data);
+        return $this->_news->insert($this->_post_comments_table, $data);
+    }
+
+    public function getCommentListByPid($option)
+    {
+        dbEscape($option);
+        $res = $this->_news->from($this->_post_comments_table)
+            ->where($option)
+            ->order_by('Fcomment_id', 'DESC')
+            ->get()
+            ->result_array();
+        return filterData($res);
+    }
+
+    public function getPraiseCountByPid($option)
+    {
+        dbEscape($option);
+        return $this->_news->from($this->_post_praise_table)
+            ->where($option)
+            ->count_all_results();
+    }
+
+    public function getIsPraise($option)
+    {
+        dbEscape($option);
+        return $this->_news->from($this->_post_praise_table)
+            ->where($option)
+            ->count_all_results();
+    }
+
+    public function addPraise($option)
+    {
+        dbEscape($option);
+        return $this->_news->insert($this->_post_praise_table, $option);
+    }
+
+    public function delPraise($option)
+    {
+        dbEscape($option);
+        return $this->_news->delete($this->_post_praise_table, $option);
+    }
+
+    public function postsCommentNum($where, $like) {
+
+        dbEscape($like);
+        dbEscape($where);
+        $count = $this->_news->select('count(*) as num')
+            ->from($this->_post_comments_table)
+            ->where($where)
+            ->like($like)
+            ->count_all_results();
+        return $count;
+    }
+
+    public function postsCommentList($where, $like, $page, $page_size) {
+        dbEscape($like);
+        dbEscape($where);
+        $query = $this->_news->select('c.*, p.Fpost_title')
+            ->from($this->_post_comments_table . ' as c')
+            ->join($this->_posts_table.' as p', 'c.Fcomment_post_id = p.Fid', 'left')
+            ->where($where)
+            ->like($like)
+            ->order_by('Fcomment_id', 'DESC')
+            ->limit($page_size, $page_size * ($page - 1))
+            ->get();
+        $res = $query->result_array();
+        return filterData($res);
+    }
+
+    public function statusComment($data, $where)
+    {
+        dbEscape($data);
+        dbEscape($where);
+        return $this->_news->update($this->_post_comments_table, $data, $where);
+    }
+
+    public function delComment($where)
+    {
+        dbEscape($where);
+        return $this->_news->delete($this->_post_comments_table, $where);
+    }
+
+    public function postsPraiseNum($where, $like) {
+
+        dbEscape($like);
+        dbEscape($where);
+        $count = $this->_news->select('count(*) as num')
+            ->from($this->_post_praise_table . ' as pp')
+            ->where($where)
+            ->like($like)
+            ->count_all_results();
+        return $count;
+    }
+
+    public function postsPraiseList($where, $like, $page, $page_size) {
+        dbEscape($like);
+        dbEscape($where);
+        $query = $this->_news->select('pp.*, p.Fpost_title')
+            ->from($this->_post_praise_table . ' as pp')
+            ->join($this->_posts_table.' as p', 'pp.Fpraise_post_id = p.Fid', 'left')
+            ->where($where)
+            ->like($like)
+            ->order_by('pp.Fpraise_id', 'DESC')
+            ->limit($page_size, $page_size * ($page - 1))
+            ->get();
+        $res = $query->result_array();
+        return filterData($res);
+    }
+
+    public function getPraiseListByUid($where)
+    {
+        $res = $this->_news->get_where($this->_post_praise_table, $where)->result_array();
+        return filterData($res);
+    }
 
 }

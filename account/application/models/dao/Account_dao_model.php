@@ -92,6 +92,14 @@ class Account_dao_model extends HZ_Model
         return filterData($res);
     }
 
+    public function getUserDetailByFuserId($data)
+    {
+        dbEscape($data);
+        $query = $this->account->get_where($this->_user_table, $data);
+        $res = $query->row_array();
+        return filterData($res);
+    }
+
     private function _sel_table($type)
     {
         return $type === 'admin' ? $this->_admin_table : $this->_user_table;

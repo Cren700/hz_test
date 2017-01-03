@@ -33,13 +33,13 @@ class Product extends BaseControllor
         $option = array(
             'p' => $this->input->get('p') ? : 1 ,
             'page_size' => $this->input->get('n') ? : 10,
-            'product_name'   => $this->input->get('product_name'),
-            'category_id' => $this->input->get('category_id'),
-            'product_status' => $this->input->get('status'),
-            'store_id'  => $this->input->get('store_id'),
-            'is_del' => $this->input->get('is_del'),
-            'min_date' => $this->input->get('min_date'),
-            'max_date' => $this->input->get('max_date'),
+            'product_name'   => $this->input->get('product_name', true),
+            'category_id' => $this->input->get('category_id', true),
+            'product_status' => $this->input->get('status', true),
+            'store_id'  => $this->_user_type == 1 ? '' : $this->_uid,
+            'is_del' => $this->input->get('is_del', true),
+            'min_date' => $this->input->get('min_date', true),
+            'max_date' => $this->input->get('max_date', true),
         );
         $cate = $this->product_service->category();
         $cate = isset($cate['data']['list']) ? $cate['data']['list'] : array();
@@ -262,5 +262,34 @@ class Product extends BaseControllor
         $this->smarty->assign('jsArr', $jsArr);
         $this->smarty->display('product/recycle.tpl');
     }
+
+    public function collect()
+    {
+        $cssArr = array('datepicker.css');
+        $jsArr = array(
+            'plugin/bootstrap-datepicker.js',
+            'product/collect.js'
+        );
+        $this->smarty->assign('jsArr', $jsArr);
+        $this->smarty->assign('cssArr', $cssArr);
+        $this->smarty->display('product/collect.tpl');
+    }
+
+    public function queryCollect()
+    {
+        $option = array(
+            'p' => $this->input->get('p') ? : 1 ,
+            'page_size' => $this->input->get('n') ? : 10,
+            'product_id'   => $this->input->get('product_id'),
+            'user_id'   => $this->input->get('user_id'),
+            'min_date' => $this->input->get('min_date'),
+            'max_date' => $this->input->get('max_date'),
+        );
+        $collect = $this->product_service->queryCollect($option);
+        $this->smarty->assign('info', $collect['data']);
+        $this->smarty->assign('page', $this->page($collect['data']['count'], $option['p'], $option['page_size'], ''));
+        echo $this->smarty->display('product/collectList.tpl');
+    }
+
 
 }

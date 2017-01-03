@@ -28,6 +28,4 @@ class Product_service_model extends HZ_Model
     {
         return $this->myCurl('product', 'queryProduct', $option);
     }
-
-
 }

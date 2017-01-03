@@ -100,7 +100,17 @@ class Account extends BaseController {
     {
         $data['Fuser_id'] = $this->input->get('id');
         $data['type'] = $this->input->get('type') ? : 'user';
-        $res = $this->account_service->detail($data, 'user');
+        $res = $this->account_service->detail($data);
+        echo outputResponse($res);
+    }
+
+    /**
+     * 根据用户ID获取用户信息
+     */
+    public function getUserDetailByFuserId()
+    {
+        $data['Fuser_id'] = $this->input->get('user_id');
+        $res = $this->account_service->getUserDetailByFuserId($data);
         echo outputResponse($res);
     }
 

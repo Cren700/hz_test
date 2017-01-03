@@ -17,6 +17,7 @@ $config = array(
             'loginAdmin'            => '/account/loginAdmin',            // 用户登录
             'modifyPwdAdmin'        => '/account/modifyPwdAdmin',        // 修改密码
             'detail'                => '/account/detail',                // 用户详情
+            'getUserDetailByFuserId'    => '/account/getUserDetailByFuserId',    // 用户详情
             'saveDetail'             => '/account/saveUserDetail',             // 添加用户详情
             'modifyDetail'          => '/account/modifyDetail',          // 修改用户详情
             'addAdminDetail'        => '/account/addAdminDetail',             // 添加后台用户详情
@@ -43,6 +44,9 @@ $config = array(
             'updateProduct'         => '/product/update',               // 更新
             'delProduct'            => '/product/del',                  // 删除
             'changeStatus'          => '/product/changeStatus',          // 更新状态
+            'collect'               => '/product/collect',              // 收藏
+            'queryCollect'          => '/product/queryCollect',         // 查询收藏列表
+            'getCollectListByUid'   => '/product/getCollectListByUid',     // 我的收藏
         ),
     ),
     'posts' => array(
@@ -55,15 +59,45 @@ $config = array(
             'updateCategory'        => '/category/update',              // 更新
             'delCategory'           => '/category/del',                 // 删除
             'cateStatus'            => '/category/cateStatus',          // 更新状态   
-            // 产品
-            'queryPosts'          => '/posts/query',                // 列表list
-            'getPostsByPid'       => '/posts/getPostsByPid',      // 某个product
-            'addPosts'            => '/posts/add',                  // add
-            'updatePosts'         => '/posts/update',               // 更新
-            'delPosts'            => '/posts/del',                  // 删除
-            'changeStatus'        => '/posts/changeStatus',          // 更新状态
-            'relatedPosts'        => '/posts/relatedPosts',          // 相关新闻
-            'postsListByCate'     => '/posts/postsListByCate',       // 根据分类获取数据
+            // 资讯
+            'queryPosts'            => '/posts/query',                // 列表list
+            'getPostsByPid'         => '/posts/getPostsByPid',      // 某个product
+            'addPosts'              => '/posts/add',                  // add
+            'updatePosts'           => '/posts/update',               // 更新
+            'delPosts'              => '/posts/del',                  // 删除
+            'changeStatus'          => '/posts/changeStatus',          // 更新状态
+            'relatedPosts'          => '/posts/relatedPosts',          // 相关新闻
+            'postsListByCate'       => '/posts/postsListByCate',       // 根据分类获取数据
+            'submitComment'         => '/posts/submitComment',       // 提交评论
+            'getCommentListByPid'   => '/posts/getCommentListByPid',     // 评论列表
+            'getPraiseCountByPid'   => '/posts/getPraiseCountByPid',          // 获取关注数量
+            'getIsPraise'           => '/posts/getIsPraise',          // 是否关注
+            'doPraise'              => '/posts/doPraise',          // 关注操作
+            'queryComment'          => '/posts/queryComment',           // 查询评论
+            'statusComment'         => '/posts/statusComment',          // 评论状态
+            'delComment'            => '/posts/delComment',             // 删除评论
+            'queryPraise'           => '/posts/queryPraise',           // 查询关注列表
+            'getPraiseListByUid'    => '/posts/getPraiseListByUid',     // 我的关注
+        ),
+    ),
+    'order' => array(
+        'host'  => HOST_URL.'/order',
+        'api'   => array(
+            'join'                  => '/shop/join',                // 加入购物车
+            'remove'                => '/shop/remove',              // 移除购物车
+            'updateCart'            => '/shop/update',              // 更新购物车
+            'getCartList'           => '/shop/getList',             // 购物车列表
+            'queryOrders'           => '/order/query',              // 查询订单
+            'previewByCid'          => '/order/previewByCid',       // 通过购物车获取数据
+            'previewByPid'          => '/order/previewByPid',       // 通过产品获取数据
+            'createByCid'           => '/order/createByCid',        // 通过购物车下订单
+            'createByPid'           => '/order/createByPid',        // 立即下订单
+            'orderStatus'           => '/order/orderStatus',        // 更改订单状态
+            'getOrderListByUid'          => '/order/getOderListByUid',   // 查询订单列表
+            'queryTxOrders'           => '/order/queryTxOrders',              // 查询提现订单
+            'txOrderStatus'           => '/order/txOrderStatus',        // 更改订单状态
+            'queryClaim'            => '/order/queryClaim',              // 查询理赔订单
+            'claimOrderStatus'      => '/order/claimOrderStatus',        // 更改理赔订单状态
         ),
     ),
 );

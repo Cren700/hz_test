@@ -225,13 +225,215 @@ class Posts_service_model extends HZ_Model
         $where = ' Fpost_status = 3 AND Fpost_category_id = ' . $option['Fpost_category_id'];
         $keyword = explode('、', $option['Fpost_keyword']);
         foreach($keyword as $k) {
-            $where .= ' OR Fpost_keyword like \'%'. $k .'%\'';
+            $where .= ' OR Fpost_keyword like "%'. $k .'%"';
         }
         $where_not_in = ' Fid != ' .$option['Fid'];
         $res = $this->posts_dao->relatedPosts($where, $where_not_in);
         $ret['data'] = $res;
         return $ret;
+    }
 
+    /**
+     * 提交评论
+     * @param $data
+     * @return array
+     */
+    public function submitComment($data)
+    {
+        $ret = array('code' => 0);
+        if (empty($data['Fcomment_post_id']) || empty($data['Fcomment_author_id'])) {
+            $ret['code'] = 'system_error_2'; // 无信息
+            return $ret;
+        }
+        $res = $this->posts_dao->submitComment($data);
+        if ($res) {
+            $ret['data'] = $data;
+        } else {
+            $ret['code'] = 'posts_error_10';
+        }
+        return $ret;
+    }
+
+    /**
+     * 获取评论列表
+     * @param $option
+     * @return array
+     */
+    public function getCommentListByPid($option)
+    {
+        $ret = array('code' => 0);
+        if (empty($option['Fcomment_post_id'])) {
+            $ret['code'] = 'system_error_2'; // 无信息
+            return $ret;
+        }
+        $option['Fcomment_approved'] = 1; // 通过审核
+        $res = $this->posts_dao->getCommentListByPid($option);
+        foreach ($res as &$re) {
+            $user = $this->myCurl('account', 'getInfo', array('id' => $re['Fcomment_author_id']));
+            $re['Fcomment_authro_image'] = isset($user['data']['Fimage_path']) ? $user['data']['Fimage_path'] : '';
+        }
+        $ret['data'] = $res;
+        return $ret;
+
+    }
+
+    public function getPraiseCountByPid($option)
+    {
+        $ret = array('code' => 0);
+        if (empty($option['Fpraise_post_id'])) {
+            $ret['code'] = 'system_error_2'; // 无信息
+            return $ret;
+        }
+        $res = $this->posts_dao->getPraiseCountByPid($option);
+        $ret['count'] = $res;
+        return $ret;
+    }
+
+    public function getIsPraise($option)
+    {
+        $ret = array('code' => 0);
+        if (empty($option['Fpraise_post_id'])) {
+            $ret['code'] = 'system_error_2'; // 无信息
+            return $ret;
+        }
+        $res = $this->posts_dao->getIsPraise($option);
+        $ret['count'] = $res;
+        return $ret;
+    }
+
+    public function doPraise($option)
+    {
+        $ret = array('code' => 0);
+        if (empty($option['Fpraise_post_id'])) {
+            $ret['code'] = 'system_error_2'; // 无信息
+            return $ret;
+        }
+        $is_praise = $this->posts_dao->getIsPraise($option);
+        if (!$is_praise) {
+            // 添加
+            $this->posts_dao->addPraise($option);
+        } else {
+            // 删除
+            $this->posts_dao->delPraise($option);
+        }
+        return $ret;
+    }
+
+    /**
+     * 评论列表
+     * @param $option
+     * @return array
+     */
+    public function queryComment($option)
+    {
+        $res = array('code' => 0);
+        $like = array();
+        $where = array();
+
+        if (!empty($option['Fcomment_post_id'])) {
+            $where['Fcomment_post_id'] = $option['Fcomment_post_id'];
+        }
+
+        if ($option['Fcomment_approved'] === '0' || !empty($option['Fcomment_approved'])) {
+            $where['Fcomment_approved'] = $option['Fcomment_approved'];
+        }
+
+        if (!empty($option['min_date'])) {
+            $where['Fcomment_date >= '] = strtotime($option['min_date']);
+        }
+
+        if (!empty($option['max_date'])) {
+            $where['Fcomment_date <= '] = strtotime($option['max_date'])+23*3600+3599;
+        }
+
+        // like
+        if (!empty($option['Fcomment_author_name'])) {
+            $like['Fcomment_author_name'] = $option['Fcomment_author_name'];
+        }
+
+        $page = $option['p'] ? : 1;
+        $page_size = $option['page_size'] ? : 10;
+        $res['data']['count'] = $this->posts_dao->postsCommentNum($where, $like);
+        $commentList = $this->posts_dao->postsCommentList($where, $like, $page, $page_size);
+        $res['data']['list'] = $commentList;
+        return $res;
+    }
+
+    public function statusComment($data, $where)
+    {
+        $ret = array('code' => 0);
+        if (empty($where['Fcomment_id']) || ($data['Fcomment_approved'] !== '0' && empty($data['Fcomment_approved']))) {
+            $ret['code'] = 'system_error_2'; // 无信息
+            return $ret;
+        }
+        $res = $this->posts_dao->statusComment($data, $where);
+        if ($res) {
+            return $ret;
+        } else {
+            return $ret['code'] = 'posts_error_9';
+        }
+    }
+
+    public function delComment($where)
+    {
+        $ret = array('code' => 0);
+        if (empty($where['Fcomment_id'])) {
+            $ret['code'] = 'system_error_2'; // 无信息
+            return $ret;
+        }
+        $res = $this->posts_dao->delComment($where);
+        if ($res) {
+            return $ret;
+        } else {
+            return $ret['code'] = 'posts_error_12';
+        }
+    }
+
+    /**
+     * 关注列表
+     * @param $option
+     * @return array
+     */
+    public function queryPraise($option)
+    {
+        $res = array('code' => 0);
+        $like = array();
+        $where = array();
+
+        if (!empty($option['Fpraise_post_id'])) {
+            $where['Fpraise_post_id'] = $option['Fpraise_post_id'];
+        }
+        // like
+        if (!empty($option['Fuser_id'])) {
+            $like['pp.Fuser_id'] = $option['Fuser_id'];
+        }
+
+        $page = $option['p'] ? : 1;
+        $page_size = $option['page_size'] ? : 10;
+        $res['data']['count'] = $this->posts_dao->postsPraiseNum($where, $like);
+        $praiseList = $this->posts_dao->postsPraiseList($where, $like, $page, $page_size);
+        $res['data']['list'] = $praiseList;
+        return $res;
+    }
+
+    /**
+     * 我的关注
+     */
+    public function getPraiseListByUid($option)
+    {
+
+        $ret = array('code' => 0);
+        if (empty($option['Fuser_id'])) {
+            $ret['code'] = 'system_error_2'; // 无信息
+            return $ret;
+        }
+        $res = $this->posts_dao->getPraiseListByUid($option);
+        if (!$res) {
+            $ret['code'] = 'posts_error_13';
+        } else {
+            $ret['data'] = $res;
+        }
+        return $ret;
     }
 
 }

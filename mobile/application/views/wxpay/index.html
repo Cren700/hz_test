@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=8" />
+    <title>微信支付</title>
+</head>
+<body>
+<div style="margin-left: 10px;color:#556B2F;font-size:30px;font-weight: bolder;">微信扫码支付测试</div><br/>
+<img alt="模式二扫码支付" src="http://paysdk.weixin.qq.com/example/qrcode.php?data={{$wxurl}}" width="150"/>
+<input type="hidden" name="orderNo" value="{{$order_no}}">
+<input type="hidden" name="timeExpire" value="{{$time_expire}}">
+</body>
+</html>
+<script>
+
+    // 每3秒请求一次数据，然后判断，跳转
+    $(function(){
+        timestamp = Date.parse( new Date())/1000; // 当前时间戳
+        orderno = $("input[name='orderNo']").val(); // 订单编号
+        timeExpire = $("input[name='timeExpire']").val(); // 订单失效时间
+        start = setInterval("checkstatus(orderno)", 3000);
+    });
+
+    function checkstatus(order_no){
+        if(timestamp > timeExpire){  // 当前时间大于失效时间时，清除轮询
+            window.clearInterval(start);
+        }else{
+
+            $.ajax({
+                // 这里调用wechatpay.php中的orderQuery接口查询订单状态
+                // 当返回值trade_state == "SUCCESS" 这个时候可以修改你的订单状态了哦。
+
+            });
+
+        }
+    }
+</script>

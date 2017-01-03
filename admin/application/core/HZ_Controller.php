@@ -10,6 +10,7 @@ class HZ_Controller extends CI_Controller
 {
     protected $_uid = null;
     protected $_user_id = null;
+    protected $_user_type = null;
     public function __construct(){
         parent::__construct();
         $this->load->library("session");
@@ -47,11 +48,11 @@ class HZ_Controller extends CI_Controller
         $this->smarty->assign('cssArr', array());
         $this->smarty->assign('jsArr', array());
 
-        $this->_uid = $this->session->userdata('uid');
-        $this->_user_id = $this->session->userdata('username');
+        $this->_uid = $this->session->userdata('a_uid');
+        $this->_user_id = $this->session->userdata('a_username');
+        $this->_user_type = $this->session->userdata('a_user_type');
         $this->smarty->assign('username', $this->_user_id);
         $this->smarty->assign('uid', $this->_uid);
-
         // 目录结构
         $menu = $this->getMenu() ? : array();
         $this->smarty->assign('menu', $menu);
@@ -209,18 +210,18 @@ class HZ_Controller extends CI_Controller
                 'sub'       => array(
                     array(
                         'selected'  => '0',
-                        'name'      => '订单列表',
+                        'name'      => '支付列表',
                         'flagName'  => 'index',
                     ),
                     array(
                         'selected'  => '0',
-                        'name'      => '订单统计',
-                        'flagName'  => 'statistics',
+                        'name'      => '提现列表',
+                        'flagName'  => 'tixian',
                     ),
                     array(
                         'selected'  => '0',
-                        'name'      => '销售排行',
-                        'flagName'  => 'sale',
+                        'name'      => '理赔列表',
+                        'flagName'  => 'claim',
                     )
                 )
             ),
@@ -247,13 +248,8 @@ class HZ_Controller extends CI_Controller
                     ),
                     array(
                         'selected'  => '0',
-                        'name'      => '评论点赞',
-                        'flagName'  => 'sale',
-                    ),
-                    array(
-                        'selected'  => '0',
                         'name'      => '评论审核',
-                        'flagName'  => 'sale',
+                        'flagName'  => 'comment',
                     ),
                     array(
                         'selected'  => '0',
@@ -263,7 +259,7 @@ class HZ_Controller extends CI_Controller
                     array(
                         'selected'  => '0',
                         'name'      => '关注列表',
-                        'flagName'  => 'sale',
+                        'flagName'  => 'praise',
                     )
                 )
             ),
@@ -280,12 +276,17 @@ class HZ_Controller extends CI_Controller
                     ),
                     array(
                         'selected'  => '0',
-                        'name'      => '交易流水',
+                        'name'      => '订单统计',
                         'flagName'  => 'order'
                     ),
                     array(
                         'selected'  => '0',
-                        'name'      => '支付方式',
+                        'name'      => '销售排行',
+                        'flagName'  => 'paytype',
+                    ),
+                    array(
+                        'selected'  => '0',
+                        'name'      => '支付渠道',
                         'flagName'  => 'paytype',
                     )
                 )
