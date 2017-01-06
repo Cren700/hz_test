@@ -12,6 +12,7 @@ class Info_dao_model extends HZ_Model
     private $_tabel_user = 't_user';
     private $_tabel_user_detail = 't_user_detail';
     private $_tabel_blackUser = 't_blackuser_list';
+    private $_account_table = 't_account';
     public function __construct()
     {
         parent::__construct();
@@ -108,6 +109,33 @@ class Info_dao_model extends HZ_Model
             ->from($this->_tabel_user . ' as u')
             ->join($this->_tabel_user_detail . ' as ud', 'u.Fid = ud.Fuser_id', 'left')
             ->join($this->_tabel_blackUser . ' as b', 'u.Fid = b.Fid', 'left')
+            ->where($where)
+            ->like($like)
+            ->order_by('u.Fid', 'DESC')
+            ->limit($page_size, $page_size * ($page - 1))
+            ->get();
+        $res = $query->result_array();
+        return filterData($res);
+    }
+
+    public function capitalAccountCounts($where, $like) {
+        dbEscape($like);
+        dbEscape($where);
+        $count = $this->u->select('count(*) as num')
+            ->from($this->_account_table .' as a')
+            ->join($this->_tabel_user . ' as u', 'u.Fuser_id = a.Fuser_id', 'left')
+            ->where($where)
+            ->like($like)
+            ->count_all_results();
+        return $count;
+    }
+
+    public function capitalAccountList($where, $like, $page, $page_size) {
+        dbEscape($like);
+        dbEscape($where);
+        $query = $this->u->select('a.*, u.Fuser_type')
+            ->from($this->_account_table .' as a')
+            ->join($this->_tabel_user . ' as u', 'u.Fuser_id = a.Fuser_id', 'left')
             ->where($where)
             ->like($like)
             ->order_by('u.Fid', 'DESC')

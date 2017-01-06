@@ -138,7 +138,7 @@ class Order extends BaseController
     {
         $option = array(
             'p' => $this->input->get('p', true) ? : 1 ,
-            'page_size' => $this->input->get('n', true) ? : 10,
+            'page_size' => $this->input->get('page_size', true) ? : 10,
             'min_date' => $this->input->get('min_date', true),
             'max_date' => $this->input->get('max_date', true),
             'Forder_no' => $this->input->get('order_no', true),
@@ -157,6 +157,18 @@ class Order extends BaseController
         );
         $res = $this->order_service->claimOrderStatus($option);
         echo outputResponse($res);
+    }
 
+    // 订单统计
+    public function querySaleStat()
+    {
+        $option = array(
+            'p' => $this->input->get('p', true) ? : 1 ,
+            'page_size' => $this->input->get('page_size', true) ? : 20,
+            'min_date' => $this->input->get('min_date', true),
+            'max_date' => $this->input->get('max_date', true),
+        );
+        $res = $this->order_service->querySaleStat($option);
+        echo outputResponse($res);
     }
 }

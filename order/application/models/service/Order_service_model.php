@@ -402,4 +402,32 @@ class Order_service_model extends HZ_Model
         return $ret;
     }
 
+    /**
+     * 后台销售统计查询
+     */
+    public function querySaleStat($option)
+    {
+        $res = array('code' => 0);
+        $where = array('Forder_status' => 3); // 支付成功
+
+        if (!empty($option['min_date'])) {
+            $where['Fcreate_time >= '] = strtotime($option['min_date']);
+        }
+
+        if (!empty($option['max_date'])) {
+            $where['Fcreate_time <= '] = strtotime($option['max_date'])+23*3600+3599;
+        }
+
+        $page = $option['p'] ? : 1;
+        $page_size = $option['page_size'] ? : 10;
+        $res['data']['count'] = $this->order_dao->querySaleStatNum($where);
+        $orderList = $this->order_dao->querySaleStatList($where, $page, $page_size);
+        foreach ($orderList as &$list) {
+            $product = $this->myCurl('product', 'getProductByPid', array('product_id' => $list['Fproduct_id']));
+            $list['Fproduct_name'] = $product['data']['Fproduct_name'];
+        }
+        $res['data']['list'] = $orderList;
+        return $res;
+    }
+
 }

@@ -251,11 +251,11 @@ class HZ_Controller extends CI_Controller
                         'name'      => '评论审核',
                         'flagName'  => 'comment',
                     ),
-                    array(
-                        'selected'  => '0',
-                        'name'      => '作家管理',
-                        'flagName'  => 'sale',
-                    ),
+//                    array(
+//                        'selected'  => '0',
+//                        'name'      => '作家管理',
+//                        'flagName'  => 'sale',
+//                    ),
                     array(
                         'selected'  => '0',
                         'name'      => '关注列表',
@@ -271,18 +271,18 @@ class HZ_Controller extends CI_Controller
                 'sub'       => array(
                     array(
                         'selected'  => '0',
-                        'name'      => '个人账户',
-                        'flagName'  => 'index',
+                        'name'      => '账户列表',
+                        'flagName'  => 'account',
                     ),
                     array(
                         'selected'  => '0',
                         'name'      => '订单统计',
-                        'flagName'  => 'order'
+                        'flagName'  => 'orderstat'
                     ),
                     array(
                         'selected'  => '0',
                         'name'      => '销售排行',
-                        'flagName'  => 'paytype',
+                        'flagName'  => 'salestat',
                     ),
                     array(
                         'selected'  => '0',

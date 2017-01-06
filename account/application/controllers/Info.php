@@ -70,4 +70,19 @@ class Info extends BaseController
         echo outputResponse($res);
     }
 
+    /**
+     * 查询个人账户
+     */
+    public function queryCapitalAccount()
+    {
+        $option = array(
+            'Fuser_type' => $this->input->get('user_type'),
+            'Fuser_id' => $this->input->get('user_id'),// 用户名
+            'p' => $this->input->get('p') ? : 1,
+            'page_size' => $this->input->get('page_size'),
+        );
+        $res = $this->info_service->queryCapitalAccount($option);
+        echo outputResponse($res);
+    }
+
 }

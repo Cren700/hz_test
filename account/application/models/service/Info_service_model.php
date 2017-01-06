@@ -166,4 +166,27 @@ class Info_service_model extends HZ_Model
 
         return $res;
     }
+
+    public function queryCapitalAccount($option)
+    {
+        $res = array('code' => 0);
+        $where = $like = array();
+        $where['u.Fstatus'] = 1; // 使用中
+
+        if ($option['Fuser_type'] === '0' || !empty($option['Fuser_type'])) {
+            $where['u.Fuser_type'] = $option['Fuser_type'];
+        }
+
+        if ($option['Fuser_id'] === '0' || !empty($option['Fuser_id'])) {
+            $like['a.Fuser_id'] = $option['Fuser_id'];
+        }
+
+        $page = $option['p'] ? : 1;
+        $page_size = $option['page_size'];
+
+        $res['data']['count'] = $this->info_dao->capitalAccountCounts($where, $like);
+        $res['data']['list'] = $this->info_dao->capitalAccountList($where, $like, $page, $page_size);
+
+        return $res;
+    }
 }

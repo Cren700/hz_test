@@ -75,4 +75,39 @@ class Account extends HZ_Controller
         echo json_encode_data($res);
     }
 
+    /**
+     * 查看用户信息
+     * @param string $uid
+     */
+    public function info($uid)
+    {
+        $uid = $uid ? : $this->input->get('id');
+        $jsArr = array(
+            'plugin/jquery.placeholder.min.js',
+            'plugin/jquery.validate.js',
+            'uploadify/jquery.uploadify.min.js',
+            'user/info.js'
+        );
+        $cssArr = array('uploadify.css');
+        $option = array(
+            'id' => $uid
+        );
+        !$uid ? $this->jump404():'';
+        $info = $this->user_service->getInfo($option);
+        $this->smarty->assign('jsArr', $jsArr);
+        $this->smarty->assign('cssArr', $cssArr);
+        $this->smarty->assign('user', $info['data']);
+        $this->smarty->display('user/info.tpl');
+    }
+
+    /**
+     * 保存用户信息
+     */
+    public function saveInfo()
+    {
+        $option = $this->input->post();//提交的数据
+        $res = $this->user_service->saveInfo($option);
+        echo json_encode_data($res);
+    }
+
 }
