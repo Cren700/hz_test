@@ -22,7 +22,7 @@ class Posts extends BaseControllor
             'plugin/bootstrap-datepicker.js',
             'posts/index.js'
         );
-        $this->smarty->assign('cate', isset($cate['data'])) ? $cate['data'] : array();
+        $this->smarty->assign('cate', isset($cate['data']) ? $cate['data'] : array());
         $this->smarty->assign('jsArr', $jsArr);
         $this->smarty->assign('cssArr', $cssArr);
         $this->smarty->display('posts/index.tpl');
@@ -105,7 +105,7 @@ class Posts extends BaseControllor
         );
         $cssArr = array('uploadify.css');
         $this->smarty->assign('is_new', 0);
-        $this->smarty->assign('cate', isset($cate['data'])) ? $cate['data'] : array();
+        $this->smarty->assign('cate', isset($cate['data']) ? $cate['data'] : array());
         $this->smarty->assign('posts', $posts['data']);
         $this->smarty->assign('jsArr', $jsArr);
         $this->smarty->assign('cssArr', $cssArr);
@@ -162,7 +162,7 @@ class Posts extends BaseControllor
         $cate = $this->posts_service->category();
         $jsArr = array('posts/cateStatus.js');
         $this->smarty->assign('jsArr', $jsArr);
-        $this->smarty->assign('cate', isset($cate['data'])) ? $cate['data'] : array();
+        $this->smarty->assign('cate', isset($cate['data']) ? $cate['data'] : array());
         $this->smarty->display('posts/cateList.tpl');
     }
 
