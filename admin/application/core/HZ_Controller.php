@@ -294,7 +294,7 @@ class HZ_Controller extends CI_Controller
             array(
                 'selected'  => '0',
                 'name'      => '广告推广管理',
-                'flagName'  => 'ad',
+                'flagName'  => 'promo',
                 'icon'      => 'icon-tasks',
                 'sub'       => array(
                     array(
@@ -306,6 +306,16 @@ class HZ_Controller extends CI_Controller
                         'selected'  => '0',
                         'name'      => '添加广告',
                         'flagName'  => 'add'
+                    ),
+                    array(
+                        'selected'  => '0',
+                        'name'      => '广告类型列表',
+                        'flagName'  => 'cateList'
+                    ),
+                    array(
+                        'selected'  => '0',
+                        'name'      => '添加广告类型',
+                        'flagName'  => 'cateAdd'
                     ),
                     array(
                         'selected'  => '0',

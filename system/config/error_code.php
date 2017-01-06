@@ -71,4 +71,13 @@ $config = array(
     'order_error_6' => array( 'code' => 50006, 'msg' => '获取订单列表失败'), //获取订单列表失败 
     'order_error_7' => array( 'code' => 50007, 'msg' => '未通过认证'),                // 未通过认证
 
+
+    // promo 60000 ~ 69999
+    'promo_error_1' => array( 'code' => 60001, 'msg' => '添加广告出错'),
+    'promo_error_2' => array( 'code' => 60002, 'msg' => '获取数据出错'),
+    'promo_error_3' => array( 'code' => 60003, 'msg' => '广告分类已经存在'),
+    'promo_error_4' => array( 'code' => 60004, 'msg' => '添加广告分类出错'),
+    'promo_error_5' => array( 'code' => 60005, 'msg' => '更新广告分类出错'),
+    'promo_error_6' => array( 'code' => 60006, 'msg' => '删除广告分类出错'),
+    'promo_error_7' => array( 'code' => 60007, 'msg' => '更新广告状态出错'),                 // 更新广告状态出错
 );

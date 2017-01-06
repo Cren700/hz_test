@@ -103,4 +103,21 @@ $config = array(
             'querySaleStat'         => '/order/querySaleStat',      // 销售统计
         ),
     ),
+    //广告模块CURL连接
+    'promo' => array(
+        'host' => HOST_URL.'/promo',
+        'api'  => array(
+            'category'               => '/category/cateList',//分类列表
+            'cateGet'                => '/category/cateGet',//获取分类
+            'cateSave'               => '/category/cateSave',//保存分类
+            'cateUpdate'             => '/category/cateUpdate',//更新分类
+            'cateDel'                => '/category/cateDel',//删除分类
+            'promoAdd'               => '/promo/add',//添加广告
+            'promoSave'              => '/promo/save',//更新广告
+            'promoDel'               => '/promo/del',//删除广告
+            'promoQuery'             => '/promo/query',//查询广告
+            'getPromoById'           => '/promo/getPromoById',//获取单条
+            'changeStatus'           => '/promo/changeStatus',//状态更改
+        ),
+    ),
 );
