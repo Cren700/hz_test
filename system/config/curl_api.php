@@ -91,6 +91,8 @@ $config = array(
             'remove'                => '/shop/remove',              // 移除购物车
             'updateCart'            => '/shop/update',              // 更新购物车
             'getCartList'           => '/shop/getList',             // 购物车列表
+
+            'orderDetail'           => '/order/orderDetail',        // 订单详情
             'queryOrders'           => '/order/query',              // 查询订单
             'previewByCid'          => '/order/previewByCid',       // 通过购物车获取数据
             'previewByPid'          => '/order/previewByPid',       // 通过产品获取数据
@@ -100,6 +102,8 @@ $config = array(
             'getOrderListByUid'          => '/order/getOderListByUid',   // 查询订单列表
             'queryTxOrders'           => '/order/queryTxOrders',              // 查询提现订单
             'txOrderStatus'           => '/order/txOrderStatus',        // 更改订单状态
+            'saveClaims'            => '/order/saveClaims',              // 保存理赔订单
+            'claimsDetail'          => '/order/claimsDetail',            // 获取理赔订单    
             'queryClaim'            => '/order/queryClaim',              // 查询理赔订单
             'claimOrderStatus'      => '/order/claimOrderStatus',        // 更改理赔订单状态
             'queryOrderStat'        => '/order/queryOrderStat',     // 订单统计

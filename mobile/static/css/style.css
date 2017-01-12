@@ -466,7 +466,7 @@ footer.footer a.active i.mine {
 .pro_list_cc .pro_info > p {
     font-size: 0.26666667rem;
 }
-.pro_list_cc .pro_info > span {
+.pro_list_cc .pro_info a > span {
     display: block;
     width: 2.4rem;
     font-size: 0.34666667rem;
@@ -479,7 +479,7 @@ footer.footer a.active i.mine {
     padding: 4px;
 }
 
-.pro_list_cc .pro_info > span.order_list {
+.pro_list_cc .pro_info a > span.order_list {
     display: inline-block;
     width: 2.4rem;
     font-size: 0.34666667rem;
@@ -490,11 +490,11 @@ footer.footer a.active i.mine {
     padding: 4px;
 }
 
-.pro_list_cc .pro_info > span.already {
+.pro_list_cc .pro_info a > span.already {
     background-color: #999999;
 }
 
-.pro_list_cc .pro_info > span.error {
+.pro_list_cc .pro_info a > span.error {
     background-color: rgba(255, 117, 89, 0.91);
 }
 
@@ -762,6 +762,7 @@ footer.foot_comment {
 section.general {
     background-color: #efeff4;
     padding-bottom: 1.30666667rem;
+    margin-top: 1rem;
 }
 .plate_jj {
     margin-bottom: 0.4rem;

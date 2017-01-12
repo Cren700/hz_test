@@ -13,20 +13,22 @@
             <{foreach $orderInfo['list'] as $list}>
                 <div class="pro_list">
                     <div class="pro_list_cc">
-                        <a href="<{'/order/detail.html?order_no='|cat:$list['Forder_no']|getBaseUrl}>">
-                            <div class="pro_info" <{if $list['Fcoverimage']}> style="background: url('<{$list['Fcoverimage']}>') no-repeat"<{/if}> >
-                                <h2><{$list['Fproduct_name']}></h2>
+                        <div class="pro_info" <{if $list['Fcoverimage']}> style="background: url('<{$list['Fcoverimage']}>') no-repeat"<{/if}> >
+                            <h2><{$list['Fproduct_name']}></h2>
+                            <{if $list['Forder_status'] eq 0}><a href="<{'/order/wxpay.html?id='|cat:$list['Forder_no']|getBaseUrl}>"><{else}><a href="<{'/order/detail.html?order_no='|cat:$list['Forder_no']|getBaseUrl}>"><{/if}>
                                 <span class="order_list <{if $list['Forder_status'] eq 3}>already<{elseif $list['Forder_status'] eq 2 || $list['Forder_status'] eq 4}>error<{/if}>">
                                     <{if $list['Forder_status'] eq 1 || $list['Forder_status'] eq 5}>马上支付<{elseif $list['Forder_status'] eq 3}>支付成功<{else}>订单已取消<{/if}>
                                 </span>
-                                <{if $list['Forder_status'] eq 3}>
-                                <span class="order_list <{if $list['Fclaims_status'] eq 0 || $list['Fclaims_status'] eq 1}>pro_claims<{elseif $list['Fclaims_status'] eq 2}>error<{elseif $list['Fclaims_status'] eq 3}>already<{/if}> ">
-                                    <{if $list['Fclaims_status'] eq 0}>发起理赔<{elseif $list['Fclaims_status'] eq 1}>理赔处理中<{elseif $list['Fclaims_status'] eq 2}>理赔失败<{elseif $list['Fclaims_status'] eq 3}>理赔成功<{/if}>
-                                </span>
-                                <{/if}>
-                                <p><{$list['Fdescription']}></p>
-                            </div>
-                        </a>
+                            </a>
+                            <{if $list['Forder_status'] eq 3}>
+                                <{if $list['Fclaims_status'] eq 0}><a href="<{'/order/claims.html?id='|cat:$list['Forder_no']|getBaseUrl}>"><{else}><a href="<{'/order/claimsDetail.html?id='|cat:$list['Forder_no']|getBaseUrl}>"><{/if}>
+                                    <span class="order_list <{if $list['Fclaims_status'] eq 0 || $list['Fclaims_status'] eq 1}>pro_claims<{elseif $list['Fclaims_status'] eq 2}>error<{elseif $list['Fclaims_status'] eq 3}>already<{/if}> ">
+                                         <{if $list['Fclaims_status'] eq 0}>发起理赔<{elseif $list['Fclaims_status'] eq 1}>理赔处理中<{elseif $list['Fclaims_status'] eq 2}>理赔失败<{elseif $list['Fclaims_status'] eq 3}>理赔成功<{/if}>
+                                    </span>
+                                </a>
+                            <{/if}>
+                            <p><{$list['Fdescription']}></p>
+                        </div>
                     </div>
                 </div>
             <{/foreach}>

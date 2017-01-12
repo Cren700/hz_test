@@ -56,7 +56,7 @@ class HZ_Controller extends CI_Controller
 
         $this->_uid = $this->session->userdata('m_uid');
         $this->_user_id = $this->session->userdata('m_username');
-        $this->_user_type = $this->session->userdata('Fuser_type');
+        $this->_user_type = $this->session->userdata('m_type');
         $this->smarty->assign('username', $this->_user_id);
         $this->smarty->assign('uid', $this->_uid);
         $this->smarty->assign('user_type', $this->_user_type);
@@ -68,9 +68,9 @@ class HZ_Controller extends CI_Controller
         exit();
     }
 
-    public function jump404()
+    public function jump404($msg ='')
     {
-        $this->jump(getBaseUrl('/404.html'));
+        $this->jump(getBaseUrl('/404.html?msg='.$msg));
         exit();
     }
 

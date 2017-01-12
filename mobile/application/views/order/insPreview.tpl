@@ -29,7 +29,7 @@
         <!--订单提交区域-->
         <div class="submitArea">
             <div class="orderTotal">
-                <div class="oTCount">Order Total : <span>￥<{$info['Fproduct']['Fproduct_price']}></span></div>
+                <div class="oTCount">合计 : <span>￥<{$info['Fproduct']['Fproduct_price']}></span></div>
             </div>
             <a href="<{'/order/insCreate.html?id='|cat:$info['Fproduct']['Fproduct_id']|getBaseUrl}>" id="submitBtn">确定下单</a>
         </div>

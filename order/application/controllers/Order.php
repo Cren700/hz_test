@@ -37,6 +37,17 @@ class Order extends BaseController
 
     }
 
+    public function orderDetail()
+    {
+        $option = array(
+            'Forder_no' => $this->input->get('order_no', true),
+            'Fuser_id' => $this->input->get('user_id', true),
+        );
+        $res = $this->order_service->orderDetail($option);
+        echo outputResponse($res);
+    }
+
+
     /**
      * 用户订单列表
      */
@@ -130,6 +141,39 @@ class Order extends BaseController
         $res = $this->order_service->txOrderStatus($option);
         echo outputResponse($res);
     }
+
+    /**
+     * 保存理赔信息
+     */
+    public function saveClaims()
+    {
+        $option = array(
+            'Freal_name' => $this->input->post('real_name', true),
+            'Fidentity' => $this->input->post('identity', true),
+            'Fphone' => $this->input->post('phone', true),
+            'Fletter_auth_path' => $this->input->post('letter_auth_path', true),
+            'Freason' => $this->input->post('reason', true),
+            'Fevidence' => $this->input->post('evidence', true),
+            'Forder_no' => $this->input->post('order_no', true),
+            'Fuser_id' => $this->input->post('user_id', true),
+            'Fstatus' => 1, // 理赔中
+            'Fcreate_time' => time(),
+        );
+        $res = $this->order_service->saveClaims($option);
+        echo outputResponse($res);
+    }
+
+    public function claimsDetail()
+    {
+        $option = array(
+            'Forder_no' => $this->input->get('order_no', true),
+            'Fuser_id' => $this->input->get('user_id', true),
+        );
+        $res = $this->order_service->claimsDetail($option);
+        echo outputResponse($res);
+
+    }
+
 
     /**
      * 理赔查询

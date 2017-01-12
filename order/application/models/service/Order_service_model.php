@@ -302,6 +302,53 @@ class Order_service_model extends HZ_Model
 
         return $ret;
     }
+    
+    public function saveClaims($option)
+    {
+        $ret = array('code' => 0);
+        $order_no = $option['Forder_no'];
+
+        $order_data = $this->order_dao->getOrderByNo(array('Forder_no' => $order_no));
+
+        if (!$order_data) {
+            $ret['code'] = 'order_error_8';
+            return $ret;
+        }
+
+        // 是否理赔中
+        $where = array('Fuser_id' => $option['Fuser_id'], 'Forder_no' => $option['Forder_no']);
+        $claims_data = $this->order_dao->checkClaims($where);
+        if ($claims_data) {
+            $ret['code'] = 'order_error_10';
+            return $ret;
+        }
+
+        $option['Fstore_id'] = $order_data['Fstore_id'];
+        $option['Fstore_type'] = $order_data['Fstore_type'];
+        $option['Fproduct_id'] = $order_data['Fproduct_id'];
+
+        $res = $this->order_dao->saveClaims($option);
+        if (!$res) {
+            $ret['code'] = 'order_error_9';
+        }
+        // 更改order的理赔状态
+        $where = array('Forder_no' => $option['Forder_no']);
+        $data = array('Fclaims_status' => 1);
+        $this->order_dao->updateOrderClaimsStatus($where, $data);
+        return $ret;
+    }
+
+    public function claimsDetail($where)
+    {
+        $ret = array('code' => 0);
+        $claims_data = $this->order_dao->checkClaims($where);
+        if (!$claims_data) {
+            $ret['code'] = 'order_error_10';
+            return $ret;
+        }
+        $ret['data'] = $claims_data;
+        return $ret;
+    }
 
     /**
      * 后台提现查询
@@ -409,6 +456,8 @@ class Order_service_model extends HZ_Model
 
     /**
      * 后台销售统计查询
+     * @param $option
+     * @return mixed
      */
     public function querySaleStat($option)
     {
@@ -433,6 +482,21 @@ class Order_service_model extends HZ_Model
         }
         $res['data']['list'] = $orderList;
         return $res;
+    }
+
+    public function orderDetail($where)
+    {
+        $ret = array('code' => 0);
+        $order_data = $this->order_dao->getOrderByNo($where);
+        if (!$order_data) {
+            $ret['code'] = 'order_error_8';
+            return $ret;
+        }
+        $product = $this->myCurl('product', 'getProductByPid', array('product_id' => $order_data['Fproduct_id']));
+        $order_data['Fcoverimage'] = $product['data']['Fcoverimage'];
+        $order_data['Fdescription'] = $product['data']['Fdescription'];
+        $ret['data'] = $order_data;
+        return $ret;
     }
 
 

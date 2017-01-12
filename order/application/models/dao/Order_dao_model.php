@@ -22,6 +22,13 @@ class Order_dao_model extends HZ_Model
         $this->o_db = $this->load->database('order', true);// order库
     }
 
+    public function getOrderByNo($where)
+    {
+        dbEscape($where);
+        $res = $this->o_db->get_where($this->_order_table, $where)->row_array();
+        return filterData($res);
+    }
+
     public function getProductByPid($where)
     {
         $this->p_db = $this->load->database('product', true);// 产品库
@@ -77,6 +84,7 @@ class Order_dao_model extends HZ_Model
         return filterData($res);
     }
 
+    // 订单状态
     public function orderStatus($where, $data)
     {
         return $this->o_db->update($this->_order_table, $data, $where);
@@ -118,6 +126,12 @@ class Order_dao_model extends HZ_Model
         return $this->o_db->update($this->_withdraw_table, $data, $where);
     }
 
+    public function saveClaims($data)
+    {
+        dbEscape($data);
+        return $this->o_db->insert($this->_claim_table, $data);
+    }
+
     public function claimOrderNum($where, $like) {
         dbEscape($like);
         dbEscape($where);
@@ -127,6 +141,28 @@ class Order_dao_model extends HZ_Model
             ->like($like)
             ->count_all_results();
         return $count;
+    }
+
+    public function checkClaims($where)
+    {
+        dbEscape($where);
+        return $this->o_db->get_where($this->_claim_table, $where)->row_array();
+    }
+
+    // 更改理赔表中的状态
+    public function updateClaimsStatus($where, $data)
+    {
+        dbEscape($data);
+        dbEscape($where);
+        return $this->o_db->update($this->_claim_table, $data, $where);
+    }
+
+    // 订单表中的理赔状态
+    public function updateOrderClaimsStatus($where, $data)
+    {
+        dbEscape($data);
+        dbEscape($where);
+        return $this->o_db->update($this->_order_table, $data, $where);
     }
 
     public function claimOrderList($where, $like, $page, $page_size) {
@@ -152,13 +188,6 @@ class Order_dao_model extends HZ_Model
     {
         $data = array();
         $order = $this->o_db->select('count(DISTINCT Fuser_id) as num, sum(Fproduct_tol_amt) as total, count(*) as c')->from($this->_order_table)->where($option)->get()->row_array();
-//        $order_total = $this->o_db->select('sum(Fproduct_tol_amt) as total, Forder_status')->from($this->_order_table)->where($option)->group_by('Forder_status')->get()->result_array();
-//        $order_total = $this->o_db->select('sum(Fproduct_tol_amt) as total')->from($this->_order_table)->where($option)->get()->row_array();
-//        $order_count = $this->o_db->select('count(*) as c')->from($this->_order_table)->where($option)->get()->row_array();
-//        $_tmp = array();
-//        foreach($order_total as $o) {
-//            $_tmp[$o['Forder_status']] = $o['total'];
-//        }
         $data['order_num'] = empty($order['num']) ? 0 : $order['num'];
         $data['order_total'] = empty($order['total']) ? 0 : $order['total'];
         $data['order_count'] = empty($order['c']) ? 0 : $order['c'];

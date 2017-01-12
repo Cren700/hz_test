@@ -96,7 +96,6 @@ class Account extends HZ_Controller
 
     /**
      * 查看用户信息
-     * @param string $uid
      * @return null
      */
     public function detail()

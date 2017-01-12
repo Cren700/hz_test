@@ -13,6 +13,11 @@ class Order_service_model extends HZ_Model
     {
         parent::__construct();
     }
+    
+    public function orderDetail($option)
+    {
+        return $this->myCurl($this->_host, 'orderDetail', $option);
+    }
 
     // 通过购物车获取数据
     public function previewByCid($cid)
@@ -41,4 +46,25 @@ class Order_service_model extends HZ_Model
         $option = array('user_id' => $this->_user_id, 'product_id' => $id);
         return $this->myCurl($this->_host, 'createByPid', $option, true);
     }
+
+    /**
+     * 保存理赔信息
+     * @param $option
+     * @return mixed
+     */
+    public function saveClaims($option)
+    {
+        return $this->myCurl($this->_host, 'saveClaims', $option, true);
+    }
+
+    /**
+     * 获取理赔信息
+     * @param $option
+     * @return mixed
+     */
+    public function claimsDetail($option)
+    {
+        return $this->myCurl($this->_host, 'claimsDetail', $option);
+    }
+
 }
