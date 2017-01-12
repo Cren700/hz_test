@@ -33,7 +33,7 @@
                                 <div class="span12">
                                     <label class="control-label">真实名称</label>
                                     <div class="controls">
-                                        <input type="text" class="span11" name="real_name" placeholder="真实名称" value="<{$user['Freal_name']|default:''}>">
+                                        <input type="text" class="span11" name="nick_name" placeholder="真实名称" value="<{$user['Freal_name']|default:''}>">
                                     </div>
                                 </div>
                             </div>

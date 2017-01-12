@@ -4,21 +4,21 @@ if (typeof (HZ) == "undefined" || !HZ) {
 
 HZ.Home = (function() {
     var p = 1;
+    var flag = true;
     function _init(){
 
         // 获取列表
         _getList(p);
         p++;
 
-        $('.js-next-page').on('click', function(){
-            _getList(p);
-            p++;
-        })
-
         $('.js-btn-submit').on('click', function(e) {
             e.preventDefault();
             _getList();
         });
+
+        $(window).scroll(function () {
+            _scroll();
+        })
     }
 
     function _getList(p){
@@ -31,9 +31,10 @@ HZ.Home = (function() {
             type: 'GET',
             success: function(res){
                 if(res === '') {
-                    $('.js-next-page').hide();
+                    flag = false;
                     return false;
                 }
+                flag = true;
                 $('.new_item_shape').append(res);
                 $('.js-date-dif').each(function(){
                     var u_time = $(this).attr('rel');
@@ -41,6 +42,21 @@ HZ.Home = (function() {
                 })
             }
         });
+    }
+
+    function _scroll()
+    {
+        var scrollTop = $(this).scrollTop();
+        var scrollHeight = $(document).height();
+        var windowHeight = $(this).height();
+        var re_hegith = 80;
+        if (scrollTop + windowHeight + re_hegith * 2 > scrollHeight) {
+            if (flag) {
+                flag = false;
+                _getList(p);
+                p++;
+            }
+        }
     }
 
     return {

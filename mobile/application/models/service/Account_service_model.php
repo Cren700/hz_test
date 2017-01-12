@@ -15,11 +15,18 @@ class Account_service_model extends HZ_Model
 
     public function add($user_id, $passwd)
     {
-        $post_data = array(
+        $data = array(
             'user_id'   => $user_id,
             'passwd'    => $passwd,
         );
-        return $this->myCurl('account', 'addAccountAdmin', $post_data, true);
+        $res = $this->myCurl('account', 'addAccount', $data, true);
+        if ($res['code'] == 0) {
+            // 保存session
+            $res['data']['url'] = getBaseUrl('/home.html');
+            $session = array('m_uid' => $res['data']['Fid'], 'm_username' => $res['data']['Fuser_id'], 'm_type' => $res['data']['Fuser_type']);
+            $this->session->set_userdata($session);
+        }
+        return $res;
     }
 
     /**
@@ -31,10 +38,11 @@ class Account_service_model extends HZ_Model
     public function login($user_id, $passwd)
     {
         $post_data = array('user_id' => $user_id, 'passwd' => $passwd);
-        $res = $this->myCurl('account', 'loginAdmin', $post_data, true);
-        if ($res['code'] === 0) {
+        $res = $this->myCurl('account', 'login', $post_data, true);
+        if ($res['code'] == 0) {
             // 保存session
-            $session = array('uid' => $res['data']['uid'], 'username' => $res['data']['username']);
+            $res['data']['url'] = getBaseUrl('/home.html');
+            $session = array('m_uid' => $res['data']['uid'], 'm_username' => $res['data']['username'], 'm_type' => $res['data']['user_type']);
             $this->session->set_userdata($session);
         }
         return $res;
@@ -60,7 +68,7 @@ class Account_service_model extends HZ_Model
                 'passwd' => $passwd,
                 'new_passwd' => $new_passwd
             );
-            $res = $this->myCurl('account', 'modifyPwdAdmin', $data, true);
+            $res = $this->myCurl('account', 'modifyPwd', $data, true);
             if ($res['code'] == 0) {
                 $res['data']['url'] = getBaseUrl('/home.html');
             }

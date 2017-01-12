@@ -12,6 +12,7 @@ class Home extends HZ_Controller
     {
         parent::__construct();
         $this->load->model('service/posts_service_model', 'posts_service');
+        $this->smarty->assign('model', 'posts');
     }
 
     public function index()
@@ -41,7 +42,7 @@ class Home extends HZ_Controller
             'post_category_id' => intval($this->input->get('post_category_id')) ? : $cate,
             'post_status' => 3, // 已发布
             'p' => $this->input->get('p') ? : 1,
-            'page_size' => 3//$this->input->get('page_size'),
+            'page_size' => $this->input->get('page_size') ? : 10,
         );
         $posts = $this->posts_service->getPostsList($option); // 获取资讯信息
         $postsList = array();

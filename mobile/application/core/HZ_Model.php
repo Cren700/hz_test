@@ -13,10 +13,8 @@ class HZ_Model extends CI_Model
     public function __construct()
     {
         parent::__construct();
-//        $this->_uid = $this->session->userdata('m_uid');
-//        $this->_user_id = $this->session->userdata('m_username');
-        $this->_uid = 6;
-        $this->_user_id = 'user001';
+        $this->_uid = $this->session->userdata('m_uid');
+        $this->_user_id = $this->session->userdata('m_username');
     }
 
     protected function myCurl($host, $control, $data = array(), $is_post = false)
@@ -60,11 +58,11 @@ class HZ_Model extends CI_Model
         $res = curl_exec($ch);
 // //        
         // // if($control == "queryProduct")
-        if($control == "join")
-        {
-            echo $res;die;
-        }
-        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);//print_r($httpCode);exit();
+        // if($control == "addAccount")
+        // {
+        //     echo $res;die;
+        // }
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
 
         if($httpCode != '200')

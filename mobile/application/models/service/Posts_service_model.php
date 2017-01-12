@@ -71,4 +71,9 @@ class Posts_service_model extends HZ_Model
         $where = array('post_id' => $option['post_id'], 'user_id' => $this->_user_id);
         return $this->myCurl('posts', 'doPraise', $where);
     }
+
+    public function search($where)
+    {
+        return $this->myCurl('posts', 'search', $where);
+    }
 }

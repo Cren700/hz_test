@@ -476,10 +476,32 @@ footer.footer a.active i.mine {
     background-color: #4fa63c;
     border-radius: 0.45333333rem;
     margin-top: 0.34666667rem;
+    padding: 4px;
 }
+
+.pro_list_cc .pro_info > span.order_list {
+    display: inline-block;
+    width: 2.4rem;
+    font-size: 0.34666667rem;
+    color: #fff;
+    margin: 0.34666667rem;
+    background-color: #4fa63c;
+    border-radius: 0.45333333rem;
+    padding: 4px;
+}
+
 .pro_list_cc .pro_info > span.already {
     background-color: #999999;
 }
+
+.pro_list_cc .pro_info > span.error {
+    background-color: rgba(255, 117, 89, 0.91);
+}
+
+.pro_claims {
+    background-color: rgb(60, 115, 171) !important;
+}
+
 .pro_list_cc .join_info {
     height: 0.96rem;
     background-color: #fff;
@@ -491,16 +513,10 @@ footer.footer a.active i.mine {
     flex: 1;
     -webkit-flex: 1;
     width: 50%;
-    padding: 0 20px;
     line-height: 0.96rem;
     font-size: 0.34666667rem;
     color: #2c2e2f;
-}
-.pro_list_cc .join_info p:first-child {
-    text-align: left;
-}
-.pro_list_cc .join_info p:last-child {
-    text-align: right;
+    padding-left: 20px;
 }
 /*article css*/
 section.article {
@@ -997,7 +1013,7 @@ section.general {
     padding-bottom: 0.53333333rem;
 }
 .problem .problem_box {
-    padding: 0 22px;
+    /*padding: 0 22px;*/
 }
 .problem_box .problem_item {
     border-bottom: 1px solid #efeff4;
@@ -1131,6 +1147,7 @@ footer.plan_join {
   padding-left: 0.4rem;
   padding-right: 0.4rem;
   padding-bottom: 0.53333333rem;
+  margin-bottom: 1rem;
   background-color: #fff;
 }
 .about_sec > h2 {
@@ -1145,19 +1162,21 @@ footer.plan_join {
 }
 section.mine_jj {
     padding-top: 1.17333333rem;
+    margin-bottom: 1.4rem;
 }
 .mine_head {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
+    z-index: 100000;
+    background-color: #fff;
 }
 .head_nav {
     display: flex;
     display: -webkit-flex;
     display: -webkit-box;
     display: -ms-flexbox;
-    background-color: #fff;
     height: 1.17333333rem;
 }
 .head_nav > p {
@@ -1468,9 +1487,10 @@ section.mine_jj {
 }
 /*我的登录*/
 section.mylogin {
-    padding-bottom: 1.30666667rem;
+    padding-bottom: 1.70666667rem;
     height: 100%;
     background-color: #ffffff;
+    margin-bottom: 1.70666667rem;
 }
 .user_name {
     height: 4.56rem;
@@ -1501,15 +1521,14 @@ section.mylogin {
 .user_item {
     padding-left: 0.61333333rem;
     padding-right: 0.58666667rem;
-    margin-top: 1.06666667rem;
 }
 .user_item p a {
     display: block;
     font-size: 0.42666667rem;
     color: #000;
     border-bottom: 1px solid #eaeaea;
-    padding-bottom: 0.48rem;
-    padding-top: 0.48rem;
+    padding-bottom: 0.4rem;
+    padding-top: 0.40rem;
     font-weight: 600;
 }
 .content_one {
@@ -1518,7 +1537,7 @@ section.mylogin {
 }
 .user_set {
     width: 100%;
-    height: 5.33333333rem;
+    height: 4.33333333rem;
     background: linear-gradient(to bottom, #ffffff 0%, #d8d8d8 100%);
     background: -webkit-linear-gradient(top, #ffffff 0%, #d8d8d8 100%);
     background: -ms-linear-gradient(top, #ffffff 0%, #d8d8d8 100%);
@@ -1799,8 +1818,8 @@ section.sub_info {
     height: 1.33333333rem;
     left: 50%;
     top: 50%;
-    margin-left: -0.66666667rem;
-    margin-top: -0.66666667rem;
+    /*margin-left: -0.66666667rem;*/
+    /*margin-top: -0.66666667rem;*/
 }
 .circle .center i {
     display: block;
@@ -1931,9 +1950,17 @@ section.sub_info {
     background-color: #197dd2;
     color: #fff;
     font-size: 0.48rem;
-    margin: 0 auto;
-    margin-top: 1.06666667rem;
-    margin-bottom: 0.26666667rem;
+    margin:0.36666667rem auto 0.26666667rem auto ;
+}
+.register_regit_sub {
+    display: block;
+    width: 8.53333333rem;
+    height: 1.17333333rem;
+    border-radius: 0.58666667rem;
+    background-color: #ffaa78;
+    color: #fff;
+    font-size: 0.48rem;
+    margin:0.36666667rem auto 0.26666667rem auto ;
 }
 .login_regit_box form label {
     display: block;
@@ -2342,6 +2369,344 @@ section.change_info {
 .cart-content-none-ship input{width: 100%;height: 0.95rem;background-color: #dae8f6;font-size: 0.4rem;color: #6098ed;line-height: 0.94rem;text-align: center;border: 1px solid #8eb6df;border-radius: 0.2rem;-webkit-appearance: none;}
 .cart-content-image-inner{padding: 1.6rem 0;}
 .cart-item-float-wrap{position: fixed;left: 0;bottom: 0;width: 100%;}
+
+
+.center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate3d(-50%, -50%, 0); }
+
+.left {
+    float: left; }
+
+.right {
+    float: right; }
+
+.v-center {
+    position: absolute;
+    top: 50%;
+    transform: translate3d(0, -50%, 0); }
+
+.l-center {
+    position: absolute;
+    left: 50%;
+    transform: translate3d(-50%, 0, 0); }
+
+.clearfix {
+    *zoom: 1; }
+
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+    height: 0;
+    visibility: hidden;
+    overflow: hidden; }
+
+.orderTitle {
+    margin-top: 0.17094rem;
+    height: 0.34188rem;
+    line-height: 0.34188rem;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: left;
+    padding-left: 0.12821rem;
+    background-color: #fff;
+    border-bottom: 1px solid #cecece; }
+
+.orderList {
+    margin-top: 1.2rem;
+    padding: 0.12821rem 0.12821rem 0rem;
+    overflow: scroll;
+    font-size: 14px;
+    font-weight: 700;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box; }
+
+.orderList li {
+    background-color: #fff;
+    margin: 0 0.1rem 0.2rem 0.1rem;
+    padding: 0.3rem;
+}
+
+.orderLogo {
+    width: 2.4rem;
+    height: 2rem;
+    display: inline;
+}
+.orderLogo img {
+    width: 2.4rem;
+    height: 2rem;
+    display: inline;
+}
+
+.orderInfo {
+    width: 6.5rem;
+    display: inline;
+}
+
+.pName {
+    color: #51464a;
+    overflow: hidden;
+}
+
+.pColor {
+    color: #d1c1c4;
+    margin: 0.04274rem 0; }
+
+.pPrice {
+    color: #ee4483; }
+
+.pCount {
+    color: #9c9c9c;
+    margin-left: 0.17094rem;
+}
+.pCount a {
+    border: 1px solid;
+}
+
+.submitArea {
+    padding: 0.12821rem;
+    background-color: #FFFFFF;
+    margin-top: 0.12821rem;
+    font-size: 14px;
+    font-weight: 700; }
+
+.orderTotal {
+    padding: 0.4rem;
+    text-align: right;
+    border-bottom: 1px solid #cecece; }
+
+.orderTotal li {
+    margin-bottom: 0.08547rem;
+    color: #625255; }
+
+.orderTotal li span {
+    margin-left: 0.0641rem; }
+
+.oTCount {
+    text-align: left;
+    margin-top: 0.17094rem; }
+
+.oTCount span {
+    display: inline-block;
+    margin-left: 0.12821rem;
+    color: #ff4f8d;
+    font-size: 16px; }
+
+#submitBtn {
+    display: block;
+    height: 0.8rem;
+    line-height: 0.8rem;
+    margin-top: 0.2rem;
+    background-color: #fb8022;
+    text-align: center;
+    color: #FFFFFF;
+    border-radius: 10px; }
+
+/*---淇℃伅鍒楄〃---*/
+.box {
+    margin-bottom: 0.3rem; }
+
+.myInfoList {
+    margin-top: 0.64103rem;
+    padding: 0.12821rem 0.21368rem;
+    font-size: 14px; }
+
+.input_box label {
+    width: 2rem;
+    display: inline-block;
+    text-align: right;
+    margin-right: 0.14957rem;
+    vertical-align: middle; }
+
+.input_box input {
+    width: 6rem;
+    height: 0.8rem;
+    line-height: 0.8rem;
+    padding: 0.1rem;
+    border: 0;
+    outline: none;
+    display: inline-block;
+    border-bottom: 1px solid #ceced2; }
+
+::-webkit-input-placeholder {
+    color: #ceced2; }
+
+:-moz-placeholder {
+    color: #ceced2; }
+
+::-moz-placeholder {
+    color: #ceced2; }
+
+:-ms-input-placeholder {
+    color: #ceced2; }
+
+.checkboxes {
+    border-bottom: 1px solid #0064cd; }
+
+.radio_box {
+    /*padding-left: 0.51282rem; */
+}
+
+.radio_box label {
+    height: 20px;
+    display: inline-block;
+    margin-right: 0.21368rem;
+}
+.radio_label {
+    width: 2rem;
+    display: inline-block;
+    text-align: right;
+}
+
+.label_radio input {
+    margin-right: 5px; }
+
+.has-js .label_radio {
+    padding-left: 30px; }
+
+.has-js .label_radio {
+    background: url(../img/checkbox-radio-bg.png) no-repeat; }
+
+.has-js .label_radio {
+    background-position: 0 0; }
+
+.has-js .label_check {
+    background-position: 0 -100px; }
+
+.has-js label.c_on {
+    background-position: 0 -150px; }
+
+.has-js label.r_on {
+    background-position: 0 -50px; }
+
+.has-js .label_radio input {
+    position: absolute;
+    left: -9999px; }
+
+.select_box {
+    /*padding-left: 0.51282rem; */
+}
+
+select#selectPointOfInterest {
+    width: 5rem;
+    height: 1rem;
+    line-height: 0.29915rem;
+    text-indent: 0.12821rem;
+    text-align: left;
+    vertical-align: middle;
+    border: 1px solid #197dd2;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none; }
+
+label#lblSelect {
+    position: relative;
+    display: inline-block; }
+
+label#lblSelect::after {
+    content: "\25bc";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 20pt;
+    line-height: 23pt;
+    vertical-align: middle;
+    text-align: center;
+    background: #197dd2;
+    color: #fff;
+    -moz-border-radius: 0 6px 6px 0;
+    -webkit-border-radius: 0 6px 6px 0;
+    border-radius: 0 6px 6px 0;
+    pointer-events: none; }
+
+.file_box {
+    /*padding-left: 0.51282rem; */
+}
+
+.file_box label{
+    width: 2rem;
+    display: inline-block;
+    text-align: right;
+}
+
+.file {
+    position: relative;
+    display: inline-block;
+    background: #197dd2;
+    border: 1px solid #99D3F5;
+    border-radius: 4px;
+    padding: 4px 12px;
+    overflow: hidden;
+    color: #fff !important;
+    text-decoration: none;
+    text-indent: 0;
+    line-height: 20px;
+    vertical-align: middle; }
+.file input {
+    position: absolute;
+    font-size: 100px;
+    right: 0;
+    top: 0;
+    opacity: 0; }
+.file_box input{
+    width: 2rem;
+    display: inline;
+}
+.file_box button {
+    vertical-align: middle;
+    width: 2rem;
+    height: 1rem;
+    line-height: 0.25641rem;
+    background: #7bd6ff;
+    color: #fff;
+    border: 0;
+    border-radius: 3px;
+    margin-left: 0.21368rem; }
+
+.submit_box {
+    width: 2rem;
+    height: 1rem;
+    margin: 0 auto;
+}
+.submit_box button{
+    width: 2rem;
+    height: 1rem;
+    vertical-align: middle;
+    line-height: 0.25641rem;
+    background: red;
+    color: #fff;
+    border: 0;
+    border-radius: 3px;
+}
+
+.buyCount{
+    width: 20px;
+    outline: none;
+    text-align: right;
+    padding: 3px 5px;
+}
+.pInfo {
+    margin-top: 10px;
+}
+
+#del,#buy{
+    float: right;
+    display: inline-block;
+    padding: 3px 5px;
+    margin-right: 10px;
+    border: 1px solid #9c9c9c;
+    border-radius: 3px;
+    font-size: 12px;
+}
 
 /*keyframe*/
 @keyframes loading {

@@ -12,45 +12,33 @@ class Info extends BaseControllor
     {
         parent::__construct();
         $this->load->model('service/info_service_model', 'info_service');
+        $this->smarty->assign('model', 'info');
     }
 
     public function index()
     {
+        $this->load->model('service/user_service_model');
+        $info = $this->user_service_model->detail();
+        $this->smarty->assign('user', $info['data']);
         $this->smarty->display('info/index.tpl');
     }
 
     /**
-     * 订单列表
+     * 我的计划
      */
-    public function orderList()
+    public function planList()
     {
         $option = array(
             'user_id' => $this->_user_id
         );
+        $collectList = $this->info_service->collectList($option);
         $orderList = $this->info_service->orderList($option);
-        if (!isset($orderList['data']) || empty($orderList['data']) ){
-            // 没有数据
-            $this->jump404();
-        }
-        $this->smarty->assign('info', $orderList['data']);
-        $this->smarty->display('info/orderList.tpl');
-    }
-
-    /**
-     * 关注资讯列表
-     */
-    public function praiseList()
-    {
-        $option = array(
-            'user_id' => $this->_user_id
-        );
-        $praiseList = $this->info_service->praiseList($option);
-        if (!isset($praiseList['data']) || empty($praiseList['data']) ){
-            // 没有数据
-            $this->jump404();
-        }
-        $this->smarty->assign('info', $praiseList['data']);
-        $this->smarty->display('info/praiseList.tpl');
+        $jsArr = array('info_plan.js');
+        $this->smarty->assign('jsArr', $jsArr);
+        $this->smarty->assign('orderInfo', isset($orderList['data']) ? $orderList['data'] : array());
+//        p($collectList);
+        $this->smarty->assign('collectList', isset($collectList['data']) ? $collectList['data'] : array());
+        $this->smarty->display('info/planList.tpl');
     }
 
     /**
@@ -61,13 +49,12 @@ class Info extends BaseControllor
         $option = array(
             'user_id' => $this->_user_id
         );
-        $collectList = $this->info_service->collectList($option);
-//        p($collectList);
-        if (!isset($collectList['data']) || empty($collectList['data']) ){
+        $praiseList = $this->info_service->praiseList($option);
+        if (!isset($praiseList['data']) || empty($praiseList['data']) ){
             // 没有数据
             $this->jump404();
         }
-        $this->smarty->assign('info', $collectList['data']);
-        $this->smarty->display('info/collectList.tpl');
+        $this->smarty->assign('praiseInfo', $praiseList['data']);
+        $this->smarty->display('info/praiseList.tpl');
     }
 }

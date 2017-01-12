@@ -421,7 +421,6 @@ class Posts_service_model extends HZ_Model
      */
     public function getPraiseListByUid($option)
     {
-
         $ret = array('code' => 0);
         if (empty($option['Fuser_id'])) {
             $ret['code'] = 'system_error_2'; // 无信息
@@ -435,5 +434,31 @@ class Posts_service_model extends HZ_Model
         }
         return $ret;
     }
+
+    /**
+     * 搜索
+     * @param $option
+     * @return array
+     */
+    public function search($option)
+    {
+        $ret = array('code' => 0);
+        if (empty($option['keyword'])) {
+            $ret['code'] = 'posts_error_14'; // 暂无数据
+            return $ret;
+        }
+
+        $where1 = 'Fpost_keyword like "%'.$option['keyword'].'%" AND Fpost_status = 3';
+        $where2 = 'Fpost_title like "%'.$option['keyword'].'%" AND Fpost_status = 3';
+
+        $res = $this->posts_dao->search($where1, $where2);
+        if (!$res) {
+            $ret['code'] = 'posts_error_14';
+        } else {
+            $ret['data'] = $res;
+        }
+        return $ret;
+    }
+
 
 }

@@ -42,7 +42,7 @@ class Shop extends BaseController
             'Fuser_id' => $this->input->post('user_id'),
         );
         $data = array(
-            'Fproduct_num' => $this->input->post('count') ? : 1
+            'Fproduct_num' => (int)$this->input->post('count') ? : 1
         );
         $res = $this->shop_service->update($where, $data);
         echo outputResponse($res);

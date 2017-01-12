@@ -18,7 +18,7 @@ class Account extends BaseController {
         $data = array();
 		$data['Fuser_id'] = $this->input->post('user_id');
 		$data['Fpasswd'] = $this->input->post('passwd');
-		$data['Fuser_type'] = $this->input->post('user_type');
+		$data['Fuser_type'] = $this->input->post('user_type') ? : '4';
         $data['Fcreate_time'] = time();
         $data['Fupdate_time']  = time();
         $data['Fstatus'] = 1;
@@ -98,7 +98,7 @@ class Account extends BaseController {
      */
     public function detail()
     {
-        $data['Fuser_id'] = $this->input->get('id');
+        $data['Fuser_id'] = $this->input->get('id'); // Fuser_id 是id而不是user_id
         $data['type'] = $this->input->get('type') ? : 'user';
         $res = $this->account_service->detail($data);
         echo outputResponse($res);

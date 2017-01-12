@@ -27,6 +27,7 @@ $config = array(
             'changeStatus'          => '/info/changeStatus',            // 修改用户状态
             'queryBlackList'        => '/info/queryBlackList',          // 黑名单列表
             'queryCapitalAccount'   => '/info/queryCapitalAccount',          // 黑名单列表
+            'center'                => '/order/userCenter',         // 用户中心
         ),
     ),
     'product' => array(
@@ -48,6 +49,7 @@ $config = array(
             'collect'               => '/product/collect',              // 收藏
             'queryCollect'          => '/product/queryCollect',         // 查询收藏列表
             'getCollectListByUid'   => '/product/getCollectListByUid',     // 我的收藏
+            'search'                => '/product/search',                 // 搜索
         ),
     ),
     'posts' => array(
@@ -79,6 +81,7 @@ $config = array(
             'delComment'            => '/posts/delComment',             // 删除评论
             'queryPraise'           => '/posts/queryPraise',           // 查询关注列表
             'getPraiseListByUid'    => '/posts/getPraiseListByUid',     // 我的关注
+            'search'                => '/posts/search',                 // 搜索
         ),
     ),
     'order' => array(

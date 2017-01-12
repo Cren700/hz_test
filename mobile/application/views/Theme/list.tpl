@@ -26,25 +26,4 @@
     </a>
 </div>
 <{/if}>
-<!--
-<div class="new_shape_three">
-    <a href="articlex.html" class="article_link">
-        <h3>5家网络互助保障平台用户数超百万人年内行业融资过亿</h3>
-        <div class="article_img">
-            <div class="article_img_item">
-                <img src="image/106.jpg">
-            </div>
-            <div class="article_img_item">
-                <img src="image/101.jpg">
-            </div>
-            <div class="article_img_item">
-                <img src="image/103.jpg">
-            </div>
-        </div>
-        <div class="item_info">
-            <span>互助之家的朋友们</span>
-            <span>2小时前</span>
-        </div>
-    </a>
-</div>-->
 <{/foreach}>

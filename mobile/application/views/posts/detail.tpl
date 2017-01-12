@@ -9,7 +9,7 @@
         </article>
         <p class="article_remarks"><{$info.Fremark}></p>
         <div class="img_cont">
-            <img src="">
+            <img src="<{'/qrcode.png'|baseImgUrl}>">
         </div>
         <p class="img_cont_remarks">关注微信服务号互动之家（imhuzhu）<br/>定时推送，精彩福利互动！</p>
         <{if $info.Fpost_keyword}>

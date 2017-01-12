@@ -189,4 +189,13 @@ class Info_service_model extends HZ_Model
 
         return $res;
     }
+
+    public function userCenter($option)
+    {
+        $ret = array('code' => 0);
+
+        $ret['data'] = $this->info_dao->userCenter($option);
+
+        return $ret;
+    }
 }

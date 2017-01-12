@@ -9,11 +9,8 @@
 
 $config = array(
     'uri' => array(
-        'account/add',       
-        'account/login',     
-        'account/modifyPwd', 
+        'account/modifyPwd',
         'account/addAdmin',  
-        'account/loginAdmin',
         'account/modifyPwdAdm',
         'account/detail',    
         'account/saveUserDetail',   

@@ -12,6 +12,7 @@ class Account extends HZ_Controller
     {
         parent::__construct();
         $this->load->model('service/account_service_model');
+        $this->load->model('service/user_service_model');
     }
 
     /**
@@ -19,13 +20,13 @@ class Account extends HZ_Controller
      */
     public function index()
     {
-        $uri = $this->input->get('url');
-        $this->smarty->assign('uri', $uri);
-        $this->smarty->display('login/index.tpl');
+        $jsArr = array('account_login.js');
+        $this->smarty->assign('jsArr', $jsArr);
+        $this->smarty->display('account/index.tpl');
     }
 
     /**
-     * 登录接口
+     * 密码登录接口
      */
     public function doLogin()
     {
@@ -33,9 +34,30 @@ class Account extends HZ_Controller
         $passwd = $this->input->post('passwd');
         $uri = $this->input->post('uri');
         $res = $this->account_service_model->login($user_id, $passwd);
-        if ($res['code'] ===0) {
+        if ($res['code'] === 0) {
             $res['data']['url'] = $uri ? HOST_URL . $uri : getBaseUrl('/home.html');
         }
+        echo json_encode_data($res);
+    }
+
+    /**
+     * 注册页
+     */
+    public function register()
+    {
+        $jsArr = array('account_register.js');
+        $this->smarty->assign('jsArr', $jsArr);
+        $this->smarty->display('account/register.tpl');
+    }
+
+    /**
+     * 提交注册
+     */
+    public function doRegister()
+    {
+        $user_id = $this->input->post('user_id');
+        $passwd = $this->input->post('passwd');
+        $res = $this->account_service_model->add($user_id, $passwd);
         echo json_encode_data($res);
     }
 
@@ -45,8 +67,7 @@ class Account extends HZ_Controller
     public function logOut()
     {
         $this->session->sess_destroy();
-        $res = array('code' => 0, 'data' => array('url' => getBaseUrl('/home.html')));
-        echo json_encode_data($res);
+        $this->jump(getBaseUrl('/home.html'));
     }
 
     /**
@@ -55,12 +76,10 @@ class Account extends HZ_Controller
     public function pwd()
     {
         $jsArr = array(
-            'plugin/jquery.placeholder.min.js',
-            'plugin/jquery.validate.js',
-            'login/pwd.js'
+            'account_pwd.js'
         );
         $this->smarty->assign('jsArr', $jsArr);
-        $this->smarty->display('login/pwd.tpl');
+        $this->smarty->display('account/pwd.tpl');
     }
 
     /**
@@ -78,26 +97,29 @@ class Account extends HZ_Controller
     /**
      * 查看用户信息
      * @param string $uid
+     * @return null
      */
-    public function info($uid)
+    public function detail()
     {
-        $uid = $uid ? : $this->input->get('id');
+        $info = $this->user_service_model->detail();
+//        p($info);
+        $this->smarty->assign('user', $info['data']);
+        $this->smarty->display('account/detail.tpl');
+    }
+
+    public function modify()
+    {
         $jsArr = array(
-            'plugin/jquery.placeholder.min.js',
-            'plugin/jquery.validate.js',
             'uploadify/jquery.uploadify.min.js',
-            'user/info.js'
+            'account_modify.js'
         );
         $cssArr = array('uploadify.css');
-        $option = array(
-            'id' => $uid
-        );
-        !$uid ? $this->jump404():'';
-        $info = $this->user_service->getInfo($option);
+        $info = $this->user_service_model->detail();
+//        p($info);
         $this->smarty->assign('jsArr', $jsArr);
         $this->smarty->assign('cssArr', $cssArr);
         $this->smarty->assign('user', $info['data']);
-        $this->smarty->display('user/info.tpl');
+        $this->smarty->display('account/modify.tpl');
     }
 
     /**
@@ -106,8 +128,63 @@ class Account extends HZ_Controller
     public function saveInfo()
     {
         $option = $this->input->post();//提交的数据
-        $res = $this->user_service->saveInfo($option);
-        echo json_encode_data($res);
+        $option['id'] = $this->_uid;
+        $res = $this->user_service_model->saveInfo($option);
+        if ($res['code'] != 0) {
+            $this->jump404();
+        } else {
+            $url = getBaseUrl('/account/detail');
+            $this->jump($url);
+        }
+    }
+
+    /**
+     * 账户中心
+     */
+    public function center()
+    {
+        $info = $this->user_service_model->center();
+        $this->smarty->assign('user', $info['data']);
+        $this->smarty->display('account/center.tpl');
+    }
+
+    /**
+     * 设置
+     */
+    public function set()
+    {
+        $info = $this->user_service_model->detail();
+//        p($info);
+        $this->smarty->assign('user', $info['data']);
+        $this->smarty->display('account/set.tpl');
+    }
+
+
+    /**
+     * 获取验证码
+     * VerificationCode
+     */
+    public function getVC()
+    {
+        $this->load->library('captcha');
+        $code = $this->captcha->getCaptcha();
+        $this->session->set_userdata('code', $code);
+        $this->captcha->showImg();
+        $this->session->set_userdata('vc', $code);
+    }
+
+    /**
+     * 检验验证码
+     */
+    public function checkVC()
+    {
+        $code = strtoupper($this->input->get('vc'));
+        $vc = $this->session->userdata('vc');
+        if ($code == $vc) {
+            echo json_encode(array('code' => 0));
+        } else {
+            echo json_encode(array('code' => 1, 'msg' => '验证码错误'));
+        }
     }
 
 }

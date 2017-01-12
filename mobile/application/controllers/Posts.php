@@ -12,6 +12,7 @@ class Posts extends HZ_Controller
     {
         parent::__construct();
         $this->load->model('service/posts_service_model', 'post_service');
+        $this->smarty->assign('model', 'posts');
     }
 
     public function index()
@@ -68,6 +69,17 @@ class Posts extends HZ_Controller
         );
         $res = $this->post_service->doPraise($option);
         echo json_encode_data($res);
+    }
+
+    public function search()
+    {
+        $option = array('keyword' => $this->input->get('keyword'));
+        $data = $this->post_service->search($option);
+        $cssArr = array('bootstrap.min.css');
+        $this->smarty->assign('cssArr', $cssArr);
+        $this->smarty->assign('info', $data);
+        $this->smarty->assign('keyword', $this->input->get('keyword'));
+        $this->smarty->display('posts/search.tpl');
     }
         
 }

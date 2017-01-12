@@ -85,4 +85,16 @@ class Info extends BaseController
         echo outputResponse($res);
     }
 
+    /**
+     * 账户中心
+     */
+    public function userCenter()
+    {
+        $option = array(
+            'Fuser_id' => $this->input->get('user_id', true),
+        );
+        $res = $this->info_service->userCenter($option);
+        echo outputResponse($res);
+    }
+
 }

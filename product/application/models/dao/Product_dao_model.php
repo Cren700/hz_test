@@ -147,7 +147,7 @@ class Product_dao_model extends HZ_Model
 
     public function getCollectListByUid($where)
     {
-        $res = $this->p->select('f.*, p.Fproduct_name')
+        $res = $this->p->select('f.*, p.Fproduct_name, p.Fproduct_price, p.Fcoverimage, p.Fdescription, p.Fclaims_num, p.Fturnover')
             ->from($this->_favourite_article_table . ' as f')
             ->join($this->_product_table.' as p', 'f.Fproduct_id = p.Fproduct_id', 'left')
             ->where($where)
@@ -157,4 +157,9 @@ class Product_dao_model extends HZ_Model
         return filterData($res);
     }
 
+    public function search($where)
+    {
+        $res = $this->p->where($where)->order_by('Fproduct_id DESC')->get($this->_product_table)->result_array();
+        return filterData($res);
+    }
 }

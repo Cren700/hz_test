@@ -9,28 +9,47 @@ HZ.Shop = (function() {
         buyAction();
 
         changeNumber();
+
+        $('.buyCount').on('blur', function () {
+            update($(this));
+        })
+    }
+
+    function update(el) {
+        var id = el.data('id');
+        var on = parseInt(el.val(), 10);
+        var url = baseUrl+"/shop/update.html";
+        on = on < 1 ? 1 : on;
+        $.post(url, {id:id, count:on}, function(data){
+            if(data['code'] != '0')
+            {
+                HZ.Dialog.showMsg({title: data['msg']});
+            }
+        }, 'json');
     }
 
     function delCart()
     {
         $('.js-btn-del').on('click', function(){
-            var _this = $(this);
-            var url = _this.data('url');
-            $.ajax({
-                url: url,
-                data: {},
-                dataType: 'json',
-                type: 'GET',
-                success: function(res){
-                    if (res.code == 0)
-                    {
-                        _this.parents('.cart-content-list-li').remove();
-                        HZ.Dialog.showMsg({title: '成功移除购物车'});
-                    } else {
-                        HZ.Dialog.showMsg({title: res.msg});
+            if (confirm('是否删除该产品?')){
+                var _this = $(this);
+                var url = _this.data('url');
+                $.ajax({
+                    url: url,
+                    data: {},
+                    dataType: 'json',
+                    type: 'GET',
+                    success: function(res){
+                        if (res.code == 0)
+                        {
+                            _this.parents('.orderItem').remove();
+                            HZ.Dialog.showMsg({title: '成功移除购物车'});
+                        } else {
+                            HZ.Dialog.showMsg({title: res.msg});
+                        }
                     }
-                }
-            });
+                });
+            }
         });
     }
 

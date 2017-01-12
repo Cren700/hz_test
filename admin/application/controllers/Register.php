@@ -6,7 +6,7 @@
  * Date     : 2016/11/27
  * Time     : 上午11:06
  */
-class Register extends HZ_Controller
+class Register extends BaseController
 {
     public function __construct()
     {

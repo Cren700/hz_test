@@ -8,7 +8,7 @@
 <div>
     <ul>
         <{foreach $info['list'] as $list}>
-        <li><a href="<{'/posts.html?id='|cat:$list['Fpraise_post_id']|getBaseUrl}>"><{$list['Fpraise_post_id']}></a></li>
+        <li><a href="<{'/product/detail/'|cat:$list['Fproduct_id']|getBaseUrl}>"><{$list['Fproduct_name']}></a></li>
         <{/foreach}>
     </ul>
 </div>

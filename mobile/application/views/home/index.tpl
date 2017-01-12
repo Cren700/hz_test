@@ -19,7 +19,6 @@
     <div class="new_item_shape">
 
     </div>
-    <a href="javascript:;" class="js-next-page">Next</a>
     <input type="hidden" name="cate_id" value="<{$cate_id|default:''}>">
 </section>
 <{include file="public/footer.tpl"}>

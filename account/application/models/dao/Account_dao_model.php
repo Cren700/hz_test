@@ -28,7 +28,8 @@ class Account_dao_model extends HZ_Model
     {
         dbEscape($data);
         $table = $type === 'admin' ? $this->_admin_table : $this->_user_table;
-        return $this->account->insert($table, $data);
+        $this->account->insert($table, $data);
+        return $this->account->insert_id();
     }
 
     public function modifyPwd($where, $data, $type = 'user')
@@ -89,6 +90,18 @@ class Account_dao_model extends HZ_Model
         dbEscape($where);
         $query = $this->account->get_where($this->_sel_detail_table($type), $where);
         $res = $query->row_array();
+        return filterData($res);
+    }
+
+    /**
+     * 用户基本信息
+     * @param $where
+     * @return mixed
+     */
+    public function getUserBaseInfoByFid($where)
+    {
+        dbEscape($where);
+        $res = $this->account->get_where($this->_user_table, $where)->row_array();
         return filterData($res);
     }
 

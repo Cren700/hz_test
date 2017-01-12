@@ -7,10 +7,10 @@
             </a>
         </div>
         <div class="col-xs-8">
-            <form class="search_form" method="post">
+            <form class="search_form" id="js-search_form" action="<{'/posts/search.html'|getBaseUrl}>" method="get">
                 <i class="search_icon">&nbsp;</i>
                 <div class="search_txt">
-                    <input type="search" name="" placeholder="搜你想搜的">
+                    <input type="search" id="js-txt-search" value="<{$keyword|default:''}>" name="keyword" autocomplete="off" placeholder="搜你想搜的">
                 </div>
                 <i class="search_close">&nbsp;</i>
             </form>

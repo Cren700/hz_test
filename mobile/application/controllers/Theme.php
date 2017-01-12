@@ -12,6 +12,7 @@ class Theme extends HZ_Controller
     {
         parent::__construct();
         $this->load->model('service/theme_service_model', 'theme_service');
+        $this->smarty->assign('model', 'theme');
     }
 
     public function index()
@@ -35,7 +36,7 @@ class Theme extends HZ_Controller
             'post_category_id' => intval($this->input->get('post_category_id')) ? : $cate,
             'post_status' => 3, // 已发布
             'p' => $this->input->get('p') ? : 1,
-            'page_size' => 3//$this->input->get('page_size'),
+            'page_size' => $this->input->get('page_size') ? : 10,
         );
         $posts = $this->theme_service->getPostsList($option); // 获取资讯信息
         $postsList = array();

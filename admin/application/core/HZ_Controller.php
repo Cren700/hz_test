@@ -302,21 +302,21 @@ class HZ_Controller extends CI_Controller
                         'name'      => '广告列表',
                         'flagName'  => 'index',
                     ),
-                    array(
-                        'selected'  => '0',
-                        'name'      => '添加广告',
-                        'flagName'  => 'add'
-                    ),
+//                    array(
+//                        'selected'  => '0',
+//                        'name'      => '添加广告',
+//                        'flagName'  => 'add'
+//                    ),
                     array(
                         'selected'  => '0',
                         'name'      => '广告类型列表',
                         'flagName'  => 'cateList'
                     ),
-                    array(
-                        'selected'  => '0',
-                        'name'      => '添加广告类型',
-                        'flagName'  => 'cateAdd'
-                    ),
+//                    array(
+//                        'selected'  => '0',
+//                        'name'      => '添加广告类型',
+//                        'flagName'  => 'cateAdd'
+//                    ),
                     array(
                         'selected'  => '0',
                         'name'      => '推荐设置',

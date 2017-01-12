@@ -1,7 +1,7 @@
 <{include file="public/header.tpl"}>
 <body>
 <div class="wrap">
-    <{include file="public/header_box.tpl"}>
+    <{include file="public/header_product_box.tpl"}>
     <nav class="home_nav">
         <div class="nav_list">
             <a href="<{'/product.html'|getBaseUrl}>" class="header_nav<{if $cate_id eq ''}> select<{/if}>">所有计划</a>
@@ -20,7 +20,6 @@
     <div class="new_item">
 
     </div>
-    <a href="javascript:;" class="js-next-page">Next</a>
 </section>
 
 <{include file='public/footer.tpl'}>

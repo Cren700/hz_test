@@ -145,4 +145,16 @@ class Info_dao_model extends HZ_Model
         $res = $query->result_array();
         return filterData($res);
     }
+
+
+    public function userCenter($where)
+    {
+        dbEscape($where);
+        $res = $this->u->select('a.*')
+            ->from($this->_account_table .' as a')
+            ->get()
+            ->result_array();
+//        echo $this->u->last_query();die;
+        return filterData($res);
+    }
 }

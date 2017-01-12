@@ -393,11 +393,16 @@ class Order_service_model extends HZ_Model
             $ret['code'] = 'system_error_2'; // 无信息
             return $ret;
         }
-        $res = $this->order_dao->getOderListByUid($option);
-        if (!$res) {
+        $orderList = $this->order_dao->getOderListByUid($option);
+        foreach ($orderList as &$list) {
+            $product = $this->myCurl('product', 'getProductByPid', array('product_id' => $list['Fproduct_id']));
+            $list['Fcoverimage'] = $product['data']['Fcoverimage'];
+            $list['Fdescription'] = $product['data']['Fdescription'];
+        }
+        if (!$orderList) {
             $ret['code'] = 'order_error_6';
         } else {
-            $ret['data'] = $res;
+            $ret['data'] = $orderList;
         }
         return $ret;
     }
@@ -429,5 +434,6 @@ class Order_service_model extends HZ_Model
         $res['data']['list'] = $orderList;
         return $res;
     }
+
 
 }

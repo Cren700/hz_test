@@ -35,6 +35,7 @@ $config = array(
     'product_error_9' => array( 'code' => 20009, 'msg' => '更新产品状态出错'),                 // 更新产品状态出错
     'product_error_10' => array( 'code' => 20010, 'msg' => '产品已经收藏咯'),                 // 产品已经收藏咯
     'product_error_11' => array( 'code' => 20011, 'msg' => '我的收藏信息出错'),                 // 我的收藏信息出错
+    'product_error_12' => array( 'code' => 20012, 'msg' => '很抱歉，暂无数据，请换个条件试试！'),                // 搜索暂无数据
 
 
     // validation 30001 ~ 39999
@@ -61,6 +62,8 @@ $config = array(
     'posts_error_11' => array( 'code' => 400011, 'msg' => '获取评论列表出错'),                // 获取评论列表出错
     'posts_error_12' => array( 'code' => 400012, 'msg' => '删除评论出错'),                // 删除评论出错
     'posts_error_13' => array( 'code' => 40013, 'msg' => '我的关注信息出错'),                // 我的关注信息出错
+    'posts_error_14' => array( 'code' => 40014, 'msg' => '很抱歉，暂无数据，请换个条件试试！'),                // 搜索暂无数据
+
     
     // order 50000 ~ 59999
     'order_error_1' => array( 'code' => 50001, 'msg' => '已经在购物车中'),                 // 已经在购物车中

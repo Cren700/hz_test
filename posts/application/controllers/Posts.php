@@ -286,4 +286,15 @@ class Posts extends HZ_Controller
         $res = $this->posts_service->getPraiseListByUid($option);
         echo outputResponse($res);
     }
+
+    /**
+     * 搜索
+     */
+    public function search()
+    {
+        $option = array('keyword' => $this->input->get('keyword'));
+        $res = $this->posts_service->search($option);
+        echo outputResponse($res);
+    }
+
 }

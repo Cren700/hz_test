@@ -495,4 +495,27 @@ class Product_service_model extends HZ_Model
         return $ret;
     }
 
+    /**
+     * 搜索
+     * @param $option
+     * @return array
+     */
+    public function search($option)
+    {
+        $ret = array('code' => 0);
+        if (empty($option['keyword'])) {
+            $ret['code'] = 'product_error_12'; // 暂无数据
+            return $ret;
+        }
+
+        $where = 'Fproduct_name like "%'.$option['keyword'].'%" AND Fproduct_status = 2 AND Fis_del = 0';
+
+        $res = $this->product_dao->search($where);
+        if (!$res) {
+            $ret['code'] = 'product_error_12';
+        } else {
+            $ret['data'] = $res;
+        }
+        return $ret;
+    }
 }

@@ -10,6 +10,7 @@ class HZ_Controller extends CI_Controller
 {
     protected $_uid = null;
     protected $_user_id = null;
+    protected $_user_type = null;
 
     public function __construct(){
         parent::__construct();
@@ -44,18 +45,21 @@ class HZ_Controller extends CI_Controller
         //设置模板语言中的右结束符，默认为“}”
         $this->smarty->right_delimiter = '}>';
 
-        $seoArr = array('keywords' => '互助之家', 'description' => '互助之家', 'title' => '互助之家');
+        $seoArr = array(
+            'keywords' => '互助之家、互助、互助计划、互助保障、互保、相互保险、重疾、意外、大病、E互助、蚂蚁互助、蚂蚁互保、壁虎互助、夸克联盟、17互助、抗癌公社、众托帮、互助客、互助家、互助网、互助买房、互助停车、互助社、水滴互助、校友互助、医互助、钉钉互助、一起帮',
+            'description' => '互助之家是国内首家专注网络互助的行业门户网站，以资讯报道、互助产品、互助社区三大核心板块，为用户提供全方位的互助资讯、优质项目推荐和行业交流社区。互助之家愿与国内互助平台及广大用户携手，规范行业发展，营造一个透明、规范、安全的网络互助环境。',
+            'title' => '互助之家-找互助计划，上互助之家');
         $this->smarty->assign('seo', $seoArr);
 
         $this->smarty->assign('cssArr', array());
         $this->smarty->assign('jsArr', array());
 
-//        $this->_uid = $this->session->userdata('m_uid');
-//        $this->_user_id = $this->session->userdata('m_username');
-        $this->_uid = 6;
-        $this->_user_id = 'user001';
+        $this->_uid = $this->session->userdata('m_uid');
+        $this->_user_id = $this->session->userdata('m_username');
+        $this->_user_type = $this->session->userdata('Fuser_type');
         $this->smarty->assign('username', $this->_user_id);
         $this->smarty->assign('uid', $this->_uid);
+        $this->smarty->assign('user_type', $this->_user_type);
     }
 
     public function jump($url)
@@ -93,7 +97,7 @@ class BaseControllor extends HZ_Controller{
                 echo json_encode_data(array( 'code' => 10004, 'msg' => '请先登录'));die;
             } else {
                 $uri = rawurlencode($_SERVER['REQUEST_URI']);
-                $this->jump(getBaseUrl('/login?url='.$uri));
+                $this->jump(getBaseUrl('/account.html?url='.$uri));
                 exit();
             }
 

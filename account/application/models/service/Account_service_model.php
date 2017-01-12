@@ -22,6 +22,7 @@ class Account_service_model extends HZ_Model
      */
     public function addAccount($data, $type)
     {
+        $ret = array('code' => 0);
         // 数据验证
         $validationConfig = array(
             array(
@@ -54,10 +55,14 @@ class Account_service_model extends HZ_Model
         $salt = saltCode();
         $data['Fsalt'] = $salt;
         $data['Fpasswd'] = encodePwd($salt, $data['Fpasswd']);
-        if ($this->account_dao_model->addAccount($data, $type) ){
-            return array('code' => 0);
+        $uid = $this->account_dao_model->addAccount($data, $type);
+        if ( $uid ){
+            if ($type == 'user') {
+                $ret['data'] = $this->account_dao_model->getUserBaseInfoByFid(array('Fid' => $uid));
+            }
+            return $ret;
         } else {
-            return array('code' => 'account_error_3');
+            return $ret['code'] = 'account_error_3';
         }
     }
 

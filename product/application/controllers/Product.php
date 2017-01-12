@@ -178,4 +178,14 @@ class Product extends HZ_Controller
         $res = $this->product_service->getCollectListByUid($option);
         echo outputResponse($res);
     }
+
+    /**
+     * 搜索
+     */
+    public function search()
+    {
+        $option = array('keyword' => $this->input->get('keyword'));
+        $res = $this->product_service->search($option);
+        echo outputResponse($res);
+    }
 }

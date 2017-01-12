@@ -790,23 +790,23 @@ var validate = {
     }
 }
 
-function getUrlRelative() {
-    var url = document.location.toLocaleString().toString();
-    
-    var active = false;
-    $(".footer a").each(function () {
-        var herf = $(this).attr("href").toLocaleString();
-        if (url.indexOf(herf) > -1) {
-            $(this).addClass("active");
-            active = true;
-            return false;
-        }
-    });
-    if (!active) {
-        $(".footer a").eq(0).addClass("active");
-    }
-}
-getUrlRelative();
+// function getUrlRelative() {
+//     var url = document.location.toLocaleString().toString();
+//
+//     var active = false;
+//     $(".footer a").each(function () {
+//         var herf = $(this).attr("href").toLocaleString();
+//         if (url.indexOf(herf) > -1) {
+//             $(this).addClass("active");
+//             active = true;
+//             return false;
+//         }
+//     });
+//     if (!active) {
+//         $(".footer a").eq(0).addClass("active");
+//     }
+// }
+// getUrlRelative();
 var countdown = 120;
 function settime(obj) {
     if (countdown == 0) {

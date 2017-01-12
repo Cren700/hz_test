@@ -171,4 +171,5 @@ class Order extends BaseController
         $res = $this->order_service->querySaleStat($option);
         echo outputResponse($res);
     }
+
 }

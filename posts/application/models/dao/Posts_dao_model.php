@@ -228,4 +228,10 @@ class Posts_dao_model extends HZ_Model
         return filterData($res);
     }
 
+    public function search($where1, $where2)
+    {
+        $res = $this->_news->or_where($where1)->or_where($where2)->where('Fis_del = 0')->get($this->_posts_table)->result_array();
+        return filterData($res);
+    }
+
 }
