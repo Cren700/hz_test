@@ -466,6 +466,19 @@ footer.footer a.active i.mine {
 .pro_list_cc .pro_info > p {
     font-size: 0.26666667rem;
 }
+
+.pro_list_cc .pro_info span {
+    display: block;
+    width: 2.4rem;
+    font-size: 0.34666667rem;
+    color: #fff;
+    margin: 0 auto;
+    margin-bottom: 0.34666667rem;
+    background-color: #4fa63c;
+    border-radius: 0.45333333rem;
+    margin-top: 0.34666667rem;
+    padding: 4px;
+}
 .pro_list_cc .pro_info a > span {
     display: block;
     width: 2.4rem;
