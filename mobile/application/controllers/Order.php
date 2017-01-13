@@ -67,6 +67,8 @@ class Order extends BaseControllor
         $res = $this->order_service->create($id);
         if($res['code'] === 0) {
             $this->jump(getBaseUrl('/order/wxpay.html?id='.$res['data']['Forder_sn']));
+        } else {
+            $this->jump404($res['msg']);
         }
     }
     
@@ -79,6 +81,8 @@ class Order extends BaseControllor
         $res = $this->order_service->insCreate($id);
         if($res['code'] === 0) {
             $this->jump(getBaseUrl('/order/wxpay.html?id='.$res['data']['Forder_sn']));
+        } else {
+            $this->jump404($res['msg']);
         }
     }
 
