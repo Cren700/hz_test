@@ -1,4 +1,3 @@
-
 <{foreach $list as $l}>
 <{if $l['Fpost_coverimage']}>
 <div class="new_shape_one">

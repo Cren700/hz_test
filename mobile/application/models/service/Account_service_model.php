@@ -76,4 +76,31 @@ class Account_service_model extends HZ_Model
         return $res;
     }
 
+    /**
+     * 第三方登录处理,返回用户信息
+     * @param $openid
+     * @param $nickname
+     * @param $imgurl
+     * @param $type
+     * @return mixed
+     */
+    public function oauthLogin($openid, $nickname, $imgurl, $type)
+    {
+        $option = array(
+            'user_id' => $openid,
+            'nickname' => $nickname,
+            'imgurl' => $imgurl,
+            'log_type' => $type
+        );
+        $res = $this->myCurl('account', 'oauthLogin', $option, true);
+        if ($res['code'] == 0) {
+            // 保存session
+            $res['data']['url'] = getBaseUrl('/home.html');
+            $session = array('m_uid' => $res['data']['Fid'], 'm_username' => $res['data']['Fuser_id'], 'm_type' => $res['data']['Fuser_type']);
+            $this->session->set_userdata($session);
+        }
+        return $res;
+    }
+
+
 }

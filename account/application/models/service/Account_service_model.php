@@ -280,4 +280,40 @@ class Account_service_model extends HZ_Model
         }
         return $ret;
     }
+
+    /**
+     * 第三方登录处理,返回用户信息
+     * @param $option
+     * @return array
+     */
+    public function oauthLogin($option)
+    {
+        $ret = array('code' => 0);
+        $where = array(
+            'Fuser_id' => $option['Fuser_id'],
+            'Flog_type' => $option['Flog_type']
+        );
+        $res = $this->account_dao_model->getInfoByOp($where);
+        if (!$res) {
+            // 没有用户则添加用户
+            $data_base = array(
+                'Fuser_id' => $option['Fuser_id'],
+                'Flog_type' => $option['Flog_type'],
+                'Fuser_type' => 4, // 普通用户
+                'Fcreate_time' => time(),
+                'Fupdate_time' => time(),
+            );
+            $uid = $this->account_dao_model->addAccount($data_base);
+            $data_detail = array(
+                'Fuser_id' => $uid,
+                'Fnick_name' => $option['Fnick_name'],
+                'Fimage_path' => $option['Fimage_path']
+            );
+            $this->account_dao_model->addDetail($data_detail);
+            $ret['data'] = $this->account_dao_model->getInfoByOp($where);
+        } else {
+            $ret['data'] = $res;
+        }
+        return $ret;
+    }
 }

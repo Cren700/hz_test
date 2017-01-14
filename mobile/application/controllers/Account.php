@@ -11,6 +11,7 @@ class Account extends HZ_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->config->load('wx_conf');
         $this->load->model('service/account_service_model');
         $this->load->model('service/user_service_model');
     }
@@ -157,6 +158,8 @@ class Account extends HZ_Controller
         $this->smarty->assign('user', $info['data']);
         $this->smarty->display('account/set.tpl');
     }
+    
+    
 
 
     /**
@@ -184,6 +187,56 @@ class Account extends HZ_Controller
         } else {
             echo json_encode(array('code' => 1, 'msg' => '验证码错误'));
         }
+    }
+
+
+    /**
+     * 微信登录
+     */
+    public function logwx()
+    {
+        $this->config->load('wx_conf');
+        $appid = $this->config->item('appid');
+        $bakUrl = $this->config->item('log_bak_url');
+        $url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='.$appid.'&redirect_uri='.$bakUrl.'&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
+        header("Location:".$url);
+    }
+
+    public function wxLogBak()
+    {
+        $appid = $this->config->item('appid');
+        $secret = $this->config->item('secret');
+        $code = $_GET["code"];
+        $get_token_url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid='.$appid.'&secret='.$secret.'&code='.$code.'&grant_type=authorization_code';
+
+        $ch = curl_init();
+        curl_setopt($ch,CURLOPT_URL,$get_token_url);
+        curl_setopt($ch,CURLOPT_HEADER,0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1 );
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+        $res = curl_exec($ch);
+        curl_close($ch);
+        $json_obj = json_decode($res,true);
+
+        //根据openid和access_token查询用户信息
+        $access_token = $json_obj['access_token'];
+        $openid = $json_obj['openid'];
+        $get_user_info_url = 'https://api.weixin.qq.com/sns/userinfo?access_token='.$access_token.'&openid='.$openid.'&lang=zh_CN';
+
+        $ch = curl_init();
+        curl_setopt($ch,CURLOPT_URL,$get_user_info_url);
+        curl_setopt($ch,CURLOPT_HEADER,0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1 );
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+        $res = curl_exec($ch);
+        curl_close($ch);
+
+        //解析json
+        $user_obj = json_decode($res,true);
+        
+        $user = $this->account_service_model->oauthLogin($user_obj['openid'], $user_obj['nickname'], $user_obj['headimgurl'], $type=1);
+        
+        $this->jump($user['data']['url']);
     }
 
 }

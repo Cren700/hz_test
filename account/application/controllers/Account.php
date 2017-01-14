@@ -190,4 +190,19 @@ class Account extends BaseController {
         $res = $this->account_service->modifyAdminDetail($where, $data);
         echo outputResponse($res);
     }
+
+    /**
+     * 第三方登录处理,返回用户信息
+     */
+    public function oauthLogin()
+    {
+        $option = array(
+            'Fuser_id' => $this->input->post('user_id', true),
+            'Fnick_name' => $this->input->post('nickname', true),
+            'Fimage_path' => $this->input->post('imgurl', true),
+            'Flog_type' => $this->input->post('log_type', true)
+        );
+        $res = $this->account_service->oauthLogin($option);
+        echo outputResponse($res);
+    }
 }

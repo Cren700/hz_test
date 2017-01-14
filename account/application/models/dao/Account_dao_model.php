@@ -20,7 +20,7 @@ class Account_dao_model extends HZ_Model
     }
 
     /**
-     * 添加管理员账号
+     * 添加账号
      * @param $data
      * @return mixed
      */

@@ -30,7 +30,7 @@
         </form>
         <span>更多登录方式</span>
         <p class="login_regit_icon">
-            <i class="login_regit_wechat">&nbsp;</i>
+            <i class="login_regit_wechat" onclick="window.location='<{'/account/logwx.html'|getBaseUrl}>'">&nbsp;</i>
             <i class="login_regit_qq">&nbsp;</i>
         </p>
     </div>

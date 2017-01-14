@@ -1,0 +1,176 @@
+-- MySQL dump 10.13  Distrib 5.7.12, for osx10.9 (x86_64)
+--
+-- Host: localhost    Database: ORDER_DB
+-- ------------------------------------------------------
+-- Server version	5.7.13
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `t_claims`
+--
+
+DROP TABLE IF EXISTS `t_claims`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_claims` (
+  `Fid` int(11) NOT NULL AUTO_INCREMENT,
+  `Fuser_id` varchar(32) NOT NULL,
+  `Forder_no` varchar(20) NOT NULL COMMENT '订单号',
+  `Freal_name` varchar(20) NOT NULL,
+  `Fidentity` varchar(45) NOT NULL COMMENT '身份证号码',
+  `Fphone` varchar(40) DEFAULT NULL,
+  `Fstore_id` int(11) NOT NULL,
+  `Fstore_type` tinyint(1) NOT NULL DEFAULT '0' COMMENT '商户类型0：后台，1：商家用户',
+  `Fproduct_id` int(11) NOT NULL,
+  `Famount` decimal(10,2) NOT NULL COMMENT '赔偿金额',
+  `Fletter_auth_path` varchar(200) DEFAULT NULL COMMENT '授权书路径(是委托人需要用到)',
+  `Freason` text COMMENT '理由',
+  `Fevidence` text COMMENT '提供证据',
+  `Fstatus` tinyint(1) NOT NULL DEFAULT '1' COMMENT '理赔状态1：理赔中，2：处理失败，3：理赔成功',
+  `Fremark` varchar(45) DEFAULT NULL COMMENT '备注',
+  `Fcreate_time` int(11) DEFAULT NULL,
+  PRIMARY KEY (`Fid`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='理赔表';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `t_claims`
+--
+
+LOCK TABLES `t_claims` WRITE;
+/*!40000 ALTER TABLE `t_claims` DISABLE KEYS */;
+INSERT INTO `t_claims` VALUES (1,'user001','','cc','123412341','1234567890',13,0,48,1000.00,NULL,'意外',NULL,3,NULL,1483619081),(2,'user002','','cc','123412341','1234567890',13,0,48,1000.00,NULL,'意外',NULL,3,NULL,1483619081),(6,'user001','20161227102157360052','1234','1234','1324',13,0,49,0.00,NULL,'1234','1234',1,NULL,1484233339),(7,'user001','20161227235956629569','1243','1234','1234',13,0,49,0.00,NULL,'123412341243','1234',1,NULL,1484233413);
+/*!40000 ALTER TABLE `t_claims` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `t_mycart`
+--
+
+DROP TABLE IF EXISTS `t_mycart`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_mycart` (
+  `Fid` int(11) NOT NULL AUTO_INCREMENT,
+  `Fuser_id` varchar(32) NOT NULL,
+  `Fproduct_id` int(11) NOT NULL,
+  `Fproduct_num` int(11) NOT NULL,
+  `Fcreate_time` int(11) DEFAULT NULL,
+  PRIMARY KEY (`Fid`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `t_mycart`
+--
+
+LOCK TABLES `t_mycart` WRITE;
+/*!40000 ALTER TABLE `t_mycart` DISABLE KEYS */;
+INSERT INTO `t_mycart` VALUES (7,'user001',49,20,1484058337),(8,'user001',47,1,1484058369);
+/*!40000 ALTER TABLE `t_mycart` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `t_order`
+--
+
+DROP TABLE IF EXISTS `t_order`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_order` (
+  `Forder_no` varchar(20) NOT NULL,
+  `Fuser_id` varchar(32) NOT NULL,
+  `Fproduct_id` varchar(20) NOT NULL,
+  `Fproduct_name` varchar(20) NOT NULL,
+  `Fproduct_num` varchar(20) NOT NULL,
+  `Fproduct_price` decimal(10,2) NOT NULL COMMENT '单价',
+  `Fproduct_tol_amt` decimal(10,2) NOT NULL COMMENT '产品总金额(单位：元)',
+  `Fstore_id` int(11) NOT NULL COMMENT '店家用户ID',
+  `Fstore_type` tinyint(1) NOT NULL DEFAULT '0' COMMENT '商户类型0：后台，1：商家用户',
+  `Fpay_channel` tinyint(1) DEFAULT NULL COMMENT '付款渠道 1：余额支付 2：支付宝支付 3：微信支付',
+  `Forder_type` tinyint(1) NOT NULL COMMENT '订单类型 1：购买 2：',
+  `Forder_status` tinyint(1) NOT NULL COMMENT '订单状态 1:初始订单 2:取消订单 3:支付成功 4:内部处理 5:渠道支付失败\r',
+  `Fclaims_status` tinyint(1) NOT NULL COMMENT '理赔状态 0：未发起，1：理赔中，2：处理失败，3：理赔成功',
+  `Fcreate_time` int(11) DEFAULT NULL,
+  `Fupdate_time` int(11) DEFAULT NULL,
+  `Fpay_order_no` varchar(100) DEFAULT NULL COMMENT '支付订单号',
+  `Fpay_sub_channel` tinyint(1) DEFAULT NULL COMMENT '字符子渠道',
+  `Fchannel_backno` varchar(100) DEFAULT NULL,
+  `Fcallback_time` int(11) DEFAULT NULL COMMENT '回调时间',
+  PRIMARY KEY (`Forder_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `t_order`
+--
+
+LOCK TABLES `t_order` WRITE;
+/*!40000 ALTER TABLE `t_order` DISABLE KEYS */;
+INSERT INTO `t_order` VALUES ('20161227102000610031','user001','49','壁虎互助全民互助计划','1',10.00,10.00,13,0,NULL,1,1,0,1482848400,1482848400,NULL,NULL,NULL,NULL),('20161227102020340036','user001','49','壁虎互助全民互助计划','1',10.00,10.00,13,0,NULL,1,1,0,1482848420,1482848420,NULL,NULL,NULL,NULL),('20161227102157360052','user001','49','壁虎互助全民互助计划','1',10.00,10.00,13,0,NULL,1,3,1,1482848517,1482848517,NULL,NULL,NULL,NULL),('20161227102517010022','user002','49','壁虎互助全民互助计划','1',10.00,10.00,13,0,NULL,1,1,0,1482848717,1482848717,NULL,NULL,NULL,NULL),('20161227102519680076','user001','49','壁虎互助全民互助计划','1',10.00,10.00,13,0,NULL,1,1,0,1482848719,1482848719,NULL,NULL,NULL,NULL),('20161227104415674888','user002','49','壁虎互助全民互助计划','1',10.00,10.00,13,0,NULL,1,3,0,1482849855,1482849855,NULL,NULL,NULL,NULL),('20161227224601607296','user001','49','壁虎互助全民互助计划','1',10.00,10.00,13,0,NULL,1,1,0,1482849961,1482849961,NULL,NULL,NULL,NULL),('20161227235955368875','user002','49','壁虎互助全民互助计划','1',10.00,10.00,13,0,NULL,1,3,0,1481854395,1482854395,NULL,NULL,NULL,NULL),('20161227235955600758','user001','49','壁虎互助全民互助计划','1',10.00,10.00,13,0,NULL,1,1,0,1482654395,1482854395,NULL,NULL,NULL,NULL),('20161227235955819123','user001','49','壁虎互助全民互助计划','1',10.00,10.00,13,0,NULL,1,1,0,1482854395,1482854395,NULL,NULL,NULL,NULL),('20161227235955924584','user002','49','壁虎互助全民互助计划','1',10.00,10.00,13,0,NULL,1,2,0,1482854395,1482854395,NULL,NULL,NULL,NULL),('20161227235956052580','user001','49','壁虎互助全民互助计划','1',10.00,10.00,13,0,NULL,1,1,0,1482854396,1482854396,NULL,NULL,NULL,NULL),('20161227235956188844','user001','49','壁虎互助全民互助计划','1',10.00,10.00,13,0,NULL,1,1,0,1482854396,1482854396,NULL,NULL,NULL,NULL),('20161227235956315839','user002','49','壁虎互助全民互助计划','1',10.00,10.00,13,0,NULL,1,2,0,1482954396,1482854396,NULL,NULL,NULL,NULL),('20161227235956501735','user001','49','壁虎互助全民互助计划','1',10.00,10.00,13,0,NULL,1,1,0,1482854396,1482854396,NULL,NULL,NULL,NULL),('20161227235956629569','user001','49','壁虎互助全民互助计划','1',10.00,10.00,13,0,NULL,1,3,1,1482254396,1482854396,NULL,NULL,NULL,NULL),('20161229210949007160','user001','48','轻轻互助-中青年抗癌互助计划','8',900.00,7200.00,14,0,NULL,1,1,0,1483016989,1483016989,NULL,NULL,NULL,NULL),('20161229211009853385','user001','48','轻轻互助-中青年抗癌互助计划','8',900.00,7200.00,14,0,NULL,1,1,0,1483017009,1483017009,NULL,NULL,NULL,NULL),('20161229211200897215','user001','48','轻轻互助-中青年抗癌互助计划','8',900.00,7200.00,14,0,NULL,1,2,0,1483017120,1483017120,NULL,NULL,NULL,NULL),('20161229213052958991','user001','48','轻轻互助-中青年抗癌互助计划','3',900.00,2700.00,14,0,NULL,1,3,0,1483018252,1483018252,NULL,NULL,NULL,NULL),('20161229213724124862','user001','49','壁虎互助全民互助计划','1',10.00,10.00,13,0,NULL,1,1,0,1483018644,1483018644,NULL,NULL,NULL,NULL),('20161229215127922850','user001','49','壁虎互助全民互助计划','1',10.00,10.00,13,0,NULL,1,4,0,1483019487,1483019487,NULL,NULL,NULL,NULL),('20161229215137757457','user001','49','壁虎互助全民互助计划','1',10.00,10.00,13,0,NULL,1,1,0,1483019497,1483019497,NULL,NULL,NULL,NULL),('20161229220436844039','user001','48','轻轻互助-中青年抗癌互助计划','1',900.00,900.00,14,0,NULL,1,1,0,1483020276,1483020276,NULL,NULL,NULL,NULL),('20161229222010307376','user001','48','轻轻互助-中青年抗癌互助计划','1',900.00,900.00,14,0,NULL,1,1,0,1483021210,1483021210,NULL,NULL,NULL,NULL),('20161229222028143077','user001','48','轻轻互助-中青年抗癌互助计划','1',900.00,900.00,14,0,NULL,1,1,0,1483021228,1483021228,NULL,NULL,NULL,NULL),('20161229222029020153','user001','48','轻轻互助-中青年抗癌互助计划','1',900.00,900.00,14,0,NULL,1,3,0,1483021229,1483021229,NULL,NULL,NULL,NULL),('20161229222731041222','user001','48','轻轻互助-中青年抗癌互助计划','1',900.00,900.00,14,0,NULL,1,1,0,1483021651,1483021651,NULL,NULL,NULL,NULL),('20161229223245282099','user001','49','壁虎互助全民互助计划','1',10.00,10.00,13,0,NULL,1,1,0,1483021965,1483021965,NULL,NULL,NULL,NULL),('20161229223330939914','user001','49','壁虎互助全民互助计划','1',10.00,10.00,13,0,NULL,1,1,0,1483022010,1483022010,NULL,NULL,NULL,NULL),('20170101134217486187','user001','49','壁虎互助全民互助计划','1',10.00,10.00,13,0,NULL,1,4,0,1483249337,1483249337,NULL,NULL,NULL,NULL),('20170102140533818798','user001','47','轻轻互助-中青年抗癌互助计划','1',900.00,900.00,13,0,NULL,1,2,0,1483337133,1483337133,NULL,NULL,NULL,NULL),('20170102171103884553','user001','49','壁虎互助全民互助计划','1',10.00,10.00,13,0,NULL,1,1,0,1483348263,1483348263,NULL,NULL,NULL,NULL),('20170102182623322263','user001','49','壁虎互助全民互助计划','1',10.00,10.00,13,0,NULL,1,1,0,1483352783,1483352783,NULL,NULL,NULL,NULL),('20170103201321347166','user001','48','轻轻互助-中青年抗癌互助计划','1',900.00,900.00,14,0,NULL,1,1,0,1483445601,1483445601,NULL,NULL,NULL,NULL),('20170103202043018866','user001','49','壁虎互助全民互助计划','1',10.00,10.00,13,0,NULL,1,1,0,1483446043,1483446043,NULL,NULL,NULL,NULL),('20170105202340803131','user001','49','壁虎互助全民互助计划','1',10.00,10.00,13,0,NULL,1,3,0,1483529020,1483619020,NULL,NULL,NULL,NULL),('20170105202441458885','user001','48','轻轻互助-中青年抗癌互助计划','1',900.00,900.00,14,0,NULL,1,3,0,1483619081,1483619081,NULL,NULL,NULL,NULL),('20170105202456647685','user002','43','1234','3',1234.00,3702.00,14,0,NULL,1,3,0,1483619096,1483619096,NULL,NULL,NULL,NULL),('20170105222709224920','user001','48','轻轻互助-中青年抗癌互助计划','1',900.00,900.00,14,0,NULL,1,3,0,1483626429,1483626429,NULL,NULL,NULL,NULL),('20170108233551003858','user001','49','壁虎互助全民互助计划','1',10.00,10.00,13,0,NULL,1,1,0,1483889751,1483889751,NULL,NULL,NULL,NULL),('20170112000112910661','aaaa','48','轻轻互助-中青年抗癌互助计划','1',900.00,900.00,14,0,NULL,1,3,3,1484150472,1484150472,NULL,NULL,NULL,NULL),('20170112002819245688','aaaa','47','轻轻互助-中青年抗癌互助计划','1',900.00,900.00,13,0,NULL,1,2,2,1484152099,1484152099,NULL,NULL,NULL,NULL),('20170112002845720862','aaaa','49','壁虎互助全民互助计划','1',10.00,10.00,13,0,NULL,1,1,1,1484152125,1484152125,NULL,NULL,NULL,NULL);
+/*!40000 ALTER TABLE `t_order` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `t_withdraw_order`
+--
+
+DROP TABLE IF EXISTS `t_withdraw_order`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_withdraw_order` (
+  `Forder_no` varchar(20) NOT NULL,
+  `Fuser_id` varchar(32) NOT NULL,
+  `Famount` decimal(10,2) NOT NULL,
+  `Fcur_type` tinyint(1) NOT NULL DEFAULT '1' COMMENT '币种。1：人民币',
+  `Forder_type` tinyint(1) NOT NULL DEFAULT '1' COMMENT '订单类型。1：提现',
+  `Fcard_no` varchar(20) NOT NULL COMMENT '银行卡账户',
+  `Fcard_name` varchar(45) NOT NULL COMMENT '账户名称',
+  `Fbank_code` int(11) DEFAULT NULL COMMENT '银行代码',
+  `Fbank_name` varchar(45) NOT NULL COMMENT '银行名称',
+  `Fcountry` varchar(20) NOT NULL,
+  `Fprovice` varchar(45) NOT NULL,
+  `Fcity` varchar(45) NOT NULL,
+  `Faddress` varchar(100) NOT NULL,
+  `Forder_status` tinyint(1) NOT NULL COMMENT '1:初始订单\r2:取消订单\r3:提现成功',
+  `Fcreate_time` int(11) DEFAULT NULL,
+  `Fupdate_time` int(11) DEFAULT NULL,
+  `Fremark` text,
+  PRIMARY KEY (`Forder_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `t_withdraw_order`
+--
+
+LOCK TABLES `t_withdraw_order` WRITE;
+/*!40000 ALTER TABLE `t_withdraw_order` DISABLE KEYS */;
+INSERT INTO `t_withdraw_order` VALUES ('1234123412312','user002',100.00,1,1,'13241234','cc',1,'1234','111','11','111','11',3,1483619081,1483451774,NULL),('123412341234','user001',100.00,1,1,'13241234','cc',1,'1234','111','11','111','11',3,1483619081,1483451774,NULL);
+/*!40000 ALTER TABLE `t_withdraw_order` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping routines for database 'ORDER_DB'
+--
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2017-01-14 22:17:59
