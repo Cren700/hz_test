@@ -10,7 +10,7 @@ class Wx extends HZ_Controller
 
     public function config()
     {
-        echo file_get_contents('/static/MP_verify_iBHavzn7sVRrz8zH.txt');
+        echo file_get_contents('./static/MP_verify_iBHavzn7sVRrz8zH.txt');
     }
 
 
@@ -63,6 +63,7 @@ class Wx extends HZ_Controller
 //解析json
         $user_obj = json_decode($res,true);
         $_SESSION['wx_user'] = $user_obj;
+        echo "你一定很牛逼";
         print_r($user_obj);
     }
 }
