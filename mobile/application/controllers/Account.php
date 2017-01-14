@@ -233,8 +233,6 @@ class Account extends HZ_Controller
 
         //解析json
         $user_obj = json_decode($res,true);
-echo $user_obj->openid;
-//        echo $user_obj = '{"openid":"o012hwRm8pIZDTkB_AUBFEsnmSW4","nickname":"Cren","sex":1,"language":"zh_CN","city":"惠州","province":"广东","country":"中国","headimgurl":"http:\/\/wx.qlogo.cn\/mmopen\/vMUEcG7d3MkloaLWAe6x6MfV89OkCjENAK5qicsqjDuxtsXdJ4rXYnXTFylYjrB50OxYdibaL1SIGftqyy7b5IYibwMMJicjibx6Y\/0","privilege":[]}';
 
         $user = $this->account_service_model->oauthLogin($user_obj['openid'], $user_obj['nickname'], $user_obj['headimgurl'], $type=1);
         echo json_encode_data($user);die;

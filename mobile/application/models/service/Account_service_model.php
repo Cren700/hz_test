@@ -92,7 +92,7 @@ class Account_service_model extends HZ_Model
             'imgurl' => $imgurl,
             'log_type' => $type
         );
-        $res = $this->myCurl('account', 'oauthLogin', $option, true);
+        $res = $this->myCurl('account', 'oauthLogin', $option, true); 
         if ($res['code'] == 0) {
             // 保存session
             $res['data']['url'] = getBaseUrl('/home.html');
