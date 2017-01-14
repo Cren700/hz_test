@@ -106,8 +106,8 @@ HZ.Product = (function() {
                 msg: "是否还原该产品?",
                 type: 'confirm',
                 btnConfirm: function(){
-                    var url = baseUrl + '/order/orderStatus.html';
-                    var data = {pid: _this.parents('tr').attr('rel')};
+                    var url = baseUrl + '/product/status.html';
+                    var data = {is_del: 0, pid: _this.parents('tr').attr('rel')};
                     HZ.Form.btnSubmit({
                         t: 'post',
                         u: url,
