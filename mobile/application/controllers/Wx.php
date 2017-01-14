@@ -10,7 +10,7 @@ class Wx extends HZ_Controller
 
     public function config()
     {
-        echo file_get_contents('/static/MP_verify_iBHavzn7sVRrz8zH.txt');
+        echo file_get_contents('./static/MP_verify_iBHavzn7sVRrz8zH.txt');
     }
 
 
