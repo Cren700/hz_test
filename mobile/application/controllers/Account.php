@@ -233,6 +233,8 @@ class Account extends HZ_Controller
 
         //解析json
         $user_obj = json_decode($res,true);
+
+        p($user_obj);
         
         $user = $this->account_service_model->oauthLogin($user_obj['openid'], $user_obj['nickname'], $user_obj['headimgurl'], $type=1);
         
