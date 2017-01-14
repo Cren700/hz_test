@@ -28,6 +28,7 @@ $config = array(
             'queryBlackList'        => '/info/queryBlackList',          // 黑名单列表
             'queryCapitalAccount'   => '/info/queryCapitalAccount',          // 黑名单列表
             'center'                => '/order/userCenter',         // 用户中心
+            'oauthLogin'            => '/account/oauthLogin',           // 第三方登录       
         ),
     ),
     'product' => array(
