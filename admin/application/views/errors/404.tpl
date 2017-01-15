@@ -24,8 +24,8 @@
                     <div class="widget-content">
                         <div class="error_ex">
                             <h1>404</h1>
-                            <h3>找不到相应的内容.</h3>
-                            <a class="btn btn-warning btn-big"  href="<{$uri}>">返回首页</a> </div>
+                            <h3><{if $msg}><{$msg}><{else}>找不到相应的内容.<{/if}></h3>
+                            <a class="btn btn-warning btn-big"  href="<{''|getBaseUrl}>">返回首页</a> </div>
                     </div>
                 </div>
             </div>

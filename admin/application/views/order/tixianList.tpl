@@ -26,7 +26,7 @@
         <tbody>
         <{foreach $info['list'] as $i}>
             <tr rel="<{$i['Forder_no']}>">
-                <td><{$i['Forder_no']}></td>
+                <td style="text-align: center"><{$i['Forder_no']}></td>
                 <td><{$i['Fuser_id']}></td>
                 <td><{$i['Famount']}></td>
                 <td><{$i['Fcard_name']}></td>

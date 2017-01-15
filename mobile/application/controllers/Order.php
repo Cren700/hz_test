@@ -80,7 +80,7 @@ class Order extends BaseControllor
         $id = $this->input->get('id', true);
         $res = $this->order_service->insCreate($id);
         if($res['code'] === 0) {
-            $this->jump(getBaseUrl('/order/wxpay.html?id='.$res['data']['Forder_sn']));
+            $this->jump(getBaseUrl('/order/wxpay.html?id='.$res['data']['Forder_no']));
         } else {
             $this->jump404($res['msg']);
         }
@@ -90,11 +90,12 @@ class Order extends BaseControllor
      * 微信支付
      * @param string $id
      */
-    public function wxpay($id)
+    public function wxpay($id ='')
     {
         $option = array(
-            'order_no' => isset($id) ? $id : $this->input->get('id'),
+            'order_no' => !empty($id) ? $id : $this->input->get('id'),
         );
+        echo "微信支付页面";
         p($option);
     }
 
@@ -107,9 +108,12 @@ class Order extends BaseControllor
             'order_no' => $this->input->get('id'),
         );
         $jsArr = array(
-
+            'jquery.Huploadify.js',
+            'order_claims.js'
         );
+        $cssArr = array('Huploadify.css');
         $this->smarty->assign('is_new', 1);
+        $this->smarty->assign('cssArr', $cssArr);
         $this->smarty->assign('Forder_no', $option['order_no']);
         $this->smarty->assign('jsArr', $jsArr);
         $this->smarty->display('order/claims.tpl');
@@ -137,10 +141,32 @@ class Order extends BaseControllor
             'order_no' => $this->input->get('id'),
             'user_id' => $this->_user_id
         );
+        $jsArr = array(
+            'jquery.Huploadify.js',
+            'order_claims.js'
+        );
+        $cssArr = array('Huploadify.css');
         $res = $this->order_service->claimsDetail($option);
+        $this->smarty->assign('cssArr', $cssArr);
+        $this->smarty->assign('jsArr', $jsArr);
         $this->smarty->assign('Forder_no', $option['order_no']);
         $this->smarty->assign('claims', isset($res['data']) ? $res['data'] : array());
         $this->smarty->display('order/claims.tpl');
+    }
+
+    /**
+     * 更新用户信息
+     */
+    public function updateClaims()
+    {
+        $option = $this->input->post();//提交的数据
+        $res = $this->order_service->updateClaims($option);
+        if ($res['code'] != 0) {
+            $this->jump404($res['msg']);
+        } else {
+            $url = getBaseUrl('/info/planList.html');
+            $this->jump($url);
+        }
     }
 
 }

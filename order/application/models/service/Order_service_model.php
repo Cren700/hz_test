@@ -62,6 +62,7 @@ class Order_service_model extends HZ_Model
             'Fproduct_price' => $product['Fproduct_price'],
             'Fproduct_tol_amt' => sprintf("%.2f", $product['Fproduct_price'] * $option['Fproduct_num']),
             'Fstore_id' => $product['Fstore_id'],
+            'Fstore_type' => $product['Fstore_type'],
             'Forder_type' => 1, //订单类型 1：购买 2：
             'Forder_status' => 1, //订单状态 1:初始订单 2:取消订单 3:支付成功 4:内部处理失败 5:渠道支付失败
             'Fcreate_time' => time(),
@@ -137,6 +138,7 @@ class Order_service_model extends HZ_Model
             'Fproduct_price' => $product['Fproduct_price'],
             'Fproduct_tol_amt' => sprintf("%.2f", $product['Fproduct_price'] * $cartInfo['Fproduct_num']),
             'Fstore_id' => $product['Fstore_id'],
+            'Fstore_type' => $product['Fstore_type'],
             'Forder_type' => 1, //订单类型 1：购买 2：
             'Forder_status' => 1, //订单状态 1:初始订单 2:取消订单 3:支付成功 4:内部处理失败 5:渠道支付失败
             'Fcreate_time' => time(),
@@ -199,11 +201,10 @@ class Order_service_model extends HZ_Model
         $page_size = $option['page_size'] ? : 10;
         $res['data']['count'] = $this->order_dao->orderNum($where, $like);
         $orderList = $this->order_dao->orderList($where, $like, $page, $page_size);
-        foreach ($orderList as $l)
+        foreach ($orderList as &$l)
         {
-            $where = array('id' => $l['Fstore_id'], 'type' => 'admin');
-            $user_info = $this->myCurl('account', 'detail', $where);
-            $l['Fstore_name'] = $user_info['data']['Fuser_id'];
+            $user_info = $this->myCurl('account', 'getStoreName', array('id' => $l['Fstore_id'], 'type' => $l['Fstore_type']), false);
+            $l['Fstore_name'] = isset($user_info['data']['Fuser_id']) ? $user_info['data']['Fuser_id'] : '';
         }
         $res['data']['list'] = $orderList;
         return $res;
@@ -353,7 +354,7 @@ class Order_service_model extends HZ_Model
     /**
      * 后台提现查询
      */
-    public function queryClaim($option)
+    public function queryClaims($option)
     {
         $res = array('code' => 0);
         $like = array();
@@ -384,6 +385,11 @@ class Order_service_model extends HZ_Model
         $page_size = $option['page_size'] ? : 10;
         $res['data']['count'] = $this->order_dao->claimOrderNum($where, $like);
         $orderList = $this->order_dao->claimOrderList($where, $like, $page, $page_size);
+        foreach ($orderList as &$l)
+        {
+            $user_info = $this->myCurl('account', 'getStoreName', array('id' => $l['Fstore_id'], 'type' => $l['Fstore_type']), false);
+            $l['Fstore_name'] = isset($user_info['data']['Fuser_id']) ? $user_info['data']['Fuser_id'] : '';
+        }
         $res['data']['list'] = $orderList;
         return $res;
     }
@@ -440,7 +446,7 @@ class Order_service_model extends HZ_Model
             $ret['code'] = 'system_error_2'; // 无信息
             return $ret;
         }
-        $orderList = $this->order_dao->getOderListByUid($option);
+        $orderList = $this->order_dao->getOderListByUid(array('o.Fuser_id' => $option['Fuser_id']));
         foreach ($orderList as &$list) {
             $product = $this->myCurl('product', 'getProductByPid', array('product_id' => $list['Fproduct_id']));
             $list['Fcoverimage'] = $product['data']['Fcoverimage'];
@@ -497,6 +503,39 @@ class Order_service_model extends HZ_Model
         $order_data['Fdescription'] = $product['data']['Fdescription'];
         $ret['data'] = $order_data;
         return $ret;
+    }
+
+    public function getClaimsDetailByFid($option)
+    {
+        $ret = array('code' => 0);
+        if (!$option['Fid']) {
+            $ret['code'] = 'order_error_11';
+            return $ret;
+        }
+        $claims_data = $this->order_dao->getClaimsDetailByFid($option);
+        if (!$claims_data) {
+            $ret['code'] = 'order_error_11';
+            return $ret;
+        }
+        $ret['data'] = $claims_data;
+        return $ret;
+    }
+
+    public function updateClaims($option)
+    {
+        $ret = array('code' => 0);
+        if (!$option['Fid']) {
+            $ret['code'] = 'order_error_11';
+            return $ret;
+        }
+        $where = array('Fid' => $option['Fid']);
+        unset($option['Fid']);
+        $res = $this->order_dao->updateClaims($where, $option);
+        if (!$res) {
+            $ret['code'] = 'order_error_12';
+        }
+        return $ret;
+
     }
 
 

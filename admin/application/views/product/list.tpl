@@ -28,7 +28,7 @@
                 <td><{$i['Fproduct_id']}></td>
                 <td><a href="<{"/product/detail/"|cat:$i['Fproduct_id']|getBaseUrl}>" title="<{$i['Fproduct_name']}>"><{$i['Fproduct_name']}></a></td>
                 <td><{$cate[$i['Fcategory_id']]}></td>
-                <td><{$i['Fstore_id']}></td>
+                <td><{$i['Fstore_name']}></td>
                 <td><{$i['Fproduct_num']}></td>
                 <td><{$i['Fproduct_price']}></td>
                 <td><{'Y-m-d H:i'|date:$i['Fcreate_time']}></td>

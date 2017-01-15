@@ -119,6 +119,7 @@ class Product extends BaseControllor
             'is_new' => $this->input->post('is_new'),
             'product_id' => $this->input->post('product_id'),
             'store_id' => $this->_uid,
+            'store_type' => 0, //后台类型为0
             'product_name' => $this->input->post('product_name'),
             'product_num' => $this->input->post('product_num'),
             'product_price' => $this->input->post('product_price'),

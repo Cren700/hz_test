@@ -55,6 +55,7 @@ class Product extends HZ_Controller
     {
         $data = array(
             'Fstore_id' => $this->input->post('store_id'),
+            'Fstore_type' => $this->input->post('store_type'),
             'Fproduct_name' => $this->input->post('product_name'),
             'Fproduct_price' => $this->input->post('product_price'),
             'Fproduct_num' => $this->input->post('product_num'),
@@ -88,6 +89,7 @@ class Product extends HZ_Controller
         $where = array('Fproduct_id' => $this->input->post('product_id'));
         $data = array(
             'Fstore_id' => $this->input->post('store_id'),
+            'Fstore_type' => $this->input->post('store_type'),
             'Fproduct_name' => $this->input->post('product_name'),
             'Fproduct_price' => $this->input->post('product_price'),
             'Fproduct_num' => $this->input->post('product_num'),

@@ -35,15 +35,42 @@ HZ.Order = (function() {
                 btnConfirm: function(){
                     var url = baseUrl + '/order/claimOrderStatus.html';
                     var status = _this.data('status');
-                    var data = {status: status, id: _this.parents('tr').attr('rel')};
+                    var id = _this.parents('tr').attr('rel');
+                    var data = {status: status, id: id};
                     HZ.Form.btnSubmit({
                         t: 'post',
                         u: url,
                         e: _this,
                         d: data,
                         callback: function(){
-                            _this.parents('tr').find('.js-order-status').text(_changeStatus);
-                            _this.parent('td').children().remove();
+                            var _p = _this.parent();
+                            var s1 = '\
+                                <a href="'+baseUrl+'/order/claimsDetail.html?id="'+id+'>编辑</a>\
+                                <button class="btn btn-danger btn-mini js-btn-cancel" data-status="2">理赔失败</button>\
+                                <button class="btn btn-success btn-mini js-btn-success" data-status="3">已完成</button>';
+                            var s2 = '\
+                                <a href="'+baseUrl+'/order/claimsDetail.html?id="'+id+'>编辑</a>\
+                                <button class="btn btn-danger btn-mini js-btn-cancel" data-status="1">重启订单</button>';
+                            var s3 = '\
+                                <a href="'+baseUrl+'/order/claimsDetail.html?id="'+id+'>编辑</a>\
+                                <button class="btn btn-danger btn-mini js-btn-cancel" data-status="1">重启订单</button>';
+                            console.log(status);
+                            switch (status){
+                                case 1:
+                                    _this.parents('tr').find('.js-order-status').text('理赔中');
+                                    _p.html(s1);
+                                    break;
+                                case 2:
+                                    _this.parents('tr').find('.js-order-status').text('理赔失败');
+                                    _p.html(s2);
+                                    break;
+                                case 3:
+                                    _this.parents('tr').find('.js-order-status').text('理赔完成');
+                                    _p.html(s3);
+                                    break;
+                                default:
+                                    break;
+                            }
                         }
                     });
                 }
@@ -60,7 +87,7 @@ HZ.Order = (function() {
             status = $('select[name="status"]').val();
         p = p ? p : 1;
         $.ajax({
-            url: baseUrl+'/order/queryClaim',
+            url: baseUrl+'/order/queryClaims',
             data: {p: p, min_date: min_date, max_date: max_date, order_no: order_no, user_id: user_id, status: status},
             dataType: 'HTML',
             type: 'GET',

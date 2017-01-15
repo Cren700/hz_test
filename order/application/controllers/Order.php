@@ -171,14 +171,21 @@ class Order extends BaseController
         );
         $res = $this->order_service->claimsDetail($option);
         echo outputResponse($res);
-
     }
 
+    public function getClaimsDetailByFid()
+    {
+        $option =array(
+            'Fid' => $this->input->get('id')
+        );
+        $res = $this->order_service->getClaimsDetailByFid($option);
+        echo outputResponse($res);
+    }
 
     /**
      * 理赔查询
      */
-    public function queryClaim()
+    public function queryClaims()
     {
         $option = array(
             'p' => $this->input->get('p', true) ? : 1 ,
@@ -189,7 +196,24 @@ class Order extends BaseController
             'Fuser_id' => $this->input->get('user_id', true),
             'Fstatus' => $this->input->get('status', true),
         );
-        $res = $this->order_service->queryClaim($option);
+        $res = $this->order_service->queryClaims($option);
+        echo outputResponse($res);
+    }
+    
+    public function updateClaims()
+    {
+        $option = array(
+            'Fid' => $this->input->post('claims_id', true),
+            'Freal_name' => $this->input->post('real_name', true),
+            'Fidentity' => $this->input->post('identity', true),
+            'Fphone' => $this->input->post('phone', true),
+            'Fletter_auth_path' => $this->input->post('letter_auth_path', true),
+            'Freason' => $this->input->post('reason', true),
+            'Famount' => $this->input->post('amount', true),
+            'Fremark' => $this->input->post('remark', true),
+            'Fevidence' => $this->input->post('evidence', true),
+        );
+        $res = $this->order_service->updateClaims($option);
         echo outputResponse($res);
     }
 
@@ -203,6 +227,8 @@ class Order extends BaseController
         echo outputResponse($res);
     }
 
+
+
     // 订单统计
     public function querySaleStat()
     {
@@ -215,5 +241,7 @@ class Order extends BaseController
         $res = $this->order_service->querySaleStat($option);
         echo outputResponse($res);
     }
+
+
 
 }

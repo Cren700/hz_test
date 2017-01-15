@@ -50,9 +50,9 @@
             <p>个人地址</p>
             <span><{$user['Fprovince']|default:''}><{$user['Fcity']|default:''}><{$user['Faddress']|default:''}></span>
         </div>
-        <div class="set_item">
+        <div class="set_item" <{if $user['Fannex_path']}>style='height:3rem'<{/if}>>
             <p>证件照片</p>
-            <span ><img style="width: 1.2rem; height: 0.8rem;" src="<{$user['Fannex_path']|default:''}>" alt=""></span>
+            <span ><img style="<{if $user['Fannex_path']}>width: 2.5rem; height: 2rem;<{/if}>" src="<{$user['Fannex_path']|default:''}>" alt=""></span>
         </div>
         <div class="set_item">
             <p>实名认证状态</p>

@@ -55,7 +55,12 @@ class Product_service_model extends HZ_Model
         $page = $option['p'] ? : 1;
         $page_size = $option['page_size'];
         $res['data']['count'] = $this->product_dao->productNum($where, $like, $where_in);
-        $res['data']['list'] = $this->product_dao->productList($where, $like, $where_in, $page, $page_size);
+        $product_list = $this->product_dao->productList($where, $like, $where_in, $page, $page_size);
+        foreach ($product_list as &$list) {
+            $user_info = $this->myCurl('account', 'getStoreName', array('id' => $list['Fstore_id'], 'type' => $list['Fstore_type']), false);
+            $list['Fstore_name'] = isset($user_info['data']['Fuser_id']) ? $user_info['data']['Fuser_id'] : '';
+        }
+        $res['data']['list'] = $product_list;
 
         return $res;
     }
@@ -124,6 +129,7 @@ class Product_service_model extends HZ_Model
         }
         $product = array(
             'Fstore_id' => $data['Fstore_id'],
+            'Fstore_type' => $data['Fstore_type'],
             'Fproduct_name' => $data['Fproduct_name'],
             'Fproduct_price' => $data['Fproduct_price'],
             'Fproduct_num' => $data['Fproduct_num'],
@@ -295,6 +301,7 @@ class Product_service_model extends HZ_Model
         }
         $product = array(
             'Fstore_id' => $data['Fstore_id'],
+            'Fstore_type' => $data['Fstore_type'],
             'Fproduct_name' => $data['Fproduct_name'],
             'Fproduct_price' => $data['Fproduct_price'],
             'Fproduct_num' => $data['Fproduct_num'],

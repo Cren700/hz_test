@@ -171,7 +171,7 @@ function picLazy(threshold) {//延时加载
     if (threshold) {
         _threshold = threshold;
     }
-    $("img[data-original]").picLazyLoad({ threshold: _threshold });
+    // $("img[data-original]").picLazyLoad({ threshold: _threshold });
 
 }
 

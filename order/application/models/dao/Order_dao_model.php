@@ -92,7 +92,11 @@ class Order_dao_model extends HZ_Model
 
     public function getOderListByUid($where)
     {
-        $res = $this->o_db->select('*')->get_where($this->_order_table, $where)->result_array();
+        $res = $this->o_db->select('o.*, c.Fstatus as claims_status')
+            ->join($this->_claim_table . ' as c', 'c.Forder_no = o.Forder_no', 'left')
+            ->order_by('o.Fcreate_time DESC')
+            ->get_where($this->_order_table . ' as o', $where)
+            ->result_array();
         return filterData($res);
     }
     
@@ -235,6 +239,20 @@ class Order_dao_model extends HZ_Model
             ->get();
         $res = $query->result_array();
         return filterData($res);
+    }
+
+    public function getClaimsDetailByFid($where)
+    {
+        dbEscape($where);
+        $res = $this->o_db->get_where($this->_claim_table, $where)->row_array();
+        return filterData($res);
+    }
+
+    public function updateClaims($where, $option)
+    {
+        dbEscape($option);
+        dbEscape($where);
+        return $this->o_db->update($this->_claim_table, $option, $where);
     }
 
 }

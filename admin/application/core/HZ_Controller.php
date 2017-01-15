@@ -64,9 +64,9 @@ class HZ_Controller extends CI_Controller
         exit();
     }
 
-    public function jump404()
+    public function jump404($msg ='')
     {
-        $this->jump(getBaseUrl('/404.html'));
+        $this->jump(getBaseUrl('/404.html?msg='.$msg));
         exit();
     }
 
@@ -221,7 +221,7 @@ class HZ_Controller extends CI_Controller
                     array(
                         'selected'  => '0',
                         'name'      => '理赔列表',
-                        'flagName'  => 'claim',
+                        'flagName'  => 'claims',
                     )
                 )
             ),

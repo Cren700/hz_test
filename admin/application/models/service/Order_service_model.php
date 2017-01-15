@@ -34,13 +34,23 @@ class Order_service_model extends HZ_Model
         return $this->myCurl($this->_api, 'txOrderStatus', $option, true);
     }
 
-    public function queryClaim($data)
+    public function queryClaims($data)
     {
-        return $this->myCurl($this->_api, 'queryClaim', $data, false);
+        return $this->myCurl($this->_api, 'queryClaims', $data, false);
     }
 
     public function claimOrderStatus($option)
     {
         return $this->myCurl($this->_api, 'claimOrderStatus', $option, true);
+    }
+
+    public function claimsDetail($option)
+    {
+        return $this->myCurl($this->_api, 'getClaimsDetailByFid', $option);
+    }
+
+    public function updateClaims($option)
+    {
+        return $this->myCurl($this->_api, 'updateClaims', $option, true);
     }
 }

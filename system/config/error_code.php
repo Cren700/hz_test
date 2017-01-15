@@ -76,6 +76,8 @@ $config = array(
     'order_error_8' => array( 'code' => 50008, 'msg' => '没有该订单信息'),                // 没有该订单信息
     'order_error_9' => array( 'code' => 50009, 'msg' => '保存理赔订单出错'),                // 保存理赔订单出错
     'order_error_10' => array( 'code' => 50010, 'msg' => '理赔已经处理中，请稍等'),                // 已经理赔处理中，请稍等
+    'order_error_11' => array( 'code' => 50011, 'msg' => '理赔单获取失败'),                // 理赔单获取失败
+    'order_error_12' => array( 'code' => 50012, 'msg' => '理赔单更新失败'),                // 理赔单更新失败
 
 
     // promo 60000 ~ 69999

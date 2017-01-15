@@ -205,4 +205,15 @@ class Account extends BaseController {
         $res = $this->account_service->oauthLogin($option);
         echo outputResponse($res);
     }
+
+    /**
+     * 获取商家名称
+     */
+    public function getStoreName()
+    {
+        // type 0:后台,1:商户
+        $option = array('Fid' => $this->input->get('id'), 'type' => $this->input->get('type'));
+        $res = $this->account_service->getStoreName($option);
+        echo outputResponse($res);
+    }
 }

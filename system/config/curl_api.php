@@ -28,7 +28,8 @@ $config = array(
             'queryBlackList'        => '/info/queryBlackList',          // 黑名单列表
             'queryCapitalAccount'   => '/info/queryCapitalAccount',          // 黑名单列表
             'center'                => '/order/userCenter',         // 用户中心
-            'oauthLogin'            => '/account/oauthLogin',           // 第三方登录       
+            'oauthLogin'            => '/account/oauthLogin',           // 第三方登录   
+            'getStoreName'          => '/account/getStoreName',         // 获取商家名称    
         ),
     ),
     'product' => array(
@@ -105,10 +106,12 @@ $config = array(
             'txOrderStatus'           => '/order/txOrderStatus',        // 更改订单状态
             'saveClaims'            => '/order/saveClaims',              // 保存理赔订单
             'claimsDetail'          => '/order/claimsDetail',            // 获取理赔订单    
-            'queryClaim'            => '/order/queryClaim',              // 查询理赔订单
+            'queryClaims'            => '/order/queryClaims',              // 查询理赔订单
             'claimOrderStatus'      => '/order/claimOrderStatus',        // 更改理赔订单状态
             'queryOrderStat'        => '/order/queryOrderStat',     // 订单统计
             'querySaleStat'         => '/order/querySaleStat',      // 销售统计
+            'getClaimsDetailByFid'           => '/order/getClaimsDetailByFid',        // 获取理赔单
+            'updateClaims'          => '/order/updateClaims',       // 更新理赔单
         ),
     ),
     //广告模块CURL连接

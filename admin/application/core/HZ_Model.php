@@ -59,7 +59,7 @@ class HZ_Model extends CI_Model
 
         $res = curl_exec($ch);
         // if($control == "updateProduct")
-        // if($control == "queryClaim")
+        // if($control == "updateClaims")
         // {
         //     echo $res;die;
         // }

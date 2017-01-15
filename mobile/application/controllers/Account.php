@@ -110,12 +110,12 @@ class Account extends HZ_Controller
     public function modify()
     {
         $jsArr = array(
-            'uploadify/jquery.uploadify.min.js',
+            'jquery.min.js',
+            'jquery.Huploadify.js',
             'account_modify.js'
         );
-        $cssArr = array('uploadify.css');
+        $cssArr = array('Huploadify.css');
         $info = $this->user_service_model->detail();
-//        p($info);
         $this->smarty->assign('jsArr', $jsArr);
         $this->smarty->assign('cssArr', $cssArr);
         $this->smarty->assign('user', $info['data']);

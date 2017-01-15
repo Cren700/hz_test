@@ -316,4 +316,17 @@ class Account_service_model extends HZ_Model
         }
         return $ret;
     }
+
+    public function getStoreName($option)
+    {
+        $ret = array('code' => 0);
+        $type = $option['type'] == 0 ? 'admin' : 'user';
+        unset($option['type']);
+        $res = $this->account_dao_model->getInfoByOp($option, $type);
+        if ($res) {
+            $ret['data'] = $res;
+        }
+        return $ret;
+    }
+
 }

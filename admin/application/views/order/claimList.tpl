@@ -17,7 +17,6 @@
             <th>电话号码</th>
             <th>产品ID</th>
             <th>理赔金额</th>
-            <th>授权书</th>
             <th>原因</th>
             <th>提供证据</th>
             <th>商户名称</th>
@@ -30,24 +29,27 @@
         <tbody>
         <{foreach $info['list'] as $i}>
             <tr rel="<{$i['Fid']}>">
-                <td><{$i['Fid']}></td>
+                <td style="text-align: center"><{$i['Fid']}></td>
                 <td><{$i['Fuser_id']}></td>
                 <td><{$i['Freal_name']}></td>
                 <td><{$i['Fidentity']}></td>
                 <td><{$i['Fphone']}></td>
                 <td><{$i['Fproduct_id']}></td>
                 <td><{$i['Famount']}></td>
-                <td><{$i['Fletter_auth_path']}></td>
                 <td><{$i['Freason']}></td>
                 <td><{$i['Fevidence']}></td>
-                <td><{$i['Fstore_id']}></td>
-                <td class="js-order-status"><{if $i['Fstatus'] eq 1}>初始订单<{elseif $i['Fstatus'] eq 2}>处理中<{elseif $i['Fstatus'] eq 3}>已完成<{/if}></td>
+                <td><{$i['Fstore_name']}></td>
+                <td class="js-order-status"><{if $i['Fstatus'] eq 1}>理赔中<{elseif $i['Fstatus'] eq 2}>理赔失败<{elseif $i['Fstatus'] eq 3}>理赔完成<{/if}></td>
                 <td><{'y-m-d H:i'|date:$i['Fcreate_time']}></td>
                 <td><{$i['Fremark']}></td>
                 <td>
                     <{if $i['Fstatus'] eq 1}>
-                        <button class="btn btn-danger btn-mini js-btn-cancel" data-status="2">处理中</button>
+                        <a href="<{'/order/claimsDetail.html?id='|cat:$i['Fid']|getBaseUrl}>">编辑</a>
+                        <button class="btn btn-danger btn-mini js-btn-cancel" data-status="2">理赔失败</button>
                         <button class="btn btn-success btn-mini js-btn-success" data-status="3">已完成</button>
+                    <{else}>
+                        <a href="<{'/order/claimsDetail.html?id='|cat:$i['Fid']|getBaseUrl}>">编辑</a>
+                        <button class="btn btn-danger btn-mini js-btn-cancel" data-status="1">重启订单</button>
                     <{/if}>
                 </td>
             </tr>

@@ -54,25 +54,22 @@
         <div class="file_box box">
             <label>头像 :</label>
             <input type="hidden" value="<{$user['Fimage_path']|default:''}>" name="image_path" class="js-img-path">
-            <input type="file" id="file_upload">
-            <button>删除</button>
+            <div class="button" id="image_path"></div>
+            <img src="<{$user['Fimage_path']|default:''}>" class="js-img-show" style="<{if !$user['Fimage_path']}>display:none;<{/if}>" alt="">
         </div>
         <div class="file_box box">
             <label>证件照片 :</label>
             <input type="hidden" value="<{$user['Fannex_path']|default:''}>" name="annex_path" class="js-img-path">
-            <a href="javascript:;" class="file">选择文件
-                <input type="file" name="" id="file_upload2">
-            </a>
-            <button>删除</button>
+            <div class="button" id="annex_path"></div>
+            <img src="<{$user['Fannex_path']|default:''}>" class="js-img-show" style="<{if !$user['Fannex_path']}>display:none;<{/if}>" alt="">
         </div>
-
+        <hr/>
         <div class="submit_box box">
             <button id="js-btn-submit">提交</button>
         </div>
     </form>
 </div>
 
-<script type="text/javascript" src="<{"jquery-3.1.1.min.js"|baseJsUrl}>"></script>
 <{include file="public/no_nav_footer.tpl"}>
 </body>
 </html>

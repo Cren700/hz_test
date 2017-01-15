@@ -67,4 +67,9 @@ class Order_service_model extends HZ_Model
         return $this->myCurl($this->_host, 'claimsDetail', $option);
     }
 
+    public function updateClaims($option)
+    {
+        return $this->myCurl($this->_host, 'updateClaims', $option, true);
+    }
+
 }

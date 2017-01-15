@@ -2675,21 +2675,28 @@ label#lblSelect::after {
     width: 2rem;
     display: inline;
 }
-.file_box button {
+.file_box .button {
+    display: inline-block;
     vertical-align: middle;
     width: 2rem;
     height: 1rem;
     line-height: 0.25641rem;
     background: #7bd6ff;
-    color: #fff;
+    color: #fff !important;
     border: 0;
     border-radius: 3px;
     margin-left: 0.21368rem; }
-
+.file_box img{
+    height: 3rem;
+    width: 3rem;
+    margin-left: 2.2rem;
+    margin-top: 0.2rem;
+}
 .submit_box {
     width: 2rem;
     height: 1rem;
     margin: 0 auto;
+    border-top: 1px solid #ceced2
 }
 .submit_box button{
     width: 2rem;
@@ -2697,7 +2704,7 @@ label#lblSelect::after {
     vertical-align: middle;
     line-height: 0.25641rem;
     background: red;
-    color: #fff;
+    color: #fff !important;
     border: 0;
     border-radius: 3px;
 }
