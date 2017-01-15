@@ -6,83 +6,74 @@
  * Date: 16/7/9
  * Time: 上午11:16
  */
-class Account_service_model extends MY_Model
+class Account_service_model extends HZ_Model
 {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('dao/account_dao_model');
     }
 
-    public function addAccount($username, $pwd, $table_type, $role_type)
+    public function add($user_id, $passwd)
     {
-        // 数据验证
-        $validationConfig = array(
-            array(
-                'value' => $username,
-                'rules' => 'required|min_length[4]|max_length[16]',
-                'field' => '用户名'
-            ),
-            array(
-                'value' => $pwd,
-                'rules' => 'required|min_length[6]|max_length[16]',
-                'field' => '密码'
-            ),
-            array(
-                'value' => $table_type,
-                'rules' => 'required',
-                'field' => '表类别'
-            ),
+        $data = array(
+            'user_id'   => $user_id,
+            'passwd'    => $passwd,
         );
-        foreach ($validationConfig as $v) {
-            $resValidation = validationData($v['value'], $v['rules'], $v['field']);
-            if (!empty($resValidation)) {
-                return $resValidation;
-            }
+        $res = $this->myCurl('account', 'addAccount', $data, true);
+        if ($res['code'] == 0) {
+            // 保存session
+            $res['data']['url'] = getBaseUrl('/home.html');
+            $session = array('w_uid' => $res['data']['Fid'], 'w_username' => $res['data']['Fuser_id'], 'w_type' => $res['data']['Fuser_type']);
+            $this->session->set_userdata($session);
         }
-
-        $hasUsername = $this->account_dao_model->getInfoByUsername($username, $role_type);
-        if( $hasUsername ) {
-            return array('code' => 'account_error_2'); // 用户名已存在
-        }
-        $salt = saltCode();
-        $pwdCode = encodePwd($table_type, $salt, $pwd);
-        if ($this->account_dao_model->addAccount($username, $pwdCode, $table_type, $role_type, $salt) ){
-            return array('code' => 0);
-        } else {
-            return array('code' => 'account_error_3');
-        }
+        return $res;
     }
 
-    public function accountLogin($username, $pwd, $table_type)
+    /**
+     * 登录
+     * @param $user_id
+     * @param $passwd
+     * @return array
+     */
+    public function login($user_id, $passwd)
     {
-        // 数据验证
-        $validationConfig = array(
-            array(
-                'value' => $username,
-                'rules' => 'required|min_length[4]|max_length[16]',
-                'field' => '用户名'
-            ),
-            array(
-                'value' => $pwd,
-                'rules' => 'required|min_length[6]|max_length[16]',
-                'field' => '密码'
-            ),
+        $post_data = array('user_id' => $user_id, 'passwd' => $passwd);
+        $res = $this->myCurl('account', 'login', $post_data, true);
+        if ($res['code'] == 0) {
+            // 保存session
+            $res['data']['url'] = getBaseUrl('/home.html');
+            $session = array('m_uid' => $res['data']['uid'], 'm_username' => $res['data']['username'], 'm_type' => $res['data']['user_type']);
+            $this->session->set_userdata($session);
+        }
+        return $res;
+    }
+
+    /**
+     * 修改密码
+     */
+    public function modifyPwd($passwd, $new_passwd, $re_passwd)
+    {
+        $res = array(
+            'code' => 0
         );
-        foreach ($validationConfig as $v) {
-            $resValidation = validationData($v['value'], $v['rules'], $v['field']);
-            if (!empty($resValidation)) {
-                return $resValidation;
+        if ($new_passwd !== $re_passwd) {
+            $res['code'] = -1;  // 密码输入不一致
+            $res['msg'] = '新密码输入不一致';
+        } elseif($new_passwd === $passwd) {
+            $res['code'] = -2;  // 新密码与旧密码一样
+            $res['msg'] = '新密码与旧密码一样';
+        } else {
+            $data = array(
+                'user_id' => $this->_user_id,
+                'passwd' => $passwd,
+                'new_passwd' => $new_passwd
+            );
+            $res = $this->myCurl('account', 'modifyPwd', $data, true);
+            if ($res['code'] == 0) {
+                $res['data']['url'] = getBaseUrl('/home.html');
             }
         }
-        $info = $this->account_dao_model->getInfoByUsername($username, $table_type);
-        if (!$info) return array('code' => 'account_error_0'); // 账户不存在
-        $pwdCode = encodePwd(0, $info['salt'], $pwd);
-        if ($info['pwd'] !== $pwdCode) {
-            return array('code' => 'account_error_1');         // 账户密码不一致
-        } else {
-            return array('code' => 0);
-        }
+        return $res;
     }
 
 }
