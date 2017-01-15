@@ -190,7 +190,7 @@ class Account extends HZ_Controller
     {
         $this->config->load('wx_conf');
         $state  = md5(uniqid(rand(), TRUE));
-        $this->session->set_userdata(array('state' => $state));
+        $this->session->set_userdata(array('wx_state' => $state));
         $appid = $this->config->item('appid');
         $bakUrl = $this->config->item('log_bak_url');
         $url = 'https://open.weixin.qq.com/connect/qrconnect?appid='.$appid.'&redirect_uri='.$bakUrl.'&response_type=code&scope=snsapi_login&state='.$state.'#wechat_redirect';
