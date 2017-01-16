@@ -244,10 +244,10 @@ class Account extends HZ_Controller
         }
         for($i = 0; $i<3;){
             // 保存短信消息
-            $result = json_encode_data(sms($to, $data, $tempID));
-            $resultCode = $result['statusCode'];
-            $resultMsgId = $result['smsMessageSid'];
-            $createTime = strtotime($result['dateCreated']);
+            $result = sms($to, $data, $tempID);
+            $resultCode = isset($result->statusCode) ? $result->statusCode : '';
+            $resultMsgId = isset($result->smsMessageSid) ? $result->smsMessageSid : '';
+            $createTime = isset($result->statusCode) ? $result->statusCode : '';
             $endTime = $createTime+5*60;
             // 保存发送短信消息
             if ($resultCode != 0) {
