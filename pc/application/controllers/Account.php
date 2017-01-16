@@ -245,18 +245,20 @@ class Account extends HZ_Controller
         for($i = 0; $i<3;){
             // 保存短信消息
             $result = sms($to, $data, $tempID);
-            $resultCode = isset($result->statusCode) ? $result->statusCode : '';
-            $resultMsgId = isset($result->smsMessageSid) ? $result->smsMessageSid : '';
-            $createTime = isset($result->statusCode) ? $result->statusCode : '';
+            $resultCode = $result['statusCode'];
+            $resultMsgId = $result['smsMessageSid'];
+            $createTime = strtotime($result['dateCreated']);
             $endTime = $createTime+5*60;
             // 保存发送短信消息
             if ($resultCode != 0) {
                 $i++;
-                $this->account_service_model->saveVerifySms($resultCode = 1, $resultMsgId, $createTime, $content, $to);
+                $res = $this->account_service_model->saveVerifySms($resultCode = 1, $resultMsgId, $createTime, $content, $to);
+                echo 'wrong';var_dump($res);
             } else {
                 // 保存验证码
                 $this->account_service_model->saveVerifyCode($createTime, $endTime, $code);
-                $this->account_service_model->saveVerifySms($resultCode = 2, $resultMsgId, $createTime, $content, $to);
+                $res = $this->account_service_model->saveVerifySms($resultCode = 2, $resultMsgId, $createTime, $content, $to);
+                echo 'wrong';var_dump($res);
                 break;
             }
         }
@@ -266,7 +268,7 @@ class Account extends HZ_Controller
     {
         $jsArr = array('account_login.js');
         $this->smarty->assign('jsArr', $jsArr);
-        $this->smarty->display('account/index.tpl');
+        $this->smarty->display('account/phonePage.tpl');
     }
 
     /**

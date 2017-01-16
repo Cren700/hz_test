@@ -383,15 +383,26 @@ function sms($to,$datas,$tempId = 1)
 
     // 发送模板短信
     $result = $rest->sendTemplateSMS($to,$datas,$tempId);
-    return $result;
-//    if($result == NULL ) {
-//        echo "result error!";
-//    }
-//    if($result->statusCode!=0) {
-//        //TODO 添加错误处理逻辑
-//        return false;
-//    }else{
-//        //TODO 添加成功处理逻辑
-//        return true;
-//    }
+
+    $res = array(
+        'statusCode' => null,
+        'dateCreated' => null,
+        'statusMsg' => null,
+        'smsMessageSid' => null
+    );
+    if($result == NULL ) {
+        return $res;
+    }
+    if($result->statusCode!=0) {
+        //TODO 添加错误处理逻辑
+        $res['statusCode'] = $result->statusCode;
+        $res['statusMsg'] = $result->statusMsg;
+    }else{
+        //TODO 添加成功处理逻辑
+        // 获取返回信息
+        $smsmessage = $result->TemplateSMS;
+        $res['dateCreated'] = $smsmessage->dateCreated;
+        $res['smsMessageSid'] = $smsmessage->smsMessageSid;
+    }
+    return $res;
 }
