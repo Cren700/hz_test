@@ -252,14 +252,36 @@ class Account extends HZ_Controller
             // 保存发送短信消息
             if ($resultCode != 0) {
                 $i++;
-                $this->account_service->saveVerifySms($resultCode = 1, $resultMsgId, $createTime, $content, $to);
+                $this->account_service_model->saveVerifySms($resultCode = 1, $resultMsgId, $createTime, $content, $to);
             } else {
                 // 保存验证码
-                $this->account_service->saveVerifyCode($createTime, $endTime, $code);
-                $this->account_service->saveVerifySms($resultCode = 2, $resultMsgId, $createTime, $content, $to);
+                $this->account_service_model->saveVerifyCode($createTime, $endTime, $code);
+                $this->account_service_model->saveVerifySms($resultCode = 2, $resultMsgId, $createTime, $content, $to);
                 break;
             }
         }
+    }
+
+    public function phonePage()
+    {
+        $jsArr = array('account_login.js');
+        $this->smarty->assign('jsArr', $jsArr);
+        $this->smarty->display('account/index.tpl');
+    }
+
+    /**
+     * 密码登录接口
+     */
+    public function doPhoneLogin()
+    {
+        $user_id = $this->input->post('user_id');
+        $passwd = $this->input->post('passwd');
+        $uri = $this->input->post('uri');
+        $res = $this->account_service_model->login($user_id, $passwd);
+        if ($res['code'] === 0) {
+            $res['data']['url'] = $uri ? HOST_URL . $uri : getBaseUrl('/home.html');
+        }
+        echo json_encode_data($res);
     }
 
 }
