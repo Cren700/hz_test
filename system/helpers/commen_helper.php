@@ -401,10 +401,9 @@ function sms($to,$datas,$tempId = 1)
         //TODO 添加成功处理逻辑
         // 获取返回信息
         $smsmessage = json_encode($result->TemplateSMS);
-        echo $smsmessage;
         $res['statusCode'] = 0;
-        $res['dateCreated'] = $smsmessage['dateCreated'][0];
-        $res['smsMessageSid'] = $smsmessage['smsMessageSid'][0];
+        $res['dateCreated'] = $smsmessage['dateCreated'];
+        $res['smsMessageSid'] = $smsmessage['smsMessageSid'];
     }
     return $res;
 }
