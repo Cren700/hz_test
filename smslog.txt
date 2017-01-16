@@ -1,0 +1,7 @@
+request body = <TemplateSMS>
+                    <to>13631255371</to> 
+                    <appId>8a216da85982d9da0159836922200044</appId>
+                    <templateId>1</templateId>
+                    <datas><data>768070</data><data>5</data></datas>
+                  </TemplateSMS>
+request url = https://app.cloopen.com:8883/2013-12-26/Accounts/8a216da85982d9da015983691c00003d/SMS/TemplateSMS?sig=894CB82860F7947DDD57A8E6137EF09E

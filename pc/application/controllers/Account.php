@@ -245,6 +245,7 @@ class Account extends HZ_Controller
         for($i = 0; $i<3;){
             // 保存短信消息
             $result = sms($to, $data, $tempID);
+            echo json_encode($result);
             $resultCode = $result['statusCode'];
             $resultMsgId = $result['smsMessageSid'];
             $createTime = strtotime($result['dateCreated']);
