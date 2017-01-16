@@ -176,6 +176,7 @@
         </div>
         <div class="layer_close">&nbsp;</div>
     </div>
+    <input type="hidden" name="cate_id" value="<{$cate_id}>">
 </div>
 <{include file='public/footer.tpl'}>
 </body>

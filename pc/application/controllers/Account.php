@@ -16,7 +16,7 @@ class Account extends HZ_Controller
     }
 
     /**
-     * 登录页
+     * 密码登录页
      */
     public function index()
     {
@@ -185,7 +185,13 @@ class Account extends HZ_Controller
             echo json_encode(array('code' => 1, 'msg' => '验证码错误'));
         }
     }
-    
+
+    public function testlog()
+    {
+        $this->smarty->display('account/test.tpl');
+    }
+
+
     public function logwx()
     {
         $this->config->load('wx_conf');
@@ -194,6 +200,7 @@ class Account extends HZ_Controller
         $appid = $this->config->item('appid');
         $bakUrl = $this->config->item('log_bak_url');
         $url = 'https://open.weixin.qq.com/connect/qrconnect?appid='.$appid.'&redirect_uri='.$bakUrl.'&response_type=code&scope=snsapi_login&state='.$state.'#wechat_redirect';
+        https://open.weixin.qq.com/connect/qrconnect?appid=wx0ab6bc88e6d36a93&scope=snsapi_login&redirect_uri=http%3a%2f%2fwww.imhuzhu.com%2fwxlogin.aspx&state=&login_type=jssdk
         header("Location:".$url);
     }
 

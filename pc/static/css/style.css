@@ -391,6 +391,8 @@ h3{font-size:16px;font-weight:normal;}
 .phone_form>p{color:#197dd2;margin:10px 0 30px;}
 .phone_form .phone_submit{width:420px;height:46px;background-color:#197dd2;border-radius:4px;border:none;color:#fff;cursor:pointer;}
 .phone_form .phone_submit:hover{background-color:#1a6ac1;}
+.phone_form .register_regit_sub{margin-top:20px;width:420px;height:46px;background-color:#fb9c3a;border-radius:4px;border:none;color:#fff;cursor:pointer;}
+.phone_form .register_regit_sub:hover{background-color:#fbb73a;}
 .search_box{background-color:#fefefe;}
 .search_box .search_box_com{width:1120px;margin:0 auto;padding-top:20px;}
 .search_jj{width:635px;border:1px solid #e0e0e0;border-radius:6px;margin-bottom:30px;}
