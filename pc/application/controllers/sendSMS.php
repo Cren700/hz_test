@@ -12,7 +12,7 @@
  *  be found in the AUTHORS file in the root of the source tree.
  */
 
-class sendSMS extends HZ_Controller
+class sendSMS extends CI_Controller
 {
     public function __construct()
     {
