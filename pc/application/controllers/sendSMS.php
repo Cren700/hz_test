@@ -32,6 +32,10 @@ class sendSMS extends CI_Controller
      */
     function sms($to,$datas,$tempId)
     {
+
+        // 初始化REST SDK
+        global $accountSid,$accountToken,$appId,$serverIP,$serverPort,$softVersion;
+
         //主帐号
         $accountSid= '8a216da85982d9da015983691c00003d';
         //主帐号Token
@@ -44,8 +48,7 @@ class sendSMS extends CI_Controller
         $serverPort='8883';
         //REST版本号
         $softVersion='2013-12-26';
-        // 初始化REST SDK
-        global $accountSid,$accountToken,$appId,$serverIP,$serverPort,$softVersion;
+
         $rest = new REST($serverIP,$serverPort,$softVersion);
         $rest->setAccount($accountSid,$accountToken);
         $rest->setAppId($appId);
