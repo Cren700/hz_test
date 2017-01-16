@@ -45,6 +45,7 @@ $config = array(
     'validation_error_4' => array('code' => 30004, 'msg' => '必须为数字' ),                  // 必须为数字
     'validation_error_5' => array('code' => 30005, 'msg' => '不能为空' ),                    // 不能为空
     'validation_error_6' => array('code' => 30006, 'msg' => '必须为价格类型（如：10.00）' ),                    // 必须为价格
+    'validation_error_7' => array('code' => 30007, 'msg' => '必须为电话号码' ),                    // 必须为电话号码
 
 
 

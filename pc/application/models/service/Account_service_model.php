@@ -76,4 +76,41 @@ class Account_service_model extends HZ_Model
         return $res;
     }
 
+    /**
+     * 保存短信sms
+     * @param $resultCode
+     * @param $resultMsgId
+     * @param $createTime
+     * @param $content
+     * @param $mobile_no
+     */
+    public function saveVerifySms($resultCode, $resultMsgId, $createTime, $content, $mobile_no)
+    {
+        $option = array(
+            'buss_type' => 1, // 短信验证
+            'sms_id' => $resultMsgId, // smsid
+            'sms_content' => $content,
+            'mobile_no' => $mobile_no,
+            'status' => $resultCode,
+            'create_time' => $createTime
+        );
+        $this->myCurl('account', 'saveVerifySms', $option, true);
+    }
+
+    /**
+     * 保存verifycode
+     * @param $createTime
+     * @param $endTime
+     * @param $code
+     */
+    public function saveVerifyCode($createTime, $endTime, $code)
+    {
+        $option = array(
+            'verifycode' => $code,
+            'begin_time' => $createTime,
+            'end_time' => $endTime,
+            'status' => 1,
+        );
+        $this->myCurl('account', 'saveVerifyCode', $option, true);
+    }
 }

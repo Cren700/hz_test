@@ -30,6 +30,8 @@ $config = array(
             'center'                => '/order/userCenter',         // 用户中心
             'oauthLogin'            => '/account/oauthLogin',           // 第三方登录   
             'getStoreName'          => '/account/getStoreName',         // 获取商家名称    
+            'saveVerifySms'         => '/account/saveVerifySms',         // 保存短信sms    
+            'saveVerifyCode'        => '/account/saveVerifyCode',        // 保存verifycode    
         ),
     ),
     'product' => array(

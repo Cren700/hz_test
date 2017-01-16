@@ -131,7 +131,7 @@ function outputResponse($data, $header = array())
  * @param $field // 添加在错误信息字段 如:用户名
  * @return array
  */
-function validationData($data, $rules, $field)
+function validationData($data, $rules, $field = '')
 {
     $rulesData = explode('|', $rules);
     foreach ($rulesData as $rule) {
@@ -176,6 +176,12 @@ function validationData($data, $rules, $field)
                 if (!preg_match('/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,3})$/', $data, $match)) {
                     $res['field'] = '';
                     $res['code'] = 'validation_error_3'; // 邮箱不正确
+                }
+                break;
+            case 'phone':
+                if (!preg_match('/^(13[0-9]|15[0|1|3|6|7|8|9]|18[8|9])\d{8}$/', $data, $match)) {
+                    $res['field'] = '';
+                    $res['code'] = 'validation_error_7'; // 电话号码不正确
                 }
                 break;
             default:
@@ -341,4 +347,51 @@ function setFileRelaPath($type = 'img')
 function getFilePath($path)
 {
     return ROOT_PATH . $path;
+}
+
+
+
+/**
+ * 发送模板短信
+ * @param to 手机号码集合,用英文逗号分开
+ * @param datas 内容数据 格式为数组 例如：array('Marry','Alon')，如不需替换请填 null
+ * @param $tempId 模板Id
+ */
+function sms($to,$datas,$tempId = 1)
+{
+
+    // 初始化REST SDK
+//    global $accountSid,$accountToken,$appId,$serverIP,$serverPort,$softVersion;
+
+    include_once ROOT_PATH.'/system/third_party/CCPRestSDK.php';
+    //主帐号
+    $accountSid= '8a216da85982d9da015983691c00003d';
+    //主帐号Token
+    $accountToken= 'aeada2fbd41640cf8b85f84a61ed9760';
+    //应用Id
+    $appId='8a216da85982d9da0159836922200044';
+    //请求地址，格式如下，不需要写https://
+    $serverIP='app.cloopen.com';
+    //请求端口
+    $serverPort='8883';
+    //REST版本号
+    $softVersion='2013-12-26';
+
+    $rest = new REST($serverIP,$serverPort,$softVersion);
+    $rest->setAccount($accountSid,$accountToken);
+    $rest->setAppId($appId);
+
+    // 发送模板短信
+    $result = $rest->sendTemplateSMS($to,$datas,$tempId);
+    return $result;
+//    if($result == NULL ) {
+//        echo "result error!";
+//    }
+//    if($result->statusCode!=0) {
+//        //TODO 添加错误处理逻辑
+//        return false;
+//    }else{
+//        //TODO 添加成功处理逻辑
+//        return true;
+//    }
 }

@@ -329,4 +329,18 @@ class Account_service_model extends HZ_Model
         return $ret;
     }
 
+    public function saveVerifySms($option)
+    {
+        $ret = array('code' => 0);
+        $this->account_dao_model->saveVerifySms($option);
+        return $ret;
+    }
+
+    public function saveVerifyCode($option)
+    {
+        $ret = array('code' => 0);
+        $this->account_dao_model->saveVerifyCode($option);
+        return $ret;
+    }
+
 }

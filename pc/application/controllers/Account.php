@@ -186,12 +186,6 @@ class Account extends HZ_Controller
         }
     }
 
-    public function testlog()
-    {
-        $this->smarty->display('account/test.tpl');
-    }
-
-
     public function logwx()
     {
         $this->config->load('wx_conf');
@@ -232,6 +226,40 @@ class Account extends HZ_Controller
         $arr=json_decode($json,1);
         //得到 用户资料
         print_r($arr);
+    }
+
+    /**
+     * 发送模板短信
+     */
+    public function phoneLog()
+    {
+        $code = mt_rand(100000, 999999);
+        $data = array($code, 5);
+        $to = $this->input->get('phone');
+        $tempID = 1; // 短信模板ID
+        $content = json_encode_data(array('code' => $data, 'tempId' => $tempID));
+        $resValidation = validationData($to, 'phone');
+        if (!empty($resValidation)) {
+            return outputResponse($resValidation);
+        }
+        for($i = 0; $i<3;){
+            // 保存短信消息
+            $result = json_encode_data(sms($to, $data, $tempID));
+            $resultCode = $result['statusCode'];
+            $resultMsgId = $result['smsMessageSid'];
+            $createTime = strtotime($result['dateCreated']);
+            $endTime = $createTime+5*60;
+            // 保存发送短信消息
+            if ($resultCode != 0) {
+                $i++;
+                $this->account_service->saveVerifySms($resultCode = 1, $resultMsgId, $createTime, $content, $to);
+            } else {
+                // 保存验证码
+                $this->account_service->saveVerifyCode($createTime, $endTime, $code);
+                $this->account_service->saveVerifySms($resultCode = 2, $resultMsgId, $createTime, $content, $to);
+                break;
+            }
+        }
     }
 
 }

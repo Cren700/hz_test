@@ -12,11 +12,15 @@ class Account_dao_model extends HZ_Model
     private $_admin_table = 't_admin';
     private $_user_detail_table = 't_user_detail';
     private $_admin_detail_table = 't_admin_detail';
-    private $account ;
+    private $_sms_send = 't_sms_send';
+    private $_verify_code = 't_verify_code';
+    private $account;// 默认为用户库
+    private $common;// 配置库
     public function __construct()
     {
         parent::__construct();
-        $this->account = $this->load->database('default', true);// 默认为用户库
+        $this->account = $this->load->database('default', true);
+        $this->common = $this->load->database('common', true);
     }
 
     /**
@@ -121,5 +125,17 @@ class Account_dao_model extends HZ_Model
     private function _sel_detail_table($type)
     {
         return $type === 'admin' ? $this->_admin_detail_table: $this->_user_detail_table;
+    }
+
+    public function saveVerifySms($option)
+    {
+        dbEscape($option);
+        return $this->common->insert($this->_sms_send, $option);
+    }
+
+    public function saveVerifyCode($option)
+    {
+        dbEscape($option);
+        return $this->common->insert($this->_verify_code, $option);
     }
 }

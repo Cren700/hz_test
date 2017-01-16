@@ -216,4 +216,32 @@ class Account extends BaseController {
         $res = $this->account_service->getStoreName($option);
         echo outputResponse($res);
     }
+
+    /**
+     * 保存发送验证码sms
+     */
+    public function saveVerifySms()
+    {
+        $option = array(
+            'Fbuss_type' => $this->input->post('buss_type', true), // 短信验证
+            'Fsms_id' => $this->input->post('sms_id', true), // smsid
+            'Fsms_content' => $this->input->post('sms_content', true),
+            'Fmobile_no' => $this->input->post('mobile_no', true),
+            'Fstatus' => $this->input->post('status', true),
+            'Fcreate_time' => $this->input->post('create_time', true)
+        );
+        $res = $this->account_service->saveVerifySms($option);
+        echo outputResponse($res);
+    }
+
+    public function saveVerifyCode()
+    {
+        $option = array(
+            'Fverifycode' => $this->input->post('verifycode', true),
+            'Fbegin_time' => $this->input->post('begin_time', true),
+            'Fend_time' => $this->input->post('end_time', true),
+            'Fstatus' => $this->input->post('status', true),
+        );
+        $this->account_service->saveVerifySms($option);
+    }
 }

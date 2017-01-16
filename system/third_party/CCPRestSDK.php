@@ -26,8 +26,8 @@ class REST {
 	private $Batch;  //时间sh
 	private $BodyType = "xml";//包体格式，可填值：json 、xml
 	private $enabeLog = true; //日志开关。可填值：true、
-	private $Filename="../log.txt"; //日志文件
-	private $Handle; 
+	private $Filename="../smslog.txt"; //日志文件
+	private $Handle;
 	function __construct($ServerIP,$ServerPort,$SoftVersion)	
 	{
 		$this->Batch = date("YmdHis");
@@ -262,7 +262,7 @@ class REST {
    /**
     * 发送模板短信
     * @param to 短信接收彿手机号码集合,用英文逗号分开
-    * @param datas 内容数据
+    * @param datas 内容数据-(验证码)
     * @param $tempId 模板Id
     */       
     function sendTemplateSMS($to,$datas,$tempId)
