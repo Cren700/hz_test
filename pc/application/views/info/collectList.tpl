@@ -61,7 +61,7 @@
                                                 <i>&nbsp;</i>
                                                 <{assign var=keyword value=('、'|explode:$list['Fpost_keyword'])}>
                                                 <{foreach $keyword as $k}>
-                                                <a href=""><{$k}></a>
+                                                <a href="<{'/posts/search.html?keyword='|cat:$k|getBaseUrl}>"><{$k}></a>
                                                 <{/foreach}>
                                             </p>
                                             <{/if}>

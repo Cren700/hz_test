@@ -43,7 +43,7 @@
             <i>&nbsp;</i>
             <{assign var='key' value=('、'|explode:$info.Fpost_keyword)}>
             <{foreach $key as $k}>
-            <a href="javascript:void(0);"><{$k}></a>
+            <a href="<{'/posts/search.html?keyword='|cat:$k|getBaseUrl}>"><{$k}></a>
             <{/foreach}>
         </p>
         <{/if}>

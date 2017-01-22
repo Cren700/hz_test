@@ -325,7 +325,7 @@ class Posts_dao_model extends HZ_Model
     public function getThemeList($where)
     {
         dbEscape($where);
-        $res = $this->_news->get_where($this->_theme_table, $where)->result_array();
+        $res = $this->_news->order_by('Fupdate_time DESC')->get_where($this->_theme_table, $where)->result_array();
         return filterData($res);
     }
 
