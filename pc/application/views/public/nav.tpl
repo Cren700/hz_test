@@ -34,18 +34,17 @@
 
                         <{if $user_type eq 3}>
                         <!--媒体star-->
-                        <li><a href="<{'/info/collectList.html'|getBaseUrl}>">我的文章</a></li>
-                        <li><a href="<{'/about/contribute.html'|getBaseUrl}>">投稿、成为专栏作家</a></li>
-                        <li><a href="<{'/about/report.html'|getBaseUrl}>">平台寻求报道</a></li>
+                        {*<li><a href="<{'/info/collectList.html'|getBaseUrl}>">我的文章</a></li>*}
+                        {*<li><a href="<{'/about/contribute.html'|getBaseUrl}>">投稿、成为专栏作家</a></li>*}
+                        {*<li><a href="<{'/about/report.html'|getBaseUrl}>">平台寻求报道</a></li>*}
                         <!--媒体end-->
                         <{/if}>
                         <{if $user_type eq 4}>
                         <!--商户star-->
-                        <li><a href="<{'/about/contribute.html'|getBaseUrl}>">我的产品</a></li>
-                        <li><a href="<{'/about/report.html'|getBaseUrl}>">成交订单</a></li>
+                        {*<li><a href="<{'/about/contribute.html'|getBaseUrl}>">我的产品</a></li>*}
+                        {*<li><a href="<{'/about/report.html'|getBaseUrl}>">成交订单</a></li>*}
                         <!--商户end-->
                         <{/if}>
-                        <li><a href="">账号设置</a></li>
                         <li><a href="<{'/account/logout.html'|getBaseUrl}>">退出登录</a></li>
                     </ul>
                 </div>
