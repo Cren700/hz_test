@@ -509,7 +509,7 @@ h3{font-size:16px;font-weight:normal;}
 .topice_list_item .topice_txt{padding:20px;box-shadow:0 2px 4px 0 #f2f2f2;}
 .topice_list_item .topice_txt .topice_txt_l{float:left;font-size:20px;color:#000;}
 .topice_list_item .topice_txt .topice_txt_r{float:right;font-size:14px;color:#999;}
-.topice_banner{width:100%;height:332px;border-radius:4px;margin:10px 0 12px;}
+.topice_banner{width:100%;height:332px; overflow: hidden;border-radius:4px;margin:10px 0 12px;}
 .topice_banner img{width:100%;}
 .topice_h2{position:relative;text-align:center;margin-bottom:12px;}
 .topice_h2>span{padding:0 15px;background-color:#fff;position:relative;font-size:20px;color:#e0e0e0;z-index:10;}
@@ -520,9 +520,15 @@ h3{font-size:16px;font-weight:normal;}
 .topice_jj ul li .topice_jj_img{width:100%;height:183px;overflow:hidden;}
 .topice_jj ul li .topice_jj_img img{width:100%;}
 .topice_jj ul li .topice_jj_txt{border:1px solid #e0e0e0;border-top:none;border-size:border-box;padding:20px;}
-.topice_jj ul li .topice_jj_txt h3{font-size:20px;color:#333;}
+.topice_jj ul li .topice_jj_txt h3{font-size:20px;color:#333;height: 52px;overflow: hidden}
 .topice_jj ul li .topice_jj_txt p{font-size:14px;color:#999;line-height:18px;margin-top:16px;}
-
+.topice_jj ul li .topice_jj_txt .topic_txt_box {
+    height: 60px;
+    font-size: 14px;
+    color: #999;
+    margin-top: 16px;
+    overflow: hidden;
+}
 
 @keyframes stamp{
 	0%{top:10px;}

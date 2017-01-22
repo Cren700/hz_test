@@ -9,7 +9,7 @@
             <{foreach $theme['list'] as $l}>
             <div class="topice_list_item">
                 <div class="topice_list_img">
-                    <a href="">
+                    <a href="<{'/theme/jhtTheme.html?id='|cat:$l['Fid']|getBaseUrl}>">
                         <img src="<{$l['Fbanner_path']}>" alt="">
                     </a>
                 </div>
@@ -24,7 +24,7 @@
     </div>
     <div class="sidebar">
         <div class="sidebarTopics">
-            <a href="" target="_blank">
+            <a href="<{'/theme/jhtTheme.html?id=2'|getBaseUrl}>" target="_blank">
                 <img src="<{'/theme_01.png'|baseImgUrl}>" alt="">
             </a>
         </div>

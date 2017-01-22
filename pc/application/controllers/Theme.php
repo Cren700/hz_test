@@ -24,10 +24,11 @@ class Theme extends HZ_Controller
         $this->smarty->display('theme/index.tpl');
     }
 
+    // 金海豚
     public function jhtTheme()
     {
         $data = array(
-            'id' => $this->input->get('pid')
+            'id' => $this->input->get('id')
         );
         $theme = $this->theme_service->getPostsThemeByPid($data);
         $cssArr = array('bootstrap.min.css');
@@ -35,7 +36,19 @@ class Theme extends HZ_Controller
         $this->smarty->assign('cssArr', $cssArr);
         $this->smarty->assign('jsArr', $jsArr);
         $this->smarty->assign('theme', $theme);
+        $this->smarty->assign('id', $data['id']);
         $this->smarty->display('theme/jhtTheme.tpl');
+    }
+
+    public function posts()
+    {
+        $data = array(
+            'id' => $this->input->get('id')
+        );
+        $theme = $this->theme_service->getPostsThemeByPid($data);
+        $this->smarty->assign('theme', $theme);
+        $this->smarty->assign('id', $data['id']);
+        $this->smarty->display('theme/posts.tpl');
     }
 
 

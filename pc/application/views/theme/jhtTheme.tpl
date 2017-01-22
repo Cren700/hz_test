@@ -2,10 +2,10 @@
 <body>
 <div class="topic_banner">
     <img src="<{'topice_banner.jpg'|baseImgUrl}>" alt="">
-    <div class="backHome"><a href="/">返回首页</a></div>
+    <div class="backHome"><a href="<{''|getBaseUrl}>">返回首页</a></div>
     <div class="topic_btn">
         <span class="btn_item" data-toggle="modal" data-target="#myModal">报名方式</span>
-        <a href="http://www.imhuzhu.com/SpecialDetail.aspx?id=2" target="_blank"class="btn_item">专题报道</a>
+        <a href="<{'/theme/posts.html?id='|cat:$id|getBaseUrl}>" target="_blank"class="btn_item">专题报道</a>
     </div>
 </div>
 <div class="topic_container">
