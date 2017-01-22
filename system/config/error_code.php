@@ -64,6 +64,7 @@ $config = array(
     'posts_error_12' => array( 'code' => 400012, 'msg' => '删除评论出错'),                // 删除评论出错
     'posts_error_13' => array( 'code' => 40013, 'msg' => '我的关注信息出错'),                // 我的关注信息出错
     'posts_error_14' => array( 'code' => 40014, 'msg' => '很抱歉，暂无数据，请换个条件试试！'),                // 搜索暂无数据
+    'posts_error_15' => array( 'code' => 40015, 'msg' => '我的评论信息出错'),                // 我的评论信息出错
 
     
     // order 50000 ~ 59999

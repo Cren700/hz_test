@@ -312,9 +312,11 @@ class Posts_service_model extends HZ_Model
         if (!$is_praise) {
             // 添加
             $this->posts_dao->addPraise($option);
+            $ret['status'] = 1;
         } else {
             // 删除
             $this->posts_dao->delPraise($option);
+            $ret['status'] = 0;
         }
         return $ret;
     }
@@ -426,12 +428,32 @@ class Posts_service_model extends HZ_Model
             $ret['code'] = 'system_error_2'; // 无信息
             return $ret;
         }
-        $res = $this->posts_dao->getPraiseListByUid($option);
-        if (!$res) {
-            $ret['code'] = 'posts_error_13';
-        } else {
-            $ret['data'] = $res;
+        $where = array('p.Fuser_id' => $option['Fuser_id']);
+        $res = $this->posts_dao->getPraiseListByUid($where);
+        $ret['data'] = $res;
+        return $ret;
+    }
+
+    public function getCommentListByUid($option){
+        $ret = array('code' => 0);
+        if (empty($option['Fcomment_author_name'])) {
+            $ret['code'] = 'system_error_2'; // 无信息
+            return $ret;
         }
+        $where = array('c.Fcomment_author_name' => $option['Fcomment_author_name']);
+        $res = $this->posts_dao->getCommentListByUid($where);
+        $ret['data'] = $res;
+        return $ret;
+    }
+
+    public function userDelComment($option)
+    {
+        $ret = array('code' => 0);
+        if (empty($option['Fcomment_id']) || empty($option['Fcomment_author_id'])) {
+            $ret['code'] = 'system_error_2'; // 无信息
+            return $ret;
+        }
+        $this->posts_dao->userDelComment($option);
         return $ret;
     }
 
@@ -460,5 +482,168 @@ class Posts_service_model extends HZ_Model
         return $ret;
     }
 
+    //********************------专题--------*****************//
 
+    public function addTheme($data)
+    {
+        $ret = array('code' => 0);
+        // 数据验证
+        $validationConfig = array(
+            array(
+                'value' => $data['Ftheme_title'],
+                'rules' => 'required|min_length[10]|max_length[200]',
+                'field' => '专题标题'
+            ),
+            array(
+                'value' => $data['Fuser_id'],
+                'rules' => 'required',
+                'field' => '发布者'
+            )
+        );
+        foreach ($validationConfig as $v) {
+            $resValidation = validationData($v['value'], $v['rules'], $v['field']);
+            if (!empty($resValidation)) {
+                return $resValidation;
+            }
+        }
+        $res = $this->posts_dao->addTheme($data);
+        if (!$res) {
+            $ret['code'] = 'system_error_2'; //操作出错
+        }
+        return $ret;
+    }
+
+    public function updateTheme($where, $data)
+    {
+        $ret = array('code' => 0);
+        if (!isset($where['Fid']) && empty($where['Fid'])) {
+            $ret['code'] = 'system_error_2'; // 操作出错
+            return $ret;
+        }
+        $theme = $this->posts_dao->getThemeByPid($where);
+        if (empty($theme)) {
+            $ret['code'] = 'posts_error_2'; // 不存在
+            return $ret;
+        }
+        $validationConfig = array(
+            array(
+                'value' => $data['Ftheme_title'],
+                'rules' => 'required|min_length[10]|max_length[200]',
+                'field' => '文章标题'
+            )
+        );
+        foreach ($validationConfig as $v) {
+            $resValidation = validationData($v['value'], $v['rules'], $v['field']);
+            if (!empty($resValidation)) {
+                return $resValidation;
+            }
+        }
+
+        $res = $this->posts_dao->updateTheme($where, $data);
+        if ($res) {
+            return $ret;
+        } else {
+            return $ret['code'] = 'product_error_5';
+        }
+    }
+
+    public function delTheme($where)
+    {
+        $ret = array('code' => 0);
+        if (!isset($where['Fid']) && empty($where['Fid'])) {
+            $ret['code'] = 'system_error_2'; // 操作出错
+            return $ret;
+        }
+        $theme = $this->posts_dao->getThemeByPid($where);
+        if (empty($theme)) {
+            $ret['code'] = 'posts_error_2'; // 不存在
+            return $ret;
+        }
+        $res = $this->posts_dao->delTheme($where);
+        if ($res) {
+            return $ret;
+        } else {
+            return $ret['code'] = 'product_error_4';
+        }
+    }
+
+    public function queryThemes($option)
+    {
+        $res = array('code' => 0);
+
+        $page = $option['p'] ? : 1;
+        $page_size = $option['page_size'] ? : 10;
+        $res['data']['count'] = $this->posts_dao->themeNum();
+        $res['data']['list'] = $this->posts_dao->themeList($page, $page_size);
+
+        return $res;
+    }
+
+    public function changeThemeStatus($data, $where)
+    {
+        $ret = array('code' => 0);
+        if (empty($data) || empty($where)) {
+            $ret['code'] = 'system_error_2'; // 无信息
+            return $ret;
+        }
+        $theme = $this->posts_dao->getThemeByPid($where);
+        if (empty($theme)) {
+            $ret['code'] = 'posts_error_2'; // 不存在
+            return $ret;
+        }
+        $data['Fupdate_time'] = time();
+        $res = $this->posts_dao->changeThemeStatus($data, $where);
+        if ($res) {
+            return $ret;
+        } else {
+            return $ret['code'] = 'posts_error_9';
+        }
+    }
+
+    public function getThemeByPid($where)
+    {
+        $ret = array('code' => 0);
+        $res = $this->posts_dao->getThemeByPid($where);
+        $ret['data'] = $res;
+        return $ret;
+    }
+
+    public function getPostsThemeByPid($where)
+    {
+        $ret = array('code' => 0);
+        $postList = array();
+        $res = $this->posts_dao->getThemeByPid($where);
+        if(isset($res['Fpost_id']) && !empty($res['Fpost_id'])) {
+            $posts = explode(',', $res['Fpost_id']);
+            $postList = $this->posts_dao->getPostsByPids($posts);
+        }
+        $ret['data'] = $res;
+        $ret['postList'] = $postList;
+        return $ret;
+    }
+
+    public function addThemePost($data, $where)
+    {
+        $ret = array('code' => 0);
+        if (empty($data) || empty($where)) {
+            $ret['code'] = 'system_error_2'; // 无信息
+            return $ret;
+        }
+        $theme = $this->posts_dao->getThemeByPid($where);
+        if (empty($theme)) {
+            $ret['code'] = 'posts_error_2'; // 不存在
+            return $ret;
+        }
+        $data['Fupdate_time'] = time();
+        $this->posts_dao->addThemePost($data, $where);
+        return $ret;
+    }
+
+    public function getThemeList($where)
+    {
+        $ret = array('code' => 0);
+        $theme = $this->posts_dao->getThemeList($where);
+        $ret['data'] = $theme;
+        return $ret;
+    }
 }

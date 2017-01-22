@@ -33,4 +33,12 @@ class Product_service_model extends HZ_Model
     {
         return $this->myCurl('product', 'search', $where);
     }
+
+    /**
+     * 收藏产品列表
+     */
+    public function collectList($option)
+    {
+        return $this->myCurl('product', 'getCollectListByUid', $option);
+    }
 }

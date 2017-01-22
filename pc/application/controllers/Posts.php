@@ -36,9 +36,17 @@ class Posts extends HZ_Controller
         $praise = $this->post_service->getPraiseCountByPid($option['id']); // 关注数量
         $is_Praise = $this->post_service->getIsPraise($option['id']); // 是否关注
         $jsArr = array(
-            'post_detail.js'
+            'post_detail.js',
+            'share.js',
+            'slider.js'
         );
+        $cssArr = array
+        (
+            'weixin.css'
+        );
+        $this->smarty->assign('id', $option['id']);
         $this->smarty->assign('jsArr', $jsArr);
+        $this->smarty->assign('cssArr', $cssArr);
         $this->smarty->assign('info', $posts['data']);
         $this->smarty->assign('comment', $comment);
         $this->smarty->assign('praise', $praise);
@@ -75,11 +83,26 @@ class Posts extends HZ_Controller
     {
         $option = array('keyword' => $this->input->get('keyword'));
         $data = $this->post_service->search($option);
+//        p($data);
+        $jsArr = array('search.js');
         $cssArr = array('bootstrap.min.css');
+        $this->smarty->assign('type', 'posts');
         $this->smarty->assign('cssArr', $cssArr);
+        $this->smarty->assign('jsArr', $jsArr);
         $this->smarty->assign('info', $data);
         $this->smarty->assign('keyword', $this->input->get('keyword'));
         $this->smarty->display('posts/search.tpl');
+    }
+
+    public function delComment()
+    {
+        $option = array(
+            'comment_id' => $this->input->post('comment_id'),
+            'author_id' => $this->_uid
+        );
+        $res = $this->post_service->delComment($option);
+        echo json_encode_data($res);
+
     }
         
 }

@@ -36,4 +36,12 @@ class Info_service_model extends HZ_Model
     {
         return $this->myCurl('product', 'getCollectListByUid', $option);
     }
+
+    /**
+     * 收藏产品列表
+     */
+    public function commentList($option)
+    {
+        return $this->myCurl('posts', 'getCommentListByUid', $option);
+    }
 }

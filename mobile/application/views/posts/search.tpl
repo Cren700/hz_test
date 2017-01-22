@@ -6,14 +6,16 @@
 <{if $info['code'] eq 0}>
 <section class="content" id="section_content" style="padding-top: 1rem">
     <div class="new_item_shape">
+        <{assign var=preg value='/'|cat:$keyword|cat:'/'}>
+        <{assign var=rep value='<span style="color:red; margin-right:0">'|cat:$keyword|cat:'</span>'}>
         <{foreach $info['data']['list'] as $l}>
         <{if $l['Fpost_coverimage']}>
         <div class="new_shape_one">
             <a href="<{'/posts?id='|cat:$l['Fid']|getBaseUrl}>" title="<{$l['Fpost_title']}>" class="article_link">
                 <div class="article_txt">
-                    <h3><{$l['Fpost_title']}></h3>
+                    <h3><{$preg|preg_replace:$rep:$l['Fpost_title']}></h3>
                     <div class="item_info">
-                        <span><{$l['Fpost_author']}></span>
+                        <span><{$preg|preg_replace:$rep:$l['Fpost_author']}></span>
                         <span class="js-date-dif" rel="<{$l['Fupdate_time']}>"></span>
                     </div>
                 </div>

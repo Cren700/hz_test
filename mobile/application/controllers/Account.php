@@ -103,6 +103,7 @@ class Account extends HZ_Controller
     {
         $info = $this->user_service_model->detail();
 //        p($info);
+        $jsArr = array('account_modify.js');
         $this->smarty->assign('user', $info['data']);
         $this->smarty->display('account/detail.tpl');
     }

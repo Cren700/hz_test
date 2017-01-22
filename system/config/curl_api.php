@@ -32,6 +32,7 @@ $config = array(
             'getStoreName'          => '/account/getStoreName',         // 获取商家名称    
             'saveVerifySms'         => '/account/saveVerifySms',         // 保存短信sms    
             'saveVerifyCode'        => '/account/saveVerifyCode',        // 保存verifycode    
+            'modifyHdImg'           => '/account/modifyHdImg',        // 保存头像    
         ),
     ),
     'product' => array(
@@ -86,6 +87,17 @@ $config = array(
             'queryPraise'           => '/posts/queryPraise',           // 查询关注列表
             'getPraiseListByUid'    => '/posts/getPraiseListByUid',     // 我的关注
             'search'                => '/posts/search',                 // 搜索
+            'getCommentListByUid'   => '/posts/getCommentListByUid',    // 个人评论列表
+            'userDelComment'        => '/posts/userDelComment',     // 用户删除评论
+            'queryThemes'           => '/posts/queryThemes',     // 后台专题
+            'addTheme'              => '/posts/addTheme',                  // addTheme
+            'updateTheme'           => '/posts/updateTheme',               // 更新Theme
+            'delTheme'              => '/posts/delTheme',                  // 删除Theme
+            'changeThemeStatus'     => '/posts/changeThemeStatus',          // 更新Theme状态
+            'getThemeByPid'         => '/posts/getThemeByPid',          // 获取某个主题
+            'getPostsThemeByPid'    => '/posts/getPostsThemeByPid',          // 获取某个主题
+            'addThemePost'          => '/posts/addThemePost',          // 添加post_id
+            'getThemeList'          => '/posts/getThemeList',          // 前台获取专题列表
         ),
     ),
     'order' => array(

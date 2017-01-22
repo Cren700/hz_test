@@ -16,32 +16,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `t_blackuser_list`
---
-
-DROP TABLE IF EXISTS `t_blackuser_list`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `t_blackuser_list` (
-  `Fuser_id` varchar(20) NOT NULL,
-  `Fuser_type` tinyint(1) NOT NULL COMMENT '用户类型 1、个人普通用户 2、个人微信用户 3、企业总商户\r',
-  `Freason` varchar(200) NOT NULL COMMENT '原因',
-  `Fcreate_time` int(11) NOT NULL,
-  `Fremark` varchar(500) DEFAULT NULL,
-  PRIMARY KEY (`Fuser_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `t_blackuser_list`
---
-
-LOCK TABLES `t_blackuser_list` WRITE;
-/*!40000 ALTER TABLE `t_blackuser_list` DISABLE KEYS */;
-/*!40000 ALTER TABLE `t_blackuser_list` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `t_email_send`
 --
 
@@ -67,38 +41,6 @@ CREATE TABLE `t_email_send` (
 LOCK TABLES `t_email_send` WRITE;
 /*!40000 ALTER TABLE `t_email_send` DISABLE KEYS */;
 /*!40000 ALTER TABLE `t_email_send` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `t_post_comments`
---
-
-DROP TABLE IF EXISTS `t_post_comments`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `t_post_comments` (
-  `Fcomment_id` int(11) NOT NULL AUTO_INCREMENT,
-  `Fcomment_post_id` int(11) DEFAULT NULL,
-  `Fcomment_parent_id` int(11) DEFAULT NULL COMMENT '父评论编号',
-  `Fcomment_author_id` int(11) DEFAULT NULL COMMENT '评论者id',
-  `Fcomment_author_name` varchar(20) DEFAULT NULL COMMENT '评论者名称',
-  `Fcomment_author_ip` varchar(45) DEFAULT NULL COMMENT 'ip',
-  `Fcomment_date` int(11) DEFAULT NULL,
-  `Fcomment_content` text,
-  `Fcomment_approved` tinyint(1) DEFAULT '0' COMMENT '审核状态0：未审核，1:审核通过，2：审核不通过',
-  PRIMARY KEY (`Fcomment_id`),
-  KEY `index` (`Fcomment_post_id`),
-  KEY `index2` (`Fcomment_parent_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `t_post_comments`
---
-
-LOCK TABLES `t_post_comments` WRITE;
-/*!40000 ALTER TABLE `t_post_comments` DISABLE KEYS */;
-/*!40000 ALTER TABLE `t_post_comments` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -168,4 +110,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-01-16 22:57:02
+-- Dump completed on 2017-01-22 18:49:39

@@ -103,4 +103,48 @@ class Posts_service_model extends HZ_Model
         return $this->myCurl($this->_api, 'queryPraise', $data, false);
     }
 
+    public function queryThemes($data)
+    {
+        return $this->myCurl($this->_api, 'queryThemes', $data, false);
+    }
+
+    public function statusTheme($data)
+    {
+        return $this->myCurl($this->_api, 'changeThemeStatus', $data, true);
+    }
+
+    public function saveTheme($data)
+    {
+        $is_new = $data['is_new'];
+        unset($data['is_new']);
+        if ($is_new) {
+            $res = $this->myCurl($this->_api, 'addTheme', $data, true);
+        } else {
+            $res = $this->myCurl($this->_api, 'updateTheme', $data, true);
+        }
+        if ($res['code'] === 0) {
+            $res['data']['url'] = getBaseUrl('/posts/theme.html');
+        }
+        return $res;
+    }
+
+    public function delTheme($data)
+    {
+        return $this->myCurl($this->_api, 'delTheme', $data, false);
+    }
+
+    public function getThemeByPid($data)
+    {
+        return $this->myCurl($this->_api, 'getThemeByPid', $data, false);
+    }
+
+    public function getPostsThemeByPid($data)
+    {
+        return $this->myCurl($this->_api, 'getPostsThemeByPid', $data, false);
+    }
+
+    public function addThemePost($option)
+    {
+        return $this->myCurl($this->_api, 'addThemePost', $option, true);
+    }
 }

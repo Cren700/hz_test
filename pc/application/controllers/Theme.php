@@ -18,33 +18,26 @@ class Theme extends HZ_Controller
     public function index()
     {
         $cate_id = $this->input->get('id');
-        $cssArr = array('bootstrap.min.css');
-        $jsArr = array('theme_index.js');
+        $theme = $this->theme_service->getThemeList();
         $this->smarty->assign('cate_id', $cate_id);
-        $this->smarty->assign('jsArr', $jsArr);
-        $this->smarty->assign('cssArr', $cssArr);
+        $this->smarty->assign('theme', isset($theme['data']) ? $theme['data'] : array());
         $this->smarty->display('theme/index.tpl');
     }
 
-    public function getPostsList()
+    public function jhtTheme()
     {
-        $cate = $this->theme_service->getCate(); // 资讯分类
-        if($cate['code'] == 0 && count($cate['data']['list'])) {
-            $cate = array_column($cate['data']['list'], 'Fpost_category_id');
-        }
-        $option = array(
-            'post_category_id' => intval($this->input->get('post_category_id')) ? : $cate,
-            'post_status' => 3, // 已发布
-            'p' => $this->input->get('p') ? : 1,
-            'page_size' => $this->input->get('page_size') ? : 10,
+        $data = array(
+            'id' => $this->input->get('pid')
         );
-        $posts = $this->theme_service->getPostsList($option); // 获取资讯信息
-        $postsList = array();
-        if (isset($posts['data']['list'])) {
-            $postsList = $posts['data']['list'];
-        }
-        $this->smarty->assign('list', $postsList);
-        $this->smarty->display('theme/list.tpl');
+        $theme = $this->theme_service->getPostsThemeByPid($data);
+        $cssArr = array('bootstrap.min.css');
+        $jsArr = array('bootstrap.min.js');
+        $this->smarty->assign('cssArr', $cssArr);
+        $this->smarty->assign('jsArr', $jsArr);
+        $this->smarty->assign('theme', $theme);
+        $this->smarty->display('theme/jhtTheme.tpl');
     }
+
+
 
 }

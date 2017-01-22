@@ -42,7 +42,7 @@ class Info extends BaseControllor
     }
 
     /**
-     * 收藏产品列表
+     * 收藏文章列表和评论列表
      */
     public function collectList()
     {
@@ -50,11 +50,18 @@ class Info extends BaseControllor
             'user_id' => $this->_user_id
         );
         $praiseList = $this->info_service->praiseList($option);
+        $commentList = $this->info_service->commentList($option);
+//        p($commentList);
         if (!isset($praiseList['data']) || empty($praiseList['data']) ){
             // 没有数据
             $this->jump404();
         }
+        $jsArr = array(
+            'info_collect.js'
+        );
+        $this->smarty->assign('jsArr', $jsArr);
         $this->smarty->assign('praiseInfo', $praiseList['data']);
-        $this->smarty->display('info/praiseList.tpl');
+        $this->smarty->assign('commentList', $commentList['data']);
+        $this->smarty->display('info/collectList.tpl');
     }
 }

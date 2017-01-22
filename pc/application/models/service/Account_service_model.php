@@ -42,7 +42,7 @@ class Account_service_model extends HZ_Model
         if ($res['code'] == 0) {
             // 保存session
             $res['data']['url'] = getBaseUrl('/home.html');
-            $session = array('m_uid' => $res['data']['uid'], 'm_username' => $res['data']['username'], 'm_type' => $res['data']['user_type']);
+            $session = array('w_uid' => $res['data']['uid'], 'w_username' => $res['data']['username'], 'w_type' => $res['data']['user_type'], 'w_image_path' => $res['data']['image_path']);
             $this->session->set_userdata($session);
         }
         return $res;
@@ -112,5 +112,10 @@ class Account_service_model extends HZ_Model
             'status' => 1,
         );
         $this->myCurl('account', 'saveVerifyCode', $option, true);
+    }
+
+    public function modifyHdImg($option)
+    {
+        $this->myCurl('account', 'modifyHdImg', $option, true);
     }
 }

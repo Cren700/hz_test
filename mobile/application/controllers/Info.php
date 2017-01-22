@@ -42,7 +42,7 @@ class Info extends BaseControllor
     }
 
     /**
-     * 收藏产品列表
+     * 收藏文章列表
      */
     public function collectList()
     {

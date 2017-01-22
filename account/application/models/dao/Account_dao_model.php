@@ -138,4 +138,11 @@ class Account_dao_model extends HZ_Model
         dbEscape($option);
         return $this->common->insert($this->_verify_code, $option);
     }
+
+    public function modifyHdImg($data, $where)
+    {
+        dbEscape($data);
+        dbEscape($where);
+        return $this->account->update($this->_user_detail_table, $data, $where);
+    }
 }

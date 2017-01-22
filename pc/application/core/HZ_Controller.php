@@ -11,6 +11,7 @@ class HZ_Controller extends CI_Controller
     protected $_uid = null;
     protected $_user_id = null;
     protected $_user_type = null;
+    protected $_image_path = null;
 
     public function __construct(){
         parent::__construct();
@@ -57,9 +58,11 @@ class HZ_Controller extends CI_Controller
         $this->_uid = $this->session->userdata('w_uid');
         $this->_user_id = $this->session->userdata('w_username');
         $this->_user_type = $this->session->userdata('w_type');
+        $this->_image_path = $this->session->userdata('w_image_path');
         $this->smarty->assign('username', $this->_user_id);
         $this->smarty->assign('uid', $this->_uid);
         $this->smarty->assign('user_type', $this->_user_type);
+        $this->smarty->assign('image_path', $this->_image_path);
     }
 
     public function jump($url)

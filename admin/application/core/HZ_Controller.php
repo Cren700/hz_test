@@ -248,6 +248,11 @@ class HZ_Controller extends CI_Controller
                     ),
                     array(
                         'selected'  => '0',
+                        'name'      => '专题',
+                        'flagName'  => 'theme',
+                    ),
+                    array(
+                        'selected'  => '0',
                         'name'      => '评论审核',
                         'flagName'  => 'comment',
                     ),

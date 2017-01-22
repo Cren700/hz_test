@@ -79,7 +79,7 @@
                             </div>
                             <div class="control-group">
                                 <div class="span12">
-                                    <label class="control-label">是否开发评论</label>
+                                    <label class="control-label">是否开放评论</label>
                                     <div class="controls" style="vertical-align: middle">
                                         <label style="display: inline-block">开放</label>
                                         <input type="radio" style="margin: 0" class="span2" value="1" name="comment_status" <{if isset($posts['Fcomment_status']) && $posts['Fcomment_status'] eq 1}>checked<{elseif !isset($posts['Fcomment_status'])}>checked<{/if}> />

@@ -13,9 +13,9 @@ class Posts_service_model extends HZ_Model
         parent::__construct();
     }
 
-    public function getCate($is_special = 0)
+    public function getCate()
     {
-        return $this->myCurl('posts', 'category', array('status' => '1', 'is_special' => $is_special));
+        return $this->myCurl('posts', 'category', array('status' => '1'));
     }
     
     public function getPostsList($option)
@@ -70,6 +70,11 @@ class Posts_service_model extends HZ_Model
     {
         $where = array('post_id' => $option['post_id'], 'user_id' => $this->_user_id);
         return $this->myCurl('posts', 'doPraise', $where);
+    }
+
+    public function delComment($option)
+    {
+        return $this->myCurl('posts', 'userDelComment', $option, true);
     }
 
     public function search($where)

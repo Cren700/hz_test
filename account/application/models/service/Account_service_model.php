@@ -99,7 +99,8 @@ class Account_service_model extends HZ_Model
         if ($info['Fpasswd'] !== $pwdCode) {
             return array('code' => 'account_error_1');         // 账户密码不一致
         } else {
-            $resData = array('uid' => $info['Fid'], 'username' => $info['Fuser_id'], 'user_type' => $info['Fuser_type']);
+            $detail = $this->account_dao_model->getDetailByOp(array('Fuser_id' => $info['Fid']), $type);
+            $resData = array('uid' => $info['Fid'], 'username' => $info['Fuser_id'], 'user_type' => $info['Fuser_type'], 'image_path' => isset($detail['Fimage_path']) ? $detail['Fimage_path'] : '');
             return array('code' => 0, 'data' => $resData);
         }
     }
@@ -343,4 +344,16 @@ class Account_service_model extends HZ_Model
         return $ret;
     }
 
+    public function modifyHdImg($option)
+    {
+        $ret = array('code' => 0);
+        if (!$option['Fuser_id']) {
+            $ret['code'] = 'account_error_4';
+            return $ret;
+        }
+        $where = array('Fuser_id' => $option['Fuser_id']);
+        $data = array('Fimage_path' => $option['Fimage_path']);
+        $this->account_dao_model->modifyHdImg($data, $where);
+        return $ret;
+    }
 }

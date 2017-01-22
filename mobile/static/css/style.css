@@ -1524,7 +1524,7 @@ section.mylogin {
 }
 .user_avatar img {
     width: 100%;
-    height: auto;
+    height: 100%;
 }
 .user_name p {
     font-size: 0.4rem;

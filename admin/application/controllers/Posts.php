@@ -153,7 +153,6 @@ class Posts extends BaseControllor
         echo json_encode_data($res);
     }
 
-
     /**
      * 产品分类
      */
@@ -337,5 +336,143 @@ class Posts extends BaseControllor
         $this->smarty->assign('info', $praise['data']);
         $this->smarty->assign('page', $this->page($praise['data']['count'], $option['p'], $option['page_size'], ''));
         echo $this->smarty->display('posts/praiseList.tpl');
+    }
+
+    //********************------专题--------*****************//
+    public function theme()
+    {
+        $jsArr = array(
+            'posts/theme.js'
+        );
+        $this->smarty->assign('jsArr', $jsArr);
+        $this->smarty->display('posts/theme.tpl');
+    }
+
+    public function queryThemes()
+    {
+        $option = array(
+            'p' => $this->input->get('p') ? : 1 ,
+            'page_size' => $this->input->get('n') ? : 10,
+        );
+        $theme = $this->posts_service->queryThemes($option);
+        $this->smarty->assign('info', $theme['data']);
+        $this->smarty->assign('page', $this->page($theme['data']['count'], $option['p'], $option['page_size'], ''));
+        echo $this->smarty->display('posts/themeList.tpl');
+    }
+
+    public function addTheme()
+    {
+        $cate = $this->posts_service->category();
+        $jsArr = array(
+            'plugin/jquery.placeholder.min.js',
+            'plugin/jquery.validate.js',
+            'uploadify/jquery.uploadify.min.js',
+            'posts/detailTheme.js',
+        );
+        $cssArr = array('uploadify.css');
+        $this->smarty->assign('is_new', 1);
+        $this->smarty->assign('cate', $cate['data']);
+        $this->smarty->assign('jsArr', $jsArr);
+        $this->smarty->assign('cssArr', $cssArr);
+        $this->smarty->display('posts/detailTheme.tpl');
+    }
+
+    public function detailTheme($pid = null){
+        $data = array(
+            'id' => $pid ? : $this->input->get('pid')
+        );
+
+        $theme = $this->posts_service->getThemeByPid($data);
+        if (empty($theme['data'])) {
+            $this->jump404();
+        }
+        $jsArr = array(
+            'plugin/jquery.placeholder.min.js',
+            'plugin/jquery.validate.js',
+            'uploadify/jquery.uploadify.min.js',
+            'posts/detailTheme.js',
+        );
+        $cssArr = array('uploadify.css');
+        $this->smarty->assign('is_new', 0);
+        $this->smarty->assign('theme', $theme['data']);
+        $this->smarty->assign('jsArr', $jsArr);
+        $this->smarty->assign('cssArr', $cssArr);
+        $this->smarty->display('posts/detailTheme.tpl');
+    }
+
+    public function saveTheme()
+    {
+        $data = array(
+            'is_new' => $this->input->post('is_new'),
+            'id' => $this->input->post('id'),
+            'user_id' => $this->_uid,
+            'theme_title' => $this->input->post('theme_title'),
+            'theme_excerpt' => $this->input->post('theme_excerpt'),
+            'theme_coverimage' => $this->input->post('theme_coverimage'),
+            'banner_path' => $this->input->post('banner_path'),
+        );
+        $res = $this->posts_service->saveTheme($data);
+        echo json_encode_data($res);
+    }
+
+    public function statusTheme()
+    {
+        $data = array(
+            'status'    => $this->input->post('status'),
+            'id'       => $this->input->post('id'),
+        );
+        $res = $this->posts_service->statusTheme($data);
+        echo json_encode_data($res);
+    }
+
+    public function delTheme()
+    {
+        $data = array(
+            'id' => $this->input->post('id')
+        );
+        $res = $this->posts_service->delTheme($data);
+        echo json_encode_data($res);
+    }
+
+    public function postsTheme()
+    {
+        $data = array(
+            'id' => $this->input->get('id')
+        );
+        $jsArr = array(
+            'posts/postsTheme.js'
+        );
+        $theme = $this->posts_service->getPostsThemeByPid($data);
+        if (empty($theme['data'])) {
+            $this->jump404();
+        }
+        $this->smarty->assign('theme', $theme['data']);
+        $this->smarty->assign('posts', $theme['postList']);
+        $this->smarty->assign('jsArr', $jsArr);
+        $this->smarty->display('posts/postsTheme.tpl');
+    }
+
+    public function getPostByPid($pid = null)
+    {
+        $data = array(
+            'id' => $pid ?: $this->input->get('pid')
+        );
+
+        $theme = $this->posts_service->getPostsByPid($data);
+        echo json_encode_data($theme);
+    }
+
+    public function addThemePost()
+    {
+        $post_id = $this->input->get('post_id');
+        $post_arr = explode(',', $post_id);
+        $post_id = join(',', array_unique($post_arr));
+        $option = array(
+            'post_id' => $post_id,
+            'id' => $this->input->get('id')
+        );
+        $theme = $this->posts_service->addThemePost($option);
+        echo json_encode_data($theme);
+
     }
 }

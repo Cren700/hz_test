@@ -244,4 +244,13 @@ class Account extends BaseController {
         );
         $this->account_service->saveVerifySms($option);
     }
+
+    public function modifyHdImg()
+    {
+        $option = array(
+            'Fuser_id' => $this->input->post('user_id', true),
+            'Fimage_path' => $this->input->post('image_path', true),
+        );
+        $this->account_service->modifyHdImg($option);
+    }
 }

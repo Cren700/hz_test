@@ -101,7 +101,15 @@ class Account extends HZ_Controller
     public function detail()
     {
         $info = $this->user_service_model->detail();
-//        p($info);
+        $jsArr = array(
+            'jquery.placeholder.min.js',
+            'jquery.validate.js',
+            'uploadify/jquery.uploadify.min.js',
+            'account_modify.js'
+        );
+        $cssArr = array('uploadify.css');
+        $this->smarty->assign('jsArr', $jsArr);
+        $this->smarty->assign('cssArr', $cssArr);
         $this->smarty->assign('user', $info['data']);
         $this->smarty->display('account/detail.tpl');
     }
@@ -129,12 +137,7 @@ class Account extends HZ_Controller
         $option = $this->input->post();//提交的数据
         $option['id'] = $this->_uid;
         $res = $this->user_service_model->saveInfo($option);
-        if ($res['code'] != 0) {
-            $this->jump404();
-        } else {
-            $url = getBaseUrl('/account/detail');
-            $this->jump($url);
-        }
+        echo json_encode_data($res);
     }
 
     /**
@@ -145,6 +148,18 @@ class Account extends HZ_Controller
         $info = $this->user_service_model->center();
         $this->smarty->assign('user', $info['data']);
         $this->smarty->display('account/center.tpl');
+    }
+
+    public function modifyHdImg()
+    {
+        $option  = array(
+            'image_path' => $this->input->get('hdImg'),
+            'user_id' => $this->_uid
+        );
+        $res = $this->account_service_model->modifyHdImg($option);
+        echo json_encode_data($res);
+
+
     }
 
     /**

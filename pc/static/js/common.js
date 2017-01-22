@@ -278,7 +278,7 @@ var halfamonth = day * 15;
 var month = day * 30;
 function getDateDiff(dateTimeStamp) {
     var now = new Date().getTime();
-    var diffValue = now - dateTimeStamp;
+    var diffValue = now - dateTimeStamp*1000;
     if (diffValue < 0) {
         //若日期不符则弹出窗口告之
         //alert("结束日期不能小于开始日期！");
@@ -288,7 +288,11 @@ function getDateDiff(dateTimeStamp) {
     var dayC = diffValue / day;
     var hourC = diffValue / hour;
     var minC = diffValue / minute;
-    if (monthC >= 1) {
+    if (monthC >= 6) {
+        var date = new Date(dateTimeStamp*1000);
+        var d_str = date.getFullYear() + '-' + (date.getMonth()+1) + '-' + date.getDate();
+        result = d_str;
+    } else if( monthC >= 1 && monthC < 6) {
         result = parseInt(monthC) + "个月前";
     }
     else if (weekC >= 1) {

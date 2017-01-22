@@ -36,14 +36,15 @@ $(function(){
 		$("html,body").animate({scrollTop:0},1000)
 	});
 	function FloatLayer(){
-		var sidebar = $(".sidebar"),
-			floatlayer = $(".float_layer"),
-			sidebarW = sidebar.width(),
-			sidebarL = sidebar.offset().left;
-
-		floatlayer.css({
-			left : sidebarW + sidebarL + 20
-		})
+		var sidebar = $(".sidebar");
+		if (sidebar.length) {
+			var floatlayer = $(".float_layer");
+			var sidebarW = sidebar.width();
+			var sidebarL = sidebar.offset().left;
+			floatlayer.css({
+				left : sidebarW + sidebarL + 20
+			})
+		}
 	};
 	FloatLayer();
 	$(window).on('resize',function(){

@@ -41,6 +41,7 @@ $(function(){
 			$(".drop_nav").addClass("show")
 		}
 	});
+
 	$(".pro_info_dd").find("a").on('mouseover',function(){
 		$(this).parent().hide().siblings().show()
 	})

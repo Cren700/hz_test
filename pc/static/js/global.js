@@ -29,6 +29,16 @@ HZ.Global = (function() {
             $('.circle').removeClass('open');
             $('.circle_box').removeClass('show');
         });
+
+        $('.search_btn').on('click', function(){
+            var keyword = $(this).parent().find('.search_txt').val();
+            if(!$.trim(keyword)) {
+                HZ.Dialog.showMsg({title: '请输入搜索关键词'});
+            } else {
+                $(this).parent('form[name="search_form"]').submit();
+            }
+        })
+
     }
 
     return {
@@ -112,14 +122,18 @@ HZ.Dialog = (function() {
         $.extend(t, f);
 
         var tmpDialog = '\
-            <div id="layermbox" class="layermbox layermbox0 layermshow" ><div class="laymshade"></div><div class="layermmain"><div class="section"><div class="layermchild layermanim"><div class="layermcont">{title}</div></div></div></div></div>';
+        <div id="layermbox">\
+            <div class="xubox_shade" style="z-index:19891020; background-color:#000; opacity:0.3; filter:alpha(opacity=30);"></div>\
+            <div style="z-index: 19891025; width: auto; height: auto; top: 208px; margin-left: -69px;" id="xubox_layer11" class="xubox_layer" type="dialog"><div style="z-index: 19891025; height: 45px; background-color: rgb(255, 255, 255);" class="xubox_main"><div class="xubox_dialog"><span class="xubox_msg xubox_text" style="padding-left: 20px; margin-top: 12px;">{title}</span></div></div><div id="dialog_border" class="xubox_border" style="z-index: 19891024; opacity: 0.3; top: -8px; left: -8px; height: 61px; background-color: rgb(0, 0, 0);"></div></div></div>';
 
         // 处理弹窗
         tmpDialog = tmpDialog.replace('{title}', t.title);
         $(document).find('body').append(tmpDialog); // 完成了弹窗的样式
-
+        var border_width = $('.xubox_main').width();
+        $('#dialog_border').width(border_width+16);
         setTimeout(closeMsg, 3000);
     }
+
     function closeMsg() {
         if ($('#layermbox').length > 0) {
             $('#layermbox').remove();

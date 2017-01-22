@@ -297,4 +297,141 @@ class Posts extends HZ_Controller
         echo outputResponse($res);
     }
 
+    public function getCommentListByUid()
+    {
+        $option = array('Fcomment_author_name' => $this->input->get('user_id'));
+        $res = $this->posts_service->getCommentListByUid($option);
+        echo outputResponse($res);
+    }
+    
+    public function userDelComment()
+    {
+        $option = array(
+            'Fcomment_id' => $this->input->post('comment_id'),
+            'Fcomment_author_id' => $this->input->post('author_id')
+        );
+        $res = $this->posts_service->userDelComment($option);
+        echo outputResponse($res);
+    }
+
+
+    /**
+     * 添加专题
+     */
+    public function addTheme()
+    {
+        $data = array(
+            'Fuser_id' => $this->input->post('user_id'),
+            'Ftheme_content' => $this->input->post('theme_content'),
+            'Ftheme_title' => $this->input->post('theme_title'),
+            'Ftheme_excerpt' => $this->input->post('theme_excerpt'),
+            'Ftheme_coverimage' => $this->input->post('theme_coverimage'),
+            'Fbanner_path' => $this->input->post('banner_path'),
+            'Fcreate_time'  => time(),
+            'Fupdate_time'  => time(),
+        );
+        $res = $this->posts_service->addTheme($data);
+        echo outputResponse($res);
+    }
+
+    /**
+     * 更新资讯
+     */
+    public function updateTheme()
+    {
+        $where = array('Fid' => $this->input->post('id'));
+
+        $data = array(
+            'Ftheme_content' => $this->input->post('theme_content'),
+            'Ftheme_title' => $this->input->post('theme_title'),
+            'Ftheme_excerpt' => $this->input->post('theme_excerpt'),
+            'Ftheme_coverimage' => $this->input->post('theme_coverimage'),
+            'Fbanner_path' => $this->input->post('banner_path'),
+            'Fupdate_time'  => time(),
+        );
+
+        $res = $this->posts_service->updateTheme($where, $data);
+        echo outputResponse($res);
+    }
+
+    /**
+     * 获取某专题
+     */
+    public function getThemeByPid()
+    {
+        $where = array(
+            'Fid'  => $this->input->get('id')// 专题id
+        );
+        $res = $this->posts_service->getThemeByPid($where);
+        echo outputResponse($res);
+    }
+
+    /**
+     * 获取某专题资讯列表
+     */
+    public function getPostsThemeByPid()
+    {
+        $where = array(
+            'Fid'  => $this->input->get('id')// 专题id
+        );
+        $res = $this->posts_service->getPostsThemeByPid($where);
+        echo outputResponse($res);
+    }
+
+    /**
+     * 查询
+     */
+    public function queryThemes()
+    {
+        $option = array(
+            'p' => $this->input->get('p'),
+            'page_size' => $this->input->get('page_size'),
+        );
+        $res = $this->posts_service->queryThemes($option);
+        echo outputResponse($res);
+    }
+
+    /**
+     * 删除资讯
+     */
+    public function delTheme()
+    {
+        $where = array('Fid' => $this->input->get('id'));
+        $res = $this->posts_service->delTheme($where);
+        echo outputResponse($res);
+    }
+
+    /**
+     * 更新状态
+     */
+    public function changeThemeStatus()
+    {
+        $data = array(
+            'Ftheme_status' => $this->input->post('status'),
+        );
+        $where = array(
+            'Fid'   => $this->input->post('id')
+        );
+        $res = $this->posts_service->changeThemeStatus($data, $where);
+        echo outputResponse($res);
+    }
+
+    public function addThemePost()
+    {
+        $where = array(
+            'Fid' => $this->input->post('id')
+        );
+        $data = array('Fpost_id' => $this->input->post('post_id'));
+        $res = $this->posts_service->addThemePost($data, $where);
+        echo outputResponse($res);
+    }
+
+    public function getThemeList()
+    {
+        $where = array('Ftheme_status' => $this->input->get('theme_status'));
+        $res = $this->posts_service->getThemeList($where);
+        echo outputResponse($res);
+
+    }
+
 }

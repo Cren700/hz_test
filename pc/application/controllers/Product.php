@@ -23,10 +23,20 @@ class Product extends HZ_Controller
         if ($cate['code']===0) {
             $cateData = $cate['data']['list'];
         }
+        $collectList = null; // 收藏产品
+        if ($this->_user_id) {
+            $option = array(
+                'user_id' => $this->_user_id
+            );
+            $collect = $this->product_service->collectList($option);
+            if (isset($collect['data'])) {
+                $pid = array_column($collect['data']['list'], 'Fproduct_id');
+                $collectList = join(',', $pid);
+            }
+        }
         $jsArr = array('product_index.js');
-        $cssArr = array('bootstrap.min.css');
-        $this->smarty->assign('cssArr', $cssArr);
         $this->smarty->assign('jsArr', $jsArr);
+        $this->smarty->assign('collect', $collectList);
         $this->smarty->assign('cate', $cateData);
         $this->smarty->assign('cate_id', $cate_id);
         $this->smarty->display('product/index.tpl');
@@ -78,8 +88,24 @@ class Product extends HZ_Controller
     {
         $option = array('keyword' => $this->input->get('keyword'));
         $data = $this->product_service->search($option);
+//        p($data);
+        $jsArr = array('search.js');
         $cssArr = array('bootstrap.min.css');
+        $collectList = null; // 收藏产品
+        if ($this->_user_id) {
+            $option = array(
+                'user_id' => $this->_user_id
+            );
+            $collect = $this->product_service->collectList($option);
+            if (isset($collect['data'])) {
+                $pid = array_column($collect['data']['list'], 'Fproduct_id');
+                $collectList = join(',', $pid);
+            }
+        }
         $this->smarty->assign('cssArr', $cssArr);
+        $this->smarty->assign('jsArr', $jsArr);
+        $this->smarty->assign('collect', $collectList);
+        $this->smarty->assign('type', 'product');
         $this->smarty->assign('info', $data);
         $this->smarty->assign('keyword', $this->input->get('keyword'));
         $this->smarty->display('product/search.tpl');
