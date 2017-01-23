@@ -78,20 +78,22 @@ class Account_service_model extends HZ_Model
 
     /**
      * 保存短信sms
-     * @param $resultCode
+     * @param $status
      * @param $resultMsgId
      * @param $createTime
      * @param $content
      * @param $mobile_no
+     * @param $resultMsg
      */
-    public function saveVerifySms($resultCode, $resultMsgId, $createTime, $content, $mobile_no)
+    public function saveVerifySms($status, $resultMsgId, $createTime, $content, $mobile_no, $resultMsg)
     {
         $option = array(
             'buss_type' => 1, // 短信验证
             'sms_id' => $resultMsgId, // smsid
             'sms_content' => $content,
             'mobile_no' => $mobile_no,
-            'status' => $resultCode,
+            'status' => $status,
+            'ret_msg' => $resultMsg,
             'create_time' => $createTime
         );
         $this->myCurl('account', 'saveVerifySms', $option, true);
@@ -117,5 +119,21 @@ class Account_service_model extends HZ_Model
     public function modifyHdImg($option)
     {
         $this->myCurl('account', 'modifyHdImg', $option, true);
+    }
+
+    public function loginPhone($option)
+    {
+        $ret = array('code' => 0);
+        $res = $this->myCurl('account', 'loginPhone', $option, true);
+        if ($res['code'] == 0) {
+            // 保存session
+            $ret['data']['url'] = getBaseUrl('/home.html');
+            $session = array('w_uid' => $res['data']['Fid'], 'w_username' => $res['data']['Fuser_id'], 'w_type' => $res['data']['Fuser_type'], 'w_image_path' => isset($res['data']['Fimage_path']) ? $res['data']['Fimage_path'] : '' );
+            $this->session->set_userdata($session);
+        } else {
+            $ret['code'] = $res['code'];
+            $ret['msg'] = $res['msg'];
+        }
+        return $ret;
     }
 }

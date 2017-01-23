@@ -318,6 +318,39 @@ class Account_service_model extends HZ_Model
         return $ret;
     }
 
+    public function loginPhone($option)
+    {
+        $ret = array('code' => 0);
+        $where = array(
+            'Fuser_id' => $option['Fuser_id'],
+            'Flog_type' => $option['Flog_type']
+        );
+        $res = $this->account_dao_model->getInfoByOp($where);
+        if (!$res) {
+            // 没有用户则添加用户
+            $data_base = array(
+                'Fuser_id' => $option['Fuser_id'],
+                'Flog_type' => $option['Flog_type'],
+                'Fuser_type' => 4, // 普通用户
+                'Fcreate_time' => time(),
+                'Fupdate_time' => time(),
+            );
+            $uid = $this->account_dao_model->addAccount($data_base);
+            $res_detail = array(
+                'Fid' => $uid,
+                'Fuser_id' => $option['Fuser_id'],
+                'Fuser_type' => 4,
+                'Fimage_path' => ''
+            );
+            $ret['data'] = $res_detail;
+        } else {
+            $detail = $this->account_dao_model->getDetailByOp(array('Fuser_id' => $res['Fid']));
+            $ret['data'] = $res;
+            $ret['data']['Fimage_path'] = $detail['Fimage_path'];
+        }
+        return $ret;
+    }
+    
     public function getStoreName($option)
     {
         $ret = array('code' => 0);
@@ -355,5 +388,26 @@ class Account_service_model extends HZ_Model
         $data = array('Fimage_path' => $option['Fimage_path']);
         $this->account_dao_model->modifyHdImg($data, $where);
         return $ret;
+    }
+
+    public function checkVerifyCode($Fverifycode)
+    {
+        $ret = array('code' => 0);
+        if(!$Fverifycode) {
+            $ret['code'] = 'account_error_7';
+            return $ret;
+        }
+        $where = array(
+            'Fverifycode' => $Fverifycode,
+            'Fstatus' => 1,
+            'Fend_time > ' => time()
+        );
+        $res = $this->account_dao_model->checkVerifyCode($where);
+        if (empty($res)) {
+            $ret['code'] = 'account_error_8';
+            return $ret;
+        }
+        return $ret;
+
     }
 }

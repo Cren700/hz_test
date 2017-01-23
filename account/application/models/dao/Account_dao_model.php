@@ -145,4 +145,16 @@ class Account_dao_model extends HZ_Model
         dbEscape($where);
         return $this->account->update($this->_user_detail_table, $data, $where);
     }
+
+    public function checkVerifyCode($where)
+    {
+        dbEscape($where);
+        $res = $this->common->get_where($this->_verify_code, $where)->row_array();
+        if ($res) {
+            $u_where = array('Fverifycode_id' => $res['Fverifycode_id']);
+            $u_data = array('Fstatus' => 0);
+            $res = $this->common->update($this->_verify_code, $u_data, $u_where);
+        }
+        return $res;
+    }
 }

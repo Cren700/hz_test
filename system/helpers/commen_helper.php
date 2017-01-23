@@ -350,60 +350,33 @@ function getFilePath($path)
 }
 
 
-
 /**
  * 发送模板短信
- * @param to 手机号码集合,用英文逗号分开
- * @param datas 内容数据 格式为数组 例如：array('Marry','Alon')，如不需替换请填 null
- * @param $tempId 模板Id
+ * @param $ali_appKey
+ * @param $secretKey
+ * @param $signName
+ * @param $tempCode
+ * @param $phone
+ * @param $param // 数组
+ * @return mixed
  */
-function sms($to,$datas,$tempId = 1)
+function sms($ali_appKey, $secretKey, $signName, $tempCode, $phone, $param)
 {
 
     // 初始化REST SDK
-//    global $accountSid,$accountToken,$appId,$serverIP,$serverPort,$softVersion;
-
-    include_once ROOT_PATH.'/system/third_party/CCPRestSDK.php';
-    //主帐号
-    $accountSid= '8a216da85982d9da015983691c00003d';
-    //主帐号Token
-    $accountToken= 'aeada2fbd41640cf8b85f84a61ed9760';
-    //应用Id
-    $appId='8a216da85982d9da0159836922200044';
-    //请求地址，格式如下，不需要写https://
-    $serverIP='app.cloopen.com';
-    //请求端口
-    $serverPort='8883';
-    //REST版本号
-    $softVersion='2013-12-26';
-
-    $rest = new REST($serverIP,$serverPort,$softVersion);
-    $rest->setAccount($accountSid,$accountToken);
-    $rest->setAppId($appId);
-
-    // 发送模板短信
-    $result = $rest->sendTemplateSMS($to,$datas,$tempId);
-
-    $res = array(
-        'statusCode' => null,
-        'dateCreated' => null,
-        'statusMsg' => null,
-        'smsMessageSid' => null
-    );
-    if($result == NULL ) {
-        return $res;
-    }
-    if($result->statusCode!=0) {
-        //TODO 添加错误处理逻辑
-        $res['statusCode'] = $result->statusCode;
-        $res['statusMsg'] = $result->statusMsg;
-    }else{
-        //TODO 添加成功处理逻辑
-        // 获取返回信息
-        $smsmessage = json_encode($result->TemplateSMS);
-        $res['statusCode'] = 0;
-        $res['dateCreated'] = $smsmessage['dateCreated'];
-        $res['smsMessageSid'] = $smsmessage['smsMessageSid'];
-    }
-    return $res;
+    include_once ROOT_PATH.'/system/third_party/alidayu/TopSdk.php';
+    include_once ROOT_PATH.'/system/third_party/alidayu/top/TopClient.php';
+    include_once ROOT_PATH.'/system/third_party/alidayu/top/request/AlibabaAliqinFcSmsNumSendRequest.php';
+    $c = new TopClient;
+    $c->appkey = $ali_appKey;
+    $c->secretKey = $secretKey;
+    $req = new AlibabaAliqinFcSmsNumSendRequest;
+    $req->setExtend( "" );
+    $req->setSmsType( "normal" );
+    $req->setSmsFreeSignName( $signName );
+    $req->setSmsParam( json_encode($param) ); // 参数必须是字符串
+    $req->setRecNum( $phone );
+    $req->setSmsTemplateCode( $tempCode );
+    $resp = $c->execute( $req );
+    return $resp;
 }

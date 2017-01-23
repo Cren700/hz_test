@@ -228,12 +228,14 @@ class Account extends BaseController {
             'Fsms_content' => $this->input->post('sms_content', true),
             'Fmobile_no' => $this->input->post('mobile_no', true),
             'Fstatus' => $this->input->post('status', true),
+            'Fret_msg' => $this->input->post('ret_msg', true),
             'Fcreate_time' => $this->input->post('create_time', true)
         );
         $res = $this->account_service->saveVerifySms($option);
         echo outputResponse($res);
     }
 
+    // 保存手机验证码
     public function saveVerifyCode()
     {
         $option = array(
@@ -242,9 +244,10 @@ class Account extends BaseController {
             'Fend_time' => $this->input->post('end_time', true),
             'Fstatus' => $this->input->post('status', true),
         );
-        $this->account_service->saveVerifySms($option);
+        $this->account_service->saveVerifyCode($option);
     }
 
+    // 保存头像信息
     public function modifyHdImg()
     {
         $option = array(
@@ -253,4 +256,20 @@ class Account extends BaseController {
         );
         $this->account_service->modifyHdImg($option);
     }
+
+    // 手机验证码登录
+    public function loginPhone()
+    {
+        $option = array(
+            'Fuser_id' => $this->input->post('user_id', true),
+            'Fverifycode' => $this->input->post('code', true),
+            'Flog_type' => 3 // 手机登录
+        );
+        $res = $this->account_service->checkVerifyCode($option['Fverifycode']);
+        if ($res['code'] === 0) {
+            $res = $this->account_service->loginPhone($option);
+        }
+        echo outputResponse($res);
+    }
+
 }

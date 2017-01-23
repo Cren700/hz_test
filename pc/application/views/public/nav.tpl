@@ -20,7 +20,7 @@
                 </div>
                 <{else}>
                 <div class="drop">
-                    <p>您好，<span><{$username}></span></p>
+                    <p><span>您好，<{$username}></span></p>
                     <div class="drop_avatar">
                         <img src="<{if $image_path}><{$image_path}><{else}><{'avatar.jpg'|baseImgUrl}><{/if}>"/>
                     </div>

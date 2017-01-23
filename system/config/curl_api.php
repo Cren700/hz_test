@@ -33,6 +33,7 @@ $config = array(
             'saveVerifySms'         => '/account/saveVerifySms',         // 保存短信sms    
             'saveVerifyCode'        => '/account/saveVerifyCode',        // 保存verifycode    
             'modifyHdImg'           => '/account/modifyHdImg',        // 保存头像    
+            'loginPhone'            => '/account/loginPhone',            // 手机登录
         ),
     ),
     'product' => array(

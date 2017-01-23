@@ -7,21 +7,22 @@
     <p class="welogin">用户登录</p>
     <form id="loginform" method="post" action="">
         <div class="phone_form">
-            <input type="text" class="phone_t" name="user_id" placeholder="请输入您的账号"/>
-            <div class="img_verification clearfix">
-                <input type="password" class="phone_t" name="passwd" placeholder="请输入您的密码"/>
-            </div>
+            <input type="text" class="phone_t" name="user_id" placeholder="请输入您的手机号码"/>
             <div class="img_verification clearfix">
                 <input type="text" class="img_yanzheng" name="" id="js-vc-code" placeholder="请输入右侧图形验证码"/>
                 <img class="yanz_img" src="<{'/account/getVC?_='|cat:time()|getBaseUrl}>" id="js-vc-img" onclick="this.src+='?';">
             </div>
-            <p></p>
-            <input type="submit" class="phone_submit" value="登录" id="js-btn-login" data-pwd-url="<{'/account/dologin.html'|getBaseUrl}>">
+            <div class="clearfix">
+                <input type="text" class="phone_yanzheng" name="phoneyanz" placeholder="请输入验证码"/>
+                <input type="button" class="verification_btn" id="js-btn-send-sms" value="发送验证码" >
+            </div>
+            <p id="js-txt-show-tips"></p>
+            <input type="submit" class="phone_submit" value="登录" id="js-btn-login" data-pwd-url="<{'/account/doPhoneLogin.html'|getBaseUrl}>">
             <input type="button" class="register_regit_sub" value="注册" id="js-btn-register" onclick="window.location ='<{'/account/register.html'|getBaseUrl}>'">
         </div>
     </form>
     <span>或</span>
-    <a href="<{'/account/phonepage.html'|getBaseUrl}>" class="other_login">使用电话号码登录</a>
+    <a href="<{'/account.html'|getBaseUrl}>" class="other_login">使用账号登录</a>
     <a href="" class="other_login">使用微信登录</a>
     <!--<a href="" class="other_login">使用QQ登录</a>-->
 </div>

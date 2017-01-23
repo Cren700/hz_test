@@ -1862,7 +1862,7 @@ section.sub_info {
 }
 .login_logo {
     width: 6.16rem;
-    height: 1.6rem;
+    height: 1rem;
     margin: 0 auto;
     margin-bottom: 1.01333333rem;
 }
@@ -1924,6 +1924,7 @@ section.sub_info {
     border: 1px solid #ceced2;
     border-radius: 0.58666667rem;
     text-indent: 0.53333333rem;
+    font-size: 0.48rem;
     flex: 1;
     -webkit-flex: 1;
     -webkit-box-flex: 1;
@@ -1962,6 +1963,16 @@ section.sub_info {
     height: 1.17333333rem;
     border-radius: 0.58666667rem;
     background-color: #197dd2;
+    color: #fff;
+    font-size: 0.48rem;
+    margin:0.36666667rem auto 0.26666667rem auto ;
+}
+.login_other_sub {
+    display: block;
+    width: 8.53333333rem;
+    height: 1.17333333rem;
+    border-radius: 0.58666667rem;
+    background-color: #2dd219;
     color: #fff;
     font-size: 0.48rem;
     margin:0.36666667rem auto 0.26666667rem auto ;

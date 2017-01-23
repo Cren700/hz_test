@@ -51,11 +51,6 @@ class Info extends BaseControllor
         );
         $praiseList = $this->info_service->praiseList($option);
         $commentList = $this->info_service->commentList($option);
-//        p($commentList);
-        if (!isset($praiseList['data']) || empty($praiseList['data']) ){
-            // 没有数据
-            $this->jump404();
-        }
         $jsArr = array(
             'info_collect.js'
         );

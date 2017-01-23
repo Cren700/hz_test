@@ -243,46 +243,9 @@ class Account extends HZ_Controller
         print_r($arr);
     }
 
-    /**
-     * 发送模板短信
-     */
-    public function phoneLog()
-    {
-        $code = mt_rand(100000, 999999);
-        $data = array($code, 5);
-        $to = $this->input->get('phone');
-        $tempID = 1; // 短信模板ID
-        $content = json_encode_data(array('code' => $data, 'tempId' => $tempID));
-        $resValidation = validationData($to, 'phone');
-        if (!empty($resValidation)) {
-            return outputResponse($resValidation);
-        }
-        for($i = 0; $i<3;){
-            // 保存短信消息
-            $result = sms($to, $data, $tempID);
-            echo json_encode($result);
-            $resultCode = $result['statusCode'];
-            $resultMsgId = $result['smsMessageSid'];
-            $createTime = strtotime($result['dateCreated']);
-            $endTime = $createTime+5*60;
-            // 保存发送短信消息
-            if ($resultCode != 0) {
-                $i++;
-                $res = $this->account_service_model->saveVerifySms($resultCode = 1, $resultMsgId, $createTime, $content, $to);
-                echo 'wrong';var_dump($res);
-            } else {
-                // 保存验证码
-                $this->account_service_model->saveVerifyCode($createTime, $endTime, $code);
-                $res = $this->account_service_model->saveVerifySms($resultCode = 2, $resultMsgId, $createTime, $content, $to);
-                echo 'wrong';var_dump($res);
-                break;
-            }
-        }
-    }
-
     public function phonePage()
     {
-        $jsArr = array('account_login.js');
+        $jsArr = array('account_phone.js');
         $this->smarty->assign('jsArr', $jsArr);
         $this->smarty->display('account/phonePage.tpl');
     }
@@ -292,14 +255,59 @@ class Account extends HZ_Controller
      */
     public function doPhoneLogin()
     {
-        $user_id = $this->input->post('user_id');
-        $passwd = $this->input->post('passwd');
-        $uri = $this->input->post('uri');
-        $res = $this->account_service_model->login($user_id, $passwd);
-        if ($res['code'] === 0) {
-            $res['data']['url'] = $uri ? HOST_URL . $uri : getBaseUrl('/home.html');
-        }
+        $option = array(
+            'user_id' => $this->input->post('user_id'),
+            'code' => $this->input->post('code')
+        );
+        $res = $this->account_service_model->loginPhone($option);
         echo json_encode_data($res);
+    }
+
+    public function sendSms()
+    {
+        $ret = array('code' => 0);
+        $this->config->load('sms');
+        $login_con = $this->config->item('login');
+        $code = mt_rand(100000, 999999);
+        $param = array('name' => '用户', 'code' => (string)$code);
+        $phone = $this->input->get('phone');
+        $content = $login_con['msg'];
+        $content = preg_replace('/{name}/', $param['name'], $content);
+        $content = preg_replace('/{code}/', $param['code'], $content);
+        $resValidation = validationData($phone, 'phone');
+        if (!empty($resValidation)) {
+            return outputResponse($resValidation);
+        }
+
+        for($i = 0; $i<3;){
+            // 保存短信消息
+            $resultObj = sms($login_con['appkey'], $login_con['secretKey'], $login_con['signName'], $login_con['tempCode'], $phone, $param);
+//var_dump($result);
+            $result = (array)$resultObj;
+            $resultCode = 0;
+            $resultMsg = '发送成功';
+            $resultMsgId = null;
+            $createTime = time();
+            $endTime = $createTime+30*60;
+            if (isset($result['code'])) {
+                $resultCode = $result['code'];
+                $resultMsg = $result['sub_msg'];
+            }
+            $resultMsgId = $result['request_id'];
+
+            // 保存发送短信消息
+            if ($resultCode != 0) {
+                $i++;
+                $this->account_service_model->saveVerifySms($status = 0, $resultMsgId, $createTime, $content, $phone, $resultMsg);
+                $ret['code'] = 1;  // 不成功
+            } else {
+                // 保存验证码
+                $this->account_service_model->saveVerifyCode($createTime, $endTime, $code);
+                $this->account_service_model->saveVerifySms($status = 1, $resultMsgId, $createTime, $content, $phone, $resultMsg);
+                break; // 跳出循环
+            }
+        }
+        echo json_encode_data($ret);
     }
 
 }

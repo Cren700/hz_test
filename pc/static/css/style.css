@@ -30,7 +30,9 @@ h3{font-size:16px;font-weight:normal;}
 .head_right .social a.weibo{background-position:;}
 .head_right .social a.weichat{background-position:;}
 .drop_down{position:relative;height:60px;float:right;margin-left:20px;}
-.drop_down .drop p{color:#666;float:left;margin-right:20px;padding-top:15px;}
+.drop_down .drop p{color:#666;float:left;margin-right:20px;padding-top:15px;
+    overflow:hidden; }
+.drop_down .drop p span{max-width: 120px; overflow: hidden; display:block; white-space:nowrap;text-overflow: ellipsis;}
 .drop_down .drop .drop_avatar{width:48px;height:48px;border-radius:50%;overflow:hidden;cursor:pointer;margin-top:-8px;}
 .drop_down .drop .drop_avatar img{width:48px;height:48px;}
 .drop_down .drop .drop_avatar>a{display:block;}

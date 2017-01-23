@@ -190,6 +190,78 @@ class Account extends HZ_Controller
         }
     }
 
+    /**
+     * 手机登录
+     */
+    public function phone()
+    {
+        $jsArr = array('account_phone.js');
+        $this->smarty->assign('jsArr', $jsArr);
+        $this->smarty->display('account/phone.tpl');
+    }
+
+    /**
+     * 密码登录接口
+     */
+    public function doPhoneLogin()
+    {
+        $option = array(
+            'user_id' => $this->input->post('user_id'),
+            'code' => $this->input->post('code')
+        );
+        $res = $this->account_service_model->loginPhone($option);
+        echo json_encode_data($res);
+    }
+
+    /**
+     * 发送短信
+     */
+    public function sendSms()
+    {
+        $ret = array('code' => 0);
+        $this->config->load('sms');
+        $login_con = $this->config->item('login');
+        $code = mt_rand(100000, 999999);
+        $param = array('name' => '用户', 'code' => (string)$code);
+        $phone = $this->input->get('phone');
+        $content = $login_con['msg'];
+        $content = preg_replace('/{name}/', $param['name'], $content);
+        $content = preg_replace('/{code}/', $param['code'], $content);
+        $resValidation = validationData($phone, 'phone');
+        if (!empty($resValidation)) {
+            return outputResponse($resValidation);
+        }
+
+        for($i = 0; $i<3;){
+            // 保存短信消息
+            $resultObj = sms($login_con['appkey'], $login_con['secretKey'], $login_con['signName'], $login_con['tempCode'], $phone, $param);
+//var_dump($result);
+            $result = (array)$resultObj;
+            $resultCode = 0;
+            $resultMsg = '发送成功';
+            $resultMsgId = null;
+            $createTime = time();
+            $endTime = $createTime+30*60;
+            if (isset($result['code'])) {
+                $resultCode = $result['code'];
+                $resultMsg = $result['sub_msg'];
+            }
+            $resultMsgId = $result['request_id'];
+
+            // 保存发送短信消息
+            if ($resultCode != 0) {
+                $i++;
+                $this->account_service_model->saveVerifySms($status = 0, $resultMsgId, $createTime, $content, $phone, $resultMsg);
+                $ret['code'] = 1;  // 不成功
+            } else {
+                // 保存验证码
+                $this->account_service_model->saveVerifyCode($createTime, $endTime, $code);
+                $this->account_service_model->saveVerifySms($status = 1, $resultMsgId, $createTime, $content, $phone, $resultMsg);
+                break; // 跳出循环
+            }
+        }
+        echo json_encode_data($ret);
+    }
 
     /**
      * 微信登录
