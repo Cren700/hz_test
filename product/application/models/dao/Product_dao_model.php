@@ -162,4 +162,10 @@ class Product_dao_model extends HZ_Model
         $res = $this->p->where($where)->order_by('Fproduct_id DESC')->get($this->_product_table)->result_array();
         return filterData($res);
     }
+    
+    public function hasProductPower($option)
+    {
+        $res = $this->p->get_where($this->_product_table, $option)->result_array();
+        return $res;
+    }
 }

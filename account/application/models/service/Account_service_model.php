@@ -408,6 +408,29 @@ class Account_service_model extends HZ_Model
             return $ret;
         }
         return $ret;
+    }
 
+    public function hasMediumPower($option)
+    {
+
+        $ret = array('code' => 0);
+        $res = $this->account_dao_model->hasMediumPower($option);
+        if (empty($res)) {
+            $ret['code'] = 'account_error_9';
+            return $ret;
+        }
+        return $ret;
+    }
+
+    public function hasStorePower($option)
+    {
+
+        $ret = array('code' => 0);
+        $res = $this->account_dao_model->hasStorePower($option);
+        if (empty($res)) {
+            $ret['code'] = 'account_error_10';
+            return $ret;
+        }
+        return $ret;
     }
 }

@@ -256,11 +256,11 @@ class HZ_Controller extends CI_Controller
                         'name'      => '评论审核',
                         'flagName'  => 'comment',
                     ),
-//                    array(
-//                        'selected'  => '0',
-//                        'name'      => '作家管理',
-//                        'flagName'  => 'sale',
-//                    ),
+                    array(
+                        'selected'  => '0',
+                        'name'      => '行业动态',
+                        'flagName'  => 'events',
+                    ),
                     array(
                         'selected'  => '0',
                         'name'      => '关注列表',

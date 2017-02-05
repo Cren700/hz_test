@@ -110,15 +110,17 @@ HZ.ISLOGIN = (function(){
  */
 HZ.Dialog = (function() {
 
+    var t = {
+        title: '温馨提示',
+        url: null
+    };
+
     function init() {
         $(document).on( 'click', '.js-dialog-btn-cancel', function(){
             closeMsg();
         })
     }
     function showMsg(f) {
-        var t = {
-            title: '温馨提示'
-        };
         $.extend(t, f);
 
         var tmpDialog = '\
@@ -137,6 +139,9 @@ HZ.Dialog = (function() {
     function closeMsg() {
         if ($('#layermbox').length > 0) {
             $('#layermbox').remove();
+        }
+        if (t.url) {
+            window.location = t.url;
         }
     }
     return {

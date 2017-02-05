@@ -34,6 +34,8 @@ $config = array(
             'saveVerifyCode'        => '/account/saveVerifyCode',        // 保存verifycode    
             'modifyHdImg'           => '/account/modifyHdImg',        // 保存头像    
             'loginPhone'            => '/account/loginPhone',            // 手机登录
+            'hasMediumPower'        => '/account/hasMediumPower',        // 查看是否具有媒体权限
+            'hasStorePower'        => '/account/hasStorePower',        // 查看是否具有商户权限
         ),
     ),
     'product' => array(
@@ -56,6 +58,7 @@ $config = array(
             'queryCollect'          => '/product/queryCollect',         // 查询收藏列表
             'getCollectListByUid'   => '/product/getCollectListByUid',     // 我的收藏
             'search'                => '/product/search',                 // 搜索
+            'hasProductPower'       => '/product/hasProductPower',         // 是否具有产品权限
         ),
     ),
     'posts' => array(
@@ -99,6 +102,10 @@ $config = array(
             'getPostsThemeByPid'    => '/posts/getPostsThemeByPid',          // 获取某个主题
             'addThemePost'          => '/posts/addThemePost',          // 添加post_id
             'getThemeList'          => '/posts/getThemeList',          // 前台获取专题列表
+            'saveEvent'             => '/posts/saveEvent',              // 行业动态
+            'queryEvents'           => '/posts/queryEvents',            // 查询信息
+            'delEvent'              => '/posts/delEvent',               // 删除行业信息
+            'modifyEvent'           => '/posts/modifyEvent',               // 修改行业信息
         ),
     ),
     'order' => array(

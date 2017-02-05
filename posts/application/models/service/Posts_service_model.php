@@ -39,6 +39,15 @@ class Posts_service_model extends HZ_Model
         if ($option['Fis_del'] === '0' || !empty($option['Fis_del'])) {
             $where['Fis_del'] = $option['Fis_del'];
         }
+
+        if ($option['Fuser_type'] === '0' || !empty($option['Fuser_type'])) {
+            $where['Fuser_type'] = $option['Fuser_type'];
+        }
+
+        if ($option['Fuser_id'] === '0' || !empty($option['Fuser_id'])) {
+            $where['Fuser_id'] = $option['Fuser_id'];
+        }
+
         // like
         if ($option['Fpost_title'] === '0' || !empty($option['Fpost_title'])) {
             $like['Fpost_title'] = $option['Fpost_title'];
@@ -50,8 +59,12 @@ class Posts_service_model extends HZ_Model
         $page = $option['p'] ? : 1;
         $page_size = $option['page_size'] ? : 10;
         $res['data']['count'] = $this->posts_dao->postsNum($where, $like);
-        $res['data']['list'] = $this->posts_dao->postsList($where, $like, $page, $page_size);
-
+        $posts = $this->posts_dao->postsList($where, $like, $page, $page_size);
+        foreach ( $posts as &$post) {
+            $user_info = $this->myCurl('account', 'getStoreName', array('id' => $post['Fuser_id'], 'type' => $post['Fuser_type']), false);
+            $post['Fuser_name'] = isset($user_info['data']['Fuser_id']) ? $user_info['data']['Fuser_id'] : '';
+        }
+        $res['data']['list'] = $posts;
         return $res;
     }
 
@@ -645,5 +658,84 @@ class Posts_service_model extends HZ_Model
         $theme = $this->posts_dao->getThemeList($where);
         $ret['data'] = $theme;
         return $ret;
+    }
+
+    public function saveEvent($option)
+    {
+        $ret = array('code' => 0);
+        // 数据验证
+        $validationConfig = array(
+            array(
+                'value' => $option['Fpartners_id'],
+                'rules' => 'required',
+                'field' => '编号'
+            ),
+            array(
+                'value' => $option['Fpartners_name'],
+                'rules' => 'required',
+                'field' => '名称'
+            )
+        );
+        foreach ($validationConfig as $v) {
+            $resValidation = validationData($v['value'], $v['rules'], $v['field']);
+            if (!empty($resValidation)) {
+                return $resValidation;
+            }
+        }
+        $this->posts_dao->addEvent($option);
+        return $ret;
+    }
+
+    public function queryEvents($option)
+    {
+        $res = array('code' => 0);
+
+        $page = $option['p'] ? : 1;
+        $page_size = $option['page_size'] ? : 10;
+        $res['data']['count'] = $this->posts_dao->eventsNum();
+        $res['data']['list'] = $this->posts_dao->eventsList($page, $page_size);
+
+        return $res;
+    }
+
+    public function delEvent($where)
+    {
+        $ret = array('code' => 0);
+        if (!isset($where['Fid']) && empty($where['Fid'])) {
+            $ret['code'] = 'system_error_2'; // 操作出错
+            return $ret;
+        }
+        $res = $this->posts_dao->delEvent($where);
+        if ($res) {
+            return $ret;
+        } else {
+            return $ret['code'] = 'posts_error_16';
+        }
+    }
+
+    public function modifyEvent($where, $data)
+    {
+        $ret = array('code' => 0);
+        if (!isset($where['Fid']) && empty($where['Fid'])) {
+            $ret['code'] = 'system_error_2'; // 操作出错
+            return $ret;
+        }
+        $res = $this->posts_dao->modifyEvent($where, $data);
+        if ($res) {
+            return $ret;
+        } else {
+            return $ret['code'] = 'posts_error_17';
+        }
+    }
+
+    public function hasPostsPower($option)
+    {
+        $ret = array('code' => 0);
+        $res = $this->posts_dao->hasPostsPower($option);
+        if ($res) {
+            return $ret;
+        } else {
+            return $ret['code'] = 'posts_error_18';
+        }
     }
 }

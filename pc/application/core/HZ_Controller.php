@@ -73,7 +73,7 @@ class HZ_Controller extends CI_Controller
 
     public function jump404($msg ='')
     {
-        $this->jump(getBaseUrl('/404.html?msg='.$msg));
+        $this->jump(getBaseUrl('/errorPage.html?msg='.$msg));
         exit();
     }
 
@@ -89,6 +89,153 @@ class HZ_Controller extends CI_Controller
                 exit();
             }
         }
+    }
+
+    /**
+     * 分页
+     * @param $rows
+     * @param int $p
+     * @param int $pageSize
+     * @param string $url
+     * @return mixed
+     */
+    public function page($rows, $p = 1, $pageSize = 10, $url = '')
+    {
+        $this->load->library('pagination');
+        $config['base_url'] = $url;
+        $config['total_rows'] = $rows;
+        $config['per_page'] = $pageSize;
+        $config['first_link'] = false;
+        $config['last_link'] = false;
+        $config['prev_link'] = '&lt;';
+        $config['next_link'] = '&gt;';
+        $config['cur_page'] = $p; // 当前页数
+
+        $config['use_page_numbers'] = TRUE;
+
+        //把结果包在ul标签里
+        $config['full_tag_open'] = '<div class="pagination alternate"><ul>';
+        $config['full_tag_close'] = '</ul></div>';
+        //自定义数字
+        $config['num_tag_open'] = '<li>';
+        $config['num_tag_close'] = '</li>';
+        //当前页
+        $config['cur_tag_open'] = '<li class="active"><a href="#">';
+        $config['cur_tag_close'] = '</a><li>';
+        //前一页
+        $config['prev_tag_open'] = '<li class="prev">';
+        $config['prev_tag_close'] = '</li>';
+        //后一页
+        $config['next_tag_open'] = '<li>';
+        $config['next_tag_close'] = '<li>';
+
+        $this->pagination->initialize($config);
+
+        return $this->pagination->create_links();
+    }
+
+    /**
+     * 后台资讯目录
+     * @return array
+     */
+    public function getMediumMenu()
+    {
+        // 目录结构
+        $menu = array(
+            array(
+                'selected'  => '0',
+                'name'      => '资讯管理',
+                'flagName'  => 'medium',
+                'icon'      => 'icon-bar-chart',
+                'sub'       => array(
+                    array(
+                        'selected'  => '0',
+                        'name'      => '资讯列表',
+                        'flagName'  => 'index',
+                    ),
+                    array(
+                        'selected'  => '0',
+                        'name'      => '资讯发布',
+                        'flagName'  => 'add'
+                    ),
+                )
+            ),
+        );
+
+        $rsegments = $this->uri->rsegments;
+        $cont = $rsegments[1];
+        $method = $rsegments[2];
+
+        foreach ($menu as &$m) {
+            if (strtolower($cont) ===$m['flagName']) {
+                $m['selected'] = 1;
+                foreach ($m['sub'] as &$s) {
+                    if (strtolower($method) === $s['flagName']) {
+                        $s['selected'] = 1;
+                    }
+                }
+            }
+        }
+        return $menu;
+    }
+
+
+    /**
+     * 商户后台目录
+     * @return array
+     */
+    public function getStoreMenu()
+    {
+        // 目录结构
+        $menu = array(
+            array(
+                'selected'  => '0',
+                'name'      => '商品管理',
+                'flagName'  => 'store',
+                'icon'      => 'icon-bar-chart',
+                'sub'       => array(
+                    array(
+                        'selected'  => '0',
+                        'name'      => '商品列表',
+                        'flagName'  => 'index',
+                    ),
+                    array(
+                        'selected'  => '0',
+                        'name'      => '添加商品',
+                        'flagName'  => 'add',
+                    ),
+                )
+            ),
+            array(
+                'selected'  => '0',
+                'name'      => '订单管理',
+                'flagName'  => 'storeorder',
+                'icon'      => 'icon-trophy',
+                'sub'       => array(
+                    array(
+                        'selected'  => '0',
+                        'name'      => '支付列表',
+                        'flagName'  => 'index',
+                    )
+                )
+            ),
+        );
+
+        $rsegments = $this->uri->rsegments;
+        $cont = $rsegments[1];
+        $method = $rsegments[2];
+
+        foreach ($menu as &$m) {
+            if (strtolower($cont) ===$m['flagName']) {
+                $m['selected'] = 1;
+                foreach ($m['sub'] as &$s) {
+                    if (strtolower($method) === $s['flagName']) {
+                        $s['selected'] = 1;
+                    }
+                }
+            }
+        }
+        return $menu;
     }
 }
 

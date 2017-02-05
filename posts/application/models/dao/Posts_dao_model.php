@@ -12,6 +12,7 @@ class Posts_dao_model extends HZ_Model
     private $_post_comments_table = 't_post_comments';
     private $_post_praise_table = 't_praise';
     private $_theme_table = 't_themes';
+    private $_events_table = 't_events';
     private $_news = null; // 资讯库
     public function __construct()
     {
@@ -328,5 +329,46 @@ class Posts_dao_model extends HZ_Model
         $res = $this->_news->order_by('Fupdate_time DESC')->get_where($this->_theme_table, $where)->result_array();
         return filterData($res);
     }
+
+    public function addEvent($data)
+    {
+        dbEscape($data);
+        return $this->_news->insert($this->_events_table, $data);
+    }
+
+    public function eventsNum() {
+        $count = $this->_news->select('count(*) as num')
+            ->from($this->_events_table)
+            ->count_all_results();
+        return $count;
+    }
+
+    public function eventsList($page, $page_size) {
+        $query = $this->_news->select('*')
+            ->from($this->_events_table)
+            ->order_by('Fnum', 'DESC')
+            ->limit($page_size, $page_size * ($page - 1))
+            ->get();
+        $res = $query->result_array();
+        return filterData($res);
+    }
+
+    public function delEvent($where)
+    {
+        dbEscape($where);
+        return $this->_news->delete($this->_events_table, $where);
+    }
+
+    public function modifyEvent($where, $data)
+    {
+        return $this->_news->update($this->_events_table, $data, $where);
+    }
+
+    public function hasPostsPower($option)
+    {
+        $res = $this->_news->get_where($this->_posts_table, $option)->result_array();
+        return $res;
+    }
+
 
 }

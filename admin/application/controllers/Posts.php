@@ -473,6 +473,70 @@ class Posts extends BaseControllor
         );
         $theme = $this->posts_service->addThemePost($option);
         echo json_encode_data($theme);
-
     }
+
+    /** ---------------*****行业动态*****------------ */
+    /**
+     * 行业动态
+     */
+    public function events()
+    {
+        $jsArr = array(
+            'posts/events.js'
+        );
+        $this->smarty->assign('jsArr', $jsArr);
+        $this->smarty->display('posts/events.tpl');
+    }
+
+    public function addEvent()
+    {
+        $jsArr = array(
+            'posts/addEvents.js',
+        );
+        $this->smarty->assign('jsArr', $jsArr);
+        $this->smarty->display('posts/addEvent.tpl');
+    }
+
+    public function saveEvent()
+    {
+        $option = array(
+            'partners_id' => $this->input->post('partners_id'),
+            'partners_name' => $this->input->post('partners_name'),
+            'num' => $this->input->post('num'),
+        );
+        $res = $this->posts_service->saveEvent($option);
+        echo json_encode_data($res);
+    }
+
+    public function modifyEvent()
+    {
+        $option = array(
+            'id' => $this->input->post('id'),
+            'num' => $this->input->post('num'),
+        );
+        $res = $this->posts_service->modifyEvent($option);
+        echo json_encode_data($res);
+    }
+
+    public function delEvent()
+    {
+        $data = array(
+            'id' => $this->input->post('id')
+        );
+        $res = $this->posts_service->delEvent($data);
+        echo json_encode_data($res);
+    }
+
+    public function queryEvents()
+    {
+        $option = array(
+            'p' => $this->input->get('p') ? : 1 ,
+            'page_size' => $this->input->get('n') ? : 10,
+        );
+        $events = $this->posts_service->queryEvents($option);
+        $this->smarty->assign('info', $events['data']);
+        $this->smarty->assign('page', $this->page($events['data']['count'], $option['p'], $option['page_size'], ''));
+        echo $this->smarty->display('posts/eventList.tpl');
+    }
+
 }

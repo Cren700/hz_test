@@ -61,6 +61,7 @@ class Product extends HZ_Controller
             'Fproduct_num' => $this->input->post('product_num'),
             'Fcategory_id' => $this->input->post('category_id'),
             'Fdescription' => $this->input->post('description'),
+            'Fcoverimage' => $this->input->post('coverimage'),
             'Fheight_amount' => $this->input->post('height_amount'),
             'Fscope_insurance' => $this->input->post('scope_insurance'),
             'Fscope_age' => $this->input->post('scope_age'),
@@ -188,6 +189,17 @@ class Product extends HZ_Controller
     {
         $option = array('keyword' => $this->input->get('keyword'));
         $res = $this->product_service->search($option);
+        echo outputResponse($res);
+    }
+
+    public function hasProductPower()
+    {
+        $option = array(
+            'Fproduct_id' => $this->input->get('id', true),
+            'Fstore_id' => $this->input->get('user_id', true),
+            'Fstore_type' => $this->input->get('user_type', true)
+        );
+        $res = $this->product_service->hasProductPower($option);
         echo outputResponse($res);
     }
 }

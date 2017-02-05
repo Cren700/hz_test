@@ -22,6 +22,8 @@ $config = array(
     'account_error_6' => array( 'code' => 10006, 'msg' => '不能重复添加用户详情'),                     //不能重复添加用户详情 
     'account_error_7' => array( 'code' => 10007, 'msg' => '请输入验证码'),                     //请输入验证码 
     'account_error_8' => array( 'code' => 10008, 'msg' => '验证码不正确或已经过期'),                     //验证码不正确或已经过期 
+    'account_error_9' => array( 'code' => 10009, 'msg' => '您不是媒体用户或者验证未通过'),                     //您不是媒体用户或者验证未通过 
+    'account_error_10' => array( 'code' => 10010, 'msg' => '您不是商户类型或者验证未通过'),                     //您不是商户类型或者验证未通过 
 
 
 
@@ -38,6 +40,7 @@ $config = array(
     'product_error_10' => array( 'code' => 20010, 'msg' => '产品已经收藏咯'),                 // 产品已经收藏咯
     'product_error_11' => array( 'code' => 20011, 'msg' => '我的收藏信息出错'),                 // 我的收藏信息出错
     'product_error_12' => array( 'code' => 20012, 'msg' => '很抱歉，暂无数据，请换个条件试试！'),                // 搜索暂无数据
+    'product_error_13' => array( 'code' => 20013, 'msg' => '没有该文章的权限！'),                // 没有该文章的权限
 
 
     // validation 30001 ~ 39999
@@ -67,6 +70,9 @@ $config = array(
     'posts_error_13' => array( 'code' => 40013, 'msg' => '我的关注信息出错'),                // 我的关注信息出错
     'posts_error_14' => array( 'code' => 40014, 'msg' => '很抱歉，暂无数据，请换个条件试试！'),                // 搜索暂无数据
     'posts_error_15' => array( 'code' => 40015, 'msg' => '我的评论信息出错'),                // 我的评论信息出错
+    'posts_error_16' => array( 'code' => 40016, 'msg' => '删除行业出错'),                // 删除行业出错
+    'posts_error_17' => array( 'code' => 40017, 'msg' => '修改行业出错'),                // 修改行业出错
+    'posts_error_18' => array( 'code' => 40018, 'msg' => '没有该文章的权限'),                // 没有该文章的权限
 
     
     // order 50000 ~ 59999

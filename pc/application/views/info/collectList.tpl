@@ -16,6 +16,28 @@
                     <p>我的文章</p>
                 </div>
             </a>
+            <{if $user_type eq 3}>
+            <a href="<{'/medium.html'|getBaseUrl}>">
+                <div class="personal_nav_item">
+                    <i class="my_article">&nbsp;</i>
+                    <p>文章列表</p>
+                </div>
+            </a>
+            <{/if}>
+            <{if $user_type eq 2}>
+            <a href="<{'/store.html'|getBaseUrl}>">
+                <div class="personal_nav_item">
+                    <i class="my_article">&nbsp;</i>
+                    <p>产品列表</p>
+                </div>
+            </a>
+            <a href="<{'/storeorder.html'|getBaseUrl}>">
+                <div class="personal_nav_item">
+                    <i class="my_article">&nbsp;</i>
+                    <p>订单列表</p>
+                </div>
+            </a>
+            <{/if}>
             <a href="<{'/account/detail.html'|getBaseUrl}>">
                 <div class="personal_nav_item">
                     <i class="my_setting">&nbsp;</i>

@@ -3,16 +3,23 @@ if (typeof (HZ) == "undefined" || !HZ) {
 }
 
 HZ.Home = (function() {
-    var p = 1;
+    var p = pe = 1;
     function _init(){
 
         // 获取列表
         _getList(p);
 
+        _getEventList();
+
         $('#js-btn-more').on('click', function(e) {
             e.preventDefault();
             _getList(++p);
         });
+
+        $('#js-event-move').on('click', function (e) {
+            e.preventDefault();
+            _getEventList(++pe);
+        })
 
         $(document).on('scroll resize',function(){
             var docTop = $(document).scrollTop();
@@ -54,6 +61,25 @@ HZ.Home = (function() {
                     }
                 } else {
                     $("#js-btn-more").remove();
+                }
+            }
+        });
+    }
+
+
+    function _getEventList(pe){
+
+        pe = pe ? pe : 1;
+        $.ajax({
+            url: baseUrl+'/home/queryEvents',
+            data: {p: pe},
+            dataType: 'HTML',
+            type: 'GET',
+            success: function(res){
+                $('#js-event-box').append(res);
+                var num = res.split('<li>').length-1;
+                if(num < 10) {
+                    $("#js-event-move").remove();
                 }
             }
         });

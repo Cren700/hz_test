@@ -211,7 +211,7 @@ class Account extends BaseController {
      */
     public function getStoreName()
     {
-        // type 0:后台,1:商户
+        // type 0:后台admin表,1:前台用户user表
         $option = array('Fid' => $this->input->get('id'), 'type' => $this->input->get('type'));
         $res = $this->account_service->getStoreName($option);
         echo outputResponse($res);
@@ -272,4 +272,23 @@ class Account extends BaseController {
         echo outputResponse($res);
     }
 
+    public function hasMediumPower()
+    {
+        $option = array(
+            'Fid' => $this->input->get('id'),
+            'Fuser_id' => $this->input->get('id')
+        );
+        $res = $this->account_service->hasMediumPower($option);
+        echo outputResponse($res);
+    }
+
+    public function hasStorePower()
+    {
+        $option = array(
+            'Fid' => $this->input->get('id'),
+            'Fuser_id' => $this->input->get('id')
+        );
+        $res = $this->account_service->hasStorePower($option);
+        echo outputResponse($res);
+    }
 }

@@ -97,6 +97,7 @@ class Order extends BaseController
             'Fproduct_id' => $this->input->get('product_id', true),
             'Fuser_id' => $this->input->get('user_id', true),
             'Fstore_id'  => $this->input->get('store_id', true),// 商户ID
+            'Fstore_type'  => $this->input->get('store_type', true),// 商户类型
             'Forder_status' => $this->input->get('order_status', true),
         );
         $res = $this->order_service->query($option);

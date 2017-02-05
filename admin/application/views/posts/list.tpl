@@ -27,7 +27,7 @@
             <tr rel="<{$i['Fid']}>">
                 <td><{$i['Fid']}></td>
                 <td><a href="<{"/posts/detail/"|cat:$i['Fid']|getBaseUrl}>" title="<{$i['Fpost_title']}>"><{$i['Fpost_title']}></a></td>
-                <td><{$i['Fuser_id']}></td>
+                <td><{$i['Fuser_name']}></td>
                 <td><{$i['Fpost_author']}></td>
                 <td><{$cate[$i['Fpost_category_id']]|default:''}></td>
                 <td><img style="width: 100px; height:75px; <{if !isset($i['Fpost_coverimage']) || !$i['Fpost_coverimage']}>display: none<{/if}>" src="<{$i['Fpost_coverimage']|default:''}>" title ="<{$i['Fpost_title']}>" alt="<{$i['Fpost_title']}>" ></td>

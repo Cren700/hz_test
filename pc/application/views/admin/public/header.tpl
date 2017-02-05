@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title><{$seo['title']}></title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="<{"admin/bootstrap.min.css"|baseCssUrl}>" />
+    <link rel="stylesheet" href="<{"admin/matrix-style.css"|baseCssUrl}>" />
+    <link rel="stylesheet" href="<{"admin/matrix-media.css"|baseCssUrl}>" />
+    <link href="<{"/static/font-awesome/css/font-awesome.css"|getBaseUrl}>" rel="stylesheet" />
+    <{foreach $cssArr as $css}>
+    <link href="<{$css|baseCssUrl}>" rel="stylesheet" type="text/css">
+    <{/foreach}>
+</head>

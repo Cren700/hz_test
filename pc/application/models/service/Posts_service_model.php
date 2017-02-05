@@ -81,4 +81,55 @@ class Posts_service_model extends HZ_Model
     {
         return $this->myCurl('posts', 'search', $where);
     }
+
+    public function queryEvents($data)
+    {
+        return $this->myCurl('posts', 'queryEvents', $data, false);
+    }
+
+    public function save($data)
+    {
+        $is_new = $data['is_new'];
+        unset($data['is_new']);
+        if ($is_new) {
+            $res = $this->myCurl('posts', 'addPosts', $data, true);
+        } else {
+            $res = $this->myCurl('posts', 'updatePosts', $data, true);
+        }
+        if ($res['code'] === 0) {
+            $res['data']['url'] = getBaseUrl('/medium.html');
+        }
+        return $res;
+    }
+
+    public function query($data)
+    {
+        return $this->myCurl('posts', 'queryPosts', $data, false);
+    }
+
+    public function status($data)
+    {
+        return $this->myCurl('posts', 'changeStatus', $data, true);
+    }
+
+    public function del($data)
+    {
+        return $this->myCurl('posts', 'delPosts', $data, false);
+    }
+
+    public function hasMediumPower()
+    {
+        $option = array('id' => $this->_uid);
+        return $this->myCurl('account', 'hasMediumPower', $option, false);
+    }
+
+    public function hasPostsPower($pid)
+    {
+        $option = array(
+            'id' => $pid,
+            'user_id' => $this->_uid,
+            'user_type' => 2
+        );
+        return $this->myCurl('posts', 'hasPostsPower', $option, false);
+    }
 }

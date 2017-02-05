@@ -181,6 +181,10 @@ class Order_service_model extends HZ_Model
             $where['Fstore_id'] = $option['Fstore_id'];
         }
 
+        if (!empty($option['Fstore_type'])) {
+            $where['Fstore_type'] = $option['Fstore_type'];
+        }
+
         if (!empty($option['min_date'])) {
             $where['Fcreate_time >= '] = strtotime($option['min_date']);
         }

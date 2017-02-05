@@ -20,9 +20,9 @@ class Posts extends HZ_Controller
     public function postsListByCate()
     {
         $option = array(
-            'p' => $this->input->get('p'),
-            'page_size' => $this->input->get('page_size'),
-            'Fpost_category_id' => $this->input->get('post_category_id'),
+            'p' => $this->input->get('p', true),
+            'page_size' => $this->input->get('page_size', true),
+            'Fpost_category_id' => $this->input->get('post_category_id', true),
         );
         $res = $this->posts_service->postsListByCate($option);
         echo outputResponse($res);
@@ -34,15 +34,17 @@ class Posts extends HZ_Controller
     public function query()
     {
         $option = array(
-            'Fpost_title' => $this->input->get('post_title'),
-            'Fpost_author' => $this->input->get('post_author'),
-            'Fpost_category_id' => $this->input->get('post_category_id'),
-            'Fpost_status' => $this->input->get('post_status'),
-            'Fis_del' => $this->input->get('is_del'),
-            'p' => $this->input->get('p'),
-            'page_size' => $this->input->get('page_size'),
-            'min_date' => $this->input->get('min_date'),
-            'max_date' => $this->input->get('max_date'),
+            'Fpost_title' => $this->input->get('post_title', true),
+            'Fpost_author' => $this->input->get('post_author', true),
+            'Fpost_category_id' => $this->input->get('post_category_id', true),
+            'Fpost_status' => $this->input->get('post_status', true),
+            'Fis_del' => (int)$this->input->get('is_del', true),
+            'Fuser_type' => (int)$this->input->get('user_type', true),
+            'Fuser_id' => (int)$this->input->get('user_id', true),
+            'p' => $this->input->get('p', true),
+            'page_size' => $this->input->get('page_size', true),
+            'min_date' => $this->input->get('min_date', true),
+            'max_date' => $this->input->get('max_date', true),
         );
         $res = $this->posts_service->query($option);
         echo outputResponse($res);
@@ -225,11 +227,11 @@ class Posts extends HZ_Controller
         $option = array(
             'p' => $this->input->get('p') ? : 1 ,
             'page_size' => $this->input->get('n') ? : 10,
-            'Fcomment_post_id'   => $this->input->get('post_id'),
-            'Fcomment_author_name'   => $this->input->get('author_name'),
-            'Fcomment_approved' => $this->input->get('comment_approved'),
-            'min_date' => $this->input->get('min_date'),
-            'max_date' => $this->input->get('max_date'),
+            'Fcomment_post_id'   => $this->input->get('post_id', true),
+            'Fcomment_author_name'   => $this->input->get('author_name', true),
+            'Fcomment_approved' => $this->input->get('comment_approved', true),
+            'min_date' => $this->input->get('min_date', true),
+            'max_date' => $this->input->get('max_date', true),
         );
         $res = $this->posts_service->queryComment($option);
         echo outputResponse($res);
@@ -241,10 +243,10 @@ class Posts extends HZ_Controller
     public function statusComment()
     {
         $data = array(
-            'Fcomment_approved' => $this->input->post('status'),
+            'Fcomment_approved' => $this->input->post('status', true),
         );
         $where = array(
-            'Fcomment_id' => $this->input->post('comment_id'),
+            'Fcomment_id' => $this->input->post('comment_id', true),
         );
         $res = $this->posts_service->statusComment($data, $where);
         echo outputResponse($res);
@@ -256,7 +258,7 @@ class Posts extends HZ_Controller
     public function delComment()
     {
         $where = array(
-            'Fcomment_id' => $this->input->post('comment_id'),
+            'Fcomment_id' => $this->input->post('comment_id', true),
         );
         $res = $this->posts_service->delComment($where);
         echo outputResponse($res);
@@ -270,8 +272,8 @@ class Posts extends HZ_Controller
         $option = array(
             'p' => $this->input->get('p') ? : 1 ,
             'page_size' => $this->input->get('n') ? : 10,
-            'Fpraise_post_id'   => $this->input->get('post_id'),
-            'Fuser_id'   => $this->input->get('user_id'),
+            'Fpraise_post_id'   => $this->input->get('post_id', true),
+            'Fuser_id'   => $this->input->get('user_id', true),
         );
         $res = $this->posts_service->queryPraise($option);
         echo outputResponse($res);
@@ -282,7 +284,7 @@ class Posts extends HZ_Controller
      */
     public function getPraiseListByUid()
     {
-        $option = array('Fuser_id' => $this->input->get('user_id'));
+        $option = array('Fuser_id' => $this->input->get('user_id', true));
         $res = $this->posts_service->getPraiseListByUid($option);
         echo outputResponse($res);
     }
@@ -292,14 +294,14 @@ class Posts extends HZ_Controller
      */
     public function search()
     {
-        $option = array('keyword' => $this->input->get('keyword'));
+        $option = array('keyword' => $this->input->get('keyword', true));
         $res = $this->posts_service->search($option);
         echo outputResponse($res);
     }
 
     public function getCommentListByUid()
     {
-        $option = array('Fcomment_author_name' => $this->input->get('user_id'));
+        $option = array('Fcomment_author_name' => $this->input->get('user_id', true));
         $res = $this->posts_service->getCommentListByUid($option);
         echo outputResponse($res);
     }
@@ -307,8 +309,8 @@ class Posts extends HZ_Controller
     public function userDelComment()
     {
         $option = array(
-            'Fcomment_id' => $this->input->post('comment_id'),
-            'Fcomment_author_id' => $this->input->post('author_id')
+            'Fcomment_id' => $this->input->post('comment_id', true),
+            'Fcomment_author_id' => $this->input->post('author_id', true)
         );
         $res = $this->posts_service->userDelComment($option);
         echo outputResponse($res);
@@ -321,12 +323,12 @@ class Posts extends HZ_Controller
     public function addTheme()
     {
         $data = array(
-            'Fuser_id' => $this->input->post('user_id'),
-            'Ftheme_content' => $this->input->post('theme_content'),
-            'Ftheme_title' => $this->input->post('theme_title'),
-            'Ftheme_excerpt' => $this->input->post('theme_excerpt'),
-            'Ftheme_coverimage' => $this->input->post('theme_coverimage'),
-            'Fbanner_path' => $this->input->post('banner_path'),
+            'Fuser_id' => $this->input->post('user_id', true),
+            'Ftheme_content' => $this->input->post('theme_content', true),
+            'Ftheme_title' => $this->input->post('theme_title', true),
+            'Ftheme_excerpt' => $this->input->post('theme_excerpt', true),
+            'Ftheme_coverimage' => $this->input->post('theme_coverimage', true),
+            'Fbanner_path' => $this->input->post('banner_path', true),
             'Fcreate_time'  => time(),
             'Fupdate_time'  => time(),
         );
@@ -339,14 +341,14 @@ class Posts extends HZ_Controller
      */
     public function updateTheme()
     {
-        $where = array('Fid' => $this->input->post('id'));
+        $where = array('Fid' => $this->input->post('id', true));
 
         $data = array(
-            'Ftheme_content' => $this->input->post('theme_content'),
-            'Ftheme_title' => $this->input->post('theme_title'),
-            'Ftheme_excerpt' => $this->input->post('theme_excerpt'),
-            'Ftheme_coverimage' => $this->input->post('theme_coverimage'),
-            'Fbanner_path' => $this->input->post('banner_path'),
+            'Ftheme_content' => $this->input->post('theme_content', true),
+            'Ftheme_title' => $this->input->post('theme_title', true),
+            'Ftheme_excerpt' => $this->input->post('theme_excerpt', true),
+            'Ftheme_coverimage' => $this->input->post('theme_coverimage', true),
+            'Fbanner_path' => $this->input->post('banner_path', true),
             'Fupdate_time'  => time(),
         );
 
@@ -360,7 +362,7 @@ class Posts extends HZ_Controller
     public function getThemeByPid()
     {
         $where = array(
-            'Fid'  => $this->input->get('id')// 专题id
+            'Fid'  => $this->input->get('id', true)// 专题id
         );
         $res = $this->posts_service->getThemeByPid($where);
         echo outputResponse($res);
@@ -372,7 +374,7 @@ class Posts extends HZ_Controller
     public function getPostsThemeByPid()
     {
         $where = array(
-            'Fid'  => $this->input->get('id')// 专题id
+            'Fid'  => $this->input->get('id', true)// 专题id
         );
         $res = $this->posts_service->getPostsThemeByPid($where);
         echo outputResponse($res);
@@ -385,7 +387,7 @@ class Posts extends HZ_Controller
     {
         $option = array(
             'p' => $this->input->get('p'),
-            'page_size' => $this->input->get('page_size'),
+            'page_size' => $this->input->get('page_size', true),
         );
         $res = $this->posts_service->queryThemes($option);
         echo outputResponse($res);
@@ -396,7 +398,7 @@ class Posts extends HZ_Controller
      */
     public function delTheme()
     {
-        $where = array('Fid' => $this->input->get('id'));
+        $where = array('Fid' => $this->input->get('id', true));
         $res = $this->posts_service->delTheme($where);
         echo outputResponse($res);
     }
@@ -407,7 +409,7 @@ class Posts extends HZ_Controller
     public function changeThemeStatus()
     {
         $data = array(
-            'Ftheme_status' => $this->input->post('status'),
+            'Ftheme_status' => $this->input->post('status', true),
         );
         $where = array(
             'Fid'   => $this->input->post('id')
@@ -421,17 +423,70 @@ class Posts extends HZ_Controller
         $where = array(
             'Fid' => $this->input->post('id')
         );
-        $data = array('Fpost_id' => $this->input->post('post_id'));
+        $data = array('Fpost_id' => $this->input->post('post_id', true));
         $res = $this->posts_service->addThemePost($data, $where);
         echo outputResponse($res);
     }
 
     public function getThemeList()
     {
-        $where = array('Ftheme_status' => $this->input->get('theme_status'));
+        $where = array('Ftheme_status' => $this->input->get('theme_status', true));
         $res = $this->posts_service->getThemeList($where);
         echo outputResponse($res);
-
     }
 
+    public function saveEvent()
+    {
+        $option = array(
+            'Fpartners_id' => $this->input->post('partners_id', true),
+            'Fpartners_name' => $this->input->post('partners_name', true),
+            'Fnum' => $this->input->post('num'),
+        );
+        $res = $this->posts_service->saveEvent($option);
+        echo outputResponse($res);
+    }
+
+    /**
+     * 查询
+     */
+    public function queryEvents()
+    {
+        $option = array(
+            'p' => $this->input->get('p', true),
+            'page_size' => $this->input->get('page_size', true),
+        );
+        $res = $this->posts_service->queryEvents($option);
+        echo outputResponse($res);
+    }
+
+    /**
+     * 删除行业信息
+     */
+    public function delEvent()
+    {
+        $where = array('Fid' => $this->input->get('id', true));
+        $res = $this->posts_service->delEvent($where);
+        echo outputResponse($res);
+    }
+
+    public function modifyEvent()
+    {
+        $where = array('Fid' => $this->input->post('id', true));
+        $data = array(
+            'Fnum' => $this->input->post('num'),
+        );
+        $res = $this->posts_service->modifyEvent($where, $data);
+        echo outputResponse($res);
+    }
+
+    public function hasPostsPower()
+    {
+        $option = array(
+            'Fid' => $this->input->get('id', true),
+            'Fuser_id' => $this->input->get('user_id', true),
+            'Fuser_type' => $this->input->get('user_type', true)
+        );
+        $res = $this->posts_service->hasPostsPower($option);
+        echo outputResponse($res);
+    }
 }

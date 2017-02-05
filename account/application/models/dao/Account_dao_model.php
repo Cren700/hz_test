@@ -157,4 +157,28 @@ class Account_dao_model extends HZ_Model
         }
         return $res;
     }
+
+    public function hasMediumPower($option)
+    {
+        dbEscape($option);
+        $res = $this->account->select("*")
+                    ->from($this->_user_table . ' as u ')
+                    ->join($this->_user_detail_table . ' as ud', 'ud.Fuser_id = '.$option['Fuser_id'])
+                    ->where('u.Fuser_type = 3 and ud.Fatte_status = 1 and u.Fid = ' . $option['Fid'])
+                    ->get()
+                    ->row_array();
+        return $res;
+    }
+
+    public function hasStorePower($option)
+    {
+        dbEscape($option);
+        $res = $this->account->select("*")
+            ->from($this->_user_table . ' as u ')
+            ->join($this->_user_detail_table . ' as ud', 'ud.Fuser_id = '.$option['Fuser_id'])
+            ->where('u.Fuser_type = 2 and ud.Fatte_status = 1 and u.Fid = ' . $option['Fid'])
+            ->get()
+            ->row_array();
+        return $res;
+    }
 }

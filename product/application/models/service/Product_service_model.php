@@ -132,6 +132,7 @@ class Product_service_model extends HZ_Model
             'Fstore_type' => $data['Fstore_type'],
             'Fproduct_name' => $data['Fproduct_name'],
             'Fproduct_price' => $data['Fproduct_price'],
+            'Fcoverimage' => $data['Fcoverimage'],
             'Fproduct_num' => $data['Fproduct_num'],
             'Fcategory_id' => $data['Fcategory_id'],
             'Fdescription' => $data['Fdescription'],
@@ -522,6 +523,16 @@ class Product_service_model extends HZ_Model
             $ret['code'] = 'product_error_12';
         } else {
             $ret['data'] = $res;
+        }
+        return $ret;
+    }
+
+    public function hasProductPower($option)
+    {
+        $ret = array('code' => 0);
+        $res = $this->product_dao->hasProductPower($option);
+        if (!$res) {
+            $ret['code'] = 'product_error_13';
         }
         return $ret;
     }

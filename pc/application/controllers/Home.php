@@ -53,5 +53,16 @@ class Home extends HZ_Controller
         $this->smarty->display('home/list.tpl');
     }
 
+    public function queryEvents()
+    {
+        $option = array(
+            'p' => $this->input->get('p') ? : 1 ,
+            'page_size' => $this->input->get('n') ? : 10,
+        );
+        $events = $this->posts_service->queryEvents($option);
+        $this->smarty->assign('info', $events['data']);
+        $this->smarty->assign('p', $option['p']);
+        echo $this->smarty->display('home/eventList.tpl');
+    }
 
 }

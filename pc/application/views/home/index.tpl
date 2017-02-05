@@ -79,56 +79,10 @@
         <div class="hysj">
             <h3>行业数据</h3>
             <div class="data">
-                <ul class="data_scroll">
-                    <li>
-                        <i>&nbsp;</i>
-                        <span class="data_td">1.轻松互助</span>
-                        <span class="data_tt">3768505</span>
-                    </li>
-                    <li>
-                        <i>&nbsp;</i>
-                        <span class="data_td">1.轻松互助</span>
-                        <span class="data_tt">3768505</span>
-                    </li>
-                    <li>
-                        <i>&nbsp;</i>
-                        <span class="data_td">1.轻松互助</span>
-                        <span class="data_tt">3768505</span>
-                    </li>
-                    <li>
-                        <i>&nbsp;</i>
-                        <span class="data_td">1.轻松互助</span>
-                        <span class="data_tt">3768505</span>
-                    </li>
-                    <li>
-                        <i>&nbsp;</i>
-                        <span class="data_td">1.轻松互助</span>
-                        <span class="data_tt">3768505</span>
-                    </li>
-                    <li>
-                        <i>&nbsp;</i>
-                        <span class="data_td">1.轻松互助</span>
-                        <span class="data_tt">3768505</span>
-                    </li>
-                    <li>
-                        <i>&nbsp;</i>
-                        <span class="data_td">1.轻松互助</span>
-                        <span class="data_tt">3768505</span>
-                    </li>
-                    <li>
-                        <i>&nbsp;</i>
-                        <span class="data_td">1.轻松互助</span>
-                        <span class="data_tt">3768505</span>
-                    </li>
-                    <li>
-                        <i>&nbsp;</i>
-                        <span class="data_td">1.轻松互助</span>
-                        <span class="data_tt">3768505</span>
-                    </li>
+                <ul class="data_scroll" id='js-event-box'>
                 </ul>
-                <a href="javascript:void(0);" class="data_more">加载更多</a>
+                <a href="javascript:void(0);" class="data_more" id="js-event-move">加载更多</a>
             </div>
-            <p class="update_time">更新时间: <span>2016-10-21 00:00</span></p>
         </div>
     </div>
 </div>

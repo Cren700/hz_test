@@ -1,7 +1,7 @@
 
 <div class="header">
     <div class="container head_content">
-        <a href="" class="logo">
+        <a href="<{''|getBaseUrl}>" class="logo">
             <img src="<{'logo.png'|baseImgUrl}>"/>
         </a>
         <div class="nav">

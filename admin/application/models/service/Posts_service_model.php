@@ -147,4 +147,24 @@ class Posts_service_model extends HZ_Model
     {
         return $this->myCurl($this->_api, 'addThemePost', $option, true);
     }
+
+    public function saveEvent($option)
+    {
+        return $this->myCurl($this->_api, 'saveEvent', $option, true);
+    }
+
+    public function queryEvents($data)
+    {
+        return $this->myCurl($this->_api, 'queryEvents', $data, false);
+    }
+
+    public function delEvent($data)
+    {
+        return $this->myCurl($this->_api, 'delEvent', $data, false);
+    }
+
+    public function modifyEvent($option)
+    {
+        return $this->myCurl($this->_api, 'modifyEvent', $option, true);
+    }
 }
