@@ -2,7 +2,7 @@
 <body>
 <{include file='public/nav.tpl'}>
 <div class="container">
-    <div class="nav_tab pro_nav">
+    <div class="nav_tab pro_nav nav_tab_width">
         <ul class="clearfix">
             <li class="<{if $cate_id eq ''}> active<{/if}>"><a href="<{'/product.html'|getBaseUrl}>" ">所有计划</a></li>
             <{foreach $cate as $c}>

@@ -77,6 +77,7 @@ h3{font-size:16px;font-weight:normal;}
 .nav_tab ul li a{color:#999;}
 .nav_tab ul li.active{background-color:#1e7be2;border-color:#1e7be2;color:#fff;}
 .nav_tab ul li.active a{color:#fff;}
+.nav_tab_width {width: auto}
 
 .tab_list_item.hidden{display:none;}
 .tab_list_item ul li{padding:15px 0;}
