@@ -117,6 +117,14 @@ class Account_dao_model extends HZ_Model
         return filterData($res);
     }
 
+    public function getAdminInfo($where)
+    {
+        dbEscape($where);
+        $query = $this->account->get_where($this->_admin_table, $where);
+        $res = $query->row_array();
+        return filterData($res);
+    }
+
     private function _sel_table($type)
     {
         return $type === 'admin' ? $this->_admin_table : $this->_user_table;
@@ -180,5 +188,79 @@ class Account_dao_model extends HZ_Model
             ->get()
             ->row_array();
         return $res;
+    }
+
+    public function adminAction()
+    {
+        $res = $this->account->get('t_admin_action')->result_array();
+        return $res;
+    }
+
+    public function role()
+    {
+        $res = $this->account->get('t_admin_role')->result_array();
+        return $res;
+    }
+
+    public function addRole($option)
+    {
+        $res = $this->account->insert('t_admin_role', $option);
+        return $res;
+    }
+
+    public function saveRole($where, $option)
+    {
+        $this->account->update('t_admin_role', $option, $where);
+    }
+
+    public function getRole($where)
+    {
+        return $this->account->get_where('t_admin_role', $where)->row_array();
+    }
+
+    public function getActions($ids)
+    {
+        return $this->account->where_in('Fid', $ids)->get('t_admin_action')->result_array();
+    }
+
+    public function adminCounts($where, $like) {
+        dbEscape($like);
+        dbEscape($where);
+        $count = $this->account->select('count(*) as num')
+            ->from($this->_admin_table . ' as u')
+            ->where($where)
+            ->like($like)
+            ->count_all_results();
+        return $count;
+    }
+
+    public function adminList($where, $like, $page, $page_size) {
+        dbEscape($like);
+        dbEscape($where);
+        $query = $this->account->select('u.Fid, u.Fuser_id, u.Frole_id, u.Fcreate_time, u.Fupdate_time, u.Fstatus, r.Frole_name')
+            ->from($this->_admin_table . ' as u')
+            ->join('t_admin_role as r', 'u.Frole_id = r.Frole_id')
+            ->where($where)
+            ->like($like)
+            ->order_by('u.Fupdate_time', 'DESC')
+            ->limit($page_size, $page_size * ($page - 1))
+            ->get();
+        $res = $query->result_array();
+        return filterData($res);
+    }
+
+    public function updateAdmin($where, $data)
+    {
+        return $this->account->update($this->_admin_table, $data, $where);
+    }
+
+    public function powerUrl($where)
+    {
+        dbEscape($where);
+        $action_ids = $this->account->get_where('t_admin_role', $where)->row_array();
+        $actionWhere = explode(',', $action_ids['Faction_ids']);
+        $res = $this->account->where_in('Fid', $actionWhere)->get('t_admin_action')->result_array();
+
+        return filterData($res);
     }
 }

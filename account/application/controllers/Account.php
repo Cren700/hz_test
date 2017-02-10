@@ -34,10 +34,7 @@ class Account extends BaseController {
         $data = array();
         $data['Fuser_id'] = $this->input->post('user_id');
         $data['Fpasswd'] = $this->input->post('passwd');
-
-//        $data['Fuser_id'] = 'admin';
-//        $data['Fpasswd'] = '123456';
-//        $data['Fnick_name'] = 'aadmin';
+        $data['Frole_id'] = $this->input->post('role_id');
         $data['Fuser_type'] = 1; // 用户类型 默认为4 (运营管理用户1， 企业管理用户2)
         $data['Fcreate_time'] = time();
         $data['Fupdate_time']  = time();
@@ -47,6 +44,18 @@ class Account extends BaseController {
         $res = $this->account_service->addAccount($data, 'admin');
         echo outputResponse($res);
     }
+
+
+    /**
+     * 根据用户ID获取后台用户信息
+     */
+    public function getAdminInfo()
+    {
+        $data['Fid'] = $this->input->get('id');
+        $res = $this->account_service->getAdminInfo($data);
+        echo outputResponse($res);
+    }
+
     /**
      * 登录
      */
@@ -291,4 +300,104 @@ class Account extends BaseController {
         $res = $this->account_service->hasStorePower($option);
         echo outputResponse($res);
     }
+
+    public function adminAction()
+    {
+        $res = $this->account_service->adminAction();
+        echo outputResponse($res);
+    }
+
+    public function role()
+    {
+        $res = $this->account_service->role();
+        echo outputResponse($res);
+    }
+    
+    public function addRole()
+    {
+        $option = array(
+            'Frole_name' => (string)$this->input->post('role_name'),
+            'Fdesc' => (string)$this->input->post('desc'),
+            'Faction_ids' => (string)$this->input->post('action_ids'),
+        );
+        $res = $this->account_service->addRole($option);
+        echo outputResponse($res);
+    }
+
+    public function saveRole()
+    {
+        $where = array(
+            'Frole_id' => $this->input->post('role_id')
+        );
+        $option = array(
+            'Frole_name' => (string)$this->input->post('role_name'),
+            'Fdesc' => (string)$this->input->post('desc'),
+            'Faction_ids' => (string)$this->input->post('action_ids'),
+        );
+        $res = $this->account_service->saveRole($where, $option);
+        echo outputResponse($res);
+    }
+    
+    public function getRole()
+    {
+        $where = array('Frole_id' => $this->input->get('id'));
+
+        $res = $this->account_service->getRole($where);
+        echo outputResponse($res);
+    }
+    
+    public function adminList()
+    {
+        $option = array(
+            'Fuser_id' => $this->input->get('user_id'),// 用户名
+            'p' => $this->input->get('p') ? : 1,
+            'page_size' => $this->input->get('page_size'),
+            'min_date' => $this->input->get('min_date'),
+            'max_date' => $this->input->get('max_date'),
+        );
+        $res = $this->account_service->adminList($option);
+        echo outputResponse($res);
+    }
+
+    public function changeAdminStatus()
+    {
+        $option = array(
+            'Fid' => intval($this->input->get('id', true)),
+            'Fstatus' => $this->input->get('status', true),
+        );
+        $res = $this->account_service->changeAdminStatus($option);
+        echo outputResponse($res);
+    }
+
+    public function updateAdminPwd()
+    {
+        $where =array(
+            'Fid' => $this->input->post('id', true),
+        );
+        $data = array(
+            'Fpasswd' => $this->input->post('passwd', true)
+        );
+        $res = $this->account_service->updateAdminPwd($where, $data);
+        echo json_encode_data($res);
+    }
+
+    public function updateAdminRole()
+    {
+        $where =array(
+            'Fid' => $this->input->post('id', true),
+        );
+        $data = array(
+            'Frole_id' => $this->input->post('role_id', true)
+        );
+        $res = $this->account_service->updateAdminRole($where, $data);
+        echo json_encode_data($res);
+    }
+
+    public function powerUrl()
+    {
+        $where = array('Frole_id' => $this->input->get('role_id'));
+        $res = $this->account_service->powerUrl($where);
+        echo outputResponse($res);
+    }
+
 }

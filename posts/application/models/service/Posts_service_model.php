@@ -738,4 +738,20 @@ class Posts_service_model extends HZ_Model
             return $ret['code'] = 'posts_error_18';
         }
     }
+
+    public function getBanners()
+    {
+        $ret = array('code' => 0);
+        $res = $this->posts_dao->getBanners();
+        $ret['data'] = $res;
+        return $ret;
+    }
+
+    public function getThreeNews()
+    {
+        $ret = array('code' => 0);
+        $res = $this->posts_dao->getThreeNews();
+        $ret['data'] = $res;
+        return $ret;
+    }
 }

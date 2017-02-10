@@ -5,49 +5,40 @@
     <div class="content_left">
         <div class="content_slider">
             <div class="slider_show">
+                <{assign var=list value=$banner['list']|default:array()}>
                 <ul>
+                    <{foreach $list as $l}>
                     <li>
-                        <a href=""><img src="<{'Bitmap.png'|baseImgUrl}>" height="250"/></a>
+                        <a href="<{$l['Factive_url']}>"><img src="<{$l['Fimage_path']}>" height="250" width="100%"/></a>
                     </li>
-                    <li>
-                        <a href=""><img src="<{'1.png'|baseImgUrl}>" height="250"/></a>
-                    </li>
-                    <li>
-                        <a href=""><img src="<{'2.png'|baseImgUrl}>" height="250"/></a>
-                    </li>
+                    <{/foreach}>
                 </ul>
             </div>
             <div class="slider_list">
                 <ul>
-                    <li>&nbsp;</li>
-                    <li>&nbsp;</li>
-                    <li>&nbsp;</li>
+                    <{foreach $list as $l}>
+                        <li>&nbsp;</li>
+                    <{/foreach}>
                 </ul>
             </div>
             <div class="item_btn prev"></div>
             <div class="item_btn next"></div>
         </div>
         <div class="img_news clearfix">
-            <div class="img_new_item">
-                <img src="image/01.jpg"/>
-                <div class="img_new_txt">
-                    <p>中国互助元年，互助保障进入细分领域</p>
+            <{if $threeNews['list']|default:array()}>
+            <{foreach $threeNews['list'] as $new}>
+                <div class="img_new_item">
+                    <a href="<{'/posts.html?id='|cat:$new['Fid']|getBaseUrl}>" target="_blank">
+                        <img src="<{$new['Fpost_coverimage']}>"/>
+                        <div class="img_new_txt">
+                            <p><{$new['Fpost_title']}></p>
+                        </div>
+                    </a>
                 </div>
-            </div>
-            <div class="img_new_item">
-                <img src="image/02.jpg"/>
-                <div class="img_new_txt">
-                    <p>中国互助元年，互助保障进入细分领域</p>
-                </div>
-            </div>
-            <div class="img_new_item last-child">
-                <img src="image/03.jpg"/>
-                <div class="img_new_txt">
-                    <p>中国互助元年，互助保障进入细分领域</p>
-                </div>
-            </div>
+            <{/foreach}>
+            <{/if}>
         </div>
-        <div class="nav_tab fixed">
+        <div class="nav_tab">
             <ul class="clearfix">
                 <li class="<{if $cate_id eq ''}> active<{/if}>"><a href="<{''|getBaseUrl}>">最新</a></li>
                 <{foreach $cate as $c}>

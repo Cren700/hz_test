@@ -21,6 +21,11 @@ HZ.PostsDetail = (function() {
             $('#bdshare_weixin_qrcode_dialog').show();
         });
 
+        $(".pinglun").on('click', function () {
+            var com_top = $(".com_h").offset().top;
+            $("html body").animate({ scrollTop: com_top + 1500 }, 200);
+        });
+
         $(window).scroll(function () {
             _scroll();
         })
@@ -33,6 +38,8 @@ HZ.PostsDetail = (function() {
             $('#bdshare_weixin_qrcode_dialog').hide();
         });
     }
+
+
 
     //二维码滚动
     function _scroll()

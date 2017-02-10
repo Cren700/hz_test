@@ -123,80 +123,89 @@ class HZ_Controller extends CI_Controller
         $menu = array(
             array(
                 'selected'  => '0',
+                'show'      => '0',
                 'name'      => '用户管理',
                 'flagName'  => 'user',
                 'icon'      => 'icon-th',
                 'sub'       => array(
                     array(
                         'selected'  => '0',
+                        'show'      => '0',
                         'name'      => '会员列表',
                         'flagName'  => 'member',
                     ),
                     array(
                         'selected'  => '0',
-                        'name'      => '管理员列表',
-                        'flagName'  => 'admin',
-                    ),
-                    array(
-                        'selected'  => '0',
-                        'name'      => '媒体会员列表',
+                        'show'      => '0',
+                        'name'      => '媒体列表',
                         'flagName'  => 'medium',
                     ),
                     array(
                         'selected'  => '0',
+                        'show'      => '0',
                         'name'      => '商户列表',
                         'flagName'  => 'merchant',
                     ),
                     array(
                         'selected'  => '0',
-                        'name'      => '黑名单列表',
-                        'flagName'  => 'blacklist',
+                        'show'      => '0',
+                        'name'      => '管理员列表',
+                        'flagName'  => 'admin',
                     ),
                     array(
                         'selected'  => '0',
-                        'name'      => '权限管理',
-                        'flagName'  => 'power',
-                    ),
-                    array(
-                        'selected'  => '0',
+                        'show'      => '0',
                         'name'      => '角色管理',
                         'flagName'  => 'role',
+                    ),
+                    array(
+                        'selected'  => '0',
+                        'show'      => '0',
+                        'name'      => '黑名单列表',
+                        'flagName'  => 'blacklist',
                     )
                 )
             ),
             array(
                 'selected'  => '0',
+                'show'      => '0',
                 'name'      => '商品管理',
                 'flagName'  => 'product',
                 'icon'      => 'icon-bar-chart',
                 'sub'       => array(
                     array(
                         'selected'  => '0',
+                        'show'      => '0',
                         'name'      => '商品列表',
                         'flagName'  => 'index',
                     ),
                     array(
                         'selected'  => '0',
+                        'show'      => '0',
                         'name'      => '添加商品',
                         'flagName'  => 'add',
                     ),
                     array(
                         'selected'  => '0',
+                        'show'      => '0',
                         'name'      => '商品分类',
                         'flagName'  => 'cate',
                     ),
                     array(
                         'selected'  => '0',
+                        'show'      => '0',
                         'name'      => '商品审核',
                         'flagName'  => 'verify',
                     ),
                     array(
                         'selected'  => '0',
+                        'show'      => '0',
                         'name'      => '商品回收站',
                         'flagName'  => 'recycle',
                     ),
                     array(
                         'selected'  => '0',
+                        'show'      => '0',
                         'name'      => '收藏列表',
                         'flagName'  => 'collect',
                     )
@@ -204,22 +213,26 @@ class HZ_Controller extends CI_Controller
             ),
             array(
                 'selected'  => '0',
+                'show'      => '0',
                 'name'      => '订单管理',
                 'flagName'  => 'order',
                 'icon'      => 'icon-trophy',
                 'sub'       => array(
                     array(
                         'selected'  => '0',
+                        'show'      => '0',
                         'name'      => '支付列表',
                         'flagName'  => 'index',
                     ),
                     array(
                         'selected'  => '0',
+                        'show'      => '0',
                         'name'      => '提现列表',
                         'flagName'  => 'tixian',
                     ),
                     array(
                         'selected'  => '0',
+                        'show'      => '0',
                         'name'      => '理赔列表',
                         'flagName'  => 'claims',
                     )
@@ -227,42 +240,50 @@ class HZ_Controller extends CI_Controller
             ),
             array(
                 'selected'  => '0',
+                'show'      => '0',
                 'name'      => '资讯管理',
                 'flagName'  => 'posts',
                 'icon'      => 'icon-bar-chart',
                 'sub'       => array(
                     array(
                         'selected'  => '0',
+                        'show'      => '0',
                         'name'      => '资讯列表',
                         'flagName'  => 'index',
                     ),
                     array(
                         'selected'  => '0',
+                        'show'      => '0',
                         'name'      => '资讯发布',
                         'flagName'  => 'add'
                     ),
                     array(
                         'selected'  => '0',
+                        'show'      => '0',
                         'name'      => '资讯分类',
                         'flagName'  => 'cate'
                     ),
                     array(
                         'selected'  => '0',
+                        'show'      => '0',
                         'name'      => '专题',
                         'flagName'  => 'theme',
                     ),
                     array(
                         'selected'  => '0',
+                        'show'      => '0',
                         'name'      => '评论审核',
                         'flagName'  => 'comment',
                     ),
                     array(
                         'selected'  => '0',
+                        'show'      => '0',
                         'name'      => '行业动态',
                         'flagName'  => 'events',
                     ),
                     array(
                         'selected'  => '0',
+                        'show'      => '0',
                         'name'      => '关注列表',
                         'flagName'  => 'praise',
                     )
@@ -270,27 +291,32 @@ class HZ_Controller extends CI_Controller
             ),
             array(
                 'selected'  => '0',
+                'show'      => '0',
                 'name'      => '财务管理',
                 'flagName'  => 'finance',
                 'icon'      => 'icon-trophy',
                 'sub'       => array(
                     array(
                         'selected'  => '0',
+                        'show'      => '0',
                         'name'      => '账户列表',
                         'flagName'  => 'account',
                     ),
                     array(
                         'selected'  => '0',
+                        'show'      => '0',
                         'name'      => '订单统计',
                         'flagName'  => 'orderstat'
                     ),
                     array(
                         'selected'  => '0',
+                        'show'      => '0',
                         'name'      => '销售排行',
                         'flagName'  => 'salestat',
                     ),
                     array(
                         'selected'  => '0',
+                        'show'      => '0',
                         'name'      => '支付渠道',
                         'flagName'  => 'paytype',
                     )
@@ -298,12 +324,14 @@ class HZ_Controller extends CI_Controller
             ),
             array(
                 'selected'  => '0',
+                'show'      => '0',
                 'name'      => '广告推广管理',
                 'flagName'  => 'promo',
                 'icon'      => 'icon-tasks',
                 'sub'       => array(
                     array(
                         'selected'  => '0',
+                        'show'      => '0',
                         'name'      => '广告列表',
                         'flagName'  => 'index',
                     ),
@@ -314,6 +342,7 @@ class HZ_Controller extends CI_Controller
 //                    ),
                     array(
                         'selected'  => '0',
+                        'show'      => '0',
                         'name'      => '广告类型列表',
                         'flagName'  => 'cateList'
                     ),
@@ -324,44 +353,47 @@ class HZ_Controller extends CI_Controller
 //                    ),
                     array(
                         'selected'  => '0',
+                        'show'      => '0',
                         'name'      => '推荐设置',
                         'flagName'  => 'set',
                     ),
-                    array(
-                        'selected'  => '0',
-                        'name'      => '*返利管理',
-                        'flagName'  => 'ret',
-                    ),
-                    array(
-                        'selected'  => '0',
-                        'name'      => '友情链接',
-                        'flagName'  => 'links',
-                    )
+//                    array(
+//                        'selected'  => '0',
+//                        'name'      => '*返利管理',
+//                        'flagName'  => 'ret',
+//                    ),
+//                    array(
+//                        'selected'  => '0',
+//                        'name'      => '友情链接',
+//                        'flagName'  => 'links',
+//                    )
                 )
             ),
-            array(
-                'selected'  => '0',
-                'name'      => '安全配置',
-                'flagName'  => 'set',
-                'icon'      => 'icon-info-sign',
-                'sub'       => array(
-                    array(
-                        'selected'  => '0',
-                        'name'      => '数据库配置',
-                        'flagName'  => 'add'
-                    ),
-                    array(
-                        'selected'  => '0',
-                        'name'      => '短信设置',
-                        'flagName'  => 'msg',
-                    )
-                )
-            ),
+//            array(
+//                'selected'  => '0',
+//                'name'      => '安全配置',
+//                'flagName'  => 'set',
+//                'icon'      => 'icon-info-sign',
+//                'sub'       => array(
+//                    array(
+//                        'selected'  => '0',
+//                        'name'      => '数据库配置',
+//                        'flagName'  => 'add'
+//                    ),
+//                    array(
+//                        'selected'  => '0',
+//                        'name'      => '短信设置',
+//                        'flagName'  => 'msg',
+//                    )
+//                )
+//            ),
         );
 
         $rsegments = $this->uri->rsegments;
         $cont = $rsegments[1];
         $method = $rsegments[2];
+
+        $powerUrl = $this->session->userdata('powerUrl') ? : array();
 
         foreach ($menu as &$m) {
             if (strtolower($cont) ===$m['flagName']) {
@@ -370,6 +402,11 @@ class HZ_Controller extends CI_Controller
                     if (strtolower($method) === $s['flagName']) {
                         $s['selected'] = 1;
                     }
+                }
+            }
+            foreach ($m['sub'] as &$s) {
+                if (in_array($m['flagName'].'/'.$s['flagName'], $powerUrl)) {
+                    $s['show'] = 1;
                 }
             }
         }

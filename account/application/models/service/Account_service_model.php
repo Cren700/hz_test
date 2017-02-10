@@ -93,7 +93,7 @@ class Account_service_model extends HZ_Model
                 return $resValidation;
             }
         }
-        $info = $this->account_dao_model->getInfoByOp(array('Fuser_id' => $data['Fuser_id']), $type);
+        $info = $this->account_dao_model->getInfoByOp(array('Fuser_id' => $data['Fuser_id'], 'Fstatus' => 1), $type);
         if (!$info) return array('code' => 'account_error_0'); // 账户不存在
         $pwdCode = encodePwd($info['Fsalt'], $data['Fpasswd']);
         if ($info['Fpasswd'] !== $pwdCode) {
@@ -101,6 +101,7 @@ class Account_service_model extends HZ_Model
         } else {
             $detail = $this->account_dao_model->getDetailByOp(array('Fuser_id' => $info['Fid']), $type);
             $resData = array('uid' => $info['Fid'], 'username' => $info['Fuser_id'], 'user_type' => $info['Fuser_type'], 'image_path' => isset($detail['Fimage_path']) ? $detail['Fimage_path'] : '');
+            $type == 'admin' ? $resData['role_id'] = $info['Frole_id'] : '';
             return array('code' => 0, 'data' => $resData);
         }
     }
@@ -176,6 +177,18 @@ class Account_service_model extends HZ_Model
             $ret['code'] = 'system_error_2'; // 操作出错
         } else {
             $res = $this->account_dao_model->getUserDetailByFuserId(array('Fuser_id' => $data['Fuser_id']));
+            $ret['data'] = $res;
+        }
+        return $ret;
+    }
+
+    public function getAdminInfo($data)
+    {
+        $ret = array('code' => 0);
+        if (empty($data['Fid'])) {
+            $ret['code'] = 'system_error_2'; // 操作出错
+        } else {
+            $res = $this->account_dao_model->getAdminInfo(array('Fid' => $data['Fid']));
             $ret['data'] = $res;
         }
         return $ret;
@@ -424,7 +437,6 @@ class Account_service_model extends HZ_Model
 
     public function hasStorePower($option)
     {
-
         $ret = array('code' => 0);
         $res = $this->account_dao_model->hasStorePower($option);
         if (empty($res)) {
@@ -433,4 +445,132 @@ class Account_service_model extends HZ_Model
         }
         return $ret;
     }
+
+    public function adminAction()
+    {
+        $ret = array('code' => 0);
+        $res = $this->account_dao_model->adminAction();
+        $ret['data'] = $res;
+        return $ret;
+    }
+
+    public function role()
+    {
+        $ret = array('code' => 0);
+        $res = $this->account_dao_model->role();
+        foreach ($res as &$r){
+            $ids = explode(',', $r['Faction_ids']) ? : '0';
+            $actions = $this->account_dao_model->getActions($ids);
+            $r['Faction_name'] = join(',', array_column($actions, 'Faction_name'));
+        }
+        $ret['data'] = $res;
+        return $ret;
+    }
+
+    public function addRole($option)
+    {
+        $ret = array('code' => 0);
+        $this->account_dao_model->addRole($option);
+        return $ret;
+    }
+
+    public function saveRole($where, $option)
+    {
+        $ret = array('code' => 0);
+        $this->account_dao_model->saveRole($where, $option);
+        return $ret;
+    }
+
+    public function getRole($where)
+    {
+        $ret = array('code' => 0);
+        $ret['data'] = $this->account_dao_model->getRole($where);
+        return $ret;
+    }
+
+    public function adminList($option)
+    {
+        $res = array('code' => 0);
+        $where = $like = array();
+
+
+        if (!empty($option['min_date'])) {
+            $where['u.Fcreate_time >= '] = strtotime($option['min_date']);
+        }
+
+        if (!empty($option['max_date'])) {
+            $where['u.Fcreate_time <= '] = strtotime($option['max_date'])+23*3600+3599;
+        }
+
+        if ($option['Fuser_id'] === '0' || !empty($option['Fuser_id'])) {
+            $like['u.Fuser_id'] = $option['Fuser_id'];
+        }
+        $page = $option['p'] ? : 1;
+        $page_size = $option['page_size'];
+
+        $res['data']['count'] = $this->account_dao_model->adminCounts($where, $like);
+        $res['data']['list'] = $this->account_dao_model->adminList($where, $like, $page, $page_size);
+
+        return $res;
+    }
+
+    public function changeAdminStatus($option)
+    {
+        $res = array('code' => 0);
+        // 数据验证
+        $validationConfig = array(
+            array(
+                'value' => $option['Fid'],
+                'rules' => 'required',
+                'field' => '用户ID'
+            )
+        );
+        foreach ($validationConfig as $v) {
+            $resValidation = validationData($v['value'], $v['rules'], $v['field']);
+            if (!empty($resValidation)) {
+                return $resValidation;
+            }
+        }
+        if ($option['Fstatus'] === '0' || $option['Fstatus'] === '1') {
+            // update status
+            $where = array('Fid' => $option['Fid']);
+            $data = array('Fstatus' => $option['Fstatus']);
+            $rt = $this->account_dao_model->updateAdmin($where, $data);
+            if (!$rt) {
+                $res['code'] = 'account_error_5'; // error
+            }
+        }
+        return $res;
+    }
+
+    public function updateAdminPwd($where, $data)
+    {
+        $res = array('code' => 0);
+        $salt = saltCode();
+        $data['Fsalt'] = $salt;
+        $data['Fpasswd'] = encodePwd($salt, $data['Fpasswd']);
+        $ret = $this->account_dao_model->updateAdmin($where, $data);
+        if (!$ret) {
+            $res['code'] = 'account_error_11'; // error
+        }
+        return $res;
+    }
+
+    public function updateAdminRole($where, $data)
+    {
+        $res = array('code' => 0);
+        $ret = $this->account_dao_model->updateAdmin($where, $data);
+        if (!$ret) {
+            $res['code'] = 'account_error_12'; // error
+        }
+        return $res;
+    }
+
+    public function powerUrl($where)
+    {
+        $ret = array('code' => 0);
+        $ret['data'] = $this->account_dao_model->powerUrl($where);
+        return $ret;
+    }
+
 }

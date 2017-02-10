@@ -6,7 +6,7 @@
             </div>
             <div class="list_item_txt">
                 <h2>
-                    <a href="<{'/posts.html?id='|cat:$l['Fid']|getBaseUrl}>"><{$l['Fpost_title']}></a>
+                    <a target="_blank" href="<{'/posts.html?id='|cat:$l['Fid']|getBaseUrl}>"><{$l['Fpost_title']}></a>
                 </h2>
                 <p><{$l['Fpost_excerpt']}></p>
                 <div class="upload_info">

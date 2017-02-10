@@ -23,8 +23,11 @@ class Home extends HZ_Controller
         if (isset($cate['data']['list'])) {
             $cateList = $cate['data']['list'];
         }
-//        $cssArr = array('bootstrap.min.css');
+        $banner = $this->posts_service->getBanners();
+        $threeNews = $this->posts_service->getThreeNews();
         $jsArr = array('home_index.js', 'slider.js');
+        $this->smarty->assign('banner', $banner['data']);
+        $this->smarty->assign('threeNews', $threeNews['data']);
         $this->smarty->assign('cate_id', $cate_id);
         $this->smarty->assign('cate', $cateList);
         $this->smarty->assign('jsArr', $jsArr);

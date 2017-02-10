@@ -13,7 +13,7 @@ $config = array(
     'system_error_2' => array( 'code' => 2, 'msg' => '操作出错'),                     //操作出错
 
     // account 10000 ~ 19999
-    'account_error_0' => array( 'code' => 10000, 'msg' => '用户账号不存在'),                //用户账号不存在
+    'account_error_0' => array( 'code' => 10000, 'msg' => '用户账号不存在或已禁用'),                //用户账号不存在
     'account_error_1' => array( 'code' => 10001, 'msg' => '用户账号密码不一致'),            //用户账号密码不一致
     'account_error_2' => array( 'code' => 10002, 'msg' => '用户名已存在'),                 //用户名已存在
     'account_error_3' => array( 'code' => 10003, 'msg' => '添加数据错误'),                 //添加数据错误
@@ -24,6 +24,8 @@ $config = array(
     'account_error_8' => array( 'code' => 10008, 'msg' => '验证码不正确或已经过期'),                     //验证码不正确或已经过期 
     'account_error_9' => array( 'code' => 10009, 'msg' => '您不是媒体用户或者验证未通过'),                     //您不是媒体用户或者验证未通过 
     'account_error_10' => array( 'code' => 10010, 'msg' => '您不是商户类型或者验证未通过'),                     //您不是商户类型或者验证未通过 
+    'account_error_11' => array( 'code' => 10011, 'msg' => '修改用户密码出错'),                     //修改用户密码出错 
+    'account_error_12' => array( 'code' => 10012, 'msg' => '修改用户角色出错'),                     //修改用户角色出错 
 
 
 

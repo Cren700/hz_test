@@ -132,4 +132,15 @@ class Posts_service_model extends HZ_Model
         );
         return $this->myCurl('posts', 'hasPostsPower', $option, false);
     }
+    
+    public function getBanners()
+    {
+        return $this->myCurl('posts', 'getBanners', array(), false);
+    }
+
+    public function getThreeNews()
+    {
+        return $this->myCurl('posts', 'getThreeNews', array(), false);
+    }
+
 }

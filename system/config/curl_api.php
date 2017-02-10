@@ -35,7 +35,18 @@ $config = array(
             'modifyHdImg'           => '/account/modifyHdImg',        // 保存头像    
             'loginPhone'            => '/account/loginPhone',            // 手机登录
             'hasMediumPower'        => '/account/hasMediumPower',        // 查看是否具有媒体权限
-            'hasStorePower'        => '/account/hasStorePower',        // 查看是否具有商户权限
+            'hasStorePower'         => '/account/hasStorePower',        // 查看是否具有商户权限
+            'adminAction'           => '/account/adminAction',          // 管理员操作
+            'role'                  => '/account/role',                 // 角色管理
+            'addRole'               => '/account/addRole',             // 添加角色
+            'saveRole'              => '/account/saveRole',             // 保存角色
+            'getRole'               => '/account/getRole',              // 获取角色信息
+            'adminList'             => '/account/adminList',             // 管理列表
+            'changeAdminStatus'     => '/account/changeAdminStatus',     // 修改管理员状态
+            'getAdminInfo'          => '/account/getAdminInfo',          // 管理员信息
+            'updateAdminPwd'        => '/account/updateAdminPwd',        // 修改管理员密码
+            'updateAdminRole'       => '/account/updateAdminRole',        // 修改管理员角色
+            'powerUrl'              => '/account/powerUrl',               // 用户权限目录
         ),
     ),
     'product' => array(
@@ -106,6 +117,8 @@ $config = array(
             'queryEvents'           => '/posts/queryEvents',            // 查询信息
             'delEvent'              => '/posts/delEvent',               // 删除行业信息
             'modifyEvent'           => '/posts/modifyEvent',               // 修改行业信息
+            'getBanners'            => '/posts/getBanners',               // 首页banner
+            'getThreeNews'          => '/posts/getThreeNews',               // 获取前三条新闻
         ),
     ),
     'order' => array(

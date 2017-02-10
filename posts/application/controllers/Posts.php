@@ -489,4 +489,16 @@ class Posts extends HZ_Controller
         $res = $this->posts_service->hasPostsPower($option);
         echo outputResponse($res);
     }
+
+    public function getBanners()
+    {
+        $res = $this->posts_service->getBanners();
+        echo outputResponse($res);
+    }
+
+    public function getThreeNews()
+    {
+        $res = $this->posts_service->getThreeNews();
+        echo outputResponse($res);
+    }
 }

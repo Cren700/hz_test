@@ -47,7 +47,7 @@
             <{/foreach}>
         </p>
         <{/if}>
-        <h5>发表评论</h5>
+        <h5 class="com_h">发表评论</h5>
         <form>
             <div class="comment">
                 <div class="comment_disable">

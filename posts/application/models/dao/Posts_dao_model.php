@@ -370,5 +370,25 @@ class Posts_dao_model extends HZ_Model
         return $res;
     }
 
+    public function getBanners()
+    {
+        $where = array(
+            'Fstatus' => 1,
+        );
+        $promo_db = $this->load->database('promo_db', true);// 产品库
+        $res = $promo_db->order_by('Flevel ASC, Factive_id DESC')->get_where('t_adv_prom', $where, 5)->result_array();
+        return $res;
+    }
+
+    public function getThreeNews()
+    {
+        $where = array(
+            'Fpost_status' => 3,
+            'Fis_del' => 0
+        );
+        $res = $this->_news->order_by('Fcreate_time' ,'DESC')->get_where($this->_posts_table, $where, 3)->result_array();
+        return $res;
+
+    }
 
 }

@@ -22,10 +22,22 @@ HZ.Global = (function() {
             }
         })
     }
+
+    // 目录为空不显示
+    function _menu() {
+        $('#sidebar').find('ul .submenu').each(function(){
+            if($(this).find('ul li').length == 0) {
+                $(this).remove();
+            }
+        })
+    }
     return {
-        logout: _logout
+        logout: _logout,
+        menu: _menu
     }
 })();
+
+HZ.Global.menu();
 
 
 HZ.Form = (function () {

@@ -64,4 +64,58 @@ class User_service_model extends HZ_Model
         return $this->myCurl('account', 'queryBlackList', $data, false);
     }
 
+    public function role()
+    {
+        return $this->myCurl('account', 'role', array(), false);
+    }
+
+    public function adminAction()
+    {
+        return $this->myCurl('account', 'adminAction', array(), false);
+    }
+    
+    public function saveRole($option)
+    {
+        return $this->myCurl('account', 'saveRole', $option, true);
+    }
+
+    public function addRole($option)
+    {
+        return $this->myCurl('account', 'addRole', $option, true);
+    }
+
+    public function getRole($option)
+    {
+        return $this->myCurl('account', 'getRole', $option, false);
+    }
+
+    public function adminList($option)
+    {
+        return $this->myCurl('account', 'adminList', $option, false);
+    }
+
+    public function changeAdminStatus($option)
+    {
+        return $this->myCurl('account', 'changeAdminStatus', $option, false);
+    }
+
+    public function getAdminInfo($data)
+    {
+        return $this->myCurl('account', 'getAdminInfo', $data, false);
+    }
+
+    public function updateAdminPwd($option)
+    {
+        return $this->myCurl('account', 'updateAdminPwd', $option, true);
+    }
+
+    public function updateAdminRole($option)
+    {
+        return $this->myCurl('account', 'updateAdminRole', $option, true);
+    }
+
+    public function addAccountAdmin($option)
+    {
+        return $this->myCurl('account', 'addAccountAdmin', $option, true);
+    }
 }
