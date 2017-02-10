@@ -299,7 +299,9 @@ class Account extends HZ_Controller
             if ($resultCode != 0) {
                 $i++;
                 $this->account_service_model->saveVerifySms($status = 0, $resultMsgId, $createTime, $content, $phone, $resultMsg);
+                sleep(5);
                 $ret['code'] = 1;  // 不成功
+                $ret['msg'] = '出错了,请您稍后再试!';
             } else {
                 // 保存验证码
                 $this->account_service_model->saveVerifyCode($createTime, $endTime, $code);
