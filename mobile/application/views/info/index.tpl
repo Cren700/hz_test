@@ -18,12 +18,12 @@
             <a href="<{'/info/planList.html'|getBaseUrl}>">我的订单</a><!--订单+关注-->
         </p>
         <p>
-            <a href="javascript:;">推荐有奖</a>
+            <a href="<{'/info/collectList.html'|getBaseUrl}>">我的文章</a>
         </p>
         <{if $user_type eq 3}>
         <!--媒体star-->
         <p>
-            <a href="<{'/info/collectList.html'|getBaseUrl}>">我的文章</a>
+            <a href="<{'/info/medium.html'|getBaseUrl}>">文章列表</a>
         </p>
         <p>
             <a href="<{'/about/contribute.html'|getBaseUrl}>">投稿、成为专栏作家</a>
@@ -43,7 +43,9 @@
         </p>
         <!--商户end-->
         <{/if}>
-
+        <p>
+            <a href="javascript:;">推荐有奖</a>
+        </p>
         <p>
             <a href="<{'/account/set.html'|getBaseUrl}>">设置</a>
         </p>

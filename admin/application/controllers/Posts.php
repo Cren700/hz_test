@@ -408,6 +408,8 @@ class Posts extends BaseControllor
             'user_id' => $this->_uid,
             'theme_title' => $this->input->post('theme_title'),
             'theme_excerpt' => $this->input->post('theme_excerpt'),
+            'url' => $this->input->post('url'),
+            'murl' => $this->input->post('murl'),
             'theme_coverimage' => $this->input->post('theme_coverimage'),
             'banner_path' => $this->input->post('banner_path'),
         );

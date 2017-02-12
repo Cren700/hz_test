@@ -38,7 +38,7 @@ class Info_service_model extends HZ_Model
     }
 
     /**
-     * 收藏产品列表
+     * 评论列表
      */
     public function commentList($option)
     {

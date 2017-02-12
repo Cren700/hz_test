@@ -18,11 +18,11 @@ class Theme extends HZ_Controller
     public function index()
     {
         $cate_id = $this->input->get('id');
-        $cssArr = array('bootstrap.min.css');
-        $jsArr = array('theme_index.js');
+        $cssArr = array('bootstrap.min.css', 'font-awesome.css');
+        $theme = $this->theme_service->getThemeList();
         $this->smarty->assign('cate_id', $cate_id);
-        $this->smarty->assign('jsArr', $jsArr);
         $this->smarty->assign('cssArr', $cssArr);
+        $this->smarty->assign('theme', isset($theme['data']) ? $theme['data'] : array());
         $this->smarty->display('theme/index.tpl');
     }
 
@@ -44,6 +44,23 @@ class Theme extends HZ_Controller
             $postsList = $posts['data']['list'];
         }
         $this->smarty->assign('list', $postsList);
+        $this->smarty->display('theme/list.tpl');
+    }
+
+    public function posts()
+    {
+        $data = array(
+            'id' => $this->input->get('id')
+        );
+        $cssArr = array('bootstrap.min.css', 'font-awesome.css');
+        $theme = $this->theme_service->getPostsThemeByPid($data);
+        if (empty($theme['data'])){
+            // 没有数据
+            $this->jump404();
+        }
+        $this->smarty->assign('theme', $theme);
+        $this->smarty->assign('cssArr', $cssArr);
+        $this->smarty->assign('id', $data['id']);
         $this->smarty->display('theme/list.tpl');
     }
 

@@ -329,6 +329,8 @@ class Posts extends HZ_Controller
             'Ftheme_excerpt' => $this->input->post('theme_excerpt', true),
             'Ftheme_coverimage' => $this->input->post('theme_coverimage', true),
             'Fbanner_path' => $this->input->post('banner_path', true),
+            'Furl' => $this->input->post('url', true),
+            'Fmurl' => $this->input->post('murl', true),
             'Fcreate_time'  => time(),
             'Fupdate_time'  => time(),
         );
@@ -349,6 +351,8 @@ class Posts extends HZ_Controller
             'Ftheme_excerpt' => $this->input->post('theme_excerpt', true),
             'Ftheme_coverimage' => $this->input->post('theme_coverimage', true),
             'Fbanner_path' => $this->input->post('banner_path', true),
+            'Furl' => $this->input->post('url', true),
+            'Fmurl' => $this->input->post('murl', true),
             'Fupdate_time'  => time(),
         );
 

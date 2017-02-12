@@ -36,4 +36,24 @@ class Info_service_model extends HZ_Model
     {
         return $this->myCurl('product', 'getCollectListByUid', $option);
     }
+
+    public function doPraise($option)
+    {
+        $where = array('post_id' => $option['post_id'], 'user_id' => $this->_user_id);
+        return $this->myCurl('posts', 'doPraise', $where);
+    }
+
+    /**
+     * 评论列表
+     */
+    public function commentList($option)
+    {
+        return $this->myCurl('posts', 'getCommentListByUid', $option);
+    }
+
+    public function mediumQuery($data)
+    {
+        return $this->myCurl('posts', 'queryPosts', $data, false);
+    }
+
 }

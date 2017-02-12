@@ -10,7 +10,7 @@
             <div class="topice_list_item">
                 <div class="topice_list_img">
                     <a href="<{'/theme/jhtTheme.html?id='|cat:$l['Fid']|getBaseUrl}>">
-                        <img src="<{$l['Fbanner_path']}>" alt="">
+                        <img src="<{$l['Ftheme_coverimage']}>" alt="">
                     </a>
                 </div>
                 <div class="topice_txt clearfix">

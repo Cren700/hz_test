@@ -13,7 +13,6 @@ class Medium extends BaseControllor
         $this->smarty->assign('menu', $menu);
     }
 
-
     public function index()
     {
         $cate = $this->post_service->getCate();

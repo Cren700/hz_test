@@ -3,7 +3,7 @@
 <{include file="public/nav.tpl"}>
 <div class="container clearfix">
     <div class="topice_banner">
-        <a href="<{'/theme/jhtTheme.html?id='|cat:$id|getBaseUrl}>">
+        <a href="<{$theme['Furl']|cat:'?id='|cat:$id}>">
             <img src="<{$theme['data']['Fbanner_path']|default:''}>" alt="">
         </a>
     </div>
@@ -16,15 +16,17 @@
         <ul class="clearfix">
             <{foreach $theme['postList'] as $l}>
             <li>
-                <div class="topice_jj_img">
-                    <img src="<{$l['Fpost_coverimage']}>" alt="">
-                </div>
-                <div class="topice_jj_txt">
-                    <h3><{$l['Fpost_title']}></h3>
-                    <div class="topic_txt_box">
-                        <p><{$l['Fpost_excerpt']}></p>
+                <a href="<{'/posts.html?id='|cat:$l['Fid']|getBaseUrl}>">
+                    <div class="topice_jj_img">
+                        <img src="<{$l['Fpost_coverimage']}>" alt="">
                     </div>
-                </div>
+                    <div class="topice_jj_txt">
+                        <h3><{$l['Fpost_title']}></h3>
+                        <div class="topic_txt_box">
+                            <p><{$l['Fpost_excerpt']}></p>
+                        </div>
+                    </div>
+                </a>
             </li>
             <{/foreach}>
         </ul>

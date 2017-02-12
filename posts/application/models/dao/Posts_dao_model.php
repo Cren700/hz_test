@@ -87,7 +87,7 @@ class Posts_dao_model extends HZ_Model
     public function getPostsByPids($where)
     {
         dbEscape($where);
-        $query = $this->_news->select('Fid, Fpost_title, Fpost_coverimage, Fpost_excerpt')->where_in('Fid', $where)->order_by('Fupdate_time DESC')->get($this->_posts_table);
+        $query = $this->_news->select('Fid, Fpost_title, Fpost_coverimage, Fpost_excerpt, Fpost_author, Fcreate_time')->where_in('Fid', $where)->order_by('Fupdate_time DESC')->get($this->_posts_table);
         $res = $query->result_array();
         return filterData($res);
     }

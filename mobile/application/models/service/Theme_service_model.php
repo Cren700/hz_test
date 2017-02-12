@@ -42,4 +42,15 @@ class Theme_service_model extends HZ_Model
         );
         return $this->myCurl('posts', 'relatedPosts', $option, false);
     }
+
+    public function getThemeList()
+    {
+        $option = array('theme_status' => 1);
+        return $this->myCurl('posts', 'getThemeList', $option, false);
+    }
+
+    public function getPostsThemeByPid($data)
+    {
+        return $this->myCurl('posts', 'getPostsThemeByPid', $data, false);
+    }
 }

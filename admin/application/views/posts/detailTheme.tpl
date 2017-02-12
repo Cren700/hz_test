@@ -39,6 +39,22 @@
                             </div>
                             <div class="control-group">
                                 <div class="span12">
+                                    <label class="control-label">PC专题链接</label>
+                                    <div class="controls">
+                                        <input type="text" class="span11" name="url" placeholder="专题链接" value="<{$theme['Furl']|default:''}>">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="span12">
+                                    <label class="control-label">微信专题链接</label>
+                                    <div class="controls">
+                                        <input type="text" class="span11" name="murl" placeholder="微信专题链接" value="<{$theme['Fmurl']|default:''}>">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="span12">
                                     <label class="control-label">专题图片</label>
                                     <div class="controls">
                                         <input type="hidden" value="<{$theme['Ftheme_coverimage']|default:''}>" name="theme_coverimage" class="js-img-path">

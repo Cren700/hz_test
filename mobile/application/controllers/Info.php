@@ -12,6 +12,7 @@ class Info extends BaseControllor
     {
         parent::__construct();
         $this->load->model('service/info_service_model', 'info_service');
+        $this->load->model('service/posts_service_model', 'post_service');
         $this->smarty->assign('model', 'info');
     }
 
@@ -50,11 +51,61 @@ class Info extends BaseControllor
             'user_id' => $this->_user_id
         );
         $praiseList = $this->info_service->praiseList($option);
-        if (!isset($praiseList['data']) || empty($praiseList['data']) ){
-            // 没有数据
-            $this->jump404();
-        }
         $this->smarty->assign('praiseInfo', $praiseList['data']);
         $this->smarty->display('info/praiseList.tpl');
     }
+
+    public function doPraise()
+    {
+        $option = array(
+            'post_id' => $this->input->post('post_id'),
+        );
+        $res = $this->info_service->doPraise($option);
+        echo json_encode_data($res);
+    }
+
+
+    /**
+     * 收藏文章列表
+     */
+    public function commentList()
+    {
+        $option = array(
+            'user_id' => $this->_user_id
+        );
+        $commentList = $this->info_service->commentList($option);
+        $this->smarty->assign('commentInfo', $commentList['data']);
+        $this->smarty->display('info/commentList.tpl');
+    }
+    
+    /**
+     * 媒体文章列表
+     */
+    public function medium()
+    {
+        $jsArr = array('medium.js');
+        $this->smarty->assign('jsArr', $jsArr);
+        $this->smarty->display('info/medium.tpl');
+    }
+
+    public function mediumQuery()
+    {
+        $option = array(
+            'p' => $this->input->get('p') ? : 1 ,
+            'page_size' => $this->input->get('n') ? : 10,
+            'user_type' => 2,
+            'user_id'  => $this->_uid,
+        );
+        $cate = $this->post_service->getCate();
+        $cate = isset($cate['data']['list']) ? $cate['data']['list'] : array();
+        $tmp = array();
+        foreach ($cate as $c) {
+            $tmp[$c['Fpost_category_id']] = $c['Fcategory_name'];
+        }
+        $posts = $this->info_service->mediumQuery($option);
+        $this->smarty->assign('cate', $tmp);
+        $this->smarty->assign('info', $posts['data']);
+        echo $this->smarty->display('info/mediumList.tpl');
+    }
+
 }

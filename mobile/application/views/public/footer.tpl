@@ -9,7 +9,7 @@
     </a>
     <a href="<{'/theme.html'|getBaseUrl}>" id="js-footer-theme" <{if isset($model) && $model eq 'theme'}>class='active'<{/if}>>
         <i class="zhuanl">&nbsp;</i>
-        专栏
+        专题
     </a>
     <a href="<{'/info.html'|getBaseUrl}>" id="js-footer-info" <{if isset($model) && $model eq 'info'}>class='active'<{/if}>>
         <i class="mine">&nbsp;</i>
