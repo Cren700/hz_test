@@ -108,4 +108,52 @@ class Info extends BaseControllor
         echo $this->smarty->display('info/mediumList.tpl');
     }
 
+    public function product()
+    {
+        $jsArr = array('info_product.js');
+        $this->smarty->assign('jsArr', $jsArr);
+        $this->smarty->display('info/product.tpl');
+    }
+
+    public function storeProductQuery()
+    {
+        $option = array(
+            'p' => $this->input->get('p') ? : 1 ,
+            'page_size' => $this->input->get('n') ? : 10,
+            'store_id'  => $this->_user_type == 1 ? '' : $this->_uid,
+        );
+        $cate = $this->post_service->getCate();
+        $cate = isset($cate['data']['list']) ? $cate['data']['list'] : array();
+        $tmp = array();
+        foreach ($cate as $c) {
+            $tmp[$c['Fpost_category_id']] = $c['Fcategory_name'];
+        }
+        $product = $this->info_service->storeProductQuery($option);
+        $this->smarty->assign('cate', $tmp);
+        $this->smarty->assign('info', $product['data']);
+        echo $this->smarty->display('info/productList.tpl');
+    }
+
+    public function storeOrder()
+    {
+        $jsArr = array(
+            'info_store_order.js'
+        );
+        $this->smarty->assign('jsArr', $jsArr);
+        $this->smarty->display('info/storeOrder.tpl');
+    }
+
+    public function storeOrderQuery()
+    {
+        $option = array(
+            'p' => $this->input->get('p') ? : 1 ,
+            'page_size' => $this->input->get('n') ? : 10,
+            'store_id'  => $this->_uid,// 商户ID
+            'store_type' => 1,// 商户类型为1
+        );
+        $order = $this->info_service->storeOrderQuery($option);
+        $this->smarty->assign('info', $order['data']);
+        echo $this->smarty->display('info/storeOrderList.tpl');
+    }
+
 }

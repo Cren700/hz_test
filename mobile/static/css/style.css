@@ -2596,10 +2596,11 @@ section.change_info {
     width: 2.4rem;
     height: 2rem;
     display: inline;
+    margin-right: 0.3rem;
 }
 
 .orderInfo {
-    width: 6.5rem;
+    width: 6.2rem;
     display: inline;
 }
 
@@ -2621,6 +2622,9 @@ section.change_info {
 }
 .pCount a {
     border: 1px solid;
+}
+.pOrder {
+    color: #4c95db;
 }
 
 .submitArea {

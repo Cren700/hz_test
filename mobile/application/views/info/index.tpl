@@ -33,13 +33,13 @@
         </p>
         <!--媒体end-->
         <{/if}>
-        <{if $user_type eq 4}>
+        <{if $user_type eq 2}>
         <!--商户star-->
         <p>
-            <a href="<{'/about/contribute.html'|getBaseUrl}>">我的产品</a>
+            <a href="<{'/info/product.html'|getBaseUrl}>">我的产品</a>
         </p>
         <p>
-            <a href="<{'/about/report.html'|getBaseUrl}>">成交订单</a>
+            <a href="<{'/info/orders.html'|getBaseUrl}>">成交订单</a>
         </p>
         <!--商户end-->
         <{/if}>

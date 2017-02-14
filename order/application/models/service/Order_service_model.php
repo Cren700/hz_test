@@ -208,7 +208,9 @@ class Order_service_model extends HZ_Model
         foreach ($orderList as &$l)
         {
             $user_info = $this->myCurl('account', 'getStoreName', array('id' => $l['Fstore_id'], 'type' => $l['Fstore_type']), false);
+            $product_info = $this->myCurl('product', 'getProductByPid', array('product_id' => $l['Fproduct_id']));
             $l['Fstore_name'] = isset($user_info['data']['Fuser_id']) ? $user_info['data']['Fuser_id'] : '';
+            $l['Fcoverimage'] = isset($product_info['data']['Fcoverimage']) ? $product_info['data']['Fcoverimage'] : '';
         }
         $res['data']['list'] = $orderList;
         return $res;

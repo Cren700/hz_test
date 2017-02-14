@@ -15,7 +15,7 @@
                 <li class="orderItem clearfix">
                     <a href="<{'/product/detail/'|cat:$info['Fproduct_id']|getBaseUrl}>">
                         <div class="orderLogo left">
-                            <img src="<{$info['Fcovarimage']|default:''}>" />
+                            <img src="<{$info['Fcoverimage']|default:''}>" />
                         </div>
                         <div class="orderInfo right">
                             <div class="pName"><{$info['Fproduct_name']|default:''}></div>

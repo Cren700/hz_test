@@ -56,4 +56,14 @@ class Info_service_model extends HZ_Model
         return $this->myCurl('posts', 'queryPosts', $data, false);
     }
 
+    public function storeProductQuery($data)
+    {
+        return $this->myCurl('product', 'queryProduct', $data, false);
+    }
+
+    public function storeOrderQuery($data)
+    {
+        return $this->myCurl('order', 'queryOrders', $data, false);
+    }
+
 }
