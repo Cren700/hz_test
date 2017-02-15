@@ -41,9 +41,12 @@
                                 <div class="span12">
                                     <label class="control-label">角色类型</label>
                                     <div class="controls">
-                                        <{foreach $role['list']|default:array() as $r}>
-                                        <label class="span2" style="display: inline; margin-left:0" for="<{$r['Frole_id']}>"><input id="<{$r['Frole_id']}>" type="radio" name="role_id" value="<{$r['Frole_id']}>" ><{$r['Frole_name']}></label>
-                                        <{/foreach}>
+                                        <select name="role_id" id="">
+                                            <option value="">请选择用户角色</option>
+                                            <{foreach $role['list']|default:array() as $r}>
+                                            <option value="<{$r['Frole_id']}>"><{$r['Frole_name']}></option>
+                                            <{/foreach}>
+                                        </select>
                                     </div>
                                 </div>
                             </div>

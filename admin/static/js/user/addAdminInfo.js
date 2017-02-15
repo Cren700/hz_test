@@ -15,15 +15,6 @@ HZ.UserInfo = (function() {
         function _form() {
             $('#form').validate({
                 submitHandler: function (form) {
-                    var role_id = $('input[name="role_id"]:checked').val();
-                    if(!role_id) {
-                        HZ.Dialog.showMsg({
-                            msg: "用户类型不能为空哦",
-                            type: 'warm'
-                        });
-                        return false;
-                    }
-                    // 手动判断证件照片是否上传
                     $('.js-btn-submit').attr('disabled', true);
                     HZ.Form.btnSubmit({
                         t: 'post',
@@ -40,11 +31,15 @@ HZ.UserInfo = (function() {
                     },
                     passwd: {
                         required: true
+                    },
+                    role_id: {
+                        required: true
                     }
                 },
                 messages: {
                     user_id: {required: '用户名称'},
-                    passwd: {required: '用户密码'}
+                    passwd: {required: '用户密码'},
+                    role_id: {required: '请选择用户角色'}
                 },
                 errorClass: "help-inline",
                 errorElement: "span",

@@ -58,11 +58,13 @@
         </div>
     </div>
     <div class="sidebar">
-        <div class="sidebar_ad">
-
+        <div class="sidebarTopics">
+            <a href="http://www.imhuzhu.com/SpecialDetail.aspx?id=2" target="_blank">
+                <img src="http://www.imhuzhu.com/upload/mg/imadmin/2017/01/12/180416839.png_300x300.png" height="170px" width="300px" alt="sfsdfsd"></a>
         </div>
-        <div class="sidebar_ad">
-
+        <div class="sidebarTopics">
+            <a href="http://www.imhuzhu.com/SpecialDetail.aspx?id=2" target="_blank">
+                <img src="http://www.imhuzhu.com/upload/mg/imadmin/2017/01/12/180416839.png_300x300.png" height="170px" width="300px" alt="sfsdfsd"></a>
         </div>
         <div class="platform">
             <a href="javascript:void(0);">平台寻求报道</a>

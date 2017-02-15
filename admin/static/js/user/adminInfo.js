@@ -31,7 +31,7 @@ HZ.UserInfo = (function() {
 
         $('#js-btn-submit').on('click', function(){
             var id = $("input[name='id']").val();
-            var role_id = $("input[name='role_id']:checked").val();
+            var role_id = $("select[name='role_id']").val();
             var data = {id: id, role_id: role_id};
             $.ajax({
                 data: data,
