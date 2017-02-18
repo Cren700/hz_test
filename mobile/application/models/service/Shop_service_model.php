@@ -21,9 +21,9 @@ class Shop_service_model extends HZ_Model
     }
 
     // 加入购物车
-    public function join($pid, $num)
+    public function join($pid)
     {
-        $option = array('user_id' => $this->_user_id, 'product_id' => $pid, 'product_num' => $num);
+        $option = array('user_id' => $this->_user_id, 'product_id' => $pid);
         return $this->myCurl('order', 'join', $option, true);
     }
 
@@ -33,14 +33,7 @@ class Shop_service_model extends HZ_Model
         $option = array('user_id' => $this->_user_id, 'id' => $id);
         return $this->myCurl('order', 'remove', $option);
     }
-
-    // 移动购物车
-    public function update($id, $count)
-    {
-        $option = array('user_id' => $this->_user_id, 'id' => $id, 'count' => $count);
-        return $this->myCurl('order', 'updateCart', $option, true);
-    }
-
+    
     //购物车列表
     public function getList()
     {

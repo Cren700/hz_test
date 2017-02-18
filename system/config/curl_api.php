@@ -164,6 +164,7 @@ $config = array(
             'promoQuery'             => '/promo/query',//查询广告
             'getPromoById'           => '/promo/getPromoById',//获取单条
             'changeStatus'           => '/promo/changeStatus',//状态更改
+            'getPromoRandom'         => '/promo/getPromoRandom', // 随机一条广告
         ),
     ),
 );

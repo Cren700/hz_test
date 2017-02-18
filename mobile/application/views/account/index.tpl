@@ -19,6 +19,7 @@
                     <img src="<{'/account/getVC?_='|cat:time()|getBaseUrl}>" width="190" id="js-vc-img" onclick="this.src+='?';">
                 </div>
             </div>
+            <input type="hidden" name="url" value="<{$url|default:''}>">
             <input type="submit" class="login_regit_sub" value="登陆" id="js-btn-login" data-pwd-url="<{'/account/dologin.html'|getBaseUrl}>">
             <label>
                 <div class="checkbox">
@@ -28,7 +29,7 @@
             </label>
         </form>
         <span>更多登录方式</span>
-        <input type="button" class="login_other_sub" value="使用手机登陆" onclick="window.location ='<{'/account/phone.html'|getBaseUrl}>'">
+        <input type="button" class="login_other_sub" value="使用手机登陆" onclick="window.location ='<{'/account/phone.html?url='|cat:$url|getBaseUrl}>'">
         <input type="button" class="register_regit_sub" value="账户注册" id="js-btn-register" onclick="window.location ='<{'/account/register.html'|getBaseUrl}>'">
         <p class="login_regit_icon">
             <i class="login_regit_wechat" onclick="window.location='<{'/account/logwx.html'|getBaseUrl}>'">&nbsp;</i>

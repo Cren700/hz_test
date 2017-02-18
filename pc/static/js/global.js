@@ -133,7 +133,7 @@ HZ.Dialog = (function() {
         $(document).find('body').append(tmpDialog); // 完成了弹窗的样式
         var border_width = $('.xubox_main').width();
         $('#dialog_border').width(border_width+16);
-        setTimeout(closeMsg, 3000);
+        setTimeout(closeMsg, 2000);
     }
 
     function closeMsg() {

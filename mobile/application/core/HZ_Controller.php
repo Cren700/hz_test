@@ -82,7 +82,7 @@ class HZ_Controller extends CI_Controller
                 die;
             } else {
                 $uri = rawurlencode($_SERVER['REQUEST_URI']);
-                $this->jump(getBaseUrl('/login?url='.$uri));
+                $this->jump(getBaseUrl('/account?url='.$uri));
                 exit();
             }
         }

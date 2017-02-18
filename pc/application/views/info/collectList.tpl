@@ -13,7 +13,7 @@
             <a href="<{'/info/collectList.html'|getBaseUrl}>">
                 <div class="personal_nav_item active">
                     <i class="my_article">&nbsp;</i>
-                    <p>我的文章</p>
+                    <p>我的收藏</p>
                 </div>
             </a>
             <{if $user_type eq 3}>

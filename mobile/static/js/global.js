@@ -72,8 +72,7 @@ HZ.Dialog = (function() {
         // 处理弹窗
         tmpDialog = tmpDialog.replace('{title}', t.title);
         $(document).find('body').append(tmpDialog); // 完成了弹窗的样式
-
-        setTimeout(closeMsg, 3000);
+        setTimeout(closeMsg, 1800);
     }
     function closeMsg() {
         if ($('#layermbox').length > 0) {

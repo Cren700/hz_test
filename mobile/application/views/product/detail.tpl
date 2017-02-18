@@ -94,21 +94,23 @@
             <{foreach $info['Fq_a'] as $k => $qa}>
             <div class="problem_item">
                 <div class="problem_q">
-                    <p>Q<{$k+1}>&nbsp;<{$qa['title']}></p>
+                    <p><{$qa['title']}></p>
                     <i>&nbsp;</i>
                 </div>
                 <div class="problem_a">
-                    <{$qa['desc']}>
+                    <p class="MsoNormal"><{$qa['desc']}></p>
                 </div>
             </div>
             <{/foreach}>
-            <p>查看<a href="javascript:;" id="js-checkProblem">《<{$info['Fproduct_name']}>》</a></p>
+            <{if $info['Fjoint_pledge']}><p><a href="javascript:;" id="js-checkProblem">查看公约内容</a></p><{/if}>
+            <{if $info['Fplan_tk']}><p><a href="javascript:;" id="js-checkPlan">查看计划条款</a></p><{/if}>
+            <{if $info['Fdemand']}><p><a href="javascript:;" id="js-checkDemand">查看健康要求</a></p><{/if}>
         </div>
     </div>
     <{/if}>
 </section>
 
-<div class="problem_section">
+<div id="problem-page" class="problem_section">
     <div class="problem">
         <div class="return_box"><a href="javascript:;" class="return_btn">返回详情</a></div>
         <{if isset($info['Fjoint_pledge'])}>
@@ -120,7 +122,49 @@
                     <i>&nbsp;</i>
                 </div>
                 <div class="problem_a">
-                    <{$pledge['desc']}>
+                    <p class="MsoNormal"><{$pledge['desc']}></p>
+                </div>
+            </div>
+            <{/foreach}>
+        </div>
+        <{/if}>
+    </div>
+</div>
+
+<div id="plan-page" class="problem_section">
+    <div class="problem">
+        <div class="return_box"><a href="javascript:;" class="return_btn">返回详情</a></div>
+        <{if isset($info['Fplan_tk'])}>
+        <div class="problem_box">
+            <{foreach $info['Fplan_tk'] as $k => $tk}>
+            <div class="problem_item">
+                <div class="problem_q">
+                    <p><{$k+1}>&nbsp;<{$tk['title']}></p>
+                    <i>&nbsp;</i>
+                </div>
+                <div class="problem_a">
+                    <p class="MsoNormal"><{$tk['desc']}></p>
+                </div>
+            </div>
+            <{/foreach}>
+        </div>
+        <{/if}>
+    </div>
+</div>
+
+<div id="demand-page" class="problem_section">
+    <div class="problem">
+        <div class="return_box"><a href="javascript:;" class="return_btn">返回详情</a></div>
+        <{if isset($info['Fdemand'])}>
+        <div class="problem_box">
+            <{foreach $info['Fdemand'] as $k => $demand}>
+            <div class="problem_item">
+                <div class="problem_q">
+                    <p><{$k+1}>&nbsp;<{$demand['title']}></p>
+                    <i>&nbsp;</i>
+                </div>
+                <div class="problem_a">
+                    <p class="MsoNormal"><{$demand['desc']}></p>
                 </div>
             </div>
             <{/foreach}>

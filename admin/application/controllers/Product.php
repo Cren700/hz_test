@@ -92,7 +92,6 @@ class Product extends BaseControllor
         if (empty($product['data'])) {
             $this->jump404();
         }
-//        p($product);
         $cate = $this->product_service->category();
         $jsArr = array(
             'plugin/jquery.placeholder.min.js',
@@ -121,7 +120,6 @@ class Product extends BaseControllor
             'store_id' => $this->_uid,
             'store_type' => 0, //后台类型为0
             'product_name' => $this->input->post('product_name'),
-            'product_num' => $this->input->post('product_num'),
             'product_price' => $this->input->post('product_price'),
             'category_id' => $this->input->post('category_id'),
             'description' => $this->input->post('description'),
@@ -139,7 +137,10 @@ class Product extends BaseControllor
             'answer' => $this->input->post('answer'),// 常见问题
             'pledge_title' => $this->input->post('pledge_title'), // 公约
             'pledge_content' => $this->input->post('pledge_content'), // 公约
-
+            'plan_tk_title' => $this->input->post('plan_tk_title'), // 计划条款
+            'plan_tk_content' => $this->input->post('plan_tk_content'), // 计划条款
+            'demand_title' => $this->input->post('demand_title'), // 健康要求
+            'demand_content' => $this->input->post('demand_content'), // 健康要求
         );
         $res = $this->product_service->save($data);
         echo json_encode_data($res);

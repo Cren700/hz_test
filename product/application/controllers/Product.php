@@ -58,7 +58,6 @@ class Product extends HZ_Controller
             'Fstore_type' => $this->input->post('store_type'),
             'Fproduct_name' => $this->input->post('product_name'),
             'Fproduct_price' => $this->input->post('product_price'),
-            'Fproduct_num' => $this->input->post('product_num'),
             'Fcategory_id' => $this->input->post('category_id'),
             'Fdescription' => $this->input->post('description'),
             'Fcoverimage' => $this->input->post('coverimage'),
@@ -75,6 +74,10 @@ class Product extends HZ_Controller
             'Fanswer' => $this->input->post('answer'),// 常见问题
             'Fpledge_title' => $this->input->post('pledge_title'), // 公约
             'Fpledge_content' => $this->input->post('pledge_content'), // 公约
+            'Fplan_tk_title' => $this->input->post('plan_tk_title'), // 计划条款
+            'Fplan_tk_content' => $this->input->post('plan_tk_content'), // 计划条款
+            'Fdemand_title' => $this->input->post('demand_title'), // 健康要求
+            'Fdemand_content' => $this->input->post('demand_content'), // 健康要求
             'Fcreate_time'  => time(),
             'Fupdate_time'  => time(),
         );
@@ -93,7 +96,6 @@ class Product extends HZ_Controller
             'Fstore_type' => $this->input->post('store_type'),
             'Fproduct_name' => $this->input->post('product_name'),
             'Fproduct_price' => $this->input->post('product_price'),
-            'Fproduct_num' => $this->input->post('product_num'),
             'Fcategory_id' => $this->input->post('category_id'),
             'Fdescription' => $this->input->post('description'),
             'Fcoverimage' => $this->input->post('coverimage'),
@@ -110,6 +112,10 @@ class Product extends HZ_Controller
             'Fanswer' => $this->input->post('answer'),// 常见问题
             'Fpledge_title' => $this->input->post('pledge_title'), // 公约
             'Fpledge_content' => $this->input->post('pledge_content'), // 公约
+            'Fplan_tk_title' => $this->input->post('plan_tk_title'), // 计划条款
+            'Fplan_tk_content' => $this->input->post('plan_tk_content'), // 计划条款
+            'Fdemand_title' => $this->input->post('demand_title'), // 健康要求
+            'Fdemand_content' => $this->input->post('demand_content'), // 健康要求
             'Fupdate_time'  => time(),
         );
         $res = $this->product_service->update($where, $data);

@@ -21,6 +21,8 @@ class Account extends HZ_Controller
      */
     public function index()
     {
+        $url = $this->input->get('url');
+        $this->smarty->assign('url', $url);
         $jsArr = array('account_login.js');
         $this->smarty->assign('jsArr', $jsArr);
         $this->smarty->display('account/index.tpl');
@@ -33,10 +35,10 @@ class Account extends HZ_Controller
     {
         $user_id = $this->input->post('user_id');
         $passwd = $this->input->post('passwd');
-        $uri = $this->input->post('uri');
+        $url = $this->input->post('url');
         $res = $this->account_service_model->login($user_id, $passwd);
         if ($res['code'] === 0) {
-            $res['data']['url'] = $uri ? HOST_URL . $uri : getBaseUrl('/home.html');
+            $res['data']['url'] = $url ? HOST_URL . $url : getBaseUrl('/home.html');
         }
         echo json_encode_data($res);
     }
@@ -76,6 +78,7 @@ class Account extends HZ_Controller
      */
     public function pwd()
     {
+        $this->is_login();
         $jsArr = array(
             'account_pwd.js'
         );
@@ -88,6 +91,7 @@ class Account extends HZ_Controller
      */
     public function modifyPwd()
     {
+        $this->is_login();
         $passwd = $this->input->post('passwd');
         $new_passwd = $this->input->post('new_passwd');
         $re_passwd = $this->input->post('re_passwd');
@@ -101,6 +105,7 @@ class Account extends HZ_Controller
      */
     public function detail()
     {
+        $this->is_login();
         $info = $this->user_service_model->detail();
 //        p($info);
         $jsArr = array('account_modify.js');
@@ -110,6 +115,7 @@ class Account extends HZ_Controller
 
     public function modify()
     {
+        $this->is_login();
         $jsArr = array(
             'jquery.min.js',
             'jquery.Huploadify.js',
@@ -128,6 +134,7 @@ class Account extends HZ_Controller
      */
     public function saveInfo()
     {
+        $this->is_login();
         $option = $this->input->post();//提交的数据
         $option['id'] = $this->_uid;
         $res = $this->user_service_model->saveInfo($option);
@@ -144,6 +151,7 @@ class Account extends HZ_Controller
      */
     public function center()
     {
+        $this->is_login();
         $info = $this->user_service_model->center();
         $this->smarty->assign('user', $info['data']);
         $this->smarty->display('account/center.tpl');
@@ -154,14 +162,12 @@ class Account extends HZ_Controller
      */
     public function set()
     {
+        $this->is_login();
         $info = $this->user_service_model->detail();
 //        p($info);
         $this->smarty->assign('user', $info['data']);
         $this->smarty->display('account/set.tpl');
     }
-    
-    
-
 
     /**
      * 获取验证码
@@ -195,6 +201,8 @@ class Account extends HZ_Controller
      */
     public function phone()
     {
+        $url = $this->input->get('url');
+        $this->smarty->assign('url', $url);
         $jsArr = array('account_phone.js');
         $this->smarty->assign('jsArr', $jsArr);
         $this->smarty->display('account/phone.tpl');
@@ -209,7 +217,11 @@ class Account extends HZ_Controller
             'user_id' => $this->input->post('user_id'),
             'code' => $this->input->post('code')
         );
+        $url = $this->input->post('url');
         $res = $this->account_service_model->loginPhone($option);
+        if ($res['code'] === 0) {
+            $res['data']['url'] = $url ? HOST_URL . $url : getBaseUrl('/home.html');
+        }
         echo json_encode_data($res);
     }
 

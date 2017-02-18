@@ -63,4 +63,10 @@ class Promo_dao_model extends HZ_Model {
         dbEscape($where);
         return $this->p->delete($this->_promo_table,$where);
     }
+    
+    public function getPromoRandom()
+    {
+        $sql = "select t1.* from {$this->_promo_table} as t1 join (select rand() * (select max(Factive_id) from {$this->_promo_table}) as Factive_id) as t2 on t1.Factive_id >t2.Factive_id where t1.Fstatus=1 limit 1";
+        return $this->p->query($sql)->row_array();
+    }
 }

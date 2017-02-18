@@ -90,6 +90,7 @@ $config = array(
     'order_error_10' => array( 'code' => 50010, 'msg' => '理赔已经处理中，请稍等'),                // 已经理赔处理中，请稍等
     'order_error_11' => array( 'code' => 50011, 'msg' => '理赔单获取失败'),                // 理赔单获取失败
     'order_error_12' => array( 'code' => 50012, 'msg' => '理赔单更新失败'),                // 理赔单更新失败
+    'order_error_13' => array( 'code' => 50013, 'msg' => '您已经购买过该产品了，请勿重新购买！'),
 
 
     // promo 60000 ~ 69999

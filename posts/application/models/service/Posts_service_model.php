@@ -283,6 +283,7 @@ class Posts_service_model extends HZ_Model
         $res = $this->posts_dao->getCommentListByPid($option);
         foreach ($res as &$re) {
             $user = $this->myCurl('account', 'getInfo', array('id' => $re['Fcomment_author_id']));
+            $re['Fcomment_name'] = isset($user['data']['Fnick_name']) ? $user['data']['Fnick_name'] : '';
             $re['Fcomment_authro_image'] = isset($user['data']['Fimage_path']) ? $user['data']['Fimage_path'] : '';
         }
         $ret['data'] = $res;

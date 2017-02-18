@@ -156,4 +156,15 @@ class Info extends BaseControllor
         echo $this->smarty->display('info/storeOrderList.tpl');
     }
 
+    public function delComment()
+    {
+        $option = array(
+            'comment_id' => $this->input->post('comment_id'),
+            'author_id' => $this->_uid
+        );
+        $res = $this->info_service->delComment($option);
+        echo json_encode_data($res);
+
+    }
+
 }

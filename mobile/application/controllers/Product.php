@@ -36,6 +36,7 @@ class Product extends HZ_Controller
     {
         $id = $id ? : $this->input->get('id');
         $res = $this->product_service->detail($id);
+//        p($res);
         $cssArr = array(
             'bootstrap.min.css',
             'swiper.min.css',

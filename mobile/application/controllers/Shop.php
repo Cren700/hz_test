@@ -30,8 +30,7 @@ class Shop extends BaseControllor
     public function join()
     {
         $pid = $this->input->get('pid', true);
-        $num = $this->input->get('num', true) ? : 1;
-        $res = $this->shop_service->join($pid, $num);
+        $res = $this->shop_service->join($pid);
 
         echo json_encode_data($res);
     }
@@ -41,16 +40,6 @@ class Shop extends BaseControllor
     {
         $id = $this->input->get('id', true);
         $res = $this->shop_service->remove($id);
-        echo json_encode_data($res);
-    }
-    
-    // 变更数量
-    public function update()
-    {
-        $id = $this->input->post('id', true);
-        $count = $this->input->post('count', true);
-        $res = $this->shop_service->update($id, $count);
-
         echo json_encode_data($res);
     }
 

@@ -69,7 +69,7 @@
                         </a>
                         <div class="history_comment_info">
                             <p>
-                                <span class="writer_name"><{$c['Fcomment_author_name']}></span>  ●
+                                <span class="writer_name"><{$c['Fcomment_name']}></span>  ●
                                 <span class="js-date-dif" rel="<{$c['Fcomment_date']}>"></span>
                             </p>
                             <p class="history_comment_txt"><{$c['Fcomment_content']}></p>

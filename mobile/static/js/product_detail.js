@@ -8,7 +8,15 @@ HZ.ProductDetail = (function() {
         addCart();
         
         $('#js-checkProblem').on('click', function(){
-            $('.problem_section').show();
+            $('#problem-page').show();
+            $('.general').hide();
+        });
+        $('#js-checkPlan').on('click', function(){
+            $('#plan-page').show();
+            $('.general').hide();
+        });
+        $('#js-checkDemand').on('click', function(){
+            $('#demand-page').show();
             $('.general').hide();
         });
 
@@ -39,7 +47,12 @@ HZ.ProductDetail = (function() {
                             HZ.Dialog.showMsg({title: '取消关注'});
                         }
                     } else {
-                        HZ.Dialog.showMsg({title: '出错啦!'+res.msg});
+                        HZ.Dialog.showMsg({title: res.msg});
+                        if (res.code === 10004) {
+                            setTimeout(function(){
+                                location.href = baseUrl+"/account.html";
+                            }, 2000)
+                        }
                     }
                 }
             });
@@ -61,6 +74,11 @@ HZ.ProductDetail = (function() {
                         HZ.Dialog.showMsg({title: '成功加入购物车'});
                     } else {
                         HZ.Dialog.showMsg({title: res.msg});
+                        if (res.code === 10004) {
+                            setTimeout(function(){
+                                location.href = baseUrl+"/account.html";
+                            }, 2000)
+                        }
                     }
                 }
             });

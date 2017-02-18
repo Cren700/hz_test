@@ -78,4 +78,10 @@ class Promo extends HZ_Controller {
         $res = $this->promo_service->del($where);
         echo outputResponse($res);
     }
+
+    public function getPromoRandom()
+    {
+        $res = $this->promo_service->getPromoRandom();
+        echo outputResponse($res);
+    }
 }

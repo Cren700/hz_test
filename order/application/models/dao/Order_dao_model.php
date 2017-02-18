@@ -255,4 +255,10 @@ class Order_dao_model extends HZ_Model
         return $this->o_db->update($this->_claim_table, $option, $where);
     }
 
+    public function hasBuy($whereBuy)
+    {
+        dbEscape($whereBuy);
+        return $this->o_db->get_where($this->_order_table, $whereBuy)->row_array();
+    }
+
 }

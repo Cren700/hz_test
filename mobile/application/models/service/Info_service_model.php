@@ -66,4 +66,8 @@ class Info_service_model extends HZ_Model
         return $this->myCurl('order', 'queryOrders', $data, false);
     }
 
+    public function delComment($option)
+    {
+        return $this->myCurl('posts', 'userDelComment', $option, true);
+    }
 }

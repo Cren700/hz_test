@@ -7,20 +7,19 @@
                 <img src="<{'logo.png'|baseImgUrl}>">
             </a>
             <span class="search-cart-common">
-                <a href="<{'/cart.html'|getBaseUrl}>" class="icon-cart1"></a>
+                <a href="<{'/shop.html'|getBaseUrl}>" class="icon-cart1"></a>
             </span>
         </section>
         <div class="orderList">
             <ul>
                 <li class="orderItem clearfix">
                     <div class="orderLogo left">
-                        <img src="<{$info['Fproduct']['Fcovarimage']|default:''}>" />
+                        <img src="<{$info['Fproduct']['Fcoverimage']|default:''}>" />
                     </div>
                     <div class="orderInfo right">
                         <div class="pName"><{$info['Fproduct']['Fproduct_name']|default:''}></div>
                         <div class="pInfo clearfix">
                             <div class="pPrice left">￥<{$info['Fproduct']['Fproduct_price']}></div>
-                            <div class="pCount left">x 1</div>
                         </div>
                     </div>
                 </li>

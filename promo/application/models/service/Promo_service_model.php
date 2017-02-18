@@ -153,4 +153,12 @@ class Promo_service_model extends HZ_Model {
             return $ret['code'] = 'promo_error_6';
         }
     }
+
+	public function getPromoRandom()
+	{
+		$ret = array('code' => 0);
+		$res = $this->promo_dao->getPromoRandom();
+		$ret['data'] = $res;
+		return $ret;
+	}
 }

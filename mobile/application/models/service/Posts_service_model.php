@@ -51,7 +51,15 @@ class Posts_service_model extends HZ_Model
     public function getCommentListByPid($pid)
     {
         $where = array('post_id' => $pid);
-        return $this->myCurl('posts', 'getCommentListByPid', $where);
+        $res = $this->myCurl('posts', 'getCommentListByPid', $where);
+        if (isset($res['data']['list'])) {
+            foreach ($res['data']['list'] as &$r) {
+                if (!$r['Fcomment_name']) {
+                    $r['Fcomment_name'] = substr($r['Fcomment_author_name'], 0,2).'**'.substr($r['Fcomment_author_name'], -2);
+                }
+            }
+        }
+        return $res;
     }
 
     public function getPraiseCountByPid($pid)
@@ -75,5 +83,10 @@ class Posts_service_model extends HZ_Model
     public function search($where)
     {
         return $this->myCurl('posts', 'search', $where);
+    }
+
+    public function getPromoRandom()
+    {
+        return $this->myCurl('promo', 'getPromoRandom', array());
     }
 }

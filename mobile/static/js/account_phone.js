@@ -19,9 +19,10 @@ HZ.Account_phone = (function() {
             e.preventDefault();
             var name = $('input[name="user_id"]').val();
             var code = $('input[name="code"]').val();
+            var uri = $('input[name="url"]').val();
             var url = $('#js-btn-login').data('pwd-url');
             $.ajax({
-                data:{user_id: name, code: code},
+                data:{user_id: name, code: code, url: uri},
                 url: url,
                 dataType: 'json',
                 type: 'post',

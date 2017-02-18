@@ -18,8 +18,7 @@ class Shop extends BaseController
     {
         $option = array(
             'Fproduct_id' => $this->input->post('product_id'),
-            'Fuser_id' => $this->_user_id,
-            'Fproduct_num' => $this->input->post('product_num') ? : 1,
+            'Fuser_id' => $this->_user_id
         );
         $res = $this->shop_service->join($option);
         echo outputResponse($res);

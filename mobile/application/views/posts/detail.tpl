@@ -20,11 +20,13 @@
             <{/foreach}>
         </p>
         <{/if}>
+        <{if $promo}>
         <div class="detail_ad">
-            <a href="1">
-                <img src="" alt="广告">
+            <a href="<{$promo['Factive_url']}>" title="<{$promo['Factive_name']}>">
+                <img src="<{$promo['Fimage_path']}>" alt="广告">
             </a>
         </div>
+        <{/if}>
         <{if $related['list']}>
         <h2>相关新闻</h2>
         <div class="new_item">
@@ -68,7 +70,7 @@
                         <img style="width:0.64rem" src="<{$c['Fcomment_authro_image']|default:''}>">
                     </div>
                     <div class="comment_info">
-                        <p><span class='comment_name'><{$c['Fcomment_author_name']}></span> • <span class="js-date-dif" rel="<{$c['Fcomment_date']}>"></span></p>
+                        <p><span class='comment_name'><{$c['Fcomment_name']}></span> • <span class="js-date-dif" rel="<{$c['Fcomment_date']}>"></span></p>
                         <p class="comment_txt"><{$c['Fcomment_content']}></p>
                     </div>
                 </div>

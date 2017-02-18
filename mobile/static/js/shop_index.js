@@ -8,24 +8,9 @@ HZ.Shop = (function() {
 
         buyAction();
 
-        changeNumber();
-
         $('.buyCount').on('blur', function () {
             update($(this));
         })
-    }
-
-    function update(el) {
-        var id = el.data('id');
-        var on = parseInt(el.val(), 10);
-        var url = baseUrl+"/shop/update.html";
-        on = on < 1 ? 1 : on;
-        $.post(url, {id:id, count:on}, function(data){
-            if(data['code'] != '0')
-            {
-                HZ.Dialog.showMsg({title: data['msg']});
-            }
-        }, 'json');
     }
 
     function delCart()
@@ -58,62 +43,6 @@ HZ.Shop = (function() {
         $('.js-btn-buy').on('click', function(){
             var cid = $(this).data('cid');
             location.href = baseUrl+'/order/preview.html?cid='+cid;
-        });
-    }
-
-    function changeNumber(){
-
-        $(".cart-content-save-commodity span").each(function(){
-            var _this = $(this),
-                up = _this.find(".cart-content-save-add"),
-                down = _this.find(".cart-content-save-reduce"),
-                result = _this.find(".cart-content-save-result"),
-                on = result.val();
-
-            function add(){
-                on ++;
-                on = on > 99 ? 99 : on;
-            }
-
-            function min(){
-                on --;
-                on = on < 1 ? 1 : on;
-            }
-
-            function method(){
-                result.val(on);
-            }
-            //Request data and modify the data
-            function calTotal(id)
-            {
-                var url = baseUrl+"/shop/update.html";
-                on = on < 1 ? 1 : on;
-                $.post(url, {id:id, count:on}, function(data){
-                    if(data['code'] != '0')
-                    {
-                        showText(".select-info", data['msg']);
-                    }
-                }, 'json');
-            }
-
-            up.on("touchend",function(){
-                add();
-                method();
-                var pid = $(this).attr('data');
-                calTotal(pid);
-            });
-
-            down.on("touchend",function(){
-                if(on == 1)
-                {
-                    showText(".select-info", "Sorry, item quantities can't be 0.");
-                    return false;
-                }
-                min();
-                method();
-                var pid = $(this).attr('data');
-                calTotal(pid);
-            });
         });
     }
 

@@ -32,6 +32,15 @@ class Order_service_model extends HZ_Model
             $ret['code'] = 'system_error_2'; // 获取数据出错
             return $ret;
         }
+        // 查看是否已经购过
+        $whereBuy = array(
+            'Fuser_id' => $option['Fuser_id'],
+            'Fproduct_id' => $option['Fproduct_id']
+        );
+        if ($this->hasBuy($whereBuy)) {
+            $ret['code'] = 'order_error_13';
+            return $ret;
+        }
         // 认证用户才能下单
         $user = $this->myCurl('account', 'getUserDetailByFuserId', array('user_id' => $option['Fuser_id']));
         if ($user['code'] != 0) {
@@ -48,19 +57,13 @@ class Order_service_model extends HZ_Model
             $ret['code'] = 'order_error_7';
             return $ret;
         }
-        // 判断库存
-        if( $option['Fproduct_num'] > $product['Fproduct_num']) {
-            $ret['code'] = 'order_error_3'; // 库存不足
-            return $ret;
-        }
         $data = array(
             'Forder_no' => createOrderSn(),
             'Fuser_id' => $option['Fuser_id'],
             'Fproduct_id' => $product['Fproduct_id'],
             'Fproduct_name' => $product['Fproduct_name'],
-            'Fproduct_num' => $option['Fproduct_num'],
             'Fproduct_price' => $product['Fproduct_price'],
-            'Fproduct_tol_amt' => sprintf("%.2f", $product['Fproduct_price'] * $option['Fproduct_num']),
+            'Fproduct_tol_amt' => sprintf("%.2f", $product['Fproduct_price']),
             'Fstore_id' => $product['Fstore_id'],
             'Fstore_type' => $product['Fstore_type'],
             'Forder_type' => 1, //订单类型 1：购买 2：
@@ -74,11 +77,6 @@ class Order_service_model extends HZ_Model
             return $ret;
         } else {
             // 成功生成订单
-            // 删除购物车,并扣减库存
-            $this->load->model('dao/shop_dao_model');
-            $this->shop_dao_model->remove($option);
-            $where = array('Fproduct_id' => $product['Fproduct_id']);
-            $this->order_dao->updateProductNum($where, $option['Fproduct_num']);
             $ret['data'] = $data;
         }
         return $ret;
@@ -108,6 +106,15 @@ class Order_service_model extends HZ_Model
             $ret['code'] = 'system_error_2'; // 获取数据出错
             return $ret;
         }
+        // 查看是否已经购过
+        $whereBuy = array(
+            'Fuser_id' => $option['Fuser_id'],
+            'Fproduct_id' => $cartInfo['Fproduct_id']
+        );
+        if ($this->hasBuy($whereBuy)) {
+            $ret['code'] = 'order_error_13';
+            return $ret;
+        }
         // 认证用户才能下单
         $user = $this->myCurl('account', 'getUserDetailByFuserId', array('user_id' => $option['Fuser_id']));
         if ($user['code'] != 0) {
@@ -124,19 +131,13 @@ class Order_service_model extends HZ_Model
             $ret['code'] = 'order_error_7';
             return $ret;
         }
-        // 判断库存
-        if( $cartInfo['Fproduct_num'] > $product['Fproduct_num']) {
-            $ret['code'] = 'order_error_3'; // 库存不足
-            return $ret;
-        }
         $data = array(
             'Forder_no' => createOrderSn(),
             'Fuser_id' => $option['Fuser_id'],
             'Fproduct_id' => $product['Fproduct_id'],
             'Fproduct_name' => $product['Fproduct_name'],
-            'Fproduct_num' => $cartInfo['Fproduct_num'],
             'Fproduct_price' => $product['Fproduct_price'],
-            'Fproduct_tol_amt' => sprintf("%.2f", $product['Fproduct_price'] * $cartInfo['Fproduct_num']),
+            'Fproduct_tol_amt' => sprintf("%.2f", $product['Fproduct_price']),
             'Fstore_id' => $product['Fstore_id'],
             'Fstore_type' => $product['Fstore_type'],
             'Forder_type' => 1, //订单类型 1：购买 2：
@@ -150,11 +151,9 @@ class Order_service_model extends HZ_Model
             return $ret;
         } else {
             // 成功生成订单
-            // 删除购物车,并扣减库存
+            // 删除购物车
             $this->load->model('dao/shop_dao_model');
             $this->shop_dao_model->remove($option);
-            $where = array('Fproduct_id' => $product['Fproduct_id']);
-            $this->order_dao->updateProductNum($where, $cartInfo['Fproduct_num']);
             $ret['data'] = $data;
         }
         return $ret;
@@ -541,7 +540,14 @@ class Order_service_model extends HZ_Model
             $ret['code'] = 'order_error_12';
         }
         return $ret;
+    }
 
+    /**
+     * 是否已经购买过
+     */
+    public function hasBuy($whereBuy)
+    {
+        return $this->order_dao->hasBuy($whereBuy);
     }
 
 

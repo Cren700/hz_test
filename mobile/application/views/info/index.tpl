@@ -18,7 +18,7 @@
             <a href="<{'/info/planList.html'|getBaseUrl}>">我的订单</a><!--订单+关注-->
         </p>
         <p>
-            <a href="<{'/info/collectList.html'|getBaseUrl}>">我的文章</a>
+            <a href="<{'/info/collectList.html'|getBaseUrl}>">我的收藏</a>
         </p>
         <{if $user_type eq 3}>
         <!--媒体star-->
@@ -39,7 +39,7 @@
             <a href="<{'/info/product.html'|getBaseUrl}>">我的产品</a>
         </p>
         <p>
-            <a href="<{'/info/orders.html'|getBaseUrl}>">成交订单</a>
+            <a href="<{'/info/storeOrder.html'|getBaseUrl}>">订单列表</a>
         </p>
         <!--商户end-->
         <{/if}>

@@ -91,11 +91,6 @@ class Product_service_model extends HZ_Model
                 'field' => '产品价格'
             ),
             array(
-                'value' => $data['Fproduct_num'],
-                'rules' => 'required',
-                'field' => '产品库存'
-            ),
-            array(
                 'value' => $data['Fcoverimage'],
                 'rules' => 'required',
                 'field' => '产品封面'
@@ -133,7 +128,6 @@ class Product_service_model extends HZ_Model
             'Fproduct_name' => $data['Fproduct_name'],
             'Fproduct_price' => $data['Fproduct_price'],
             'Fcoverimage' => $data['Fcoverimage'],
-            'Fproduct_num' => $data['Fproduct_num'],
             'Fcategory_id' => $data['Fcategory_id'],
             'Fdescription' => $data['Fdescription'],
             'Fcreate_time' => time(),
@@ -147,37 +141,61 @@ class Product_service_model extends HZ_Model
             $process = array();
             $q_a = array();
             $pledge = array();
+            $plan_tk = array();
+            $demand = array();
             // 规则
             foreach ($data['Frule_title'] as $k => &$r) {
                 if (empty($r) && empty($data['Frule_description'][$k])) {
                     unset($r);
                     unset($data['Frule_description'][$k]);
+                } else {
+                    $plan_rule[] = array('title' => $r, 'desc' => $data['Frule_description'][$k]);
                 }
-                $plan_rule[] = array('title' => $r, 'desc' => $data['Frule_description'][$k]);
             }
             // 申请流程
             foreach ($data['Fprocess_title'] as $k => &$r) {
                 if (empty($r) && empty($data['Fprocess_description'][$k])) {
                     unset($r);
                     unset($data['Fprocess_description'][$k]);
+                } else {
+                    $process[] = array('title' => $r, 'desc' => $data['Fprocess_description'][$k]);
                 }
-                $process[] = array('title' => $r, 'desc' => $data['Fprocess_description'][$k]);
             }
             // 常见问题
             foreach ($data['Fquestion'] as $k => &$r) {
                 if (empty($r) && empty($data['Fanswer'][$k])) {
                     unset($r);
                     unset($data['Fanswer'][$k]);
+                } else {
+                    $q_a[] = array('title' => $r, 'desc' => $data['Fanswer'][$k]);
                 }
-                $q_a[] = array('title' => $r, 'desc' => $data['Fanswer'][$k]);
             }
             // 公约内容
             foreach ($data['Fpledge_title'] as $k => &$r) {
                 if (empty($r) && empty($data['Fpledge_content'][$k])) {
                     unset($r);
                     unset($data['Fpledge_content'][$k]);
+                } else {
+                    $pledge[] = array('title' => $r, 'desc' => $data['Fpledge_content'][$k]);
                 }
-                $pledge[] = array('title' => $r, 'desc' => $data['Fpledge_content'][$k]);
+            }
+            // 计划条款
+            foreach ($data['Fplan_tk_title'] as $k => &$r) {
+                if (empty($r) && empty($data['Fplan_tk_content'][$k])) {
+                    unset($r);
+                    unset($data['Fplan_tk_content'][$k]);
+                } else {
+                    $plan_tk[] = array('title' => $r, 'desc' => $data['Fplan_tk_content'][$k]);
+                }
+            }
+            // 健康要求
+            foreach ($data['Fdemand_title'] as $k => &$r) {
+                if (empty($r) && empty($data['Fdemand_content'][$k])) {
+                    unset($r);
+                    unset($data['Fdemand_content'][$k]);
+                } else {
+                    $demand[] = array('title' => $r, 'desc' => $data['Fdemand_content'][$k]);
+                }
             }
 
             $product_detail = array(
@@ -191,40 +209,10 @@ class Product_service_model extends HZ_Model
                 'Fapplication_process' => json_encode_data($process),
                 'Fq_a' => json_encode_data($q_a),
                 'Fjoint_pledge' => json_encode_data($pledge),
+                'Fplan_tk' => json_encode_data($plan_tk),
+                'Fdemand' => json_encode_data($demand),
             );
             $this->product_dao->addDetail($product_detail);
-        }
-        return $ret;
-    }
-
-    public function getProductByPid($where)
-    {
-        $ret = array('code' => 0);
-        $product = $this->product_dao->getProductInfoByFId($where);
-        if (empty($product)) {
-            $ret['code'] = 'product_error_2'; // 不存在
-            return $ret;
-        }
-        $product_detail = $this->product_dao->getProductDetailByFId($where) ? : array();
-        if (!empty($product_detail)) {
-            $product_detail['Fplan_rule'] = isset($product_detail['Fplan_rule']) && !empty($product_detail['Fplan_rule']) ? json_decode($product_detail['Fplan_rule']) : '';
-            $product_detail['Fapplication_process'] = isset($product_detail['Fapplication_process']) && !empty($product_detail['Fapplication_process']) ? json_decode($product_detail['Fapplication_process']) : '';
-            $product_detail['Fq_a'] = isset($product_detail['Fq_a']) && !empty($product_detail['Fq_a']) ? json_decode($product_detail['Fq_a']) : '';
-            $product_detail['Fjoint_pledge'] = isset($product_detail['Fjoint_pledge']) && !empty($product_detail['Fjoint_pledge']) ? json_decode($product_detail['Fjoint_pledge']) : '';
-        }
-        $res = array_merge($product, $product_detail);
-        $ret['data'] = $res;
-
-        // 是否已经收藏
-        $where_collect = array(
-            'Fuser_id' => $this->_user_id,
-            'Fproduct_id' => $where['Fproduct_id']
-        );
-        $is_collect = $this->product_dao->is_collect($where_collect);
-        if ($is_collect) {
-            $ret['data']['is_collect'] = 1;
-        } else {
-            $ret['data']['is_collect'] = 0;
         }
         return $ret;
     }
@@ -264,11 +252,6 @@ class Product_service_model extends HZ_Model
                 'field' => '产品价格'
             ),
             array(
-                'value' => $data['Fproduct_num'],
-                'rules' => 'required',
-                'field' => '产品库存'
-            ),
-            array(
                 'value' => $data['Fcoverimage'],
                 'rules' => 'required',
                 'field' => '产品封面'
@@ -305,7 +288,6 @@ class Product_service_model extends HZ_Model
             'Fstore_type' => $data['Fstore_type'],
             'Fproduct_name' => $data['Fproduct_name'],
             'Fproduct_price' => $data['Fproduct_price'],
-            'Fproduct_num' => $data['Fproduct_num'],
             'Fcategory_id' => $data['Fcategory_id'],
             'Fdescription' => $data['Fdescription'],
             'Fcoverimage' => $data['Fcoverimage'],
@@ -319,6 +301,8 @@ class Product_service_model extends HZ_Model
             $process = array();
             $q_a = array();
             $pledge = array();
+            $plan_tk = array();
+            $demand = array();
             // 规则
             foreach ($data['Frule_title'] as $k => &$r) {
                 if (empty($r) && empty($data['Frule_description'][$k])) {
@@ -355,6 +339,24 @@ class Product_service_model extends HZ_Model
                     $pledge[] = array('title' => $r, 'desc' => $data['Fpledge_content'][$k]);
                 }
             }
+            // 计划条款
+            foreach ($data['Fplan_tk_title'] as $k => &$r) {
+                if (empty($r) && empty($data['Fplan_tk_content'][$k])) {
+                    unset($r);
+                    unset($data['Fplan_tk_content'][$k]);
+                } else {
+                    $plan_tk[] = array('title' => $r, 'desc' => $data['Fplan_tk_content'][$k]);
+                }
+            }
+            // 健康要求
+            foreach ($data['Fdemand_title'] as $k => &$r) {
+                if (empty($r) && empty($data['Fdemand_content'][$k])) {
+                    unset($r);
+                    unset($data['Fdemand_content'][$k]);
+                } else {
+                    $demand[] = array('title' => $r, 'desc' => $data['Fdemand_content'][$k]);
+                }
+            }
 
             $product_detail = array(
                 'Fheight_amount' => $data['Fheight_amount'],
@@ -366,6 +368,8 @@ class Product_service_model extends HZ_Model
                 'Fapplication_process' => json_encode_data($process),
                 'Fq_a' => json_encode_data($q_a),
                 'Fjoint_pledge' => json_encode_data($pledge),
+                'Fplan_tk' => json_encode_data($plan_tk),
+                'Fdemand' => json_encode_data($demand),
             );
             $res = $this->product_dao->updateDetail($where, $product_detail);
         }
@@ -375,6 +379,40 @@ class Product_service_model extends HZ_Model
             $ret['code'] = 'product_error_5';
             return $ret;
         }
+    }
+
+    public function getProductByPid($where)
+    {
+        $ret = array('code' => 0);
+        $product = $this->product_dao->getProductInfoByFId($where);
+        if (empty($product)) {
+            $ret['code'] = 'product_error_2'; // 不存在
+            return $ret;
+        }
+        $product_detail = $this->product_dao->getProductDetailByFId($where) ? : array();
+        if (!empty($product_detail)) {
+            $product_detail['Fplan_rule'] = isset($product_detail['Fplan_rule']) && !empty($product_detail['Fplan_rule']) ? json_decode($product_detail['Fplan_rule']) : '';
+            $product_detail['Fapplication_process'] = isset($product_detail['Fapplication_process']) && !empty($product_detail['Fapplication_process']) ? json_decode($product_detail['Fapplication_process']) : '';
+            $product_detail['Fq_a'] = isset($product_detail['Fq_a']) && !empty($product_detail['Fq_a']) ? json_decode($product_detail['Fq_a']) : '';
+            $product_detail['Fjoint_pledge'] = isset($product_detail['Fjoint_pledge']) && !empty($product_detail['Fjoint_pledge']) ? json_decode($product_detail['Fjoint_pledge']) : '';
+            $product_detail['Fplan_tk'] = isset($product_detail['Fplan_tk']) && !empty($product_detail['Fplan_tk']) ? json_decode($product_detail['Fplan_tk']) : '';
+            $product_detail['Fdemand'] = isset($product_detail['Fdemand']) && !empty($product_detail['Fdemand']) ? json_decode($product_detail['Fdemand']) : '';
+        }
+        $res = array_merge($product, $product_detail);
+        $ret['data'] = $res;
+
+        // 是否已经收藏
+        $where_collect = array(
+            'Fuser_id' => $this->_user_id,
+            'Fproduct_id' => $where['Fproduct_id']
+        );
+        $is_collect = $this->product_dao->is_collect($where_collect);
+        if ($is_collect) {
+            $ret['data']['is_collect'] = 1;
+        } else {
+            $ret['data']['is_collect'] = 0;
+        }
+        return $ret;
     }
 
     public function del($where)

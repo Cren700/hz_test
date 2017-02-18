@@ -20,6 +20,7 @@
                 <input type="text" placeholder="请输入短信验证码" class="login_regit_phoneTxt" name='code' id="code">
                 <input type="button" class="login_regit_phoneBtn" value="发送验证码" id="sendCode">
             </div>
+            <input type="hidden" name="url" value="<{$url|default:''}>">
             <input type="submit" class="login_regit_sub" value="登陆" id="js-btn-login" data-pwd-url="<{'/account/doPhoneLogin.html'|getBaseUrl}>">
             <label>
                 <div class="checkbox">

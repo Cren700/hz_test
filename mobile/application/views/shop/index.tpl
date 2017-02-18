@@ -23,7 +23,6 @@
                         <div class="pName"><a href="<{'/product/detail/'|cat:$l['Fproduct_id']|getBaseUrl}>"><{$l['Fproduct_name']}></a></div>
                         <div class="pInfo clearfix">
                             <div class="pPrice left">￥<{$l['Fproduct_price']}></div>
-                            <div class="pCount left"><input type="number" max="10" min="1" data-id="<{$l['Fid']}>" class="buyCount" value="<{$l['Fproduct_num']}>"/></div>
                             <div class="pColor">
                                 <a href="javascript:;" id="del" data-url="<{'/shop/remove.html?id='|cat:$l['Fid']|getBaseUrl}>" class="js-btn-del cart-del cart-content-input-left">删除</a>
                                 <a href="javascript:;" id="buy" data-cid="<{$l['Fid']}>" class="js-btn-buy cart-content-input-right">购买</a>
@@ -41,7 +40,7 @@
                     <div class="cart-content-list-show cart-content-list-show2" style="margin: 0px; display: block">
                         <div class="cart-content-none-ship" style="height: 490.2px;">
                             <div class="cart-content-image-inner">
-                                <p>购物车木有东西啊!</p>
+                                <p>购物车没有产品哦!</p>
                             </div>
                         </div>
                     </div>

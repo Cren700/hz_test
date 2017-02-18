@@ -35,6 +35,7 @@ class Posts extends HZ_Controller
         $comment = $this->post_service->getCommentListByPid($option['id']); // 获取评论信息
         $praise = $this->post_service->getPraiseCountByPid($option['id']); // 关注数量
         $is_Praise = $this->post_service->getIsPraise($option['id']); // 是否关注
+        $promo = $this->post_service->getPromoRandom();// 随机一条广告信息
         $jsArr = array(
             'post_detail.js'
         );
@@ -43,6 +44,7 @@ class Posts extends HZ_Controller
         $this->smarty->assign('comment', $comment);
         $this->smarty->assign('praise', $praise);
         $this->smarty->assign('is_Praise', $is_Praise);
+        $this->smarty->assign('promo', $promo['data']);
         $this->smarty->assign('related', $relatedPosts['data']);
         $this->smarty->display('posts/detail.tpl');
     }

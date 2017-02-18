@@ -1074,9 +1074,8 @@ section.general {
 .problem_box > p {
     font-size: 0.37333333rem;
     color: #197dd2;
-    border-bottom: 1px solid #e4e4e4;
-    padding-bottom: 0.37333333rem;
-    padding-top: 0.37333333rem;
+    padding-bottom: 0.17333333rem;
+    padding-top: 0.17333333rem;
 }
 .problem_box > p a {
     color: #197dd2;
@@ -1295,13 +1294,13 @@ section.mine_jj {
 }
 .nav_list_item_dd {
     background-color: #fff;
-    padding-left: 0.32rem;
-    padding-right: 0.32rem;
-    padding-top: 0.4rem;
+    padding-left: 0.22rem;
+    padding-right: 0.22rem;
+    padding-top: 0.2rem;
     padding-bottom: 0.26666667rem;
     margin-left: 0.34666667rem;
     margin-right: 0.34666667rem;
-    margin-top: 0.26666667rem;
+    margin-top: 0.2rem;
     margin-bottom: 0.26666667rem;
     border-bottom: 1px solid #ececec;
 }
@@ -1310,20 +1309,22 @@ section.mine_jj {
 }
 .nav_list_item_dd p > a {
     display: inline-block;
-    width: 6.4rem;
+    width: 6rem;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     font-size: 0.32rem;
     color: #197dd2;
 }
-.nav_list_item_dd p > span {
-    float: right;
-}
+/*.nav_list_item_dd p > span {*/
+    /*float: right;*/
+/*}*/
 .nav_list_item_dd p:nth-of-type(2) {
     color: #999;
-    font-size: 0.29333333rem;
+    font-size: 0.32rem;
     margin-top: 0.34666667rem;
+    height: 0.32rem;
+    line-height: 0.32rem;
 }
 .nav_list_pro {
     margin-left: 0.34666667rem;
