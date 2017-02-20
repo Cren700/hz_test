@@ -25,6 +25,11 @@ HZ.PostsDetail = (function() {
             var com_top = $(".com_h").offset().top;
             $("html body").animate({ scrollTop: com_top + 1500 }, 200);
         });
+        
+        $(".code").on('click', function () {
+            clickCode();
+        }); 
+           
 
         $(window).scroll(function () {
             _scroll();
@@ -120,7 +125,16 @@ HZ.PostsDetail = (function() {
             });
         });
     }
+    
+    //弹出二维码
+    function clickCode()
+    {
+         $('.codePage').fadeIn();
+         $('.codePage').click(function(){
+            $(this).fadeOut();
+         });
 
+    }
 
     return {
         init: _init

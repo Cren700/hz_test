@@ -13,7 +13,6 @@
             <th>订单号</th>
             <th>用户名</th>
             <th>产品名称</th>
-            <th>数量</th>
             <th>单价</th>
             <th>总价</th>
             <th>商户名称</th>
@@ -30,7 +29,6 @@
                 <td style="text-align: center"><{$i['Forder_no']}></td>
                 <td><{$i['Fuser_id']}></td>
                 <td><a href="<{"/product/detail/"|cat:$i['Fproduct_id']|getBaseUrl}>" title="<{$i['Fproduct_name']}>"><{$i['Fproduct_name']}></a></td>
-                <td><{$i['Fproduct_num']}></td>
                 <td><{$i['Fproduct_price']}></td>
                 <td><{$i['Fproduct_tol_amt']}></td>
                 <td><{$i['Fstore_name']|default:''}></td>

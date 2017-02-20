@@ -112,7 +112,6 @@ class Order extends BaseController
         );
         $res = $this->order_service->orderStatus($option);
         echo outputResponse($res);
-
     }
 
     /**

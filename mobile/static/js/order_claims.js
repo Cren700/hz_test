@@ -4,6 +4,11 @@ if (typeof (HZ) == "undefined" || !HZ) {
 
 HZ.Order_claims = (function() {
     function _init(){
+        
+        if($('input[name="status"]').val() == 3) {
+            $(document).find('input, select').attr('disabled', true);
+        }
+        
         $('body').addClass('has-js');
         _upload();
     }

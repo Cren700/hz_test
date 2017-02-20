@@ -21,7 +21,6 @@
                             <div class="pName"><{$info['Fproduct_name']|default:''}></div>
                             <div class="pInfo clearfix">
                                 <div class="pPrice left">￥<{$info['Fproduct_price']}></div>
-                                <div class="pCount left">x <{$info['Fproduct_num']}></div>
                             </div>
                         </div>
                     </a>

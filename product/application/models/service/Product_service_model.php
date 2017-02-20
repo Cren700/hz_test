@@ -381,6 +381,13 @@ class Product_service_model extends HZ_Model
         }
     }
 
+    public function updateProductCnt($where, $data)
+    {
+        $ret = array('code' => 0);
+        $this->product_dao->updateProductCnt($where, $data);
+        return $ret;
+    }
+
     public function getProductByPid($where)
     {
         $ret = array('code' => 0);

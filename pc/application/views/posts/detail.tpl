@@ -1,7 +1,6 @@
 <{include file="public/header.tpl"}>
 <body>
 <{include file="public/nav.tpl"}>
-
 <div class="container artic_con clearfix">
     <div class="side_social">
         <div>
@@ -12,6 +11,7 @@
         <div>
             <a href="javascritp:void(0);" class="pinglun">&nbsp;</a>
             <a href="javascritp:void(0);" class="zan" id="js-btn-praise">&nbsp;</a>
+            <a href="javascritp:void(0);" class="code" >&nbsp;</a>
         </div>
     </div>
     <div class="article_content">
@@ -85,6 +85,10 @@
     <div class="bd_weixin_popup_head"><span>分享到微信朋友圈</span><a href="#" onclick="return false;" class="bd_weixin_popup_close">×</a></div>
     <div id="" class="bd_weixin_popup_main"><img id="bdshare_weixin_qrcode_dialog_qr" src="<{'http://qr.liantu.com/api.php?text='|cat:('/posts.html?id='|cat:$id|getBaseUrl)}>" alt=""></div>
     <div class="bd_weixin_popup_foot">打开微信，点击底部的“发现”，<br>使用“扫一扫”即可将网页分享至朋友圈。</div>
+</div>
+
+<div class="codePage">
+    <img src="http://www.dev.huzhu.com/pc/static/img/qrcode.png" />
 </div>
 <!--
 <div times="3" id="xubox_shade3" class="xubox_shade" style="z-index:19891017; background-color:#000; opacity:0.3; filter:alpha(opacity=30);"></div>

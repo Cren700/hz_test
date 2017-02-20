@@ -10,7 +10,7 @@
     <table class="table table-bordered table-striped">
         <thead>
         <tr>
-            <th>标题</th>
+            <th>文章标题</th>
             <th>评论者</th>
             <th>评论者IP</th>
             <th class="span5">内容</th>

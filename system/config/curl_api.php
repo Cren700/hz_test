@@ -70,6 +70,7 @@ $config = array(
             'getCollectListByUid'   => '/product/getCollectListByUid',     // 我的收藏
             'search'                => '/product/search',                 // 搜索
             'hasProductPower'       => '/product/hasProductPower',         // 是否具有产品权限
+            'updateProductCnt'      => '/product/updateProductCnt',     // 更新产品的加入数量和案例数量
         ),
     ),
     'posts' => array(
@@ -165,6 +166,12 @@ $config = array(
             'getPromoById'           => '/promo/getPromoById',//获取单条
             'changeStatus'           => '/promo/changeStatus',//状态更改
             'getPromoRandom'         => '/promo/getPromoRandom', // 随机一条广告
+            'getPromoRule'           => '/promo/getPromoRule', // 添加推荐规则
+            'addPromoRule'           => '/promo/addPromoRule',//添加推广规则
+            'savePromoRule'          => '/promo/savePromoRule',//更新推广规则
+            'getPromoRule'           => '/promo/getPromoRule', //获取推广规则
+            'getRuleById'            => '/promo/getRuleById', //获取单条推广规则
+            'ruleStatus'             => '/promo/ruleStatus', // 更改推广规则状态
         ),
     ),
 );

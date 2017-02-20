@@ -227,6 +227,13 @@ class Order_service_model extends HZ_Model
         $res = $this->order_dao->orderStatus($where, $data);
         if (!$res) {
             $ret['code'] = 'order_error_5';
+        } else {
+            // 【支付成功】记录成功加入数量
+            if ($option['Forder_status'] == 3) {
+                $order_data = $this->order_dao->checkOrder($where);
+                $data = array('Fproduct_id' => $order_data['Fproduct_id'],'Fturnover' => 1);
+                $this->myCurl('product', 'updateProductCnt', $data, true);
+            }
         }
         return $ret;
     }
@@ -394,11 +401,18 @@ class Order_service_model extends HZ_Model
         {
             $user_info = $this->myCurl('account', 'getStoreName', array('id' => $l['Fstore_id'], 'type' => $l['Fstore_type']), false);
             $l['Fstore_name'] = isset($user_info['data']['Fuser_id']) ? $user_info['data']['Fuser_id'] : '';
+            $product = $this->myCurl('product', 'getProductByPid', array('product_id' => $l['Fproduct_id']), false);
+            $l['Fproduct_name'] = isset($product['data']['Fproduct_name']) ? $product['data']['Fproduct_name'] : '';
         }
         $res['data']['list'] = $orderList;
         return $res;
     }
 
+    /**
+     * 理赔状态(当状态为已完成status=3,需要记录产品案例数量)
+     * @param $option
+     * @return array
+     */
     public function claimOrderStatus($option)
     {
         $ret = array('code' => 0);
@@ -411,6 +425,12 @@ class Order_service_model extends HZ_Model
         $res = $this->order_dao->claimOrderStatus($where, $data);
         if (!$res) {
             $ret['code'] = 'order_error_5';
+        }
+        // 【理赔成功】记录成功案例数量
+        if ($option['Fstatus'] == 3) {
+            $claim_data = $this->order_dao->checkClaims($where);
+            $data = array('Fproduct_id' => $claim_data['Fproduct_id'],'Fclaims_num' => 1);
+            $this->myCurl('product', 'updateProductCnt', $data, true);
         }
         return $ret;
     }
@@ -454,6 +474,8 @@ class Order_service_model extends HZ_Model
         $orderList = $this->order_dao->getOderListByUid(array('o.Fuser_id' => $option['Fuser_id']));
         foreach ($orderList as &$list) {
             $product = $this->myCurl('product', 'getProductByPid', array('product_id' => $list['Fproduct_id']));
+            $list['Fturnover'] = $product['data']['Fturnover'];
+            $list['Fclaims_num'] = $product['data']['Fclaims_num'];
             $list['Fcoverimage'] = $product['data']['Fcoverimage'];
             $list['Fdescription'] = $product['data']['Fdescription'];
         }

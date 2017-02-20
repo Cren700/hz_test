@@ -1,7 +1,8 @@
 <?php
 class Promo_dao_model extends HZ_Model {
 
-	private $_promo_table = 't_adv_prom';//广告表
+    private $_promo_table = 't_adv_prom';//广告表
+    private $_promo_rule = 't_promo_rule';//推广规则表
 	private $p = null;//广告库
 
 	public function __construct() {
@@ -68,5 +69,33 @@ class Promo_dao_model extends HZ_Model {
     {
         $sql = "select t1.* from {$this->_promo_table} as t1 join (select rand() * (select max(Factive_id) from {$this->_promo_table}) as Factive_id) as t2 on t1.Factive_id >t2.Factive_id where t1.Fstatus=1 limit 1";
         return $this->p->query($sql)->row_array();
+    }
+
+    public function getPromoRule()
+    {
+        $res = $this->p->order_by('Frule_id', 'DESC')->get_where($this->_promo_rule)->result_array();
+        return $res;
+    }
+
+    public function getRuleByWhere($where)
+    {
+        dbEscape($where);
+        $res = $this->p->get_where($this->_promo_rule, $where)->row_array();
+        return $res;
+    }
+
+    public function addPromoRule($data) {
+        dbEscape($data);
+        return $this->p->insert($this->_promo_rule, $data);
+    }
+
+    public function savePromoRule($where, $data)
+    {
+        return $this->p->update($this->_promo_rule, $data, $where);
+    }
+
+    public function ruleStatus($where, $data)
+    {
+        return $this->p->update($this->_promo_rule, $data, $where);
     }
 }

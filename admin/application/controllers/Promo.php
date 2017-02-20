@@ -137,9 +137,6 @@ class Promo extends HZ_Controller {
         $this->smarty->display('promo/verify.tpl');
     }
 
-    /*
-    *广告分类
-    */
     //广告类型列表
     public function cateList() {
         $cate = $this->promo_service->category();
@@ -201,5 +198,82 @@ class Promo extends HZ_Controller {
         $data = array('id' => $this->input->get('id'));
         $res = $this->promo_service->cateDel($data);
         echo json_encode_data($res);//json格式输出数据
+    }
+
+    /**
+     * 推广规则
+     * 每种类型只能有一个规则
+     */
+    public function set()
+    {
+        $jsArr = array(
+            'promo/rule.js'
+        );
+        $info = $this->promo_service->getPromoRule();
+        $this->smarty->assign('jsArr',$jsArr);
+        $this->smarty->assign('info',$info['data']);
+        $this->smarty->display('promo/set.tpl');
+    }
+
+    /**
+     * 修改状态
+     */
+    public function ruleStatus()
+    {
+        $option = array(
+            'status' => $this->input->get('status'),
+            'rule_id' => $this->input->get('id')
+        );
+        $res = $this->promo_service->ruleStatus($option);
+        echo json_encode_data($res);
+    }
+
+    public function ruleDetail($rule_id)
+    {
+        $rule_id = $rule_id ? :$this->input->get('id');
+        $jsArr = array(
+            'plugin/jquery.placeholder.min.js',
+            'plugin/jquery.validate.js',
+            'promo/addRule.js'
+        );
+        $info = $this->promo_service->getRuleById($rule_id);
+        if (empty($info['data'])) {
+            $info->jump404();
+        }
+        $this->smarty->assign('is_new',0);
+        $this->smarty->assign('jsArr',$jsArr);
+        $this->smarty->assign('info', $info['data']);
+        $this->smarty->display('promo/promoRule.tpl');
+    }
+
+    /**
+     * 添加规则
+     */
+    public function addPromoRule()
+    {
+        $jsArr = array(
+            'plugin/jquery.placeholder.min.js',
+            'plugin/jquery.validate.js',
+            'promo/addRule.js'
+        );
+        $this->smarty->assign('is_new',1);
+        $this->smarty->assign('jsArr',$jsArr);
+        $this->smarty->display('promo/promoRule.tpl');
+    }
+
+    //保存推广规则
+    public function savePromoRule() {
+        $data = array(
+            'is_new'      => $this->input->post('is_new'),
+            'rule_id'   => $this->input->post('rule_id'),
+            'share_type'   => $this->input->post('share_type'),
+            'amount' => $this->input->post('amount'),
+            'integral' => $this->input->post('integral'),
+        );
+        $res = $this->promo_service->savePromoRule($data);//判断
+        if(!$res['code']) {
+            $res['data']['url'] = getBaseUrl('/promo/set.html');
+        }
+        echo json_encode_data($res);
     }
 }

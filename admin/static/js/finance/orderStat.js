@@ -28,7 +28,7 @@ HZ.OrderStat = (function() {
                 {
                     $('#orderStat').remove();
                 }
-                $('#content').append(res);
+                $('#content .container-fluid').append(res);
             }
         });
     }

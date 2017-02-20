@@ -15,7 +15,7 @@
             <th>真实名称</th>
             <th>身份证</th>
             <th>电话号码</th>
-            <th>产品ID</th>
+            <th>产品名称</th>
             <th>理赔金额</th>
             <th>原因</th>
             <th>提供证据</th>
@@ -29,12 +29,12 @@
         <tbody>
         <{foreach $info['list'] as $i}>
             <tr rel="<{$i['Fid']}>">
-                <td style="text-align: center"><{$i['Fid']}></td>
+                <td style="text-align: center"><{$i['Forder_no']}></td>
                 <td><{$i['Fuser_id']}></td>
                 <td><{$i['Freal_name']}></td>
                 <td><{$i['Fidentity']}></td>
                 <td><{$i['Fphone']}></td>
-                <td><{$i['Fproduct_id']}></td>
+                <td><{$i['Fproduct_name']}></td>
                 <td><{$i['Famount']}></td>
                 <td><{$i['Freason']}></td>
                 <td><{$i['Fevidence']}></td>
@@ -47,9 +47,11 @@
                         <a href="<{'/order/claimsDetail.html?id='|cat:$i['Fid']|getBaseUrl}>">编辑</a>
                         <button class="btn btn-danger btn-mini js-btn-cancel" data-status="2">理赔失败</button>
                         <button class="btn btn-success btn-mini js-btn-success" data-status="3">已完成</button>
-                    <{else}>
+                    <{elseif $i['Fstatus'] eq 2}>
                         <a href="<{'/order/claimsDetail.html?id='|cat:$i['Fid']|getBaseUrl}>">编辑</a>
                         <button class="btn btn-danger btn-mini js-btn-cancel" data-status="1">重启订单</button>
+                    <{elseif $i['Fstatus'] eq 3 }>
+                        <a href="<{'/order/claimsDetail.html?id='|cat:$i['Fid']|getBaseUrl}>">编辑</a>
                     <{/if}>
                 </td>
             </tr>

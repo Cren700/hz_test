@@ -19,6 +19,7 @@ HZ.InfoPlan = (function() {
             $('#js-my-collect').show();
         });
 
+        $('.js-btn-my-order').click();
     }
 
     return {

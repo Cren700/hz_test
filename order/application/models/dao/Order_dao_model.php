@@ -90,6 +90,11 @@ class Order_dao_model extends HZ_Model
         return $this->o_db->update($this->_order_table, $data, $where);
     }
 
+    public function checkOrder($where)
+    {
+        return $this->o_db->get_where($this->_order_table, $where)->row_array();
+    }
+
     public function getOderListByUid($where)
     {
         $res = $this->o_db->select('o.*, c.Fstatus as claims_status')

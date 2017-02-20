@@ -88,12 +88,12 @@
                             <div class="join_info clearfix">
                                 <p class="join_info_l">
                                     已加入会员
-                                    <span>12</span>
+                                    <span><{$list['Fturnover']}></span>
                                     人
                                 </p>
                                 <p class="join_info_r">
                                     已互助案例
-                                    <span>23</span>
+                                    <span><{$list['Fclaims_num']}></span>
                                     起
                                 </p>
                             </div>

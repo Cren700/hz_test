@@ -47,6 +47,7 @@
         <{if !$is_new|default:0}>
         <input type="hidden" name="claims_id" value="<{$claims['Fid']}>">
         <input type="hidden" name="amount" value="<{$claims['Famount']}>">
+        <input type="hidden" name="status" value="<{$claims['Fstatus']}>">
         <{/if}>
 
         <input type="hidden" name="order_no" value="<{$Forder_no}>">

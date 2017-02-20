@@ -161,4 +161,83 @@ class Promo_service_model extends HZ_Model {
 		$ret['data'] = $res;
 		return $ret;
 	}
+
+    public function getPromoRule()
+    {
+        $ret = array('code' => 0);
+        $res = $this->promo_dao->getPromoRule();
+        $ret['data'] = $res;
+        return $ret;
+    }
+
+    public function getRuleById($where)
+    {
+        $ret = array('code' => 0);
+        $res = $this->promo_dao->getRuleByWhere($where);
+        $ret['data'] = $res;
+        return $ret;
+    }
+
+    public function addPromoRule($data) {
+        $ret = array('code' => 0);//命令码
+        //验证数据
+        $validationConfig = array(
+            array(
+                'value' => $data['Fshare_type'],
+                'rule'  => 'required',
+                'field' => '返利类型'
+            )
+        );
+        foreach ($validationConfig as $v) {
+            $resValidation = validationData($v['value'],$v['rule'],$v['field']);
+            if(!empty($resValidation)) {
+                return $resValidation;
+            }
+        }
+        // 判断存在分类
+        if($this->promo_dao->getRuleByWhere(array('Fshare_type' => $data['Fshare_type']))){
+            $ret['code'] = 'promo_error_9';
+            return $ret;
+        }
+        $res = $this->promo_dao->addPromoRule($data);
+        if (!$res) {
+            $ret['code'] = 'system_error_2';
+        }
+        return $ret;
+    }
+
+    public function savePromoRule($where,$data) {
+        $ret = array('code' => 0);
+        //验证数据
+        $validationConfig = array(
+            array(
+                'value' => $data['Fshare_type'],
+                'rule'  => 'required',
+                'field' => '返利类型'
+            )
+        );
+        foreach ($validationConfig as $v) {
+            $resValidation = validationData($v['value'],$v['rule'],$v['field']);
+            if(!empty($resValidation)) {
+                return $resValidation;
+            }
+        }
+
+        $res = $this->promo_dao->savePromoRule($where,$data);
+        if($res) {
+            return $ret;
+        } else {
+            return $ret['code'] = 'promo_error_8';
+        }
+    }
+
+    public function ruleStatus($where, $data)
+    {
+        $ret = array('code' => 0);
+        $res = $this->promo_dao->ruleStatus($where, $data);
+        if (!$res) {
+            $ret['code'] = 'system_error_2';
+        }
+        return $ret;
+    }
 }

@@ -123,6 +123,22 @@ class Product extends HZ_Controller
     }
 
     /**
+     * 更新产品的加入数量和案例数量
+     */
+    public function updateProductCnt()
+    {
+        $where = array(
+            'Fproduct_id' => $this->input->post('Fproduct_id')
+        );
+        $data = array(
+            'Fturnover' => $this->input->post('Fturnover'),
+            'Fclaims_num' => $this->input->post('Fclaims_num')
+        );
+        $res = $this->product_service->updateProductCnt($where, $data);
+        echo outputResponse($res);
+    }
+
+    /**
      * 删除分类
      */
     public function del()

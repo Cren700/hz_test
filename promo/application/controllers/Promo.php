@@ -84,4 +84,51 @@ class Promo extends HZ_Controller {
         $res = $this->promo_service->getPromoRandom();
         echo outputResponse($res);
     }
+
+    public function getPromoRule()
+    {
+        $res = $this->promo_service->getPromoRule();
+        echo outputResponse($res);
+    }
+
+    public function getRuleById()
+    {
+        $where = array('Frule_id' => $this->input->get('rule_id', TRUE));
+        $res = $this->promo_service->getRuleById($where);
+        echo outputResponse($res);
+    }
+
+    //添加推广规则
+    public function addPromoRule() {
+        $data = array(
+            'Fshare_type' => $this->input->post('share_type',TRUE),
+            'Famount' => $this->input->post('amount',TRUE),
+            'Fintegral'=> $this->input->post('integral',TRUE),
+            'Fcreate_time' => time()
+        );
+        $res = $this->promo_service->addPromoRule($data);
+        echo outputResponse($res);
+    }
+
+    //保存推广规则
+    public function savePromoRule() {
+        $where = array('Frule_id' => $this->input->post('rule_id'));
+        $data = array(
+            'Fshare_type' => $this->input->post('share_type',TRUE),
+            'Famount' => $this->input->post('amount',TRUE),
+            'Fintegral'=> $this->input->post('integral',TRUE),
+        );
+        $res = $this->promo_service->savePromoRule($where,$data);
+        echo outputResponse($res);
+    }
+    
+    // 更改状态
+    public function ruleStatus()
+    {
+        $where = array('Frule_id' => $this->input->post('rule_id'));
+        $data = array('Fstatus' => $this->input->post('status'));
+
+        $res = $this->promo_service->ruleStatus($where,$data);
+        echo outputResponse($res);
+    }
 }

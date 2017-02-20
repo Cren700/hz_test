@@ -69,4 +69,31 @@ class Promo_service_model extends HZ_Model {
         //CURL链接调用模块删除方法
         return $this->myCurl($this->_api,'cateDel',$data,false);
     }
+
+    public function getPromoRule()
+    {
+        return $this->myCurl($this->_api, 'getPromoRule');
+    }
+
+    public function getRuleById($rule_id)
+    {
+        $option = array('rule_id' => $rule_id);
+        return $this->myCurl($this->_api, 'getRuleById', $option, false);
+    }
+
+    public function ruleStatus($option)
+    {
+        return $this->myCurl($this->_api, 'ruleStatus', $option, true);
+    }
+
+    public function savePromoRule($data)
+    {
+        $is_new = $data['is_new'];
+        unset($data['is_new']);
+        if($is_new) {
+            return $this->myCurl($this->_api,'addPromoRule', $data, true);
+        } else {
+            return $this->myCurl($this->_api,'savePromoRule', $data, true);
+        }
+    }
 }

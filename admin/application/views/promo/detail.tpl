@@ -25,7 +25,7 @@
                                 <div class="span12">
                                     <label class="control-label">广告名称</label>
                                     <div class="controls">
-                                        <input type="text" class="span11" name="active_name" placeholder="广告名称" value="<{$promo['Factive_name']|default:''}>">
+                                        <input type="text" class="span4" name="active_name" placeholder="广告名称" value="<{$promo['Factive_name']|default:''}>">
                                     </div>
                                 </div>
                             </div>
@@ -33,7 +33,7 @@
                                 <div class="span12">
                                     <label class="control-label">广告分类</label>
                                     <div class="controls">
-                                        <select name="category_id" class="span11" id="category_id">
+                                        <select name="category_id" class="span4" id="category_id">
                                             <option value="">请选择广告分类</option>
                                             <{foreach $cate['list'] as $c}>
                                             <option value="<{$c.Fcategory_id}>" <{if isset($promo['Fcategory_id']) && $promo['Fcategory_id'] eq $c.Fcategory_id }>selected<{/if}>><{$c.Fcategory_name}></option>
@@ -57,7 +57,7 @@
                                 <div class="span12">
                                     <label class="control-label">广告地址</label>
                                     <div class="controls">
-                                        <input type="text" class="span11" name="active_url" placeholder="广告地址" value="<{$promo['Factive_url']|default:''}>">
+                                        <input type="text" class="span4" name="active_url" placeholder="广告地址" value="<{$promo['Factive_url']|default:''}>">
                                     </div>
                                 </div>
                             </div>
@@ -65,7 +65,7 @@
                                 <div class="span12">
                                     <label class="control-label">投放厂商</label>
                                     <div class="controls">
-                                        <input type="text" class="span11" name="vendor" placeholder="投放厂商" value="<{$promo['Fvendor']|default:''}>">
+                                        <input type="text" class="span4" name="vendor" placeholder="投放厂商" value="<{$promo['Fvendor']|default:''}>">
                                     </div>
                                 </div>
                             </div>

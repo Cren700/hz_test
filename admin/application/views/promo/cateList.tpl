@@ -13,13 +13,12 @@
 <div id="content">
     <{include file='public/nav.tpl'}>
     <div class="container-fluid">
-        </div>
         <div class="row-fluid">
             <div class="span12">
                 <div class="widget-box">
                     <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
                         <h5>广告分类</h5>
-                        <a class="label label-info js-btn-add-promo" href="/promo/addCate.html">添加广告分类</a>
+                        <a class="label label-info js-btn-add-promo" href="<{'/promo/cateAdd.html'|getBaseUrl}>">添加广告分类</a>
                     </div>
                     <div id="promo-list-content">
                         <!--table info-->

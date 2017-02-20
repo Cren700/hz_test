@@ -17,33 +17,35 @@
             <div class="span12">
                 <div class="widget-box">
                     <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
-                        <h5>资讯分类</h5>
-                        <a class="label label-info js-btn-add-product" href="<{'/posts/addCate.html'|getBaseUrl}>">添加资讯分类</a>
+                        <h5>推荐规则</h5>
+                        <a class="label label-info js-btn-add-promo" href="<{'/promo/addPromoRule.html'|getBaseUrl}>">添加推荐规则</a>
                     </div>
-                    <div id="product-list-content">
+                    <div id="promo-list-content">
                         <!--table info-->
+                        <{if $info['list']}>
                         <div class="widget-content nopadding">
                             <table class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>资讯分类</th>
-                                    <th>分类说明</th>
-                                    <th>是否为专栏</th>
+                                    <th>规则类型</th>
+                                    <th>返利金额</th>
+                                    <th>返利积分</th>
                                     <th>状态</th>
+                                    <th>创建时间</th>
                                     <th>操作</th>
                                 </tr>
                                 </thead>
-                                <{foreach $cate['list'] as $c}>
-                                <tr rel="<{$c.Fpost_category_id}>">
-                                    <td><{$c.Fpost_category_id}></td>
-                                    <td><{$c.Fcategory_name}></td>
-                                    <td><{$c.Fremark}></td>
-                                    <td><{if $c.Fis_special eq 0}>否<{else}>是<{/if}></td>
-                                    <td class="js-status"><{if $c['Fstatus'] eq 0 }>禁用<{else}>使用中<{/if}></td>
-                                    <td>
-                                        <a href="<{'/posts/getcate/'|cat:$c.Fpost_category_id|getBaseUrl}>" class="btn btn-primary btn-mini js-btn-delete">编辑</a>
-                                        <{if $c['Fstatus'] eq 0}>
+                                <{foreach $info['list'] as $i}>
+                                <tr rel="<{$i.Frule_id}>">
+                                    <td><{$i.Frule_id}></td>
+                                    <td><{if $i.Fshare_type eq 1}>订单返利<{/if}></td>
+                                    <td><{$i.Famount}></td>
+                                    <td><{$i.Fintegral}></td>
+                                    <td class='js-status'><{if $i.Fstatus eq 0}>禁用<{else}>启用<{/if}></td>
+                                    <td><{"Y-m-d H:i:s"|date:$i.Fcreate_time}></td>
+                                    <td><a href="<{'/promo/ruleDetail/'|cat:$i.Frule_id|getBaseUrl}>" class="btn btn-primary btn-mini js-btn-delete">编辑</a>
+                                        <{if $i['Fstatus'] eq 0}>
                                         <button class="btn btn-primary btn-mini js-btn-status" data-status="1">启用</button>
                                         <{else}>
                                         <button class="btn btn-danger btn-mini js-btn-status" data-status="0">禁用</button>
@@ -53,6 +55,12 @@
                                 <{/foreach}>
                             </table>
                         </div>
+                        <{else}>
+                        <div class="alert alert-block"> <a class="close" data-dismiss="alert" href="#">×</a>
+                            <h4 class="alert-heading">温馨提示!</h4>
+                            无相应信息
+                        </div>
+                        <{/if}>
                         <!--end table info-->
                     </div>
                 </div>

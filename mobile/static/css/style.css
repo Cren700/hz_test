@@ -2577,7 +2577,6 @@ section.change_info {
     padding: 0.12821rem 0.12821rem 0rem;
     overflow: scroll;
     font-size: 14px;
-    font-weight: 700;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box; }
@@ -2606,7 +2605,7 @@ section.change_info {
 }
 
 .pName {
-    color: #51464a;
+    color: rgba(97, 94, 96, 0.91);;
     overflow: hidden;
 }
 
@@ -2624,8 +2623,25 @@ section.change_info {
 .pCount a {
     border: 1px solid;
 }
-.pOrder {
-    color: #4c95db;
+.orderStatus {
+    color: #FFF;
+    font-size: 0.2rem;
+    background-color: #4c95db;
+    padding: 4px;
+    margin-right: 1px;
+}
+
+.orderStatus a{
+    font-size: 0.4rem;
+    color: #FFF;
+}
+
+.orderSuccess {
+    background-color: rgba(60, 166, 61, 0.82);
+}
+
+.orderError {
+    background-color: #db4c4c;
 }
 
 .submitArea {
@@ -2832,11 +2848,16 @@ label#lblSelect::after {
     color: #fff !important;
     border: 0;
     border-radius: 3px;
-    margin-left: 0.21368rem; }
+    margin-left: 0.21368rem;
+}
+.file_box .button a {
+    font-size: 12px;
+    text-align: center;
+}
 .file_box img{
+    display: inline-block;
     height: 3rem;
     width: 3rem;
-    margin-left: 2.2rem;
     margin-top: 0.2rem;
 }
 .submit_box {

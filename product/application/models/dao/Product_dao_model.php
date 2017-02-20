@@ -43,6 +43,18 @@ class Product_dao_model extends HZ_Model
         return filterData($res);
     }
 
+    public function updateProductCnt($where, $data)
+    {
+        $this->p->where($where);
+        if ($data['Fturnover']) {
+            $this->p->set('Fturnover', 'Fturnover + 1', FALSE);
+        }
+        if ($data['Fclaims_num']) {
+            $this->p->set('Fclaims_num', 'Fclaims_num + 1', FALSE);
+        }
+        $this->p->update($this->_product_table);
+    }
+
     // 添加产品基础信息
     public function add($data)
     {
