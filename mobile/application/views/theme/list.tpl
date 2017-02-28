@@ -14,7 +14,8 @@
 </head>
 <body>
 
-<div class="topic_banner">
+<{include file="public/header_back.tpl"}>
+<div class="topic_banner" style="margin-top: 1.1rem">
     <a href="<{$theme['data']['Fmurl']|default:'#'}>"><img class="lazy beforeEnd" src="<{$theme['data']['Ftheme_coverimage']}>" alt="<{$theme['data']['Ftheme_title']}>"></a>
 </div>
 <div class="">

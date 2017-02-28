@@ -1,11 +1,7 @@
 <{include file="public/header.tpl"}>
 <body>
+<{include file="public/header_back.tpl"}>
 <section class="content_one">
-    <div class="user_set">
-        <a href="javascript:;" class="user_set_ava user_avatar">
-            <img src="<{if $user['Fimage_path']}><{$user['Fimage_path']}><{else}><{'avatar.jpg'|baseImgUrl}><{/if}>">
-        </a>
-    </div>
     <div class="user_set_item">
         <div class="set_item">
             <p>昵称</p>
@@ -49,6 +45,10 @@
         <div class="set_item">
             <p>个人地址</p>
             <span><{$user['Fprovince']|default:''}><{$user['Fcity']|default:''}><{$user['Faddress']|default:''}></span>
+        </div>
+        <div class="set_item" <{if $user['Fimage_path']}>style='height:3rem'<{/if}>>
+            <p>头像</p>
+            <span ><img style="<{if $user['Fannex_path']}>width: 2.5rem; height: 2rem;<{/if}>" src="<{$user['Fimage_path']|default:("avatar.jpg"|baseImgUrl)}>" alt=""></span>
         </div>
         <div class="set_item" <{if $user['Fannex_path']}>style='height:3rem'<{/if}>>
             <p>证件照片</p>

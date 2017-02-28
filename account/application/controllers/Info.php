@@ -97,4 +97,18 @@ class Info extends BaseController
         echo outputResponse($res);
     }
 
+    public function modifyAccountInfo()
+    {
+        $data = array(
+            'Fuser_id' => $this->input->post('user_id', true),
+            'Fuser_type' => $this->input->post('user_type', true),
+            'Famount' => $this->input->post('amount', true),
+            'Fintegral' => $this->input->post('integral', true),
+            'Fcreate_time' => time(),
+            'Fupdate_time' => time()
+        );
+        $res = $this->info_service->modifyAccountInfo($data);
+        echo outputResponse($res);
+    }
+
 }

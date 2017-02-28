@@ -2,7 +2,7 @@
 <body>
 <section class="mylogin">
     <div class="user_name">
-        <a class="user_avatar" href="javascript:;">
+        <a class="user_avatar" href="<{'/account/detail.html'|getBaseUrl}>">
             <img src="<{if $user['Fimage_path']}><{$user['Fimage_path']}><{else}><{'avatar.jpg'|baseImgUrl}><{/if}>">
         </a>
         <p></p>
@@ -29,7 +29,7 @@
             <a href="<{'/about/contribute.html'|getBaseUrl}>">投稿、成为专栏作家</a>
         </p>
         <p>
-            <a href="<{'/about/report.html'|getBaseUrl}>">平台寻求报道</a>
+            <a href="javascript:;">平台寻求报道</a>
         </p>
         <!--媒体end-->
         <{/if}>

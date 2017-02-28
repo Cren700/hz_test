@@ -83,12 +83,11 @@
 </div>
 <div id="bdshare_weixin_qrcode_dialog" class="bd_weixin_popup" style="display: none;">
     <div class="bd_weixin_popup_head"><span>分享到微信朋友圈</span><a href="#" onclick="return false;" class="bd_weixin_popup_close">×</a></div>
-    <div id="" class="bd_weixin_popup_main"><img id="bdshare_weixin_qrcode_dialog_qr" src="<{'http://qr.liantu.com/api.php?text='|cat:('/posts.html?id='|cat:$id|getBaseUrl)}>" alt=""></div>
+    <div id="" class="bd_weixin_popup_main"><img id="bdshare_weixin_qrcode_dialog_qr" src="<{'/posts/code/'|cat:getCurrentUrl()|getBaseUrl}>" alt=""></div>
     <div class="bd_weixin_popup_foot">打开微信，点击底部的“发现”，<br>使用“扫一扫”即可将网页分享至朋友圈。</div>
 </div>
-
 <div class="codePage">
-    <img src="http://www.dev.huzhu.com/pc/static/img/qrcode.png" />
+    <img src="<{'/posts/code/'|cat:getCurrentUrl()|getBaseUrl}>" alt="">
 </div>
 <!--
 <div times="3" id="xubox_shade3" class="xubox_shade" style="z-index:19891017; background-color:#000; opacity:0.3; filter:alpha(opacity=30);"></div>
@@ -96,6 +95,9 @@
 
 -->
 <input type="hidden" name='pid' value='<{$id}>'>
+<input type="hidden" id="_url" value="<{''|getCurrentUrl}>">
+<input type="hidden" id="_coverimage" value="<{$info.Fpost_coverimage}>">
+<input type="hidden" id="_excerpt" value="<{$info.Fpost_excerpt}>">
 <{include file="public/footer.tpl"}>
 </body>
 </html>

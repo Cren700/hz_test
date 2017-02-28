@@ -5,11 +5,17 @@ if (typeof (HZ) == "undefined" || !HZ) {
 HZ.PostsDetail = (function() {
     
     function _init() {
+        // 分享的数据处理
+        $param = {
+            url: $('#_url').val(),
+            content: $('#_excerpt').val(),
+            pic: $('#_coverimage').val()
+        };
         $(".weibo").on("click",function(){
-            $(this).socialShare("sinaWeibo");
+            $(this).socialShare("sinaWeibo",$param);
         });
         $(".qzone").on("click",function(){
-            $(this).socialShare("qZone");
+            $(this).socialShare("qZone",$param);
         });
         $('.wefriend').on('click', function(){
             var scrollTop = $(this).scrollTop();

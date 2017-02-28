@@ -293,5 +293,34 @@ class Product extends BaseControllor
         echo $this->smarty->display('product/collectList.tpl');
     }
 
+    /**
+     * 提交评论
+     */
+    public function submitComment()
+    {
+        $data = array(
+            'Fcomment_pro_id' => $this->input->post('pro_id', true),
+            'Fcomment_uid' => $this->input->post('uid', true),
+            'Fcomment_user_name' => $this->input->post('user_name', true),
+            'Fcomment_ip' => $this->input->post('ip', true),
+            'Fcomment_date' => time(),
+            'Fcomment_content' => $this->input->post('content')
+        );
+        $res = $this->product_service->submitComment($data);
+        echo outputResponse($res);
+    }
+    
+    /**
+     * 删除评论
+     */
+    public function delComment()
+    {
+        $where = array(
+            'Fcomment_id' => $this->input->post('comment_id', true),
+        );
+        $res = $this->product_service->delComment($where);
+        echo outputResponse($res);
+    }
+
 
 }

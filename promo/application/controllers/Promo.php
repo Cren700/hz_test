@@ -94,7 +94,14 @@ class Promo extends HZ_Controller {
     public function getRuleById()
     {
         $where = array('Frule_id' => $this->input->get('rule_id', TRUE));
-        $res = $this->promo_service->getRuleById($where);
+        $res = $this->promo_service->getRuleByWhere($where);
+        echo outputResponse($res);
+    }
+
+    public function getRuleByType()
+    {
+        $where = array('Fshare_type' => $this->input->get('share_type', TRUE));
+        $res = $this->promo_service->getRuleByWhere($where);
         echo outputResponse($res);
     }
 
@@ -131,4 +138,20 @@ class Promo extends HZ_Controller {
         $res = $this->promo_service->ruleStatus($where,$data);
         echo outputResponse($res);
     }
+
+    // 添加返利记录
+    public function addOrderExpand()
+    {
+        $data = array(
+            'Fuser_id' => $this->input->post('user_id',TRUE),//推荐者ID
+            'Famount' => $this->input->post('amount',TRUE),// 返利数额
+            'Fmember'=> $this->input->post('member',TRUE),// 注册用户
+            'Fmember_time'=> $this->input->post('member_time',TRUE),// 用户注册时间
+            'Forder_no'=> $this->input->post('order_no',TRUE),// 订单no
+            'Fcreate_time' => time()
+        );
+        $res = $this->promo_service->addOrderExpand($data);
+        echo outputResponse($res);
+    }
+
 }

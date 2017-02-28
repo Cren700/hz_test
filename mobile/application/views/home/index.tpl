@@ -5,6 +5,7 @@
     <nav class="home_nav">
         <div class="nav_list">
             <a href="<{''|getBaseUrl}>" class="header_nav <{if $cate_id eq ''}> select<{/if}>">最新</a>
+            <a href="<{'/theme.html'|getBaseUrl}>" class="header_nav">专题</a>
             <{foreach $cate as $c}>
                 <a href="<{'/home/index?id='|cat:$c['Fpost_category_id']|getBaseUrl}>" class="header_nav <{if $cate_id eq $c['Fpost_category_id']}> select<{/if}>"><{$c['Fcategory_name']}></a>
             <{/foreach}>

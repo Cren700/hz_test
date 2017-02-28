@@ -141,7 +141,7 @@ class Account extends HZ_Controller
         if ($res['code'] != 0) {
             $this->jump404();
         } else {
-            $url = getBaseUrl('/account/detail');
+            $url = getBaseUrl('/info');
             $this->jump($url);
         }
     }

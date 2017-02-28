@@ -5,7 +5,7 @@ if (typeof (HZ) == "undefined" || !HZ) {
 HZ.Account_phone = (function() {
     function _init(){
 
-        var countdown = 10;
+        var countdown = 120;
 
         $('#js-btn-send-sms').on('click', function () {
             sendSms($(this));

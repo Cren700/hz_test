@@ -24,6 +24,43 @@ HZ.ProductDetail = (function() {
             $('.problem_section').hide();
             $('.general').show();
         });
+
+        $('.pro_tab a').each(function(index){
+            $(this).click(function(){
+                $(this).addClass('active').siblings().removeClass('active');
+                $('.pro_tabContent > div').eq(index).show().siblings().hide();
+            });
+        }); 
+
+        $('#pro_custom').on('click', function(){
+            $('.page').show();
+            $('#problem').animate({'bottom': 0},100);
+            $('.page').on('click', function(){
+                $('.page').hide();
+                $('#problem').animate({'bottom': '-100%'});               
+            }); 
+        }); 
+        
+        //轮播
+        var mySwiper = new Swiper('.swiper-container',{
+             autoplay : 4000,
+        });
+
+
+        //星星评分
+        $('.star_item .star').each(function(){
+            $(this).find('label').each(function(index){
+                $(this).click(function(){
+                    for(var i=0;i<index+1;i++){
+                        $(this).parent().find('label').eq(i).css({'color':'#197dd2'});
+                        for(var j=0;j<5-index;j++){
+                            $(this).parent().find('label').eq(index+j+1).css({'color':'#999999'});
+                        }                       
+                    }
+                    $(this).parent().siblings('.score').html(index+1+'分');
+                });
+            });
+        });
     }
 
     function collect()

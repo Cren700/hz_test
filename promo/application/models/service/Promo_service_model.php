@@ -170,7 +170,7 @@ class Promo_service_model extends HZ_Model {
         return $ret;
     }
 
-    public function getRuleById($where)
+    public function getRuleByWhere($where)
     {
         $ret = array('code' => 0);
         $res = $this->promo_dao->getRuleByWhere($where);
@@ -235,6 +235,16 @@ class Promo_service_model extends HZ_Model {
     {
         $ret = array('code' => 0);
         $res = $this->promo_dao->ruleStatus($where, $data);
+        if (!$res) {
+            $ret['code'] = 'system_error_2';
+        }
+        return $ret;
+    }
+
+    public function addOrderExpand($data)
+    {
+        $ret = array('code' => 0);
+        $res = $this->promo_dao->addOrderExpand($data);
         if (!$res) {
             $ret['code'] = 'system_error_2';
         }

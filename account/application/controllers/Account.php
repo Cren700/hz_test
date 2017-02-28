@@ -19,6 +19,7 @@ class Account extends BaseController {
 		$data['Fuser_id'] = $this->input->post('user_id');
 		$data['Fpasswd'] = $this->input->post('passwd');
 		$data['Fuser_type'] = $this->input->post('user_type') ? : '4';
+        $data['Frecommend_uid'] = $this->input->post('recommend_uid');
         $data['Fcreate_time'] = time();
         $data['Fupdate_time']  = time();
         $data['Fstatus'] = 1;
@@ -119,7 +120,17 @@ class Account extends BaseController {
     public function getUserDetailByFuserId()
     {
         $data['Fuser_id'] = $this->input->get('user_id');
-        $res = $this->account_service->getUserDetailByFuserId($data);
+        $res = $this->account_service->getUserDetailByWhere($data);
+        echo outputResponse($res);
+    }
+
+    /**
+     * 根据用户ID获取用户信息
+     */
+    public function getUserDetailByWhere()
+    {
+        $data['Fid'] = $this->input->get('id');
+        $res = $this->account_service->getUserDetailByWhere($data);
         echo outputResponse($res);
     }
 
@@ -209,7 +220,8 @@ class Account extends BaseController {
             'Fuser_id' => $this->input->post('user_id', true),
             'Fnick_name' => $this->input->post('nickname', true),
             'Fimage_path' => $this->input->post('imgurl', true),
-            'Flog_type' => $this->input->post('log_type', true)
+            'Flog_type' => $this->input->post('log_type', true),
+            'Frecommend_uid' => $this->input->post('recommend_uid', true)
         );
         $res = $this->account_service->oauthLogin($option);
         echo outputResponse($res);
@@ -272,6 +284,7 @@ class Account extends BaseController {
         $option = array(
             'Fuser_id' => $this->input->post('user_id', true),
             'Fverifycode' => $this->input->post('code', true),
+            'Frecommend_uid' => $this->input->post('recommend_uid', true),
             'Flog_type' => 3 // 手机登录
         );
         $res = $this->account_service->checkVerifyCode($option['Fverifycode']);

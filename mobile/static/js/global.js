@@ -29,6 +29,10 @@ HZ.Global = (function() {
             $('.circle').removeClass('open');
             $('.circle_box').removeClass('show');
         });
+
+        $('#js-back-btn').on('click', function () {
+            location.href = history.go(-1);
+        })
     }
 
     return {

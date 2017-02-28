@@ -43,6 +43,9 @@ $config = array(
     'product_error_11' => array( 'code' => 20011, 'msg' => '我的收藏信息出错'),                 // 我的收藏信息出错
     'product_error_12' => array( 'code' => 20012, 'msg' => '很抱歉，暂无数据，请换个条件试试！'),                // 搜索暂无数据
     'product_error_13' => array( 'code' => 20013, 'msg' => '没有该文章的权限！'),                // 没有该文章的权限
+    'product_error_14' => array( 'code' => 20014, 'msg' => '评论出错'),                 // 评论出错
+    'product_error_15' => array( 'code' => 20015, 'msg' => '删除评论出错'),                // 删除评论出错
+
 
 
     // validation 30001 ~ 39999
@@ -66,9 +69,9 @@ $config = array(
     'posts_error_7' => array( 'code' => 40007, 'msg' => '添加资讯详情出错'),                 // 添加资讯详情出错
     'posts_error_8' => array( 'code' => 40008, 'msg' => '更新资讯详情出错'),                 // 更新资讯详情出错
     'posts_error_9' => array( 'code' => 40009, 'msg' => '更新资讯状态出错'),                 // 更新资讯状态出错
-    'posts_error_10' => array( 'code' => 400010, 'msg' => '评论出错'),                 // 评论出错
-    'posts_error_11' => array( 'code' => 400011, 'msg' => '获取评论列表出错'),                // 获取评论列表出错
-    'posts_error_12' => array( 'code' => 400012, 'msg' => '删除评论出错'),                // 删除评论出错
+    'posts_error_10' => array( 'code' => 40010, 'msg' => '评论出错'),                 // 评论出错
+    'posts_error_11' => array( 'code' => 40011, 'msg' => '获取评论列表出错'),                // 获取评论列表出错
+    'posts_error_12' => array( 'code' => 40012, 'msg' => '删除评论出错'),                // 删除评论出错
     'posts_error_13' => array( 'code' => 40013, 'msg' => '我的关注信息出错'),                // 我的关注信息出错
     'posts_error_14' => array( 'code' => 40014, 'msg' => '很抱歉，暂无数据，请换个条件试试！'),                // 搜索暂无数据
     'posts_error_15' => array( 'code' => 40015, 'msg' => '我的评论信息出错'),                // 我的评论信息出错

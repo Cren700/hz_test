@@ -10,6 +10,7 @@ class Product_dao_model extends HZ_Model
 {
     private $_product_table = 't_product';
     private $_product_detail_table = 't_product_detail';
+    private $_pro_comments_table = 't_pro_comments';
     private $_favourite_article_table = 't_favourite_article';
 
     private $p = null; // 产品库
@@ -179,5 +180,69 @@ class Product_dao_model extends HZ_Model
     {
         $res = $this->p->get_where($this->_product_table, $option)->result_array();
         return $res;
+    }
+
+    public function submitComment($data)
+    {
+        dbEscape($data);
+        return $this->p->insert($this->_pro_comments_table, $data);
+    }
+
+    public function getCommentListByPid($option)
+    {
+        dbEscape($option);
+        $res = $this->p->from($this->_pro_comments_table)
+            ->where($option)
+            ->order_by('Fcomment_id', 'DESC')
+            ->get()
+            ->result_array();
+        return filterData($res);
+    }
+
+    public function proCommentNum($where, $like) {
+
+        dbEscape($like);
+        dbEscape($where);
+        $count = $this->p->select('count(*) as num')
+            ->from($this->_pro_comments_table)
+            ->where($where)
+            ->like($like)
+            ->count_all_results();
+        return $count;
+    }
+
+    public function proCommentList($where, $like, $page, $page_size) {
+        dbEscape($like);
+        dbEscape($where);
+        $query = $this->p->select('c.*, p.Fpost_title')
+            ->from($this->_pro_comments_table . ' as c')
+            ->join($this->_product_table.' as p', 'c.Fcomment_pro_id = p.Fproduct_id', 'left')
+            ->where($where)
+            ->like($like)
+            ->order_by('Fcomment_id', 'DESC')
+            ->limit($page_size, $page_size * ($page - 1))
+            ->get();
+        $res = $query->result_array();
+        return filterData($res);
+    }
+
+    public function statusComment($data, $where)
+    {
+        dbEscape($data);
+        dbEscape($where);
+        return $this->p->update($this->_pro_comments_table, $data, $where);
+    }
+
+    public function delComment($where)
+    {
+        dbEscape($where);
+        return $this->p->delete($this->_pro_comments_table, $where);
+    }
+    
+    public function maybeLike($option)
+    {
+        $sql = "select t1.Fproduct_id, t1.Fcoverimage from {$this->_product_table} as t1 join (select rand() * (select max(Fproduct_id) from {$this->_product_table}) as Fproduct_id) as t2 on t1.Fproduct_id >t2.Fproduct_id where t1.Fproduct_status=2 and t1.Fis_del =0 and t1.Fproduct_id !=".$option['Fproduct_id']." limit 5";
+        return $this->p->query($sql)->result_array();
+        
     }
 }

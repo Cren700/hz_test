@@ -242,6 +242,25 @@ class Order extends BaseController
         echo outputResponse($res);
     }
 
+    public function hasCommentPower()
+    {
+        $option = array(
+            'Fproduct_id'=> $this->input->get('product_id', true),
+            'Fuser_id' => $this->input->get('user_id', true),
+            'Fcomment_flag' => 1
+        );
+        $res = $this->order_service->hasCommentPower($option);
+        echo outputResponse($res);
+    }
+    
+    public function calClaimsTotal()
+    {
+        $option = array(
+            'Fproduct_id'=> $this->input->get('product_id', true),
+        );
+        $res = $this->order_service->calClaimsTotal($option);
+        echo outputResponse($res);
+    }
 
 
 }

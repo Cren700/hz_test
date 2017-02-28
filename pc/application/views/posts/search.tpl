@@ -24,7 +24,9 @@
                 <{foreach $info['data']['list'] as $l}>
                 <div class="search_result_item_jj clearfix">
                     <div class="search_item_img">
-                        <img src="<{$l['Fpost_coverimage']}>">
+                        <a href="<{'/posts.html?id='|cat:$l['Fid']|getBaseUrl}>">
+                            <img src="<{$l['Fpost_coverimage']}>">
+                        </a>
                     </div>
                     <div class="search_item_txt">
                         <h2><a href="<{'/posts.html?id='|cat:$l['Fid']|getBaseUrl}>"><{$preg|preg_replace:$rep:$l['Fpost_title']}></a>

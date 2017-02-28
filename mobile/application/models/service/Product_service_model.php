@@ -21,7 +21,26 @@ class Product_service_model extends HZ_Model
     public function detail($id)
     {
         $where = array('product_id' => $id);
-        return $this->myCurl('product', 'getProductByPid', $where);
+        $comment_flag = FALSE;
+        $res = $this->myCurl('product', 'getProductByPid', $where);
+        if ($res['code'] === 0) {
+            if ($this->_user_id) {
+                $comment_flag = $this->hasCommentPower($id, $this->_user_id);
+            }
+            $like_pro = $this->myCurl('product', 'maybeLike', array('product_id' => $res['data']['Fproduct_id']));
+            isset($res['data']) ? $res['data']['comment_flag'] = $comment_flag : '';
+            $res['data']['maybeLike'] = isset($like_pro['data']['list']) ? $like_pro['data']['list'] : array();
+            $commentList = $this->getProComment(array('product_id' => $res['data']['Fproduct_id']));
+            $res['data']['commentList'] = isset($commentList['data']['list']) ? $commentList['data']['list'] : array();
+            $res['data']['commentAve'] = $commentList['data']['ave'];
+//            $res['data']['claimsTotal'] = $this->myCurl('order', 'calClaimsTotal', array('product_id' => $res['data']['Fproduct_id']));
+        }
+        return $res;
+    }
+
+    public function hasCommentPower($product_id, $user_id)
+    {
+        return $this->myCurl('order', 'hasCommentPower', array('product_id'=> $product_id, 'user_id' => $user_id))['data'] ? true : false;
     }
 
     public function getProductList($option)
@@ -29,8 +48,50 @@ class Product_service_model extends HZ_Model
         return $this->myCurl('product', 'queryProduct', $option);
     }
 
+    public function getProComment($option){
+        $res = $this->myCurl('product', 'getCommentListByPid', $option);
+        $total = $start1 = $start2 = $start3 = $start4 = 0;
+        if ($res['code'] === 0) {
+            // 计算平均分,总平均分
+            if (isset($res['data']['list']) && $res['data']['list']) {
+                $count = count($res['data']['list']);
+                foreach ($res['data']['list'] as $list) {
+                    $total += $list['Fstart1'] + $list['Fstart2'] + $list['Fstart3'] + $list['Fstart4'];
+                    $start1 += $list['Fstart1'];
+                    $start2 += $list['Fstart2'];
+                    $start3 += $list['Fstart3'];
+                    $start4 += $list['Fstart4'];
+                }
+                $total = sprintf('%.1f', $total / ($count * 4));
+                $start1 = sprintf('%.1f', $start1 / $count);
+                $start2 = sprintf('%.1f', $start2 / $count);
+                $start3 = sprintf('%.1f', $start3 / $count);
+                $start4 = sprintf('%.1f', $start4 / $count);
+            }
+        }
+        $ave = array(
+            'total' => $total,
+            'start1' => $start1,
+            'start2' => $start2,
+            'start3' => $start3,
+            'start4' => $start4,
+        );
+        $res['data']['ave'] = $ave;
+        return $res;
+    }
+
     public function search($where)
     {
         return $this->myCurl('product', 'search', $where);
+    }
+
+    public function submitComment($option)
+    {
+        return $this->myCurl('product', 'submitComment', $option, true);
+    }
+
+    public function calClaimsTotal($option)
+    {
+        return $this->myCurl('order', 'calClaimsTotal', $option);
     }
 }

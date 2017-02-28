@@ -266,4 +266,16 @@ class Order_dao_model extends HZ_Model
         return $this->o_db->get_where($this->_order_table, $whereBuy)->row_array();
     }
 
+    public function hasCommentPower($option)
+    {
+        dbEscape($option);
+        return $this->o_db->get_where($this->_order_table, $option, 1)->row_array();
+    }
+
+    public function calClaimsTotal($option)
+    {
+        dbEscape($option);
+        return $this->o_db->select_sum('Famount')->get_where($this->_claim_table, $option)->row_array();
+    }
+
 }

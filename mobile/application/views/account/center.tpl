@@ -1,5 +1,6 @@
 <{include file="public/header.tpl"}>
 <body>
+<{include file="public/header_back.tpl"}>
 <section class="content_one">
     <div class="user_set_item">
         <div class="set_item">

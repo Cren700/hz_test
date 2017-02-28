@@ -4,8 +4,16 @@ if (typeof (HZ) == "undefined" || !HZ) {
 
 HZ.Account_phone = (function() {
     function _init(){
+        
+        //选择角色登陆
+        $('.mid a').each(function(index){
+            $(this).on('click', function () {
+                $('.wrapRole').hide();
+            });
+        });
 
-        var countdown = 10;
+
+        var countdown = 120;
 
         $('#sendCode').on('click', function () {
             sendSms($(this));

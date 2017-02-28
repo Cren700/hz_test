@@ -56,11 +56,11 @@ class HZ_Model extends CI_Model
         }
 
         $res = curl_exec($ch);
-// //        
-        // if($control == "getPromoRandom")
-        // {
-        //     echo $res;die;
-        // }
+ //
+//         if($control == "calClaimsTotal")
+//         {
+//             echo $res;die;
+//         }
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
 

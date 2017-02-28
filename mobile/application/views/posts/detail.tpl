@@ -1,5 +1,6 @@
 <{include file="public/header.tpl"}>
 <body>
+<{include file="public/header_back.tpl"}>
 <section class="article">
     <div class="article_cont">
         <h1><{$info.Fpost_title}></h1>
@@ -67,7 +68,7 @@
                 <{foreach $comment['data']['list'] as $c}>
                 <div class="comment_list">
                     <div class="avatar">
-                        <img style="width:0.64rem" src="<{$c['Fcomment_authro_image']|default:''}>">
+                        <img style="width:0.64rem" src="<{$c['Fcomment_authro_image']|default:("avatar.jpg"|baseImgUrl)}>">
                     </div>
                     <div class="comment_info">
                         <p><span class='comment_name'><{$c['Fcomment_name']}></span> • <span class="js-date-dif" rel="<{$c['Fcomment_date']}>"></span></p>

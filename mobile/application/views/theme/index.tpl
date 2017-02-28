@@ -1,8 +1,6 @@
 <{include file="public/header.tpl"}>
 <body>
-<div class="wrap">
-    <{include file="public/header_box.tpl"}>
-</div>
+<{include file="public/header_back.tpl"}>
 <section class="content" style="padding-top: 1rem">
     <div class="topic_content">
         <div class="topic_content_list">
@@ -11,7 +9,7 @@
                 <{foreach $theme['list'] as $l}>
                 <li>
                     <div class="topice_list_img">
-                        <a href="<{'/theme/posts.html?id='|cat:$l['Fid']|getBaseUrl}>" target="_blank">
+                        <a href="<{'/theme/posts.html?id='|cat:$l['Fid']|getBaseUrl}>">
                             <img src="<{$l['Ftheme_coverimage']}>" alt="<{$l['Ftheme_title']}>"></a>
                     </div>
                     <div class="topice_list_txt">

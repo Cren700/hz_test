@@ -6,7 +6,7 @@
 </div>
 <!--end-Footer-part-->
 <script>
-    var baseUrl = '<{''|getBaseUrl}>';
+    var baseUrl = '<{''|getBaseUrl:false}>';
 </script>
 <script src="<{"admin/plugin/excanvas.min.js"|baseJsUrl}>"></script>
 <script src="<{"admin/plugin/jquery.min.js"|baseJsUrl}>"></script>

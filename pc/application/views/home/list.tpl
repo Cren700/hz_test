@@ -2,7 +2,9 @@
     <li>
         <div class="clearfix">
             <div class="list_item_img">
-                <img class="lazy" width="175px" height="120px" src="<{$l['Fpost_coverimage']}>">
+                <a target="_blank" href="<{'/posts.html?id='|cat:$l['Fid']|getBaseUrl}>">
+                    <img class="lazy" width="175px" height="120px" src="<{$l['Fpost_coverimage']}>">
+                </a>
             </div>
             <div class="list_item_txt">
                 <h2>

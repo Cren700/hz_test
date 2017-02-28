@@ -233,7 +233,41 @@ class Order_service_model extends HZ_Model
                 $order_data = $this->order_dao->checkOrder($where);
                 $data = array('Fproduct_id' => $order_data['Fproduct_id'],'Fturnover' => 1);
                 $this->myCurl('product', 'updateProductCnt', $data, true);
+                //查看用户返利
+                $user_data = $this->myCurl('account', 'getUserDetailByFuserId', array('user_id' => $order_data['Fuser_id']));
+                if ($user_data['data']['Frecommend_uid']) {
+                    $promo_data = $this->myCurl('promo', 'getRuleByType', array('share_type' => 1)); // 推广规则, 按订单类型
+                    if($promo_data['data']) {
+                        $expand_data = array(
+                            'user_id' => $user_data['data']['Frecommend_uid'], //推荐者ID
+                            'amount' => $promo_data['data']['Famount'], // 返利数额
+                            'member' => $order_data['Fuser_id'], // 注册用户
+                            'member_time' => $user_data['data']['Fcreate_time'], // 用户注册时间
+                            'order_no' => $order_data['Forder_no'],// 订单no
+                        );
+                        $res = $this->myCurl('promo', 'addOrderExpand', $expand_data, true);
+                        if ($res['code'] == 0) {
+                            // 推荐者账户金额
+                            $_rcm_user = $this->myCurl('account', 'getUserDetailByWhere', array('id'=> $user_data['data']['Frecommend_uid']));
+                            $account_data = array(
+                                'user_id' => $_rcm_user['data']['Fuser_id'],  //推荐者user_id
+                                'user_type' => 1, // 前台用户
+                                'amount' => $promo_data['data']['Famount'], // 返利数额
+                            );
+                            $this->myCurl('account', 'modifyAccountInfo', $account_data, true);
+                        }
+                    }
+                }
+                // 商户金额
+                $store_data = $this->myCurl('account', 'getStoreName', array('id' => $order_data['Fstore_id'], 'type' => $order_data['Fstore_type']));
+                $account_data = array(
+                    'user_id' => $store_data['data']['Fuser_id'],
+                    'user_type' => $order_data['Fstore_type'], // 商户类型
+                    'amount' => $order_data['Fproduct_tol_amt'], // 订单数额
+                );
+                $this->myCurl('account', 'modifyAccountInfo', $account_data, true);
             }
+            
         }
         return $ret;
     }
@@ -571,6 +605,33 @@ class Order_service_model extends HZ_Model
     {
         return $this->order_dao->hasBuy($whereBuy);
     }
+    
+    public function hasCommentPower($option)
+    {
+        $ret = array('code' => 0);
+        if (!$option['Fuser_id']) {
+            $ret['data'] = 0;
+            return $ret;
+        }
+        $res = $this->order_dao->hasCommentPower($option);
+        if (!$res) {
+            $ret['data'] = 0;
+        } else {
+            $ret['data'] = 1;
+        }
+        return $ret;
+    }
 
+    public function calClaimsTotal($option)
+    {
+        $ret = array('code' => 0);
+        if (!$option['Fproduct_id']) {
+            $ret['code'] = 'system_error_2';
+            return $ret;
+        }
+        $res = $this->order_dao->calClaimsTotal($option);
+        $ret['data'] = (int)$res['Famount'];
+        return $ret;
+    }
 
 }

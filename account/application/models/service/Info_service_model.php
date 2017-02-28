@@ -194,8 +194,30 @@ class Info_service_model extends HZ_Model
     {
         $ret = array('code' => 0);
 
-        $ret['data'] = $this->info_dao->userCenter($option);
+        $ret['data'] = $this->info_dao->getUserCenter($option);
 
         return $ret;
     }
+
+    public function modifyAccountInfo($data)
+    {
+        $ret = array('code' => 0);
+        $where = array(
+            'Fuser_id' => $data['Fuser_id'],
+            'Fuser_type' => $data['Fuser_type']
+        );
+        $ret['data'] = $this->info_dao->getUserCenter($where);
+        // 已经存在
+        if ($ret['data']) {
+            $_d = array(
+                'Famount' => $data['Famount'],
+                'Fintegral' => $data['Fintegral'],
+            );
+            $this->info_dao->updateCenterCnt($where, $_d);
+        } else {
+            $this->info_dao->addCenterInfo($data);
+        }
+        return $ret;
+    }
+
 }

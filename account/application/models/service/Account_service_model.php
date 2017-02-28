@@ -170,13 +170,13 @@ class Account_service_model extends HZ_Model
         return $ret;
     }
 
-    public function getUserDetailByFuserId($data)
+    public function getUserDetailByWhere($data)
     {
         $ret = array('code' => 0);
-        if (empty($data['Fuser_id'])) {
+        if (empty($data['Fuser_id']) && empty($data['Fid'])) {
             $ret['code'] = 'system_error_2'; // 操作出错
         } else {
-            $res = $this->account_dao_model->getUserDetailByFuserId(array('Fuser_id' => $data['Fuser_id']));
+            $res = $this->account_dao_model->getUserDetailByWhere($data);
             $ret['data'] = $res;
         }
         return $ret;
@@ -313,6 +313,7 @@ class Account_service_model extends HZ_Model
             $data_base = array(
                 'Fuser_id' => $option['Fuser_id'],
                 'Flog_type' => $option['Flog_type'],
+                'Frecommend_uid' => $option['Frecommend_uid'],
                 'Fuser_type' => 4, // 普通用户
                 'Fcreate_time' => time(),
                 'Fupdate_time' => time(),
@@ -344,6 +345,7 @@ class Account_service_model extends HZ_Model
             $data_base = array(
                 'Fuser_id' => $option['Fuser_id'],
                 'Flog_type' => $option['Flog_type'],
+                'Frecommend_uid' => $option['Frecommend_uid'],
                 'Fuser_type' => 4, // 普通用户
                 'Fcreate_time' => time(),
                 'Fupdate_time' => time(),

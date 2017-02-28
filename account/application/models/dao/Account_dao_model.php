@@ -109,7 +109,7 @@ class Account_dao_model extends HZ_Model
         return filterData($res);
     }
 
-    public function getUserDetailByFuserId($data)
+    public function getUserDetailByWhere($data)
     {
         dbEscape($data);
         $query = $this->account->get_where($this->_user_table, $data);

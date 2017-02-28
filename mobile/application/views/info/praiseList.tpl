@@ -1,13 +1,19 @@
 
 <{include file="public/header.tpl"}>
 <body>
-<div class="mine_head">
-    <div class="head_nav">
+<section class="mobile-common-title clearfix">
+    <div style="display: block">
+        <a href="<{'/info.html'|getBaseUrl}>" class="p_logo">
+            <img src="<{'back_icon.png'|baseImgUrl}>" style="width: auto;" />
+        </a>
+        <div style="clear: both"></div>
+    </div>
+    <div class="head_nav" style="background-color: #FFF; box-shadow: 0 0 5px #e1e1e1;">
         <p class="nav_item js-btn-my-posts"><a class="active" href="javascript:void(0);">我收藏的文章</a></p>
         <P class="nav_item js-btn-my-comments"><a href="<{'/info/commentList.html'|getBaseUrl}>">我的评论</a></P>
     </div>
-</div>
-<section class="mine_jj">
+</section>
+<section class="mine_jj" style="padding-top: 2.2rem">
     <div class="nav_list">
         <{if $praiseInfo['list']|default:array()}>
         <{foreach $praiseInfo['list'] as $l}>

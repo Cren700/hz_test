@@ -581,4 +581,128 @@ class Product_service_model extends HZ_Model
         }
         return $ret;
     }
+
+    /**
+     * 提交评论
+     * @param $data
+     * @return array
+     */
+    public function submitComment($data)
+    {
+        $ret = array('code' => 0);
+        if (empty($data['Fcomment_pro_id']) || empty($data['Fcomment_uid'])) {
+            $ret['code'] = 'system_error_2'; // 无信息
+            return $ret;
+        }
+        $res = $this->product_dao->submitComment($data);
+        if ($res) {
+            $ret['data'] = $data;
+        } else {
+            $ret['code'] = 'product_error_14';
+        }
+        return $ret;
+    }
+
+    /**
+     * 获取评论列表
+     * @param $option
+     * @return array
+     */
+    public function getCommentListByPid($option)
+    {
+        $ret = array('code' => 0);
+        if (empty($option['Fcomment_pro_id'])) {
+            $ret['code'] = 'system_error_2'; // 无信息
+            return $ret;
+        }
+        $option['Fcomment_approved'] = 1; // 通过审核
+        $res = $this->product_dao->getCommentListByPid($option);
+        foreach ($res as &$re) {
+            $user = $this->myCurl('account', 'getInfo', array('id' => $re['Fcomment_uid']));
+            $re['Fcomment_name'] = isset($user['data']['Fnick_name']) ? $user['data']['Fnick_name'] : '';
+            $re['Fcomment_authro_image'] = isset($user['data']['Fimage_path']) ? $user['data']['Fimage_path'] : '';
+        }
+        $ret['data'] = $res;
+        return $ret;
+    }
+
+    /**
+     * 评论列表
+     * @param $option
+     * @return array
+     */
+    public function queryComment($option)
+    {
+        $res = array('code' => 0);
+        $like = array();
+        $where = array();
+
+        if (!empty($option['Fcomment_pro_id'])) {
+            $where['Fcomment_pro_id'] = $option['Fcomment_pro_id'];
+        }
+
+        if ($option['Fcomment_approved'] === '0' || !empty($option['Fcomment_approved'])) {
+            $where['Fcomment_approved'] = $option['Fcomment_approved'];
+        }
+
+        if (!empty($option['min_date'])) {
+            $where['Fcomment_date >= '] = strtotime($option['min_date']);
+        }
+
+        if (!empty($option['max_date'])) {
+            $where['Fcomment_date <= '] = strtotime($option['max_date'])+23*3600+3599;
+        }
+
+        // like
+        if (!empty($option['Fcomment_user_name'])) {
+            $like['Fcomment_user_name'] = $option['Fcomment_user_name'];
+        }
+
+        $page = $option['p'] ? : 1;
+        $page_size = $option['page_size'] ? : 10;
+        $res['data']['count'] = $this->product_dao->proCommentNum($where, $like);
+        $commentList = $this->product_dao->proCommentList($where, $like, $page, $page_size);
+        $res['data']['list'] = $commentList;
+        return $res;
+    }
+
+    public function statusComment($data, $where)
+    {
+        $ret = array('code' => 0);
+        if (empty($where['Fcomment_id']) || ($data['Fcomment_approved'] !== '0' && empty($data['Fcomment_approved']))) {
+            $ret['code'] = 'system_error_2'; // 无信息
+            return $ret;
+        }
+        $res = $this->product_dao->statusComment($data, $where);
+        if ($res) {
+            return $ret;
+        } else {
+            return $ret['code'] = 'system_error_2';
+        }
+    }
+
+    public function delComment($where)
+    {
+        $ret = array('code' => 0);
+        if (empty($where['Fcomment_id'])) {
+            $ret['code'] = 'system_error_2'; // 无信息
+            return $ret;
+        }
+        $res = $this->product_dao->delComment($where);
+        if ($res) {
+            return $ret;
+        } else {
+            return $ret['code'] = 'product_error_15';
+        }
+    }
+
+    public function maybeLike($option)
+    {
+        $ret = array('code' => 0);
+        $res = $this->product_dao->maybeLike($option);
+        if ($res) {
+            $ret['data'] = $res;
+        }
+        return $ret;
+    }
 }

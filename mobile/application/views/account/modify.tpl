@@ -1,5 +1,6 @@
 <{include file="public/header.tpl"}>
 <body xmlns="http://www.w3.org/1999/html">
+<{include file="public/header_back.tpl"}>
 <div class="myInfoList">
     <form action="<{'/account/saveInfo.html'|getBaseUrl}>" method="post" enctype="multipart/form-data">
         <div class="input_box box">

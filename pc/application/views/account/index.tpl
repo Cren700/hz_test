@@ -24,6 +24,27 @@
     <a href="<{'/account/phonepage.html'|getBaseUrl}>" class="other_login">使用电话号码登录</a>
     <a href="" class="other_login">使用微信登录</a>
     <!--<a href="" class="other_login">使用QQ登录</a>-->
+    <!--角色选择框-->
+    <div class="wrapRole">
+        <div class="mid">
+            <img src="http://www.dev.huzhu.com/mobile/static/img/logo.png" style="margin: 0 auto 10em;display: block;" />
+            <a href="javascript:;" class="wx-login">
+                <span class="title">
+                   普通用户
+                </span>
+            </a>
+            <a href="javascript:;" class="qq-login">
+                <span class="title">
+                   高级用户
+                </span>
+            </a>
+            <a href="javascript:;" class="qq-login">
+                <span class="title">
+                   商家
+                </span>
+            </a>
+        </div>
+    </div>
 </div>
 </body>
 <{include file="public/footer.tpl"}>

@@ -102,7 +102,11 @@ class Posts extends HZ_Controller
         );
         $res = $this->post_service->delComment($option);
         echo json_encode_data($res);
+    }
 
+    public function code($url)
+    {
+        qrcode(urldecode($url));
     }
         
 }

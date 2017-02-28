@@ -1,5 +1,5 @@
 <{include file='public/header.tpl'}>
-<body>
+<body style="overflow:hidden;">
 <section class="login_regit">
     <div class="login_regit_box">
         <div class="login_logo">
@@ -36,6 +36,27 @@
             <i class="login_regit_wechat" onclick="window.location='<{'/account/logwx.html'|getBaseUrl}>'">&nbsp;</i>
             <i class="login_regit_qq">&nbsp;</i>
         </p>
+    </div>
+    <!--角色选择框-->
+    <div class="wrapRole">
+        <div class="mid">
+            <img src="http://www.dev.huzhu.com/mobile/static/img/logo.png" style="width: 60%;margin: 0 auto 1em;" />
+            <a href="javascript:;" class="wx-login">
+                <span class="title">
+                   普通用户
+                </span>
+            </a>
+            <a href="javascript:;" class="qq-login">
+                <span class="title">
+                   高级用户
+                </span>
+            </a>
+            <a href="javascript:;" class="qq-login">
+                <span class="title">
+                   商家
+                </span>
+            </a>
+        </div>
     </div>
 </section>
 <{include file="public/no_nav_footer.tpl"}>

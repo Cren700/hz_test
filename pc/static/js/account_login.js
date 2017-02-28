@@ -4,7 +4,12 @@ if (typeof (HZ) == "undefined" || !HZ) {
 
 HZ.Account_login = (function() {
     function _init(){
-
+        //选择角色登陆
+        $('.mid a').each(function(index){
+            $(this).on('click', function () {
+                $('.wrapRole').hide();
+            });
+        });
         $('#loginform').submit(function(e){
             e.preventDefault();
             if (!checkVC()) {

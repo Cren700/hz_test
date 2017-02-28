@@ -27,7 +27,7 @@ $config = array(
             'changeStatus'          => '/info/changeStatus',            // 修改用户状态
             'queryBlackList'        => '/info/queryBlackList',          // 黑名单列表
             'queryCapitalAccount'   => '/info/queryCapitalAccount',          // 黑名单列表
-            'center'                => '/order/userCenter',         // 用户中心
+            'center'                => '/info/userCenter',         // 用户中心
             'oauthLogin'            => '/account/oauthLogin',           // 第三方登录   
             'getStoreName'          => '/account/getStoreName',         // 获取商家名称    
             'saveVerifySms'         => '/account/saveVerifySms',         // 保存短信sms    
@@ -47,6 +47,8 @@ $config = array(
             'updateAdminPwd'        => '/account/updateAdminPwd',        // 修改管理员密码
             'updateAdminRole'       => '/account/updateAdminRole',        // 修改管理员角色
             'powerUrl'              => '/account/powerUrl',               // 用户权限目录
+            'modifyAccountInfo'     => '/info/modifyAccountInfo',         // 添加账户数据
+            'getUserDetailByWhere'  => '/account/getUserDetailByWhere',   // 获取用户信息
         ),
     ),
     'product' => array(
@@ -71,6 +73,10 @@ $config = array(
             'search'                => '/product/search',                 // 搜索
             'hasProductPower'       => '/product/hasProductPower',         // 是否具有产品权限
             'updateProductCnt'      => '/product/updateProductCnt',     // 更新产品的加入数量和案例数量
+            'maybeLike'             => '/product/maybeLike',            // 猜你喜欢
+            'submitComment'         => '/product/submitComment',       // 提交评论
+            'delComment'            => '/product/delComment',             // 删除评论
+            'getCommentListByPid'   => '/product/getCommentListByPid',  // 获取产品评论信息
         ),
     ),
     'posts' => array(
@@ -148,6 +154,8 @@ $config = array(
             'querySaleStat'         => '/order/querySaleStat',      // 销售统计
             'getClaimsDetailByFid'           => '/order/getClaimsDetailByFid',        // 获取理赔单
             'updateClaims'          => '/order/updateClaims',       // 更新理赔单
+            'hasCommentPower'       => '/order/hasCommentPower',    // 是否具有评论权限
+            'calClaimsTotal'        => '/order/calClaimsTotal',     // 计算理赔总额
         ),
     ),
     //广告模块CURL连接
@@ -172,6 +180,8 @@ $config = array(
             'getPromoRule'           => '/promo/getPromoRule', //获取推广规则
             'getRuleById'            => '/promo/getRuleById', //获取单条推广规则
             'ruleStatus'             => '/promo/ruleStatus', // 更改推广规则状态
+            'getRuleByType'          => '/promo/getRuleByType', //根据推荐类型获取数据
+            'addOrderExpand'         => '/promo/addOrderExpand', //添加返利记录
         ),
     ),
 );

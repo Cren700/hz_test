@@ -224,4 +224,92 @@ class Product extends HZ_Controller
         $res = $this->product_service->hasProductPower($option);
         echo outputResponse($res);
     }
+
+    /**
+     * 提交评论
+     */
+    public function submitComment()
+    {
+        $data = array(
+            'Fcomment_pro_id' => $this->input->post('comment_pro_id', true),
+            'Fcomment_uid' => $this->input->post('comment_uid', true),
+            'Fcomment_user_name' => $this->input->post('comment_user_name', true),
+            'Fcomment_ip' => $this->input->post('comment_ip', true),
+            'Fcomment_date' => time(),
+            'Fcomment_content' => $this->input->post('comment_content'),
+            'Fcomment_approved' => 0,
+            'Fstart1' => $this->input->post('start1', true),
+            'Fstart2' => $this->input->post('start2', true),
+            'Fstart3' => $this->input->post('start3', true),
+            'Fstart4' => $this->input->post('start4', true),
+        );
+        $res = $this->product_service->submitComment($data);
+        echo outputResponse($res);
+    }
+
+    /**
+     * 产品评论列表
+     */
+    public function getCommentListByPid()
+    {
+        $option = array(
+            'Fcomment_pro_id' => $this->input->get('product_id', true)
+        );
+        $res = $this->product_service->getCommentListByPid($option);
+        echo outputResponse($res);
+    }
+
+    /**
+     * 评论列表
+     */
+    public function queryComment()
+    {
+        $option = array(
+            'p' => $this->input->get('p') ? : 1 ,
+            'page_size' => $this->input->get('n') ? : 10,
+            'Fcomment_pro_id'   => $this->input->get('pro_id', true),
+            'Fcomment_user_name'   => $this->input->get('user_name', true),
+            'Fcomment_approved' => $this->input->get('comment_approved', true),
+            'min_date' => $this->input->get('min_date', true),
+            'max_date' => $this->input->get('max_date', true),
+        );
+        $res = $this->product_service->queryComment($option);
+        echo outputResponse($res);
+    }
+
+    /**
+     * 更新评论状态
+     */
+    public function statusComment()
+    {
+        $data = array(
+            'Fcomment_approved' => $this->input->post('status', true),
+        );
+        $where = array(
+            'Fcomment_id' => $this->input->post('comment_id', true),
+        );
+        $res = $this->product_service->statusComment($data, $where);
+        echo outputResponse($res);
+    }
+
+    /**
+     * 删除评论
+     */
+    public function delComment()
+    {
+        $where = array(
+            'Fcomment_id' => $this->input->post('comment_id', true),
+        );
+        $res = $this->product_service->delComment($where);
+        echo outputResponse($res);
+    }
+
+    public function maybeLike()
+    {
+        $option = array(
+            'Fproduct_id' => $this->input->get('product_id')
+        );
+        $res = $this->product_service->maybeLike($option);
+        echo outputResponse($res);
+    }
 }

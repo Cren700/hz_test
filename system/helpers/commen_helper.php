@@ -300,21 +300,32 @@ function createOrderSn()
 }
 
 // 获取URL
-function getBaseUrl($uri = '')
+function getBaseUrl($uri = '', $is_url = true)
 {
-    return APP_NAME . '' . $uri;
+    $ci = &get_instance();
+    $uid = $ci->session->userdata('w_uid') | $ci->session->userdata('m_uid');
+    $param = '';
+    if ($is_url && isset($uid) && !empty($uid)) {
+        if (strpos($uri, '?') !== false) {
+            $param .= '&';
+        } else {
+            $param .= '?';
+        }
+        $param .= "_re=" . base64_encode($uid);
+    }
+    return APP_NAME . '' . $uri . $param;
 }
 
 function baseCssUrl($uri){
-    return getBaseUrl('/static/css/' . $uri);
+    return getBaseUrl('/static/css/' . $uri, false);
 }
 
 function baseJsUrl($uri){
-    return getBaseUrl('/static/js/' . $uri);
+    return getBaseUrl('/static/js/' . $uri, false);
 }
 
 function baseImgUrl($uri){
-    return getBaseUrl('/static/img/' . $uri);
+    return getBaseUrl('/static/img/' . $uri, false);
 }
 
 /**
@@ -379,4 +390,24 @@ function sms($ali_appKey, $secretKey, $signName, $tempCode, $phone, $param)
     $req->setSmsTemplateCode( $tempCode );
     $resp = $c->execute( $req );
     return $resp;
+}
+
+/**
+ * @param $url
+ * @param int $margin 空白边距
+ * @param string $level 容错级别
+ * @param int $size 大小
+ */
+function qrcode($url, $margin = 5, $level = 'L', $size = 5)
+{
+    // 导入qrcode类库
+    include_once ROOT_PATH.'/system/third_party/phpqrcode/phpqrcode.php';
+    $enc = QRencode::factory($level, $size, $margin);
+    header("Content-type: image/png");
+    imagepng($enc->encodePNG($url, false, $saveandprint=false));
+}
+
+function getCurrentUrl()
+{
+    return urlencode('http://'.$_SERVER['SERVER_NAME'].$_SERVER["REQUEST_URI"]);
 }

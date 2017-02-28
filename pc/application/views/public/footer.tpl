@@ -22,7 +22,7 @@
     </div>
 </div>
 <script>
-    var baseUrl = '<{''|getBaseUrl}>';
+    var baseUrl = '<{''|getBaseUrl:false}>';
     <{if $uid}>
     var _uid = <{$uid}>;
     <{/if}>

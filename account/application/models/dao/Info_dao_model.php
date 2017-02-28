@@ -141,20 +141,34 @@ class Info_dao_model extends HZ_Model
             ->order_by('u.Fid', 'DESC')
             ->limit($page_size, $page_size * ($page - 1))
             ->get();
-//        echo $this->u->last_query();die;
         $res = $query->result_array();
         return filterData($res);
     }
 
-
-    public function userCenter($where)
+    public function getUserCenter($where)
     {
         dbEscape($where);
-        $res = $this->u->select('a.*')
-            ->from($this->_account_table .' as a')
-            ->get()
-            ->result_array();
+        $res = $this->u->get_where($this->_account_table, $where)
+            ->row_array();
 //        echo $this->u->last_query();die;
         return filterData($res);
+    }
+
+    public function addCenterInfo($data)
+    {
+        $this->u->insert($this->_account_table, $data);
+    }
+
+    public function updateCenterCnt($where, $data)
+    {
+        $this->u->where($where);
+        if ($data['Famount']) {
+            $this->u->set('Famount', 'Famount + ' . $data['Famount'], FALSE);
+        }
+        if ($data['Fintegral']) {
+            $this->u->set('Fintegral', 'Fintegral + ' . $data['Fintegral'], FALSE);
+        }
+        $this->u->set('Fupdate_time', time(), FALSE);
+        $this->u->update($this->_account_table);
     }
 }

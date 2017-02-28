@@ -18,6 +18,7 @@ class Account_service_model extends HZ_Model
         $data = array(
             'user_id'   => $user_id,
             'passwd'    => $passwd,
+            'recommend_uid' => $this->session->userdata('_re')
         );
         $res = $this->myCurl('account', 'addAccount', $data, true);
         if ($res['code'] == 0) {
@@ -123,6 +124,7 @@ class Account_service_model extends HZ_Model
 
     public function loginPhone($option)
     {
+        $option['recommend_uid'] = $this->session->userdata('_re');
         $ret = array('code' => 0);
         $res = $this->myCurl('account', 'loginPhone', $option, true);
         if ($res['code'] == 0) {
