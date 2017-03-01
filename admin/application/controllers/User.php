@@ -58,12 +58,12 @@ class User extends BaseControllor
         $data['industry'] = $this->input->post('industry');
         $data['cert_type'] = $this->input->post('cert_type');
         $data['cert_no'] = $this->input->post('cert_no');
-        $data['logo_path'] = $this->input->post('logo_path');
         $data['email'] = $this->input->post('email');
         $data['phone'] = $this->input->post('phone');
         $data['country'] = $this->input->post('country');
         $data['address'] = $this->input->post('address');
         $data['annex_path'] = $this->input->post('annex_path');
+        $data['image_path'] = $this->input->post('image_path');
         $data['remark'] = $this->input->post('remark');
         $data['atte_status'] = $this->input->post('atte_status');
         $res = $this->user_service->save($data);

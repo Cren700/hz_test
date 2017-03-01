@@ -278,4 +278,11 @@ class Order_dao_model extends HZ_Model
         return $this->o_db->select_sum('Famount')->get_where($this->_claim_table, $option)->row_array();
     }
 
+    public function updateOrderCommentFlag($where, $data)
+    {
+        dbEscape($where);
+        dbEscape($data);
+        return $this->o_db->update($this->_order_table, $data, $where);
+    }
+
 }

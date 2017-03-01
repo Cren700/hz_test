@@ -97,6 +97,20 @@ class Account_dao_model extends HZ_Model
         return filterData($res);
     }
 
+    public function getAccountTotalInfo($where, $type = 'user')
+    {
+        $user_type = $type === 'user' ? 1 : 0;
+        $select = 't1.Fid as Fid, t1.Fuser_id, '.$user_type.' as Fuser_type, t1.Fstatus, t2.Freal_name, t2.Fatte_status, t2.Fimage_path';
+        dbEscape($where);
+        $res = $this->account->select($select)
+            ->from($this->_sel_table($type) . ' as t1')
+            ->join($this->_sel_detail_table($type) . ' as t2', 't1.Fid = t2.Fuser_id', 'left')
+            ->where($where)
+            ->get()
+            ->row_array();
+        return $res;
+    }
+
     /**
      * 用户基本信息
      * @param $where

@@ -2,6 +2,7 @@
 <body>
 <{include file="public/header.tpl"}>
 
+<{include file="public/header_back.tpl"}>
 <div class="nav_list_item show">
     <div class="nodata">
         <div class="nodata_img">

@@ -633,5 +633,14 @@ class Order_service_model extends HZ_Model
         $ret['data'] = (int)$res['Famount'];
         return $ret;
     }
+    
+    public function updateOrderCommentFlag($where)
+    {
+        $data = array('Fcomment_flag' => 0); // 不能再评论
+
+        $ret = array('code' => 0);
+        $this->order_dao->updateOrderCommentFlag($where, $data);
+        return $ret;
+    }
 
 }

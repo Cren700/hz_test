@@ -27,13 +27,23 @@ class Product_service_model extends HZ_Model
             if ($this->_user_id) {
                 $comment_flag = $this->hasCommentPower($id, $this->_user_id);
             }
+            // 商家信息
+            $store_info = $this->myCurl('account', 'getAccountTotalInfo', array('id' => $res['data']['Fstore_id'], 'type' => $res['data']['Fstore_type']));
+            $res['data']['store_info'] = $store_info['data'];
+            // 计算数量
+            $products= $this->getStoreProduct(array('store_id' => $res['data']['Fstore_id'], 'type' => $res['data']['Fstore_type']));
+            $res['data']['productsCount'] = $products['data']['count'];
+            // 猜你喜欢
             $like_pro = $this->myCurl('product', 'maybeLike', array('product_id' => $res['data']['Fproduct_id']));
             isset($res['data']) ? $res['data']['comment_flag'] = $comment_flag : '';
             $res['data']['maybeLike'] = isset($like_pro['data']['list']) ? $like_pro['data']['list'] : array();
+            // 评论列表
             $commentList = $this->getProComment(array('product_id' => $res['data']['Fproduct_id']));
             $res['data']['commentList'] = isset($commentList['data']['list']) ? $commentList['data']['list'] : array();
             $res['data']['commentAve'] = $commentList['data']['ave'];
-//            $res['data']['claimsTotal'] = $this->myCurl('order', 'calClaimsTotal', array('product_id' => $res['data']['Fproduct_id']));
+            // 理赔金额
+            $claims = $this->myCurl('order', 'calClaimsTotal', array('product_id' => $res['data']['Fproduct_id']));
+            $res['data']['claimsTotal'] = $claims['code'] === 0 ? $claims['data'] : 0;
         }
         return $res;
     }
@@ -90,8 +100,9 @@ class Product_service_model extends HZ_Model
         return $this->myCurl('product', 'submitComment', $option, true);
     }
 
-    public function calClaimsTotal($option)
+    public function getStoreProduct($option)
     {
-        return $this->myCurl('order', 'calClaimsTotal', $option);
+        return $this->myCurl('product', 'getStoreProduct', $option);
     }
+
 }

@@ -13,7 +13,7 @@
     </div>
 </section>
 <{if isset($orderInfo['list']) && count($orderInfo['list']) neq 0}>
-<section class="mobile-index-wrap" id="js-my-order" style="padding-top: 2.2rem">
+<section class="mobile-index-wrap" id="js-my-order" style="padding-top: 1.2rem">
     <div class="orderList">
         <ul class="nav_list">
             <{foreach $orderInfo['list'] as $l}>
@@ -33,9 +33,10 @@
                     </div>
                     <div class="right">
                         <{if $l['Forder_status'] eq 1 || $l['Forder_status'] eq 5}><span class="orderStatus"><a href="<{'/order/wxpay.html?id='|cat:$l['Forder_no']|getBaseUrl}>">马上支付</a></span>
-                        <{elseif $l['Forder_status'] eq 2 || $l['Forder_status'] eq 4}><span class="orderStatus orderError">已取消</span>
+                        <{elseif $l['Forder_status'] eq 2 || $l['Forder_status'] eq 4}><span class="orderStatus orderError"><a
+                                href="javascript:;">已取消</a></span>
                         <{elseif $l['Forder_status'] eq 3}>
-                            <span class="orderStatus orderSuccess">支付成功</span>
+                            <span class="orderStatus orderSuccess"><a href="javascript:;">支付成功</a></span>
                             <span class="orderStatus <{if $l['claims_status'] eq 2}>orderError<{elseif $l['claims_status'] eq 3}>orderSuccess<{/if}>">
                                 <{if empty($l['claims_status'])}><a href="<{'/order/claims.html?id='|cat:$l['Forder_no']|getBaseUrl}>">我要理赔</a>
                                     <{elseif $l['claims_status'] eq 1}><a href="<{'/order/claimsDetail.html?id='|cat:$l['Forder_no']|getBaseUrl}>">理赔处理中</a>

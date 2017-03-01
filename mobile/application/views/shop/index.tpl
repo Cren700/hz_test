@@ -2,14 +2,7 @@
 <body>
 <section class="mobile-wrapper">
     <section class="mobile-index-wrap">
-        <section class="mobile-common-title clearfix">
-            <a href="<{''|getBaseUrl}>" class="p_logo">
-                <img src="<{'logo.png'|baseImgUrl}>">
-            </a>
-            <span class="search-cart-common">
-                <a href="<{'/cart.html'|getBaseUrl}>" class="icon-cart1"></a>
-            </span>
-        </section>
+        <{include file="public/header_back.tpl"}>
 
         <{if $info|@count neq 0}>
         <div class="orderList">

@@ -241,7 +241,7 @@ class Product_dao_model extends HZ_Model
     
     public function maybeLike($option)
     {
-        $sql = "select t1.Fproduct_id, t1.Fcoverimage from {$this->_product_table} as t1 join (select rand() * (select max(Fproduct_id) from {$this->_product_table}) as Fproduct_id) as t2 on t1.Fproduct_id >t2.Fproduct_id where t1.Fproduct_status=2 and t1.Fis_del =0 and t1.Fproduct_id !=".$option['Fproduct_id']." limit 5";
+        $sql = "SELECT Fproduct_id, Fcoverimage FROM {$this->_product_table} WHERE Fproduct_status=2 and Fis_del = 0 ORDER BY RAND() LIMIT 5";
         return $this->p->query($sql)->result_array();
         
     }

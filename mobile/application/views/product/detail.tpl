@@ -6,7 +6,7 @@
     </a>
     <span class="search-cart-common">
         <a href="<{'/shop.html'|getBaseUrl}>" class="icon-cart1"></a>
-        <img src="http://www.dev.huzhu.com/mobile/static/img/star copy 3.png" class="shareBtn" />       
+        <img src="http://www.dev.huzhu.com/mobile/static/img/star copy 3.png" class="shareBtn" />
     </span>
 </section>
 <section class="general">
@@ -48,14 +48,14 @@
     <div class="plate_jj">
         <div class="pro_join_area clearfix">
             <div class="left" style="width: 70%">
-                <img src="http://www.dev.huzhu.com/mobile/static/img/qrcode.png" class="hzImg2" />
+                <img src="<{$info['store_info']['Fimage_path']|default:''}>" class="hzImg2" />
                 <div class="pro_plan_ifo">
-                    <p class="pro_plan_p1">互助平台</p>
-                    <p class="pro_plan_p2">入驻平台5个计划</p>
+                    <p class="pro_plan_p1"><{if $info['store_info']['Fuser_type'] eq 1}>互助之家<{else}><{$info['store_info']['Freal_name']}><{/if}></p>
+                    <p class="pro_plan_p2">入驻平台<{$info['productsCount']}>个计划</p>
                 </div>
             </div>
             <div class="right">
-                <a href="javascript:;" class="lookStore">进店看看</a>
+                <a href="<{'/product/store.html?id='|cat:$info['store_info']['Fid']|cat:'&type='|cat:$info['store_info']['Fuser_type']|getBaseUrl}>" class="lookStore">进店看看</a>
             </div>
         </div>
     </div>
@@ -65,20 +65,21 @@
         <div class="swiper-container">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">
-                    <img src="http://www.dev.huzhu.com/mobile/static/img/qrcode.png" class="hzImg3">
-                    <img src="http://www.dev.huzhu.com/mobile/static/img/qrcode.png" class="hzImg3">
-                    <img src="http://www.dev.huzhu.com/mobile/static/img/qrcode.png" class="hzImg3">
+                    <{foreach $info['maybeLike'] as $k => $l}>
+                    <{if $k < 3}>
+                    <a href="<{'/product/detail/'|cat:$l['Fproduct_id']|getBaseUrl}>"><img src="<{$l['Fcoverimage']}>" class="hzImg3"></a>
+                    <{/if}>
+                    <{/foreach}>
                 </div>
+                <{if count($info['maybeLike']) > 3}>
                 <div class="swiper-slide">
-                    <img src="http://www.dev.huzhu.com/mobile/static/img/qrcode.png" class="hzImg3">
-                    <img src="http://www.dev.huzhu.com/mobile/static/img/qrcode.png" class="hzImg3">
-                    <img src="http://www.dev.huzhu.com/mobile/static/img/qrcode.png" class="hzImg3">
+                    <{foreach $info['maybeLike'] as $k => $l}>
+                    <{if $k >= 3}>
+                    <a href="<{'/product/detail/'|cat:$l['Fproduct_id']|getBaseUrl}>"><img src="<{$l['Fcoverimage']}>" class="hzImg3"></a>
+                    <{/if}>
+                    <{/foreach}>
                 </div>
-                <div class="swiper-slide">
-                    <img src="http://www.dev.huzhu.com/mobile/static/img/qrcode.png" class="hzImg3">
-                    <img src="http://www.dev.huzhu.com/mobile/static/img/qrcode.png" class="hzImg3">
-                    <img src="http://www.dev.huzhu.com/mobile/static/img/qrcode.png" class="hzImg3">
-                </div>
+                <{/if}>
             </div>
         </div>
     </div>
@@ -89,10 +90,6 @@
     </div>
     <div class="pro_tabContent">
         <div class="planInfo_Content">
-            <div class="pi_title">计划简介</div>
-            <div class="pi_img">
-              <img src="<{"bg33.jpg"|baseImgUrl}>">
-            </div>
 
             <{if isset($info['Fplan_rule'])}>
             <div class="plate_plan_plan" style="display: block;">
@@ -133,7 +130,7 @@
                     </div>
                     <div class="pro_title2 clearfix">
                         <div class="left">参与会员: <{$info.Fturnover}>人</div>
-                        <div class="right">互助金额: 100万</div>
+                        <div class="right">互助金额: <{$info.claimsTotal}>元</div>
                     </div>
                     <div class="pro_title1 clearfix">
                         <div class="pro_title_left left">保障安心度</div>
@@ -161,6 +158,7 @@
                     </div>
                 </div>
             </div>
+            <{if $info['comment_flag']}>
             <div class="pro_kb">
                 <div class="pi_title">您的评分</div>
                 <div class="pro_title1 clearfix">
@@ -173,7 +171,7 @@
                             <label>★</label>       
                             <label>★</label> 
                         </div>
-                        <span class="score">5分</span>
+                        <span class="score" id="start1" ref="5">5分</span>
                     </div>
                     <div class="star_item clearfix">
                         <div class="left star_info">理赔方面</div>
@@ -184,18 +182,18 @@
                             <label>★</label>       
                             <label>★</label> 
                         </div>
-                        <span class="score">5分</span>
+                        <span class="score" id="start2" ref="5">5分</span>
                     </div>
                     <div class="star_item clearfix">
                         <div class="left star_info">服务方面</div>
                         <div class="left star">
                             <label>★</label>
-                            <label>★</label> 
+                            <label>★</label>
                             <label>★</label> 
                             <label>★</label>       
                             <label>★</label> 
                         </div>
-                        <span class="score">5分</span>
+                        <span class="score" id="start3" ref="5">5分</span>
                     </div>
                     <div class="star_item clearfix">
                         <div class="left star_info">感受方面</div>
@@ -206,7 +204,7 @@
                             <label>★</label>       
                             <label>★</label> 
                         </div>
-                        <span class="score">5分</span>
+                        <span class="score" id="start4" ref="5">5分</span>
                     </div>
                 </div>
 
@@ -218,6 +216,7 @@
                     <div class="submitpl">提交</div>
                 </div>
             </div>
+            <{/if}>
             <div class="pro_kb">
                 <div class="pi_title">评论列表</div>
                 <{if isset($info['commentList']) && count($info['commentList']) > 0}>

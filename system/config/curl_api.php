@@ -49,6 +49,7 @@ $config = array(
             'powerUrl'              => '/account/powerUrl',               // 用户权限目录
             'modifyAccountInfo'     => '/info/modifyAccountInfo',         // 添加账户数据
             'getUserDetailByWhere'  => '/account/getUserDetailByWhere',   // 获取用户信息
+            'getAccountTotalInfo'   => '/account/getAccountTotalInfo'    // 用户完整信息
         ),
     ),
     'product' => array(
@@ -77,6 +78,7 @@ $config = array(
             'submitComment'         => '/product/submitComment',       // 提交评论
             'delComment'            => '/product/delComment',             // 删除评论
             'getCommentListByPid'   => '/product/getCommentListByPid',  // 获取产品评论信息
+            'getStoreProduct'       => '/product/getStoreProduct',      // 商户所有产品
         ),
     ),
     'posts' => array(
@@ -156,6 +158,7 @@ $config = array(
             'updateClaims'          => '/order/updateClaims',       // 更新理赔单
             'hasCommentPower'       => '/order/hasCommentPower',    // 是否具有评论权限
             'calClaimsTotal'        => '/order/calClaimsTotal',     // 计算理赔总额
+            'updateOrderCommentFlag' => '/order/updateOrderCommentFlag', // 修改订单评论标志
         ),
     ),
     //广告模块CURL连接

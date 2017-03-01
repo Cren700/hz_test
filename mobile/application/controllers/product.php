@@ -95,26 +95,12 @@ class Product extends HZ_Controller
      */
     public function submitComment()
     {
-        $data = array(
-            'comment_pro_id' => 57,//$this->input->post('pro_id', true),
-            'comment_uid' => 6,//$this->input->post('uid', true),
-            'comment_user_name' => 'user001',//$this->input->post('user_name', true),
-            'comment_ip' => get_client_ip(),
-            'comment_content' => '12341234',//$this->input->post('content', true),
-            'start1' => (int)$this->input->post('start1', true) ? : 5,
-            'start2' => (int)$this->input->post('start2', true) ? : 5,
-            'start3' => (int)$this->input->post('start3', true) ? : 5,
-            'start4' => (int)$this->input->post('start4', true) ? : 5,
-        );
-        $res = $this->product_service->submitComment($data);
-        echo outputResponse($res);
-        die;
-        $has = $this->product_service->hasCommentPower($this->input->post('pro_id', true), $this->_user_id);
+        $has = $this->product_service->hasCommentPower($this->input->post('pid', true), $this->_user_id);
         if ($has) {
             $data = array(
-                'comment_pro_id' => $this->input->post('pro_id', true),
-                'comment_uid' => $this->input->post('uid', true),
-                'comment_user_name' => $this->input->post('user_name', true),
+                'comment_pro_id' => $this->input->post('pid', true),
+                'comment_uid' => $this->_uid,
+                'comment_user_name' => $this->_user_id,
                 'comment_ip' => get_client_ip(),
                 'comment_content' => $this->input->post('content', true),
                 'start1' => (int)$this->input->post('start1', true) ? : 5,
@@ -125,8 +111,36 @@ class Product extends HZ_Controller
             $res = $this->product_service->submitComment($data);
             echo outputResponse($res);
         } else {
-            echo array('code' => -1, 'msg' => '你没有购买过该产品,不能评论');
+            echo json_encode_data(array('code' => -1, 'msg' => '您还没有购买过该产品,不能参与评论'));
         }
+    }
+
+    public function store()
+    {
+
+        $option = array(
+            'store_id' => $this->input->get('id'),
+            'type' => $this->input->get('type'),
+        );
+        $jsArr = array(
+            'product_store.js',
+        );
+        $this->smarty->assign('jsArr', $jsArr);
+        $this->smarty->assign('option', $option);
+        $this->smarty->display('product/store.tpl');
+    }
+
+    public function queryStore()
+    {
+        $option = array(
+            'store_id' => $this->input->get('id'),
+            'type' => $this->input->get('type'),
+            'p' => $this->input->get('p') ? : 1,
+            'page_size' => $this->input->get('page_size') ? : 10,
+        );
+        $res = $this->product_service->getStoreProduct($option);
+        $this->smarty->assign('info', $res['data']);
+        $this->smarty->display('product/list.tpl');
     }
 
     /**
@@ -140,11 +154,4 @@ class Product extends HZ_Controller
 //        $res = $this->product_service->delComment($where);
 //        echo outputResponse($res);
 //    }
-
-    public function calClaimsTotal()
-    {
-        $where =array('product_id' => 41);
-        $res = $this->product_service->calClaimsTotal($where);
-        echo outputResponse($res);
-    }
 }

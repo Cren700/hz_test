@@ -43,7 +43,7 @@ HZ.ProductDetail = (function() {
         
         //轮播
         var mySwiper = new Swiper('.swiper-container',{
-             autoplay : 4000,
+             autoplay : 5000,
         });
 
 
@@ -57,9 +57,37 @@ HZ.ProductDetail = (function() {
                             $(this).parent().find('label').eq(index+j+1).css({'color':'#999999'});
                         }                       
                     }
-                    $(this).parent().siblings('.score').html(index+1+'分');
+                    $(this).parent().siblings('.score').attr('ref', index+1).html(index+1+'分');
                 });
             });
+        });
+
+        $('.submitpl').on('click', function(){
+            var start1 = $('#start1').attr('ref');
+            var start2 = $('#start2').attr('ref');
+            var start3 = $('#start3').attr('ref');
+            var start4 = $('#start4').attr('ref');
+            var content = $('.txtarea').val();
+            var pid = $('input[name="pid"]').val();
+            var url = baseUrl + "/product/submitComment.html";
+            var data = {start1: start1, start2: start2, start3: start3, start4: start4, content:content, pid: pid};
+            $.ajax({
+                url: url,
+                data: data,
+                dataType: 'json',
+                type: 'post',
+                success: function(res){
+                    if (res.code == 0)
+                    {
+                        HZ.Dialog.showMsg({title: '评论成功'});
+                        setTimeout(function(){
+                            location.href = location.href;
+                        }, 2000)
+                    } else {
+                        HZ.Dialog.showMsg({title: res.msg});
+                    }
+                }
+            })
         });
     }
 

@@ -197,7 +197,7 @@ class Account extends BaseController {
         $data['Findustry'] = $this->input->post('industry');
         $data['Fcert_type'] = $this->input->post('cert_type');
         $data['Fcert_no'] = $this->input->post('cert_no');
-        $data['Flogo_path'] = $this->input->post('logo_path');
+        $data['Fimage_path'] = $this->input->post('image_path');
         $data['Femail'] = $this->input->post('email');
         $data['Fphone'] = $this->input->post('phone');
         $data['Fcountry'] = $this->input->post('country');
@@ -235,6 +235,14 @@ class Account extends BaseController {
         // type 0:后台admin表,1:前台用户user表
         $option = array('Fid' => $this->input->get('id'), 'type' => $this->input->get('type'));
         $res = $this->account_service->getStoreName($option);
+        echo outputResponse($res);
+    }
+
+    public function getAccountTotalInfo()
+    {
+        // type 0:后台admin表,1:前台用户user表
+        $option = array('Fid' => $this->input->get('id'), 'type' => $this->input->get('type'));
+        $res = $this->account_service->getAccountTotalInfo($option);
         echo outputResponse($res);
     }
 

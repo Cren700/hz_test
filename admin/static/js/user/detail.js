@@ -89,7 +89,7 @@ HZ.User = (function() {
             'onUploadSuccess' : function(file, data, response) {
                 data = JSON.parse(data);
                 if(data.code == 0){
-                    $('input[name="logo_path"]').val(data.file_data);
+                    $('input[name="image_path"]').val(data.file_data);
                     $('#file_upload').parents('.control-group').find('img').attr('src', data.file_data).show();
                     $('#file_upload').parents('.control-group').find('.js-btn-del-cover').show();
                 } else {

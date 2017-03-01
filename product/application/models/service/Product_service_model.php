@@ -20,35 +20,39 @@ class Product_service_model extends HZ_Model
         $where = array('Fis_del' => '0');
         $where_in = $like = array();
 
-        if ($option['Fproduct_id'] === '0' || !empty($option['Fproduct_id'])) {
+        if (isset($option['Fproduct_id']) && ($option['Fproduct_id'] === '0' || !empty($option['Fproduct_id']))) {
             $where['Fproduct_id'] = $option['Fproduct_id'];
         }
 
-        if ($option['Fcategory_id'] === '0' || !empty($option['Fcategory_id'])) {
+        if (isset($option['Fcategory_id']) && ($option['Fcategory_id'] === '0' || !empty($option['Fcategory_id']))) {
             $where['Fcategory_id'] = $option['Fcategory_id'];
         }
 
-        if ($option['Fstore_id'] === '0' || !empty($option['Fstore_id'])) {
+        if (isset($option['Fstore_id']) && ($option['Fstore_id'] === '0' || !empty($option['Fstore_id']))) {
             $where['Fstore_id'] = $option['Fstore_id'];
         }
 
-        if ($option['Fproduct_status'] === '0' || !empty($option['Fproduct_status'])) {
+        if (isset($option['Fstore_type']) && ($option['Fstore_type'] === '0' || !empty($option['Fstore_type']))) {
+            $where['Fstore_type'] = $option['Fstore_type'];
+        }
+
+        if (isset($option['Fproduct_status']) && ($option['Fproduct_status'] === '0' || !empty($option['Fproduct_status']))) {
             $where_in = $option['Fproduct_status'];
         }
 
-        if ($option['Fis_del'] === '0' || !empty($option['Fis_del'])) {
+        if (isset($option['Fis_del']) && ($option['Fis_del'] === '0' || !empty($option['Fis_del']))) {
             $where['Fis_del'] = $option['Fis_del'];
         }
 
-        if (!empty($option['min_date'])) {
+        if (isset($option['min_date']) && (!empty($option['min_date']))) {
             $where['Fcreate_time >= '] = strtotime($option['min_date']);
         }
 
-        if (!empty($option['max_date'])) {
+        if (isset($option['max_date']) && (!empty($option['max_date']))) {
             $where['Fcreate_time <= '] = strtotime($option['max_date'])+23*3600+3599;
         }
 
-        if ($option['Fproduct_name'] === '0' || !empty($option['Fproduct_name'])) {
+        if (isset($option['Fproduct_name']) && ($option['Fproduct_name'] === '0' || !empty($option['Fproduct_name']))) {
             $like['Fproduct_name'] = $option['Fproduct_name'];
         }
 
@@ -597,8 +601,10 @@ class Product_service_model extends HZ_Model
         $res = $this->product_dao->submitComment($data);
         if ($res) {
             $ret['data'] = $data;
+            // 修改订单评论标志
+            $this->myCurl('order', 'updateOrderCommentFlag', array('product_id' => $data['Fcomment_pro_id'], 'user_id' => $data['Fcomment_user_name']), true);
         } else {
-            $ret['code'] = 'product_error_14';
+            $ret['code'] = 'posts_error_10'; // 评论失败
         }
         return $ret;
     }
@@ -677,7 +683,7 @@ class Product_service_model extends HZ_Model
         if ($res) {
             return $ret;
         } else {
-            return $ret['code'] = 'system_error_2';
+            return $ret['code'] = 'posts_error_9';
         }
     }
 
@@ -692,7 +698,7 @@ class Product_service_model extends HZ_Model
         if ($res) {
             return $ret;
         } else {
-            return $ret['code'] = 'product_error_15';
+            return $ret['code'] = 'posts_error_12';
         }
     }
 
@@ -702,6 +708,8 @@ class Product_service_model extends HZ_Model
         $res = $this->product_dao->maybeLike($option);
         if ($res) {
             $ret['data'] = $res;
+        } else {
+            return $ret['code'] = 'posts_error_12';
         }
         return $ret;
     }

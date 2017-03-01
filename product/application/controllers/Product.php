@@ -237,7 +237,7 @@ class Product extends HZ_Controller
             'Fcomment_ip' => $this->input->post('comment_ip', true),
             'Fcomment_date' => time(),
             'Fcomment_content' => $this->input->post('comment_content'),
-            'Fcomment_approved' => 0,
+            'Fcomment_approved' => 1, // 默认通过审核
             'Fstart1' => $this->input->post('start1', true),
             'Fstart2' => $this->input->post('start2', true),
             'Fstart3' => $this->input->post('start3', true),
@@ -310,6 +310,19 @@ class Product extends HZ_Controller
             'Fproduct_id' => $this->input->get('product_id')
         );
         $res = $this->product_service->maybeLike($option);
+        echo outputResponse($res);
+    }
+
+    public function getStoreProduct()
+    {
+        $option = array(
+            'Fstore_id' => $this->input->get('store_id'),
+            'Fstore_type' => $this->input->get('type'),
+            'p' => $this->input->get('p') ? : 1,
+            'page_size' => $this->input->get('page_size'),
+            'Fproduct_status' => 2
+        );
+        $res = $this->product_service->query($option);
         echo outputResponse($res);
     }
 }

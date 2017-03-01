@@ -1,4 +1,5 @@
 
+<{if $info['count'] neq 0}>
 <{foreach $info['list'] as $i}>
     <div class="pro_list">
         <div class="pro_list_cc">
@@ -16,3 +17,15 @@
     </div>
     </div>
 <{/foreach}>
+<{else}>
+<section class="content" id="section_content">
+    <div class="nav_list_item show">
+        <div class="nodata">
+            <div class="nodata_img">
+                <img src="<{'no_data.png'|baseImgUrl}>">
+            </div>
+            <p class="nodata_txt"><{if isset($info.msg)}><{$info.msg}><{else}>暂无数据<{/if}></p>
+        </div>
+    </div>
+</section>
+<{/if}>

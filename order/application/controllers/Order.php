@@ -262,5 +262,13 @@ class Order extends BaseController
         echo outputResponse($res);
     }
 
-
+    public function updateOrderCommentFlag()
+    {
+        $where = array(
+            'Fproduct_id'=> $this->input->post('product_id', true),
+            'Fuser_id' => $this->input->post('user_id', true),
+        );
+        $res = $this->order_service->updateOrderCommentFlag($where);
+        echo outputResponse($res);
+    }
 }
