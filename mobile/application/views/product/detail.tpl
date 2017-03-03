@@ -224,7 +224,7 @@
                 <div class="comment_box" id="comment_box">
                     <div class="comment_list">
                         <div class="avatar">
-                            <img style="width:0.64rem" src="<{$l['Fcomment_authro_image']}>">
+                            <img style="width:0.64rem" src="<{$l['Fcomment_authro_image']|default:("avatar.jpg"|baseImgUrl)}>">
                         </div>
                         <div class="comment_info">
                             <p><span class="comment_name"><{$l['Fcomment_name']}></span> • <span class="js-date-dif" rel="<{$l['Fcomment_date']}>">1个月前</span></p>
@@ -352,8 +352,12 @@
                 关注计划
             </p>
         </div>
+        <{if $info['Fproduct_status'] eq 2}>
         <a href="javascript:;" class="plan_join" id="js-btn-join-cart">放入购物车</a>
         <a href="<{'/order/insPreview.html?pid='|cat:$info['Fproduct_id']|getBaseUrl}>" class="plan_join_dd" >马上加入</a>
+        <{else}>
+        <a href="javascript:;" class="plan_join" style='background-color: #999;'>已下架</a>
+        <{/if}>
     </div>
 </footer>
 <input type="hidden" name="pid" value="<{$info['Fproduct_id']}>">

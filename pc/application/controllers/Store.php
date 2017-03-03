@@ -123,9 +123,8 @@ class Store extends BaseControllor
             'is_new' => $this->input->post('is_new'),
             'product_id' => $this->input->post('product_id'),
             'store_id' => $this->_uid,
-            'store_type' => 1, //商户类型为1
+            'store_type' => 1, //前台用户
             'product_name' => $this->input->post('product_name'),
-            'product_num' => $this->input->post('product_num'),
             'product_price' => $this->input->post('product_price'),
             'category_id' => $this->input->post('category_id'),
             'description' => $this->input->post('description'),
@@ -143,6 +142,10 @@ class Store extends BaseControllor
             'answer' => $this->input->post('answer'),// 常见问题
             'pledge_title' => $this->input->post('pledge_title'), // 公约
             'pledge_content' => $this->input->post('pledge_content'), // 公约
+            'plan_tk_title' => $this->input->post('plan_tk_title'), // 计划条款
+            'plan_tk_content' => $this->input->post('plan_tk_content'), // 计划条款
+            'demand_title' => $this->input->post('demand_title'), // 健康要求
+            'demand_content' => $this->input->post('demand_content'), // 健康要求
         );
         $res = $this->store_service_model->save($data);
         echo json_encode_data($res);

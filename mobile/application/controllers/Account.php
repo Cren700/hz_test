@@ -33,10 +33,13 @@ class Account extends HZ_Controller
      */
     public function doLogin()
     {
-        $user_id = $this->input->post('user_id');
-        $passwd = $this->input->post('passwd');
+        $option = array(
+            'user_id' => $this->input->post('user_id'),
+            'passwd' => $this->input->post('passwd'),
+            'type' => $this->input->post('type'),
+        );
         $url = $this->input->post('url');
-        $res = $this->account_service_model->login($user_id, $passwd);
+        $res = $this->account_service_model->login($option);
         if ($res['code'] === 0) {
             $res['data']['url'] = $url ? HOST_URL . $url : getBaseUrl('/home.html');
         }
@@ -215,7 +218,8 @@ class Account extends HZ_Controller
     {
         $option = array(
             'user_id' => $this->input->post('user_id'),
-            'code' => $this->input->post('code')
+            'code' => $this->input->post('code'),
+            'type' => $this->input->post('type'),
         );
         $url = $this->input->post('url');
         $res = $this->account_service_model->loginPhone($option);
@@ -282,14 +286,15 @@ class Account extends HZ_Controller
      */
     public function logwx()
     {
+        $type = $this->input->get('type');
         $this->config->load('wx_conf');
         $appid = $this->config->item('appid');
-        $bakUrl = $this->config->item('log_bak_url');
+        $bakUrl = urlencode($this->config->item('log_bak_url') . '/'.$type);
         $url = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid='.$appid.'&redirect_uri='.$bakUrl.'&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
         header("Location:".$url);
     }
 
-    public function wxLogBak()
+    public function wxLogBak($type)
     {
         $appid = $this->config->item('appid');
         $secret = $this->config->item('secret');
@@ -320,8 +325,8 @@ class Account extends HZ_Controller
 
         //解析json
         $user_obj = json_decode($res,true);
-
-        $user = $this->account_service_model->oauthLogin($user_obj['openid'], $user_obj['nickname'], $user_obj['headimgurl'], $type=1);
+//        $type = $this->input->get('type');
+        $user = $this->account_service_model->oauthLogin($user_obj['openid'], $user_obj['nickname'], $user_obj['headimgurl'], $log_type=1, $type);
         $this->jump($user['data']['url']);
     }
 

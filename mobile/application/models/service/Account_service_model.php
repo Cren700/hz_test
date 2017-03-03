@@ -32,14 +32,12 @@ class Account_service_model extends HZ_Model
 
     /**
      * 登录
-     * @param $user_id
-     * @param $passwd
+     * @param $option
      * @return array
      */
-    public function login($user_id, $passwd)
+    public function login($option)
     {
-        $post_data = array('user_id' => $user_id, 'passwd' => $passwd);
-        $res = $this->myCurl('account', 'login', $post_data, true);
+        $res = $this->myCurl('account', 'login', $option, true);
         if ($res['code'] == 0) {
             // 保存session
             $res['data']['url'] = getBaseUrl('/home.html');
@@ -82,17 +80,19 @@ class Account_service_model extends HZ_Model
      * @param $openid
      * @param $nickname
      * @param $imgurl
+     * @param $log_type
      * @param $type
      * @return mixed
      */
-    public function oauthLogin($openid, $nickname, $imgurl, $type)
+    public function oauthLogin($openid, $nickname, $imgurl, $log_type, $type)
     {
         $option = array(
             'user_id' => $openid,
             'nickname' => $nickname,
             'recommend_uid' => $this->session->userdata('_re'),
             'imgurl' => $imgurl,
-            'log_type' => $type
+            'log_type' => $log_type,
+            'type' => $type
         );
         $res = $this->myCurl('account', 'oauthLogin', $option, true); 
         if ($res['code'] == 0) {

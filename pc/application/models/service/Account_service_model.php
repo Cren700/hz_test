@@ -32,14 +32,12 @@ class Account_service_model extends HZ_Model
 
     /**
      * 登录
-     * @param $user_id
-     * @param $passwd
+     * @param $option
      * @return array
      */
-    public function login($user_id, $passwd)
+    public function login($option)
     {
-        $post_data = array('user_id' => $user_id, 'passwd' => $passwd);
-        $res = $this->myCurl('account', 'login', $post_data, true);
+        $res = $this->myCurl('account', 'login', $option, true);
         if ($res['code'] == 0) {
             // 保存session
             $res['data']['url'] = getBaseUrl('/home.html');

@@ -1,6 +1,6 @@
 
-<div class="header">
-    <div class="container head_content">
+<div class="header" style="border-bottom:1px solid #333;" >
+    <div class="container head_content" style="width: 90%">
         <a href="<{''|getBaseUrl}>" class="logo">
             <img src="<{'logo.png'|baseImgUrl}>"/>
         </a>
@@ -49,15 +49,6 @@
                 </div>
                 <{/if}>
             </div>
-            <div class="search">
-                <form name="search_form" method="get" action="<{'/posts/search'|getBaseUrl}>">
-                    <input type="text" class="search_txt" name="keyword" />
-                    <input type="button" class="search_btn" name=""/>
-                </form>
-            </div>
-            <!-- <div class="login">
-                <a href="">登录</a>
-            </div> -->
         </div>
     </div>
 </div>

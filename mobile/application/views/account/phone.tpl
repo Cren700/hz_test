@@ -33,31 +33,32 @@
         <input type="button" class="login_other_sub" value="使用账号登陆" onclick="window.location ='<{'/account.html'|getBaseUrl}>'">
         <input type="button" class="register_regit_sub" value="账户注册" id="js-btn-register" onclick="window.location ='<{'/account/register.html'|getBaseUrl}>'">
         <p class="login_regit_icon">
-            <i class="login_regit_wechat" onclick="window.location='<{'/account/logwx.html'|getBaseUrl}>'">&nbsp;</i>
-            <i class="login_regit_qq">&nbsp;</i>
+            <i class="login_regit_wechat">&nbsp;</i>
+            <!--<i class="login_regit_qq">&nbsp;</i>-->
         </p>
     </div>
     <!--角色选择框-->
     <div class="wrapRole">
         <div class="mid">
-            <img src="http://www.dev.huzhu.com/mobile/static/img/logo.png" style="width: 60%;margin: 0 auto 1em;" />
-            <a href="javascript:;" class="wx-login">
+            <img src="<{'logo.png'|baseImgUrl}>" style="width: 60%;margin: 0 auto 1em;" />
+            <a href="javascript:;" ref="4">
                 <span class="title">
                    普通用户
                 </span>
             </a>
-            <a href="javascript:;" class="qq-login">
+            <a href="javascript:;" ref="3">
                 <span class="title">
-                   高级用户
+                   媒体用户
                 </span>
             </a>
-            <a href="javascript:;" class="qq-login">
+            <a href="javascript:;" ref="2">
                 <span class="title">
                    商家
                 </span>
             </a>
         </div>
     </div>
+    <input type="hidden" id='js-type' name="type" value="">
 </section>
 <{include file="public/no_nav_footer.tpl"}>
 </body>

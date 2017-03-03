@@ -328,6 +328,20 @@ function baseImgUrl($uri){
     return getBaseUrl('/static/img/' . $uri, false);
 }
 
+function getMobileUrl($uri = '')
+{
+    $ci = &get_instance();
+    $uid = $ci->session->userdata('w_uid') | $ci->session->userdata('m_uid');
+    $param = '';
+    if (strpos($uri, '?') !== false) {
+        $param .= '&';
+    } else {
+        $param .= '?';
+    }
+    $param .= "_re=" . base64_encode($uid);
+    return urlencode(HOST_URL . '/moblie' . $uri . $param);
+}
+
 /**
  * 图片保存地址
  * @param string $type

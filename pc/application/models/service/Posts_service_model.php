@@ -120,11 +120,6 @@ class Posts_service_model extends HZ_Model
         return $this->myCurl('posts', 'changeStatus', $data, true);
     }
 
-    public function del($data)
-    {
-        return $this->myCurl('posts', 'delPosts', $data, false);
-    }
-
     public function hasMediumPower()
     {
         $option = array('id' => $this->_uid);

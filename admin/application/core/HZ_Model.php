@@ -58,8 +58,7 @@ class HZ_Model extends CI_Model
         }
 
         $res = curl_exec($ch);
-        // if($control == "updateProduct")
-//         if($control == "capitalAccountCounts")
+//         if($control == "hasPostsPower")
 //         {
 //             echo $res;die;
 //         }

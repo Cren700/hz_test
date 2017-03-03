@@ -64,7 +64,8 @@ class Account extends BaseController {
     {
         $data['Fuser_id'] = $this->input->post('user_id');
         $data['Fpasswd'] = $this->input->post('passwd');
-        $res = $this->account_service->login($data, 'user');
+        $data['Fuser_type'] = $this->input->post('type');
+        $res = $this->account_service->login($data);
         echo outputResponse($res);
     }
 
@@ -75,7 +76,7 @@ class Account extends BaseController {
     {
         $data['Fuser_id'] = $this->input->post('user_id');
         $data['Fpasswd'] = $this->input->post('passwd');
-        $res = $this->account_service->login($data, 'admin');
+        $res = $this->account_service->loginAdmin($data);
         echo outputResponse($res);
     }
 
@@ -221,6 +222,7 @@ class Account extends BaseController {
             'Fnick_name' => $this->input->post('nickname', true),
             'Fimage_path' => $this->input->post('imgurl', true),
             'Flog_type' => $this->input->post('log_type', true),
+            'Fuser_type' => $this->input->post('type', true),
             'Frecommend_uid' => $this->input->post('recommend_uid', true)
         );
         $res = $this->account_service->oauthLogin($option);
@@ -292,6 +294,7 @@ class Account extends BaseController {
         $option = array(
             'Fuser_id' => $this->input->post('user_id', true),
             'Fverifycode' => $this->input->post('code', true),
+            'Fuser_type' => $this->input->post('type', true),
             'Frecommend_uid' => $this->input->post('recommend_uid', true),
             'Flog_type' => 3 // 手机登录
         );

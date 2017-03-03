@@ -67,8 +67,8 @@ HZ.Posts = (function() {
                 msg: "是否删除该资讯?",
                 type: 'confirm',
                 btnConfirm: function(){
-                    var url = baseUrl + '/medium/del.html';
-                    var data = {is_del: 1,status: 1, id: _this.parents('tr').attr('rel')};
+                    var url = baseUrl + '/medium/status.html';
+                    var data = {is_del: 1,status: 1, pid: _this.parents('tr').attr('rel')};
                     HZ.Form.btnSubmit({
                         t: 'post',
                         u: url,

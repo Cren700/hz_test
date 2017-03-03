@@ -60,7 +60,7 @@ class Medium extends BaseControllor
         $data = array(
             'product_id' => $this->input->get('id')
         );
-        $res = $this->post_service->getPostsByPid($data);
+        $res = $this->post_service->getPost($data);
         echo json_encode_data($res);
     }
 
@@ -85,6 +85,34 @@ class Medium extends BaseControllor
         // 目录结构
         $menu = $this->getMediumMenu() ? : array();
         $this->smarty->assign('menu', $menu);
+        $this->smarty->display('admin/posts/detail.tpl');
+    }
+
+    public function detail($pid = null){
+        $data = array(
+            'id' => $pid ? : $this->input->get('pid')
+        );
+
+        $posts = $this->post_service->getPost($data);
+        if (empty($posts['data'])) {
+            $this->jump404();
+        }
+        $cate = $this->post_service->getCate();
+        $jsArr = array(
+            'admin/plugin/jquery.placeholder.min.js',
+            'admin/plugin/jquery.validate.js',
+            'admin/uploadify/jquery.uploadify.min.js',
+            'admin/posts/detail.js',
+            'admin/ueditor/ueditor.config.js',
+            'admin/ueditor/ueditor.all.js',
+            'admin/ueditor/lang/zh-cn/zh-cn.js'
+        );
+        $cssArr = array('uploadify.css');
+        $this->smarty->assign('is_new', 0);
+        $this->smarty->assign('cate', isset($cate['data']) ? $cate['data'] : array());
+        $this->smarty->assign('posts', $posts['data']);
+        $this->smarty->assign('jsArr', $jsArr);
+        $this->smarty->assign('cssArr', $cssArr);
         $this->smarty->display('admin/posts/detail.tpl');
     }
 

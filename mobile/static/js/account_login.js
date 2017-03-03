@@ -5,6 +5,19 @@ if (typeof (HZ) == "undefined" || !HZ) {
 HZ.Account_login = (function() {
     function _init(){
 
+        //选择角色登陆
+        $('.mid a').each(function(index){
+            $(this).on('click', function () {
+                $('.wrapRole').hide();
+                var type = $(this).attr('ref');
+                $('#js-type').val(type);
+            });
+        });
+
+        $('.login_regit_wechat').on('click', function(){
+            window.location= baseUrl+ '/account/logwx.html?type=' + $('#js-type').val();
+        });
+
         $('#loginform').submit(function(e){
             if (!checkVC()) {
                 HZ.Dialog.showMsg({title: '请输入验证码'});
@@ -15,14 +28,18 @@ HZ.Account_login = (function() {
             var passwd = $('input[name="passwd"]').val();
             var uri = $('input[name="url"]').val();
             var url = $('#js-btn-login').data('pwd-url');
+            var type = $('#js-type').val();
             $.ajax({
-                data:{user_id: name, passwd: passwd, url: uri},
+                data:{user_id: name, passwd: passwd, url: uri, type: type},
                 url: url,
                 dataType: 'json',
                 type: 'post',
                 success: function(res){
                     if(typeof res['code'] === 'undefined' || res['code'] !== 0) {
                         HZ.Dialog.showMsg({title: res.msg});
+                        setTimeout(function(){
+                            location.href = location.href;
+                        }, 2000)
                     } else {
                         window.location = res['data']['url'];
                     }

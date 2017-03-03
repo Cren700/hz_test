@@ -59,4 +59,13 @@ class Info extends BaseControllor
         $this->smarty->assign('commentList', $commentList['data']);
         $this->smarty->display('info/collectList.tpl');
     }
+
+    public function recommend()
+    {
+        $jsArr = array(
+            'personal.js'
+        );
+        $this->smarty->assign('jsArr', $jsArr);
+        $this->smarty->display('info/recommend.tpl');
+    }
 }

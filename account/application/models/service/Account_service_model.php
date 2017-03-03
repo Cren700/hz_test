@@ -72,8 +72,9 @@ class Account_service_model extends HZ_Model
      * @param $type 'admin':为后台登录
      * @return array
      */
-    public function login($data, $type)
+    public function login($data)
     {
+        $type = 'user';
         // 数据验证
         $validationConfig = array(
             array(
@@ -93,7 +94,47 @@ class Account_service_model extends HZ_Model
                 return $resValidation;
             }
         }
-        $info = $this->account_dao_model->getInfoByOp(array('Fuser_id' => $data['Fuser_id'], 'Fstatus' => 1), $type);
+        $info = $this->account_dao_model->getInfoByOp(array('Fuser_id' => $data['Fuser_id'], 'Fstatus' => 1, 'Fuser_type' => $data['Fuser_type']), $type);
+        if (!$info) return array('code' => 'account_error_0'); // 账户不存在
+        $pwdCode = encodePwd($info['Fsalt'], $data['Fpasswd']);
+        if ($info['Fpasswd'] !== $pwdCode) {
+            return array('code' => 'account_error_1');         // 账户密码不一致
+        } else {
+            $detail = $this->account_dao_model->getDetailByOp(array('Fuser_id' => $info['Fid']), $type);
+            $resData = array('uid' => $info['Fid'], 'username' => $info['Fuser_id'], 'user_type' => $info['Fuser_type'], 'image_path' => isset($detail['Fimage_path']) ? $detail['Fimage_path'] : '');
+            $type == 'admin' ? $resData['role_id'] = $info['Frole_id'] : '';
+            return array('code' => 0, 'data' => $resData);
+        }
+    }
+
+    /**
+     * 后台登录
+     * @param $data
+     * @return array
+     */
+    public function loginAdmin($data)
+    {
+        $type = 'admin';
+        // 数据验证
+        $validationConfig = array(
+            array(
+                'value' => $data['Fuser_id'],
+                'rules' => 'required|min_length[4]|max_length[16]',
+                'field' => '用户名'
+            ),
+            array(
+                'value' => $data['Fpasswd'],
+                'rules' => 'required|min_length[6]|max_length[16]',
+                'field' => '密码'
+            ),
+        );
+        foreach ($validationConfig as $v) {
+            $resValidation = validationData($v['value'], $v['rules'], $v['field']);
+            if (!empty($resValidation)) {
+                return $resValidation;
+            }
+        }
+        $info = $this->account_dao_model->getInfoByOp(array('Fuser_id' => $data['Fuser_id'], 'Fstatus' => 1), 'admin');
         if (!$info) return array('code' => 'account_error_0'); // 账户不存在
         $pwdCode = encodePwd($info['Fsalt'], $data['Fpasswd']);
         if ($info['Fpasswd'] !== $pwdCode) {
@@ -314,7 +355,7 @@ class Account_service_model extends HZ_Model
                 'Fuser_id' => $option['Fuser_id'],
                 'Flog_type' => $option['Flog_type'],
                 'Frecommend_uid' => $option['Frecommend_uid'],
-                'Fuser_type' => 4, // 普通用户
+                'Fuser_type' => $option['Fuser_type'],
                 'Fcreate_time' => time(),
                 'Fupdate_time' => time(),
             );
@@ -337,7 +378,7 @@ class Account_service_model extends HZ_Model
         $ret = array('code' => 0);
         $where = array(
             'Fuser_id' => $option['Fuser_id'],
-            'Flog_type' => $option['Flog_type']
+            'Flog_type' => $option['Flog_type'],
         );
         $res = $this->account_dao_model->getInfoByOp($where);
         if (!$res) {
@@ -345,8 +386,8 @@ class Account_service_model extends HZ_Model
             $data_base = array(
                 'Fuser_id' => $option['Fuser_id'],
                 'Flog_type' => $option['Flog_type'],
+                'Fuser_type' => $option['Fuser_type'],
                 'Frecommend_uid' => $option['Frecommend_uid'],
-                'Fuser_type' => 4, // 普通用户
                 'Fcreate_time' => time(),
                 'Fupdate_time' => time(),
             );
@@ -354,14 +395,24 @@ class Account_service_model extends HZ_Model
             $res_detail = array(
                 'Fid' => $uid,
                 'Fuser_id' => $option['Fuser_id'],
-                'Fuser_type' => 4,
+                'Fuser_type' => $option['Fuser_type'],
                 'Fimage_path' => ''
             );
             $ret['data'] = $res_detail;
         } else {
-            $detail = $this->account_dao_model->getDetailByOp(array('Fuser_id' => $res['Fid']));
-            $ret['data'] = $res;
-            $ret['data']['Fimage_path'] = $detail['Fimage_path'];
+            $where = array(
+                'Fuser_id' => $option['Fuser_id'],
+                'Flog_type' => $option['Flog_type'],
+                'Fuser_type' => $option['Fuser_type'],
+            );
+            $re = $this->account_dao_model->getInfoByOp($where);
+            if ($re) {
+                $detail = $this->account_dao_model->getDetailByOp(array('Fuser_id' => $res['Fid']));
+                $ret['data'] = $res;
+                $ret['data']['Fimage_path'] = $detail['Fimage_path'];
+            } else {
+                $ret['code'] = 'account_error_13';
+            }
         }
         return $ret;
     }

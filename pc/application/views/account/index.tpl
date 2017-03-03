@@ -1,6 +1,6 @@
 <{include file="public/header.tpl"}>
 <body>
-<div class="login_content">
+<div class="login_content" style="min-height:700px;">
     <a href="" class="logo">
         <img src="<{'logo.png'|baseImgUrl}>">
     </a>
@@ -27,24 +27,25 @@
     <!--角色选择框-->
     <div class="wrapRole">
         <div class="mid">
-            <img src="http://www.dev.huzhu.com/mobile/static/img/logo.png" style="margin: 0 auto 10em;display: block;" />
-            <a href="javascript:;" class="wx-login">
+            <img src="<{'logo.png'|baseImgUrl}>" style="margin: 0 auto 10em;display: block;" />
+            <a href="javascript:;" ref="4">
                 <span class="title">
                    普通用户
                 </span>
             </a>
-            <a href="javascript:;" class="qq-login">
+            <a href="javascript:;" ref="3">
                 <span class="title">
-                   高级用户
+                   媒体用户
                 </span>
             </a>
-            <a href="javascript:;" class="qq-login">
+            <a href="javascript:;" ref="2">
                 <span class="title">
                    商家
                 </span>
             </a>
         </div>
     </div>
+    <input type="hidden" id='js-type' name="type" value="">
 </div>
 </body>
 <{include file="public/footer.tpl"}>

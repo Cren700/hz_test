@@ -266,6 +266,9 @@ class Order_service_model extends HZ_Model
                     'amount' => $order_data['Fproduct_tol_amt'], // 订单数额
                 );
                 $this->myCurl('account', 'modifyAccountInfo', $account_data, true);
+
+                // 支付成功可以评论
+                $this->order_dao->updateOrderCommentFlag($where, array('Fcomment_flag' => 1));
             }
             
         }

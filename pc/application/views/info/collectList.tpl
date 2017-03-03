@@ -28,7 +28,7 @@
             <a href="<{'/store.html'|getBaseUrl}>">
                 <div class="personal_nav_item">
                     <i class="my_article">&nbsp;</i>
-                    <p>产品列表</p>
+                    <p>我的产品</p>
                 </div>
             </a>
             <a href="<{'/storeorder.html'|getBaseUrl}>">
@@ -44,7 +44,7 @@
                     <p>个人信息</p>
                 </div>
             </a>
-            <a href="">
+            <a href="<{'/info/recommend.html'|getBaseUrl}>">
                 <div class="personal_nav_item">
                     <i class="recommend">&nbsp;</i>
                     <p>推荐好友</p>

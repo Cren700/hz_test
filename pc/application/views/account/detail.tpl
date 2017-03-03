@@ -28,7 +28,7 @@
             <a href="<{'/store.html'|getBaseUrl}>">
                 <div class="personal_nav_item">
                     <i class="my_article">&nbsp;</i>
-                    <p>产品列表</p>
+                    <p>我的产品</p>
                 </div>
             </a>
             <a href="<{'/storeorder.html'|getBaseUrl}>">

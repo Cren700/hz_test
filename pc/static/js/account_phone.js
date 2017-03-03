@@ -11,6 +11,15 @@ HZ.Account_phone = (function() {
             sendSms($(this));
         });
 
+        //选择角色登陆
+        $('.mid a').each(function(index){
+            $(this).on('click', function () {
+                $('.wrapRole').hide();
+                var type = $(this).attr('ref');
+                $('#js-type').val(type);
+            });
+        });
+
         $('#loginform').submit(function(e){
             e.preventDefault();
             if (!checkVC()) {
@@ -21,15 +30,19 @@ HZ.Account_phone = (function() {
             }
             var name = $('input[name="user_id"]').val();
             var code = $('input[name="phoneyanz"]').val();
+            var type = $('#js-type').val();
             var url = $('#js-btn-login').data('pwd-url');
             $.ajax({
-                data:{user_id: name, code: code},
+                data:{user_id: name, code: code, type: type},
                 url: url,
                 dataType: 'json',
                 type: 'post',
                 success: function(res){
                     if(typeof res['code'] === 'undefined' || res['code'] !== 0) {
-                        alertInfo(res.msg);
+                        alertInfo(res.msg + ',请重新登录');
+                        setTimeout(function(){
+                            location.href = location.href;
+                        }, 2000)
                     } else {
                         window.location = res['data']['url'];
                     }

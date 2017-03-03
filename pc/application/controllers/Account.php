@@ -30,10 +30,13 @@ class Account extends HZ_Controller
      */
     public function doLogin()
     {
-        $user_id = $this->input->post('user_id');
-        $passwd = $this->input->post('passwd');
+        $option = array(
+            'user_id' => $this->input->post('user_id'),
+            'passwd' => $this->input->post('passwd'),
+            'type' => $this->input->post('type'),
+        );
         $uri = $this->input->post('uri');
-        $res = $this->account_service_model->login($user_id, $passwd);
+        $res = $this->account_service_model->login($option);
         if ($res['code'] === 0) {
             $res['data']['url'] = $uri ? HOST_URL . $uri : getBaseUrl('/home.html');
         }
@@ -100,6 +103,7 @@ class Account extends HZ_Controller
      */
     public function detail()
     {
+        $this->is_login();
         $info = $this->user_service_model->detail();
         $jsArr = array(
             'jquery.placeholder.min.js',
@@ -257,7 +261,8 @@ class Account extends HZ_Controller
     {
         $option = array(
             'user_id' => $this->input->post('user_id'),
-            'code' => $this->input->post('code')
+            'code' => $this->input->post('code'),
+            'type' => $this->input->post('type'),
         );
         $res = $this->account_service_model->loginPhone($option);
         echo json_encode_data($res);

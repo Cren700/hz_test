@@ -39,7 +39,7 @@ h3{font-size:16px;font-weight:normal;}
 .drop_down .drop .drop_avatar>a img{width:100%;}
 .drop_down .drop_nav{position:absolute;top:60px;right:0;width:130px;background-color:#fff;border-top:1px solid #197dd2;box-shadow:0 4px 4px 4px #f0f0f0;z-index:999;display:none;}
 .drop_down .drop_nav.show{display:block;}
-.drop_down .drop_nav ul li a{padding:14px 20px 14px 0;text-align:right;display:block;color:#333;}
+.drop_down .drop_nav ul li a{padding:10px 20px 10px 0;text-align:right;display:block;color:#333;}
 .drop_down .drop_nav ul li a:hover{background-color:#f5f8fa;color:#197dd2;}
 
 /*content*/
@@ -119,7 +119,7 @@ h3{font-size:16px;font-weight:normal;}
 .sidebar .spots p{color:#333;padding:12px 0 0 20px;line-height:20px;}
 
 /*footer*/
-.footer{width: 100%;height: 80px;background-color: #2c2e2f;position: fixed;bottom: 0;left: 0;}
+.footer{width: 100%;height: 80px;background-color: #2c2e2f;position: fixed;bottom: 0;left: 0; z-index: 100000;}
 .foot_content{width:1120px;margin:0 auto;padding:16px 0;color:#fff;}
 .foot_content_l{float:left;}
 .foot_content_l .copy_right a{color:#fff;}
@@ -402,7 +402,7 @@ h3{font-size:16px;font-weight:normal;}
 .layer_close{position:absolute;right:-24px;top:-24px;width:48px;height:48px;background:url(../img/icons.png) no-repeat -260px -77px;cursor:pointer;}
 
 /*login css*/
-.login_content{width:600px;margin:50px auto;text-align:center;}
+.login_content{width:600px;margin:50px auto;text-align:center;min-height:700px}
 .login_content>.logo{display:block;width:211px;height:55px;margin:0 auto;}
 .login_content>.logo img{width:100%;}
 .login_content .welogin{margin:10px 0 20px;font-size:16px;}
@@ -579,7 +579,7 @@ h3{font-size:16px;font-weight:normal;}
     z-index: 200;
     background: #fff;
     overflow: hidden;
-    background: url(../img/003.jpg) no-repeat;
+    background: url(../img/bg33.jpg) no-repeat;
     background-size: cover;
 }
 .mid{
@@ -598,13 +598,13 @@ h3{font-size:16px;font-weight:normal;}
     margin: 4em 2em 0;
 }
 .wrapRole .title{
-    font-size: 24px;
+    font-size: 20px;
     background-color: #197dd2;
     color: #fff;
-    width: 240px;
+    width: 150px;
     display: block;
-    height: 100px;
-    line-height: 100px;
+    height: 60px;
+    line-height: 60px;
     border-radius: 5px;
     margin: 0 auto;
 }

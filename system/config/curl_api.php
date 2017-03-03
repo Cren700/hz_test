@@ -128,6 +128,7 @@ $config = array(
             'modifyEvent'           => '/posts/modifyEvent',               // 修改行业信息
             'getBanners'            => '/posts/getBanners',               // 首页banner
             'getThreeNews'          => '/posts/getThreeNews',               // 获取前三条新闻
+            'hasPostsPower'         => '/posts/hasPostsPower',          // 文章发布权限
         ),
     ),
     'order' => array(

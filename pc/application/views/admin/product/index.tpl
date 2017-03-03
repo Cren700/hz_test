@@ -1,9 +1,11 @@
+<{include file='public/header.tpl'}>
 <{include file='admin/public/header.tpl'}>
+
 <body>
 <!--header part-->
-<{include file="admin/public/header_part.tpl"}>
-
+<{include file="public/nav_no_search.tpl"}>
 <!--end header part-->
+
 
 <!--sidebar-menu-->
 <{include file='admin/public/menu.tpl'}>
@@ -11,7 +13,6 @@
 
 <!--main-container-part-->
 <div id="content">
-    <{include file='admin/public/nav.tpl'}>
     <div class="container-fluid">
         <div class="row-fluid">
             <div class="span12">

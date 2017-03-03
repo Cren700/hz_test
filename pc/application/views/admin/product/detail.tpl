@@ -1,9 +1,11 @@
+<{include file='public/header.tpl'}>
 <{include file='admin/public/header.tpl'}>
+
 <body>
 <!--header part-->
-<{include file="admin/public/header_part.tpl"}>
-
+<{include file="public/nav_no_search.tpl"}>
 <!--end header part-->
+
 
 <!--sidebar-menu-->
 <{include file='admin/public/menu.tpl'}>
@@ -11,7 +13,6 @@
 
 <!--main-container-part-->
 <div id="content">
-    <{include file='admin/public/nav.tpl'}>
     <div class="container-fluid">
         <div class="row-fluid">
             <div class="span12">
@@ -25,7 +26,7 @@
                                 <div class="span12">
                                     <label class="control-label">产品名称</label>
                                     <div class="controls">
-                                        <input type="text" class="span11" name="product_name" placeholder="产品名称" value="<{$product['Fproduct_name']|default:''}>">
+                                        <input type="text" class="span4" name="product_name" placeholder="产品名称" value="<{$product['Fproduct_name']|default:''}>">
                                     </div>
                                 </div>
                             </div>
@@ -33,10 +34,10 @@
                                 <div class="span12">
                                     <label class="control-label">产品分类</label>
                                     <div class="controls">
-                                        <select name="category_id" class="span11" id="category_id">
+                                        <select name="category_id" class="span4" id="category_id">
                                             <option value="">请选择产品分类</option>
                                             <{foreach $cate['list'] as $c}>
-                                            <option value="<{$c.Fcategory_id}>" <{if isset($product['Fcategory_id']) && $product['Fcategory_id'] eq $c.Fcategory_id }>selected<{/if}>><{$c.Fcategory_name}></option>
+                                        <option value="<{$c.Fcategory_id}>" <{if isset($product['Fcategory_id']) && $product['Fcategory_id'] eq $c.Fcategory_id }>selected<{/if}>><{$c.Fcategory_name}></option>
                                             <{/foreach}>
                                         </select>
                                     </div>
@@ -44,17 +45,9 @@
                             </div>
                             <div class="control-group">
                                 <div class="span12">
-                                    <label class="control-label">产品库存</label>
+                                    <label class="control-label">预存费</label>
                                     <div class="controls">
-                                        <input type="text" class="span11" name="product_num" placeholder="产品库存" value="<{$product['Fproduct_num']|default:''}>">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <div class="span12">
-                                    <label class="control-label">产品价格</label>
-                                    <div class="controls">
-                                        <input type="text" class="span11" name="product_price" placeholder="产品价格" value="<{$product['Fproduct_price']|default:''}>">
+                                        <input type="text" class="span4" name="product_price" placeholder="预存费" value="<{$product['Fproduct_price']|default:''}>">
                                     </div>
                                 </div>
                             </div>
@@ -81,7 +74,7 @@
                                 <div class="span12">
                                     <label class="control-label">最高额度</label>
                                     <div class="controls">
-                                        <input type="text" class="span11" name="height_amount" placeholder="最高额度" value="<{$product['Fheight_amount']|default:''}>">
+                                        <input type="text" class="span4" name="height_amount" placeholder="最高额度" value="<{$product['Fheight_amount']|default:''}>">
                                     </div>
                                 </div>
                             </div>
@@ -89,7 +82,7 @@
                                 <div class="span12">
                                     <label class="control-label">保障范围</label>
                                     <div class="controls">
-                                        <textarea class="span11" name="scope_insurance" placeholder="保障范围"><{$product['Fscope_insurance']|default:''}></textarea>
+                                        <input type="text" class="span4" name="scope_insurance" placeholder="保障范围" value="<{$product['Fscope_insurance']|default:''}>">
                                     </div>
                                 </div>
                             </div>
@@ -97,7 +90,7 @@
                                 <div class="span12">
                                     <label class="control-label">年龄范围</label>
                                     <div class="controls">
-                                        <textarea class="span11" name="scope_age" placeholder="年龄范围"><{$product['Fscope_age']|default:''}></textarea>
+                                        <input type="text" class="span4" name="scope_age" placeholder="年龄范围" value="<{$product['Fscope_age']|default:''}>">
                                     </div>
                                 </div>
                             </div>
@@ -105,7 +98,40 @@
                                 <div class="span12">
                                     <label class="control-label">观察期</label>
                                     <div class="controls">
-                                        <input type="text" class="span11" name="observation_period" placeholder="观察期（单位：天）" value="<{$product['Fobservation_period']|default:''}>">
+                                        <input type="text" class="span4" name="observation_period" placeholder="观察期" value="<{$product['Fobservation_period']|default:''}>">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="span12">
+                                    <label class="control-label">计划规则</label>
+                                    <div class="controls" id="js-box-rule">
+                                        <{if !isset($product['Fplan_rule']) || (isset($product['Fplan_rule']) && empty($product['Fplan_rule']))}>
+                                        <div class="span12">
+                                            <textarea type="text" class="span4" name="rule_title[0]" placeholder="标题"></textarea>
+                                            <textarea type="text" class="span6" name="rule_description[0]" placeholder="描述"></textarea>
+                                            <input style="margin-left: 10px;" type="button" class="btn btn-success" id='js-btn-rule-add' value="添加">
+                                        </div>
+                                    <input type="hidden" class="js-txt-rule-count">
+                                        <{else}>
+                                        <{foreach $product['Fplan_rule'] as $k => $pr}>
+                                        <{if $k eq 0}>
+                                        <div class="span12">
+                                            <textarea type="text" class="span4" name="rule_title[<{$k}>]" placeholder="标题"><{$pr['title']}></textarea>
+                                            <textarea type="text" class="span6" name="rule_description[<{$k}>]" placeholder="描述"><{$pr['desc']}></textarea>
+                                            <input style="margin-left: 10px;" type="button" class="btn btn-success" id='js-btn-rule-add' value="添加">
+                                        </div>
+                                    <input type="hidden" class="js-txt-rule-count">
+                                        <{else }>
+                                        <div class="span12" style="margin: 10px 0 0 0">
+                                            <textarea type="text" class="span4" name="rule_title[<{$k}>]" placeholder="标题"><{$pr['title']}></textarea>
+                                            <textarea type="text" class="span6" name="rule_description[<{$k}>]" placeholder="描述"><{$pr['desc']}></textarea>
+                                            <input style="margin-left: 10px;" type="button" class="btn btn-danger js-btn-del" value="删除">
+                                        </div>
+                                    <input type="hidden" class="js-txt-rule-count">
+                                        <{/if}>
+                                        <{/foreach}>
+                                        <{/if}>
                                     </div>
                                 </div>
                             </div>
@@ -119,63 +145,32 @@
                             </div>
                             <div class="control-group">
                                 <div class="span12">
-                                    <label class="control-label">计划规则</label>
-                                    <div class="controls" id="js-box-rule">
-                                        <{if !isset($product['Fplan_rule']) || (isset($product['Fplan_rule']) && empty($product['Fplan_rule']))}>
-                                            <div class="span10">
-                                                <textarea type="text" class="span5" name="rule_title[0]" placeholder="标题"></textarea>
-                                                <textarea type="text" class="span7" name="rule_description[0]" placeholder="描述"></textarea>
-                                            </div>
-                                            <input style="margin-left: 10px;" type="button" class="btn" id='js-btn-rule-add' value="添加">
-                                    <input type="hidden" class="js-txt-rule-count">
-                                        <{else}>
-                                        <{foreach $product['Fplan_rule'] as $k => $pr}>
-                                            <{if $k eq 0}>
-                                                <div class="span10">
-                                                    <textarea type="text" class="span5" name="rule_title[<{$k}>]" placeholder="标题"><{$pr['title']}></textarea>
-                                                    <textarea type="text" class="span7" name="rule_description[<{$k}>]" placeholder="描述"><{$pr['desc']}></textarea>
-                                                </div>
-                                                <input style="margin-left: 10px;" type="button" class="btn" id='js-btn-rule-add' value="添加">
-                                                <input type="hidden" class="js-txt-rule-count">
-                                            <{else }>
-                                                <div class="span10" style="margin: 10px 0 0 0">
-                                                    <textarea type="text" class="span5" name="rule_title[<{$k}>]" placeholder="标题"><{$pr['title']}></textarea>
-                                                    <textarea type="text" class="span7" name="rule_description[<{$k}>]" placeholder="描述"><{$pr['desc']}></textarea>
-                                                </div>
-                                                <input type="hidden" class="js-txt-rule-count">
-                                            <{/if}>
-                                        <{/foreach}>
-                                        <{/if}>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <div class="span12">
                                     <label class="control-label">申请流程</label>
                                     <div class="controls" id="js-box-process">
                                         <{if !isset($product['Fapplication_process']) || (isset($product['Fapplication_process']) && empty($product['Fapplication_process']))}>
-                                            <div class="span10">
-                                                <textarea type="text" class="span5" name="process_title[0]" placeholder="标题"></textarea>
-                                                <textarea type="text" class="span7" name="process_description[0]" placeholder="描述"></textarea>
-                                            </div>
-                                            <input style="margin-left: 10px;" type="button" class="btn" id='js-btn-process-add' value="添加">
-                                            <input type="hidden" class="js-txt-process-count">
+                                        <div class="span12">
+                                            <textarea type="text" class="span4" name="process_title[0]" placeholder="标题"></textarea>
+                                            <textarea type="text" class="span6" name="process_description[0]" placeholder="描述"></textarea>
+                                            <input style="margin-left: 10px;" type="button" class="btn btn-success" id='js-btn-process-add' value="添加">
+                                        </div>
+                                    <input type="hidden" class="js-txt-process-count">
                                         <{else}>
                                         <{foreach $product['Fapplication_process'] as $k => $ap}>
-                                            <{if $k eq 0}>
-                                            <div class="span10">
-                                                <textarea type="text" class="span5" name="process_title[<{$k}>]" placeholder="标题"><{$ap['title']}></textarea>
-                                                <textarea type="text" class="span7" name="process_description[<{$k}>]" placeholder="描述"><{$ap['desc']}></textarea>
-                                            </div>
-                                            <input style="margin-left: 10px;" type="button" class="btn" id='js-btn-process-add' value="添加">
-                                            <input type="hidden" class="js-txt-process-count">
-                                            <{else}>
-                                            <div class="span10" style="margin: 10px 0 0 0">
-                                                <textarea type="text" class="span5" name="process_title[<{$k}>]" placeholder="标题"><{$ap['title']}></textarea>
-                                                <textarea type="text" class="span7" name="process_description[<{$k}>]" placeholder="描述"><{$ap['desc']}></textarea>
-                                            </div>
-                                            <input type="hidden" class="js-txt-process-count">
-                                            <{/if}>
+                                        <{if $k eq 0}>
+                                        <div class="span12">
+                                            <textarea type="text" class="span4" name="process_title[<{$k}>]" placeholder="标题"><{$ap['title']}></textarea>
+                                            <textarea type="text" class="span6" name="process_description[<{$k}>]" placeholder="描述"><{$ap['desc']}></textarea>
+                                            <input style="margin-left: 10px;" type="button" class="btn btn-success" id='js-btn-process-add' value="添加">
+                                        </div>
+                                    <input type="hidden" class="js-txt-process-count">
+                                        <{else}>
+                                        <div class="span12" style="margin: 10px 0 0 0">
+                                            <textarea type="text" class="span4" name="process_title[<{$k}>]" placeholder="标题"><{$ap['title']}></textarea>
+                                            <textarea type="text" class="span6" name="process_description[<{$k}>]" placeholder="描述"><{$ap['desc']}></textarea>
+                                            <input style="margin-left: 10px;" type="button" class="btn btn-danger js-btn-del" value="删除">
+                                        </div>
+                                    <input type="hidden" class="js-txt-process-count">
+                                        <{/if}>
                                         <{/foreach}>
                                         <{/if}>
                                     </div>
@@ -184,33 +179,28 @@
                             <div class="control-group">
                                 <div class="span12">
                                     <label class="control-label">常见问题</label>
-                                    <div class="controls ueditor-box" id="js-box-qa">
+                                    <div class="controls" id="js-box-qa">
                                         <{if !isset($product['Fq_a']) || (isset($product['Fq_a']) && empty($product['Fq_a']))}>
-                                        <div>
-                                            <input type="text" class="span10" name="question[0]" placeholder="问题">
-                                            <input type="button" class="span2 btn" id='js-btn-qa-add' value="添加">
-                                        </div>
-                                        <div class="span10" style="margin-left: 0" >
-                                            <textarea id="qa-content-0" name="answer[0]"></textarea>
-                                        </div>
-                                        <input type="hidden" class="js-txt-qa-count">
-                                        <{else}>
-                                        <{foreach $product['Fq_a'] as $k => $qa}>
-                                        <{if $k eq 0}>
-                                        <div>
-                                            <input type="text" class="span10" name="question[<{$k}>]" value="<{$qa['title']}>" placeholder="问题">
-                                            <input type="button" class="span2 btn" id='js-btn-qa-add' value="添加">
-                                        </div>
-                                        <div class="span10" style="margin-left: 0" >
-                                            <textarea id="qa-content-<{$k}>" name="answer[<{$k}>]"><{$qa['desc']}></textarea>
+                                        <div class="span12">
+                                            <textarea type="text" class="span4" name="question[0]" placeholder="标题"></textarea>
+                                            <textarea type="text" class="span6" name="answer[0]" placeholder="描述"></textarea>
+                                            <input style="margin-left: 10px;" type="button" class="btn btn-success" id='js-btn-qa-add' value="添加">
                                         </div>
                                     <input type="hidden" class="js-txt-qa-count">
                                         <{else}>
-                                        <div>
-                                            <input type="text" class="span10" name="question[<{$k}>]" value="<{$qa['title']}>" placeholder="问题">
+                                        <{foreach $product['Fq_a'] as $k => $qa}>
+                                        <{if $k eq 0}>
+                                        <div class="span12">
+                                            <textarea type="text" class="span4" name="question[<{$k}>]" placeholder="标题"><{$qa['title']}></textarea>
+                                            <textarea type="text" class="span6" name="answer[<{$k}>]" placeholder="描述"><{$qa['desc']}></textarea>
+                                            <input style="margin-left: 10px;" type="button" class="btn btn-success" id='js-btn-qa-add' value="添加">
                                         </div>
-                                        <div class="span10" style="margin-left: 0" >
-                                            <textarea id="qa-content-<{$k}>" name="answer[<{$k}>]"><{$qa['desc']}></textarea>
+                                    <input type="hidden" class="js-txt-qa-count">
+                                        <{else}>
+                                        <div class="span12" style="margin: 10px 0 0 0">
+                                            <textarea type="text" class="span4" name="question[<{$k}>]" placeholder="标题"><{$qa['title']}></textarea>
+                                            <textarea type="text" class="span6" name="answer[<{$k}>]" placeholder="描述"><{$qa['desc']}></textarea>
+                                            <input style="margin-left: 10px;" type="button" class="btn btn-danger js-btn-del" value="删除">
                                         </div>
                                     <input type="hidden" class="js-txt-qa-count">
                                         <{/if}>
@@ -222,47 +212,106 @@
                             <div class="control-group">
                                 <div class="span12">
                                     <label class="control-label">公约内容</label>
-                                    <div class="controls ueditor-box" id="js-box-pledge">
-                                    <{if !isset($product['Fjoint_pledge']) || (isset($product['Fjoint_pledge']) && empty($product['Fjoint_pledge']))}>
-                                        <div>
-                                            <input type="text" class="span10" name="pledge_title[0]" placeholder="标题">
-                                            <input type="button" class="span2 btn" id='js-btn-pledge-add' value="添加">
-                                        </div>
-                                        <div class="span10" style="margin-left: 0" >
-                                            <textarea id="pledge-content-0" name="pledge_content[0]"></textarea>
+                                    <div class="controls" id="js-box-pledge">
+                                        <{if !isset($product['Fjoint_pledge']) || (isset($product['Fjoint_pledge']) && empty($product['Fjoint_pledge']))}>
+                                        <div class="span12">
+                                            <textarea type="text" class="span4" name="pledge_title[0]" placeholder="标题"></textarea>
+                                            <textarea type="text" class="span6" name="pledge_content[0]" placeholder="描述"></textarea>
+                                            <input style="margin-left: 10px;" type="button" class="btn btn-success" id='js-btn-pledge-add' value="添加">
                                         </div>
                                     <input type="hidden" class="js-txt-pledge-count">
-                                    <{else}>
-                                    <{foreach $product['Fjoint_pledge'] as $k => $jp}>
-                                    <{if $k eq 0}>
-                                        <div>
-                                            <input type="text" class="span10" name="pledge_title[<{$k}>]" value='<{$jp['title']}>' placeholder="标题">
-                                            <input type="button" class="span2 btn" id='js-btn-pledge-add' value="添加">
-                                        </div>
-                                        <div class="span10" style="margin-left: 0" >
-                                            <textarea id="pledge-content-<{$k}>" name="pledge_content[<{$k}>]"><{$jp['desc']|htmlspecialchars_decode}></textarea>
+                                        <{else}>
+                                        <{foreach $product['Fjoint_pledge'] as $k => $jp}>
+                                        <{if $k eq 0}>
+                                        <div class="span12">
+                                            <textarea type="text" class="span4" name="pledge_title[<{$k}>]" placeholder="标题"><{$jp['title']}></textarea>
+                                            <textarea type="text" class="span6" name="pledge_content[<{$k}>]" placeholder="描述"><{$jp['desc']}></textarea>
+                                            <input style="margin-left: 10px;" type="button" class="btn btn-success" id='js-btn-pledge-add' value="添加">
                                         </div>
                                     <input type="hidden" class="js-txt-pledge-count">
-                                    <{else}>
-                                        <div>
-                                            <input type="text" class="span10" name="pledge_title[<{$k}>]" value='<{$jp['title']}>' placeholder="标题">
-                                        </div>
-                                        <div class="span10" style="margin-left: 0" >
-                                            <textarea id="pledge-content-<{$k}>" name="pledge_content[<{$k}>]"><{$jp['desc']|htmlspecialchars_decode}></textarea>
+                                        <{else}>
+                                        <div class="span12" style="margin: 10px 0 0 0">
+                                            <textarea type="text" class="span4" name="pledge_title[<{$k}>]" placeholder="标题"><{$jp['title']}></textarea>
+                                            <textarea type="text" class="span6" name="pledge_content[<{$k}>]" placeholder="描述"><{$jp['desc']}></textarea>
+                                            <input style="margin-left: 10px;" type="button" class="btn btn-danger js-btn-del" value="删除">
                                         </div>
                                     <input type="hidden" class="js-txt-pledge-count">
-                                    <{/if}>
-                                    <{/foreach}>
-                                    <{/if}>
-
-
+                                        <{/if}>
+                                        <{/foreach}>
+                                        <{/if}>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="span12">
+                                    <label class="control-label">计划条款</label>
+                                    <div class="controls" id="js-box-tk">
+                                        <{if !isset($product['Fplan_tk']) || (isset($product['Fplan_tk']) && empty($product['Fplan_tk']))}>
+                                        <div class="span12">
+                                            <textarea type="text" class="span4" name="plan_tk_title[0]" placeholder="标题"></textarea>
+                                            <textarea type="text" class="span6" name="plan_tk_content[0]" placeholder="描述"></textarea>
+                                            <input style="margin-left: 10px;" type="button" class="btn btn-success" id='js-btn-tk-add' value="添加">
+                                        </div>
+                                    <input type="hidden" class="js-txt-tk-count">
+                                        <{else}>
+                                        <{foreach $product['Fplan_tk'] as $k => $tk}>
+                                        <{if $k eq 0}>
+                                        <div class="span12">
+                                            <textarea type="text" class="span4" name="plan_tk_title[<{$k}>]" placeholder="标题"><{$tk['title']}></textarea>
+                                            <textarea type="text" class="span6" name="plan_tk_content[<{$k}>]" placeholder="描述"><{$tk['desc']}></textarea>
+                                            <input style="margin-left: 10px;" type="button" class="btn btn-success" id='js-btn-tk-add' value="添加">
+                                        </div>
+                                    <input type="hidden" class="js-txt-tk-count">
+                                        <{else}>
+                                        <div class="span12" style="margin: 10px 0 0 0">
+                                            <textarea type="text" class="span4" name="plan_tk_title[<{$k}>]" placeholder="标题"><{$tk['title']}></textarea>
+                                            <textarea type="text" class="span6" name="plan_tk_content[<{$k}>]" placeholder="描述"><{$tk['desc']}></textarea>
+                                            <input style="margin-left: 10px;" type="button" class="btn btn-danger js-btn-del" value="删除">
+                                        </div>
+                                    <input type="hidden" class="js-txt-tk-count">
+                                        <{/if}>
+                                        <{/foreach}>
+                                        <{/if}>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="span12">
+                                    <label class="control-label">健康要求</label>
+                                    <div class="controls" id="js-box-dm">
+                                        <{if !isset($product['Fdemand']) || (isset($product['Fdemand']) && empty($product['Fdemand']))}>
+                                        <div class="span12">
+                                            <textarea type="text" class="span4" name="demand_title[0]" placeholder="标题"></textarea>
+                                            <textarea type="text" class="span6" name="demand_content[0]" placeholder="描述"></textarea>
+                                            <input style="margin-left: 10px;" type="button" class="btn btn-success" id='js-btn-dm-add' value="添加">
+                                        </div>
+                                    <input type="hidden" class="js-txt-demand-count">
+                                        <{else}>
+                                        <{foreach $product['Fdemand'] as $k => $dm}>
+                                        <{if $k eq 0}>
+                                        <div class="span12">
+                                            <textarea type="text" class="span4" name="demand_title[<{$k}>]" placeholder="标题"><{$dm['title']}></textarea>
+                                            <textarea type="text" class="span6" name="demand_content[<{$k}>]" placeholder="描述"><{$dm['desc']}></textarea>
+                                            <input style="margin-left: 10px;" type="button" class="btn btn-success" id='js-btn-dm-add' value="添加">
+                                        </div>
+                                    <input type="hidden" class="js-txt-demand-count">
+                                        <{else}>
+                                        <div class="span12" style="margin: 10px 0 0 0">
+                                            <textarea type="text" class="span4" name="demand_title[<{$k}>]" placeholder="标题"><{$dm['title']}></textarea>
+                                            <textarea type="text" class="span6" name="demand_content[<{$k}>]" placeholder="描述"><{$dm['desc']}></textarea>
+                                            <input style="margin-left: 10px;" type="button" class="btn btn-danger js-btn-del" value="删除">
+                                        </div>
+                                    <input type="hidden" class="js-txt-demand-count">
+                                        <{/if}>
+                                        <{/foreach}>
+                                        <{/if}>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="form-actions">
                                 <input type="submit" class="btn btn-success js-btn-submit" value="提 交" />
-                                <a href="<{'/store.html'|getBaseUrl}>" class="btn" title="返回列表">返回列表</a>
+                                <a href="<{'/store.html'|getBaseUrl}>" class="btn btn-success" title="返回列表">返回列表</a>
                             </div>
                             <input type="hidden" name="product_id" value="<{$product['Fproduct_id']|default:''}>">
                             <input type="hidden" name="is_new" value="<{$is_new}>">

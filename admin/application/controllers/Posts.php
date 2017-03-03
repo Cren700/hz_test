@@ -144,15 +144,6 @@ class Posts extends BaseControllor
         echo json_encode_data($res);
     }
 
-    public function del()
-    {
-        $data = array(
-            'id' => $this->input->get('id')
-        );
-        $res = $this->posts_service->del($data);
-        echo json_encode_data($res);
-    }
-
     /**
      * 产品分类
      */
