@@ -1896,6 +1896,9 @@ section.sub_info {
     margin-bottom: 0.48rem;
     margin-top: 0.10666667rem;
 }
+.login_regit_box {
+    display: none;
+}
 .login_regit_box > p {
     font-size: 0.37333333rem;
     color: #999;

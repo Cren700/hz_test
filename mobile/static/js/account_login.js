@@ -11,6 +11,7 @@ HZ.Account_login = (function() {
                 $('.wrapRole').hide();
                 var type = $(this).attr('ref');
                 $('#js-type').val(type);
+                $('.login_regit_box').show();
             });
         });
 
