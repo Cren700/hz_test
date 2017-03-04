@@ -39,8 +39,17 @@ HZ.ProductDetail = (function() {
                 $('.page').hide();
                 $('#problem').animate({'bottom': '-100%'});               
             }); 
-        }); 
-        
+        });
+
+        $('.shareBtn').on('click', function(){
+            $('.page').show();
+            $('#share_page').animate({'bottom': 0},100);
+            $('.page').on('click', function(){
+                $('.page').hide();
+                $('#share_page').animate({'bottom': '-100%'});
+            });
+        });
+
         //轮播
         var mySwiper = new Swiper('.swiper-container',{
              autoplay : 5000,

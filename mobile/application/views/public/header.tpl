@@ -10,5 +10,6 @@
 <link href="<{$css|baseCssUrl}>" rel="stylesheet" type="text/css">
     <{/foreach}>
     <link rel="stylesheet" href="<{"style.css"|baseCssUrl}>" />
+    <link rel="stylesheet" href="<{"font-awesome.css"|baseCssUrl}>" />
     <link rel="stylesheet" href="<{"layer.css"|baseCssUrl}>" />
 </head>
