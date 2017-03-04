@@ -81,13 +81,14 @@
         <{/if}>
     </div>
 </div>
+<{assign var='currentUrl' value=('/posts.html?id='|cat:$id|getMobileUrl)}>
 <div id="bdshare_weixin_qrcode_dialog" class="bd_weixin_popup" style="display: none;">
     <div class="bd_weixin_popup_head"><span>分享到微信朋友圈</span><a href="#" onclick="return false;" class="bd_weixin_popup_close">×</a></div>
-    <div id="" class="bd_weixin_popup_main"><img id="bdshare_weixin_qrcode_dialog_qr" src="<{'/posts/code/'|cat:getCurrentUrl()|getBaseUrl}>" alt=""></div>
+    <div id="" class="bd_weixin_popup_main"><img id="bdshare_weixin_qrcode_dialog_qr" src="<{'/posts/code/'|cat:$currentUrl|getBaseUrl}>" alt=""></div>
     <div class="bd_weixin_popup_foot">打开微信，点击底部的“发现”，<br>使用“扫一扫”即可将网页分享至朋友圈。</div>
 </div>
 <div class="codePage">
-    <img src="<{'/posts/code/'|cat:getCurrentUrl()|getBaseUrl}>" alt="">
+    <img src="<{'/posts/code/'|cat:$currentUrl|getBaseUrl}>" alt="">
 </div>
 <!--
 <div times="3" id="xubox_shade3" class="xubox_shade" style="z-index:19891017; background-color:#000; opacity:0.3; filter:alpha(opacity=30);"></div>

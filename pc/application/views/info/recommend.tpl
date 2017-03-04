@@ -39,13 +39,13 @@
             </a>
             <{/if}>
             <a href="<{'/account/detail.html'|getBaseUrl}>">
-                <div class="personal_nav_item active">
+                <div class="personal_nav_item">
                     <i class="my_setting">&nbsp;</i>
                     <p>个人信息</p>
                 </div>
             </a>
             <a href="">
-                <div class="personal_nav_item">
+                <div class="personal_nav_item active">
                     <i class="recommend">&nbsp;</i>
                     <p>推荐好友</p>
                 </div>
