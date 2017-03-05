@@ -17,8 +17,31 @@
         </div>
     </form>
     <span>或</span>
+    <a href="<{'/account/phonepage.html'|getBaseUrl}>" class="other_login">使用电话号码登录</a>
     <a href="" class="other_login">使用微信登录</a>
 </div>
+<!--角色选择框-->
+<div class="wrapRole">
+    <div class="mid">
+        <img src="<{'logo.png'|baseImgUrl}>" style="margin: 0 auto 10em;display: block;" />
+        <a href="javascript:;" ref="4">
+                <span class="title">
+                   普通用户
+                </span>
+        </a>
+        <a href="javascript:;" ref="3">
+                <span class="title">
+                   媒体用户
+                </span>
+        </a>
+        <a href="javascript:;" ref="2">
+                <span class="title">
+                   商家
+                </span>
+        </a>
+    </div>
+</div>
+<input type="hidden" id='js-type' name="type" value="">
 </body>
 <{include file="public/footer.tpl"}>
 </html>

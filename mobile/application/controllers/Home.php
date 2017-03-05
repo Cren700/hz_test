@@ -53,5 +53,13 @@ class Home extends HZ_Controller
         $this->smarty->display('home/list.tpl');
     }
 
+    // 推荐引导页
+    public function recommendPage()
+    {
+        $cssArr = array('swiper.min.css');
+        $this->smarty->assign('cssArr', $cssArr);
+        $this->smarty->display('info/recommendPage.tpl');
+    }
+
 
 }

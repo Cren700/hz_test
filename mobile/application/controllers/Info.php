@@ -164,7 +164,33 @@ class Info extends BaseControllor
         );
         $res = $this->info_service->delComment($option);
         echo json_encode_data($res);
-
     }
 
+    // 需求报道页面
+    public function report()
+    {
+        $jsArr = array(
+            'info_report.js'
+        );
+        $this->smarty->assign('jsArr', $jsArr);
+        $this->smarty->display('info/report.tpl');
+    }
+
+    public function sendReport()
+    {
+        $option = array(
+            'relation' => $this->input->post('relation'),
+            'content' => $this->input->post('content'),
+            'type' => 1, // 需求报道
+        );
+        $res = $this->info_service->sendReport($option);
+        echo json_encode_data($res);
+    }
+
+    // 推荐页面
+    public function recommend()
+    {
+        $this->smarty->display('info/recommend.tpl');
+    }
+    
 }

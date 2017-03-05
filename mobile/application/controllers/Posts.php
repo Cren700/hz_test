@@ -83,5 +83,10 @@ class Posts extends HZ_Controller
         $this->smarty->assign('keyword', $this->input->get('keyword'));
         $this->smarty->display('posts/search.tpl');
     }
+
+    public function code($url)
+    {
+        qrcode(urldecode($url));
+    }
         
 }

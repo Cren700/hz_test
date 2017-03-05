@@ -137,6 +137,17 @@ h3{font-size:16px;font-weight:normal;}
 .foot_content_r a.wechat .wechat_lay_img img{width:100%;}
 .foot_content_r a.wechat:hover .wechat_lay_img{display:block;}
 
+/*.company_icon{ height: 150px;}*/
+.company_icon a{display:inline-block;width:48px;height:48px;margin-left:34px;background:url(../img/icons.png) no-repeat;}
+.company_icon a.weibo{background-position:0px -128px;}
+.company_icon a.weibo:hover{background-position:0px -76px;}
+.company_icon a.wechat{background-position:-52px -128px;position:relative;}
+.company_icon a.wechat:hover{background-position:-52px -77px;}
+/*.foot_content_r a.qq{background-position:-104px -128px;}
+.foot_content_r a.qq:hover{background-position:-104px -77px;}*/
+.foot_content_r a.wechat .wechat_lay_img{width:120px;height:120px;border:1px solid #eee;position:absolute;left:50%;margin-left:-60px;bottom:65px;overflow:hidden;display:none;}
+.foot_content_r a.wechat .wechat_lay_img img{width:100%;}
+.foot_content_r a.wechat:hover .wechat_lay_img{display:block;}
 
 /*GO-top*/
 .float_layer{width:48px;height:97px;border:1px solid #e0e0e0;position:fixed;bottom:150px;right:10px;cursor:pointer;}
@@ -402,7 +413,7 @@ h3{font-size:16px;font-weight:normal;}
 .layer_close{position:absolute;right:-24px;top:-24px;width:48px;height:48px;background:url(../img/icons.png) no-repeat -260px -77px;cursor:pointer;}
 
 /*login css*/
-.login_content{width:600px;margin:50px auto;text-align:center;min-height:700px}
+.login_content{width:600px;margin:50px auto;text-align:center;min-height:700px;display:none}
 .login_content>.logo{display:block;width:211px;height:55px;margin:0 auto;}
 .login_content>.logo img{width:100%;}
 .login_content .welogin{margin:10px 0 20px;font-size:16px;}
@@ -607,4 +618,9 @@ h3{font-size:16px;font-weight:normal;}
     line-height: 60px;
     border-radius: 5px;
     margin: 0 auto;
+}
+#js-wechat-qrcode {
+	position: relative;
+	right: 0;
+	top: -20px;
 }

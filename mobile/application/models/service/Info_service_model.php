@@ -70,4 +70,9 @@ class Info_service_model extends HZ_Model
     {
         return $this->myCurl('posts', 'userDelComment', $option, true);
     }
+
+    public function sendReport($option)
+    {
+        return $this->myCurl('promo', 'sendReport', $option, true);
+    }
 }

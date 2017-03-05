@@ -119,7 +119,9 @@ class Account_dao_model extends HZ_Model
     public function getUserBaseInfoByFid($where)
     {
         dbEscape($where);
-        $res = $this->account->get_where($this->_user_table, $where)->row_array();
+        $res = $this->account->select('Fid, Fuser_id, Fuser_type, Flog_type, Fis_blackuser, Fstatus, Fcreate_time, Fupdate_time, Fremark, Frecommend_uid')
+            ->get_where($this->_user_table, $where)
+            ->row_array();
         return filterData($res);
     }
 

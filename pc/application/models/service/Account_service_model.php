@@ -13,14 +13,10 @@ class Account_service_model extends HZ_Model
         parent::__construct();
     }
 
-    public function add($user_id, $passwd)
+    public function add($option)
     {
-        $data = array(
-            'user_id'   => $user_id,
-            'passwd'    => $passwd,
-            'recommend_uid' => $this->session->userdata('_re')
-        );
-        $res = $this->myCurl('account', 'addAccount', $data, true);
+        $option['recommend_uid'] = $this->session->userdata('_re');
+        $res = $this->myCurl('account', 'addAccount', $option, true);
         if ($res['code'] == 0) {
             // 保存session
             $res['data']['url'] = getBaseUrl('/home.html');

@@ -15,6 +15,7 @@ HZ.Account_phone = (function() {
         $('.mid a').each(function(index){
             $(this).on('click', function () {
                 $('.wrapRole').hide();
+                $('.login_content').show();
                 var type = $(this).attr('ref');
                 $('#js-type').val(type);
             });

@@ -61,9 +61,12 @@ class Account extends HZ_Controller
      */
     public function doRegister()
     {
-        $user_id = $this->input->post('user_id');
-        $passwd = $this->input->post('passwd');
-        $res = $this->account_service_model->add($user_id, $passwd);
+        $option = array(
+            'user_id' => $this->input->post('user_id'),
+            'passwd' => $this->input->post('passwd'),
+            'type' => $this->input->post('type'),
+        );
+        $res = $this->account_service_model->add($option);
         echo json_encode_data($res);
     }
 

@@ -98,26 +98,28 @@
                 <h3>联系我们</h3>
                 <p>kefu@imhuzhu.com</p>
                 <p>0755-22724880</p>
-                <p>
-                    <a href="" class="weibo"></a>
-                    <a href="" class="wechat"></a>
-                    <a href="" class="qq"></a>
-                </p>
+                <div>
+                    <p class="company_icon">
+                        <a href="http://weibo.com/p/1006065969398161/home" target="_blank" class="weibo"></a>
+                        <a href="javascript:void(0);" class="wechat" id="js-wechat"></a>
+                        <a href="javascript:void(0);" style="display: none;" id='js-wechat-qrcode'><img  src="<{'qrcode.png'|baseImgUrl}>" alt="" style=" float: left"></a>
+                    </p>
+                </div>
                 <p class="address">深圳市香林路财富广场B座</p>
-                <img src=""/>
+                <img src="<{'map.png'|baseImgUrl}>"/>
             </div>
         </div>
         <div class="layer_right">
             <div class="layer_right_con">
-                <p>成为专栏专家</p>
+                <p>需求报道</p>
                 <form method="post" action="">
                     <dl>
                         <dt>您的联系方式</dt>
-                        <dd><input type="text" class="contact_phone" name=""></dd>
-                        <dt>个人简介</dt>
-                        <dd><textarea></textarea></dd>
+                        <dd><input type="text" class="contact_phone" name="relation"></dd>
+                        <dt>报道介绍</dt>
+                        <dd><textarea name='content' ></textarea></dd>
                     </dl>
-                    <input type="button" class="comment_btn" value="发送">
+                    <input type="button" id="js-btn-send" class="comment_btn" value="发送">
                 </form>
             </div>
         </div>
@@ -126,5 +128,18 @@
     <input type="hidden" name="cate_id" value="<{$cate_id}>">
 </div>
 <{include file='public/footer.tpl'}>
+
+<script type="text/javascript">
+    $(function(){
+        $('#js-wechat').on({
+            'mouseenter': function(){
+                $('#js-wechat-qrcode').show();
+            },
+            'mouseleave': function () {
+                $('#js-wechat-qrcode').hide();
+            }
+        });
+    })
+</script>
 </body>
 </html>

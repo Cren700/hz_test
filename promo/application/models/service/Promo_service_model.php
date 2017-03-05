@@ -250,4 +250,14 @@ class Promo_service_model extends HZ_Model {
         }
         return $ret;
     }
+
+    public function sendReport($data)
+    {
+        $ret = array('code' => 0);
+        $res = $this->promo_dao->sendReport($data);
+        if (!$res) {
+            $ret['code'] = 'system_error_2';
+        }
+        return $ret;
+    }
 }

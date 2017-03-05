@@ -146,4 +146,8 @@ class Posts_service_model extends HZ_Model
         return $this->myCurl('posts', 'getThreeNews', array(), false);
     }
 
+    public function sendReport($option)
+    {
+        return $this->myCurl('promo', 'sendReport', $option, true);
+    }
 }

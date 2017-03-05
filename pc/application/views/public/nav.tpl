@@ -35,7 +35,6 @@
                         <{if $user_type eq 3}>
                         <!--媒体star-->
                         <li><a href="<{'/mudium.html'|getBaseUrl}>">文章列表</a></li>
-                        <li><a href="<{'/about/report.html'|getBaseUrl}>">平台寻求报道</a></li>
                         <!--媒体end-->
                         <{/if}>
                         <{if $user_type eq 2}>

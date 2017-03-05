@@ -68,4 +68,15 @@ class Home extends HZ_Controller
         echo $this->smarty->display('home/eventList.tpl');
     }
 
+    public function sendReport()
+    {
+        $option = array(
+            'relation' => $this->input->post('relation'),
+            'content' => $this->input->post('content'),
+            'type' => 1, // 需求报道
+        );
+        $res = $this->posts_service->sendReport($option);
+        echo json_encode_data($res);
+    }
+
 }

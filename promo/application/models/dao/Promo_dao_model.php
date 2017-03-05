@@ -4,6 +4,7 @@ class Promo_dao_model extends HZ_Model {
     private $_promo_table = 't_adv_prom';//广告表
     private $_promo_rule = 't_promo_rule';//推广规则表
     private $_expand = 't_expand';//返利信息表
+    private $_report = 't_report';//用户反馈表
 	private $p = null;//广告库
 
 	public function __construct() {
@@ -103,5 +104,11 @@ class Promo_dao_model extends HZ_Model {
     public function addOrderExpand($data)
     {
         return $this->p->insert($this->_expand, $data);
+    }
+
+    public function sendReport($data)
+    {
+        $_db = $this->load->database('common', true);
+        return $_db->insert($this->_report, $data);
     }
 }

@@ -87,7 +87,7 @@
             <p>请沿虚线截图，发送给好友</p>
             <div class="recom_img_box">
                 <div class="recom_img">
-                    <img src="<{'/posts/code/'|cat:('/account.html'|getMobileUrl)|getBaseUrl}>">
+                    <img src="<{'/posts/code/'|cat:('/home/recommendPage.html'|getMobileUrl)|getBaseUrl}>">
                 </div>
                 <p>微信识别二维码，即刻体验</p>
             </div>

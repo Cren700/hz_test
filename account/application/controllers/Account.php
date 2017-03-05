@@ -18,7 +18,7 @@ class Account extends BaseController {
         $data = array();
 		$data['Fuser_id'] = $this->input->post('user_id');
 		$data['Fpasswd'] = $this->input->post('passwd');
-		$data['Fuser_type'] = $this->input->post('user_type') ? : '4';
+		$data['Fuser_type'] = $this->input->post('type') ? : '4';
         $data['Frecommend_uid'] = $this->input->post('recommend_uid');
         $data['Fcreate_time'] = time();
         $data['Fupdate_time']  = time();

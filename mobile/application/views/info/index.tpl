@@ -1,6 +1,6 @@
 <{include file="public/header.tpl"}>
 <body>
-<section class="mylogin">
+<section class="mylogin" style="padding-bottom: 0">
     <div class="user_name">
         <a class="user_avatar" href="<{'/account/detail.html'|getBaseUrl}>">
             <img src="<{if $user['Fimage_path']}><{$user['Fimage_path']}><{else}><{'avatar.jpg'|baseImgUrl}><{/if}>">
@@ -25,12 +25,6 @@
         <p>
             <a href="<{'/info/medium.html'|getBaseUrl}>">文章列表</a>
         </p>
-        <p>
-            <a href="<{'/about/contribute.html'|getBaseUrl}>">投稿、成为专栏作家</a>
-        </p>
-        <p>
-            <a href="javascript:;">平台寻求报道</a>
-        </p>
         <!--媒体end-->
         <{/if}>
         <{if $user_type eq 2}>
@@ -44,7 +38,10 @@
         <!--商户end-->
         <{/if}>
         <p>
-            <a href="javascript:;">推荐有奖</a>
+            <a href="<{'/info/report.html'|getBaseUrl}>">平台寻求报道</a>
+        </p>
+        <p>
+            <a href="<{'/info/recommend.html'|getBaseUrl}>">推荐有奖</a>
         </p>
         <p>
             <a href="<{'/account/set.html'|getBaseUrl}>">设置</a>

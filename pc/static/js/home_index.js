@@ -11,6 +11,8 @@ HZ.Home = (function() {
 
         _getEventList();
 
+        _sendReport();
+
         $('#js-btn-more').on('click', function(e) {
             e.preventDefault();
             _getList(++p);
@@ -19,7 +21,7 @@ HZ.Home = (function() {
         $('#js-event-move').on('click', function (e) {
             e.preventDefault();
             _getEventList(++pe);
-        })
+        });
 
         $(document).on('scroll resize',function(){
             var docTop = $(document).scrollTop();
@@ -82,6 +84,30 @@ HZ.Home = (function() {
                     $("#js-event-move").remove();
                 }
             }
+        });
+    }
+
+    function _sendReport()
+    {
+        $('#js-btn-send').on('click', function(){
+            var relation = $('input[name="relation"]').val();
+            var content = $('textarea[name="content"]').val();
+            var data = {relation: relation, content: content};
+            var url = baseUrl + '/home/sendReport.html';
+            $.ajax({
+                data: data,
+                type: "post",
+                dataType: "json",
+                url: url,
+                success: function (res) {
+                    if (res.code === 0) {
+                        alertInfo('提交成功,后续客服将于您联系!');
+                        $('.layer_close').click();
+                    } else {
+                        alertInfo(res.Msg);
+                    }
+                }
+            })
         });
     }
 

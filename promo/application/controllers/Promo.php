@@ -154,4 +154,15 @@ class Promo extends HZ_Controller {
         echo outputResponse($res);
     }
 
+    public function sendReport()
+    {
+        $data = array(
+            'Ftype' => $this->input->post('type'),
+            'Frelation' => $this->input->post('relation'),
+            'Fcontent' => $this->input->post('content')
+        );
+        $res = $this->promo_service->sendReport($data);
+        echo outputResponse($res);
+
+    }
 }
