@@ -6,7 +6,7 @@
     </a>
     <span class="search-cart-common">
         <a href="<{'/shop.html'|getBaseUrl}>" class="icon-cart1"></a>
-        <img src="http://www.dev.huzhu.com/mobile/static/img/star copy 3.png" class="shareBtn" />
+        <img src="<{'star_copy_3.png'|baseImgUrl}>" class="shareBtn" />
     </span>
 </section>
 <section class="general">

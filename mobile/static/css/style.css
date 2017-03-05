@@ -2973,7 +2973,7 @@ label#lblSelect::after {
     width: 22px;
     position: absolute;
     top: 50%;
-    right: 4em;
+    right: 3em;
     -webkit-transform: translate3d(-50%,-50%,0);
     -moz-transform: translate3d(-50%,-50%,0);
     transform: translate3d(-50%,-50%,0);
