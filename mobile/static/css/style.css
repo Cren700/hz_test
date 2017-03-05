@@ -56,7 +56,7 @@ img {
 }
 html,
 body {
-    font-size: 0.3rem;
+    font-size: 0.5rem;
 }
 header {
     width: 100%;
@@ -1519,7 +1519,7 @@ section.mylogin {
     padding-bottom: 1.70666667rem;
     height: 100%;
     background-color: #ffffff;
-    margin-bottom: 1.70666667rem;
+    margin-bottom: 2rem;
 }
 .user_name {
     height: 4.56rem;
@@ -3063,7 +3063,7 @@ label#lblSelect::after {
     -webkit-box-sizing:border-box;
     -moz-box-sizing:border-box;
     box-sizing:border-box;
-    font-size:.15em;
+    font-size:0.4rem;
     padding: 0.2rem 0.4rem;
     border-top:1px solid #ababab;
     border-bottom:1px solid #ababab;
@@ -3167,12 +3167,12 @@ label#lblSelect::after {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    font-size: .21em;
+    font-size: 0.4rem;
     font-weight: 700;
     color: #000;
 }
 .pro_title_right,.pro_title2 div{
-    font-size: .15em;
+    font-size: 0.4rem;
     width: 43%;
     overflow: hidden;
     white-space: nowrap;
@@ -3182,7 +3182,7 @@ label#lblSelect::after {
     margin-right: .2em;
 }
 .pro_title1,.pro_title2{
-    margin-bottom: .1em;
+    margin-bottom: 0.1rem;
 }
 .txtarea_detail{
     margin: 0rem 0.32rem;
