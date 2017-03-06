@@ -11,6 +11,7 @@ class HZ_Controller extends CI_Controller
     protected $_uid = null;
     protected $_user_id = null;
     protected $_user_type = null;
+    protected $_log_type = null;
     protected $_recommend_uid = null;
 
     public function __construct(){
@@ -58,9 +59,11 @@ class HZ_Controller extends CI_Controller
         $this->_uid = $this->session->userdata('m_uid');
         $this->_user_id = $this->session->userdata('m_username');
         $this->_user_type = $this->session->userdata('m_type');
+        $this->_log_type = $this->session->userdata('m_log_type');
         $this->smarty->assign('username', $this->_user_id);
         $this->smarty->assign('uid', $this->_uid);
         $this->smarty->assign('user_type', $this->_user_type);
+        $this->smarty->assign('log_type', $this->_log_type);
 
         // 是否存在推荐者
         $this->_recommend_uid = base64_decode($this->input->get('_re'));

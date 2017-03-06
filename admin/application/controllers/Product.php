@@ -294,33 +294,62 @@ class Product extends BaseControllor
     }
 
     /**
-     * 提交评论
+     * 评论列表页
      */
-    public function submitComment()
+    public function comment()
+    {
+        $cate = $this->product_service->category();
+        $cssArr = array('datepicker.css');
+        $jsArr = array(
+            'plugin/bootstrap-datepicker.js',
+            'product/comment.js'
+        );
+        $this->smarty->assign('cate', isset($cate['data'])) ? $cate['data'] : array();
+        $this->smarty->assign('jsArr', $jsArr);
+        $this->smarty->assign('cssArr', $cssArr);
+        $this->smarty->display('product/comment.tpl');
+    }
+
+    public function queryComment()
+    {
+        $option = array(
+            'p' => $this->input->get('p') ? : 1 ,
+            'page_size' => $this->input->get('n') ? : 10,
+            'pro_id'   => $this->input->get('pro_id'),
+            'user_name'   => $this->input->get('author_name'),
+            'comment_approved' => $this->input->get('comment_approved'),
+            'min_date' => $this->input->get('min_date'),
+            'max_date' => $this->input->get('max_date'),
+        );
+        $comment = $this->product_service->queryComment($option);
+        $this->smarty->assign('info', $comment['data']);
+        $this->smarty->assign('page', $this->page($comment['data']['count'], $option['p'], $option['page_size'], ''));
+        echo $this->smarty->display('product/commentList.tpl');
+    }
+
+    /**
+     * 评论状态
+     */
+    public function statusComment()
     {
         $data = array(
-            'Fcomment_pro_id' => $this->input->post('pro_id', true),
-            'Fcomment_uid' => $this->input->post('uid', true),
-            'Fcomment_user_name' => $this->input->post('user_name', true),
-            'Fcomment_ip' => $this->input->post('ip', true),
-            'Fcomment_date' => time(),
-            'Fcomment_content' => $this->input->post('content')
+            'status'    => $this->input->post('status'),
+            'comment_id'       => $this->input->post('comment_id'),
         );
-        $res = $this->product_service->submitComment($data);
-        echo outputResponse($res);
+        $res = $this->product_service->statusComment($data);
+        echo json_encode_data($res);
     }
-    
+
     /**
      * 删除评论
      */
     public function delComment()
     {
-        $where = array(
-            'Fcomment_id' => $this->input->post('comment_id', true),
+        $data = array(
+            'comment_id' => $this->input->post('comment_id')
         );
-        $res = $this->product_service->delComment($where);
-        echo outputResponse($res);
+        $res = $this->product_service->delComment($data);
+        echo json_encode_data($res);
     }
-
 
 }

@@ -11,9 +11,11 @@
         <p>
             <a href="<{'/about/index.html'|getBaseUrl}>">关于互助之家</a>
         </p>
+        <{if $log_type == 0}>
         <p>
             <a href="<{'/account/pwd.html'|getBaseUrl}>">修改密码</a>
         </p>
+        <{/if}>
         <p>
             <a href="<{'/account/logout.html'|getBaseUrl}>">退出</a>
         </p>

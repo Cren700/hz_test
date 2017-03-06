@@ -325,4 +325,5 @@ class Product extends HZ_Controller
         $res = $this->product_service->query($option);
         echo outputResponse($res);
     }
+
 }

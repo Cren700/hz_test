@@ -1,7 +1,8 @@
 <{include file='public/header.tpl'}>
 <body>
-<section class="login_regit">
-    <div class="login_regit_box">
+<{include file="public/header_back.tpl"}>
+<section class="login_regit" style="margin-top: 1rem">
+    <div class="login_regit_box" style="display: block">
         <div class="login_logo">
             <img src="<{'logo.png'|baseImgUrl}>">
         </div>

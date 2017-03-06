@@ -1,5 +1,6 @@
 <{include file="public/header.tpl"}>
 <body>
+<{include file="public/header_back.tpl"}>
 <section>
     <div class="about_sec">
         <h2>关于互助之家</h2>

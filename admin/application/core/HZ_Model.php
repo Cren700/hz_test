@@ -58,7 +58,7 @@ class HZ_Model extends CI_Model
         }
 
         $res = curl_exec($ch);
-//         if($control == "hasPostsPower")
+//         if($control == "queryComment")
 //         {
 //             echo $res;die;
 //         }

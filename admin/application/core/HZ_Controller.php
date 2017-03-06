@@ -200,6 +200,12 @@ class HZ_Controller extends CI_Controller
                     array(
                         'selected'  => '0',
                         'show'      => '0',
+                        'name'      => '商品评论',
+                        'flagName'  => 'comment',
+                    ),
+                    array(
+                        'selected'  => '0',
+                        'show'      => '0',
                         'name'      => '商品回收站',
                         'flagName'  => 'recycle',
                     ),

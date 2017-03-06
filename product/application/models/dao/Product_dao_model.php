@@ -214,7 +214,7 @@ class Product_dao_model extends HZ_Model
     public function proCommentList($where, $like, $page, $page_size) {
         dbEscape($like);
         dbEscape($where);
-        $query = $this->p->select('c.*, p.Fpost_title')
+        $query = $this->p->select('c.*, p.Fproduct_name')
             ->from($this->_pro_comments_table . ' as c')
             ->join($this->_product_table.' as p', 'c.Fcomment_pro_id = p.Fproduct_id', 'left')
             ->where($where)

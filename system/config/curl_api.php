@@ -75,10 +75,12 @@ $config = array(
             'hasProductPower'       => '/product/hasProductPower',         // 是否具有产品权限
             'updateProductCnt'      => '/product/updateProductCnt',     // 更新产品的加入数量和案例数量
             'maybeLike'             => '/product/maybeLike',            // 猜你喜欢
-            'submitComment'         => '/product/submitComment',       // 提交评论
-            'delComment'            => '/product/delComment',             // 删除评论
             'getCommentListByPid'   => '/product/getCommentListByPid',  // 获取产品评论信息
             'getStoreProduct'       => '/product/getStoreProduct',      // 商户所有产品
+            'submitComment'         => '/product/submitComment',       // 提交评论
+            'queryComment'          => '/product/queryComment',           // 查询评论
+            'statusComment'         => '/product/statusComment',          // 评论状态
+            'delComment'            => '/product/delComment',             // 删除评论
         ),
     ),
     'posts' => array(

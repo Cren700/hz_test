@@ -3,7 +3,7 @@
 <section class="login_regit">
     <div class="login_regit_box">
         <div class="login_logo">
-            <img src="<{'logo.png'|baseImgUrl}>">
+            <a href="<{'/home'|getBaseUrl}>"><img src="<{'logo.png'|baseImgUrl}>"></a>
         </div>
         <p id="p_res">手机号码登录</p>
         <form id="loginform" method="post" action="">

@@ -101,7 +101,7 @@ class Account_service_model extends HZ_Model
             return array('code' => 'account_error_1');         // 账户密码不一致
         } else {
             $detail = $this->account_dao_model->getDetailByOp(array('Fuser_id' => $info['Fid']), $type);
-            $resData = array('uid' => $info['Fid'], 'username' => $info['Fuser_id'], 'user_type' => $info['Fuser_type'], 'image_path' => isset($detail['Fimage_path']) ? $detail['Fimage_path'] : '');
+            $resData = array('uid' => $info['Fid'], 'username' => $info['Fuser_id'], 'user_type' => $info['Fuser_type'], 'image_path' => isset($detail['Fimage_path']) ? $detail['Fimage_path'] : '', 'log_type' => $info['Flog_type']);
             $type == 'admin' ? $resData['role_id'] = $info['Frole_id'] : '';
             return array('code' => 0, 'data' => $resData);
         }

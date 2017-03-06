@@ -85,4 +85,20 @@ class Product_service_model extends HZ_Model
     {
         return $this->myCurl($this->_api, 'queryCollect', $data, false);
     }
+
+    // 获取评论列表
+    public function queryComment($data)
+    {
+        return $this->myCurl($this->_api, 'queryComment', $data, false);
+    }
+
+    public function statusComment($data)
+    {
+        return $this->myCurl($this->_api, 'statusComment', $data, true);
+    }
+
+    public function delComment($data)
+    {
+        return $this->myCurl($this->_api, 'delComment', $data, true);
+    }
 }

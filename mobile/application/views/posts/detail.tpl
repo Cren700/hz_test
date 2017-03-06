@@ -22,10 +22,22 @@
         </p>
         <{/if}>
 
-        <p style="display: inline">马上分享: </p>
-        <div class="bdsharebuttonbox"><a href="#" class="bds_weixin" data-cmd="weixin"></a><a href="#" class="bds_qzone" data-cmd="qzone"></a><a href="#" class="bds_tsina" data-cmd="tsina"></a><a href="#" class="bds_tqq" data-cmd="tqq"></a><a href="#" class="bds_more" data-cmd="more"></a></div>
-        <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{},"image":{"viewList":["weixin","qzone","tsina","tqq","renren"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["weixin","qzone","tsina","tqq","renren"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
-
+        <div>
+            <p style="float: left; font-size: 0.4rem; line-height: 1rem; height: 1rem; padding-right: 0.3rem;">马上分享: </p>
+            <div style="float: left;padding-top: 0.2rem; height: 1rem; line-height: 1rem;">
+                <!-- JiaThis Button BEGIN -->
+                <div class="jiathis_style_24x24">
+                    <a class="jiathis_button_cqq"></a>
+                    <a class="jiathis_button_qzone"></a>
+                    <a class="jiathis_button_tsina"></a>
+                    <a class="jiathis_button_tqq"></a>
+                    <a class="jiathis_button_renren"></a>
+                </div>
+                <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
+                <!-- JiaThis Button END -->
+            </div>
+        </div>
+        <div style="clear: both"></div>
         <{if $promo}>
         <div class="detail_ad">
             <a href="<{$promo['Factive_url']}>" title="<{$promo['Factive_name']}>">

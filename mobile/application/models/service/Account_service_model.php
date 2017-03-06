@@ -20,7 +20,7 @@ class Account_service_model extends HZ_Model
         if ($res['code'] == 0) {
             // 保存session
             $res['data']['url'] = getBaseUrl('/home.html');
-            $session = array('m_uid' => $res['data']['Fid'], 'm_username' => $res['data']['Fuser_id'], 'm_type' => $res['data']['Fuser_type']);
+            $session = array('m_uid' => $res['data']['Fid'], 'm_username' => $res['data']['Fuser_id'], 'm_type' => $res['data']['Fuser_type'], 'm_log_type' => $res['data']['Flog_type']);
             $this->session->set_userdata($session);
         }
         return $res;
@@ -37,7 +37,7 @@ class Account_service_model extends HZ_Model
         if ($res['code'] == 0) {
             // 保存session
             $res['data']['url'] = getBaseUrl('/home.html');
-            $session = array('m_uid' => $res['data']['uid'], 'm_username' => $res['data']['username'], 'm_type' => $res['data']['user_type']);
+            $session = array('m_uid' => $res['data']['uid'], 'm_username' => $res['data']['username'], 'm_type' => $res['data']['user_type'], 'm_log_type' => $res['data']['Flog_type']);
             $this->session->set_userdata($session);
         }
         return $res;
@@ -94,7 +94,7 @@ class Account_service_model extends HZ_Model
         if ($res['code'] == 0) {
             // 保存session
             $res['data']['url'] = getBaseUrl('/home.html');
-            $session = array('m_uid' => $res['data']['Fid'], 'm_username' => $res['data']['Fuser_id'], 'm_type' => $res['data']['Fuser_type']);
+            $session = array('m_uid' => $res['data']['Fid'], 'm_username' => $res['data']['Fuser_id'], 'm_type' => $res['data']['Fuser_type'], 'm_log_type' => $res['data']['Flog_type']);
             $this->session->set_userdata($session);
         }
         return $res;
@@ -148,7 +148,7 @@ class Account_service_model extends HZ_Model
         if ($res['code'] == 0) {
             // 保存session
             $ret['data']['url'] = getBaseUrl('/home.html');
-            $session = array('m_uid' => $res['data']['Fid'], 'm_username' => $res['data']['Fuser_id'], 'm_type' => $res['data']['Fuser_type']);
+            $session = array('m_uid' => $res['data']['Fid'], 'm_username' => $res['data']['Fuser_id'], 'm_type' => $res['data']['Fuser_type'], 'm_log_type' => $res['data']['Flog_type']);
             $this->session->set_userdata($session);
         } else {
             $ret['code'] = $res['code'];
