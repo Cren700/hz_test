@@ -216,7 +216,7 @@ class Account extends HZ_Controller
         $appid = $this->config->item('appid');
         $bakUrl = $this->config->item('log_bak_url');
         $url = 'https://open.weixin.qq.com/connect/qrconnect?appid='.$appid.'&redirect_uri='.$bakUrl.'&response_type=code&scope=snsapi_login&state='.$state.'#wechat_redirect';
-        https://open.weixin.qq.com/connect/qrconnect?appid=wx0ab6bc88e6d36a93&scope=snsapi_login&redirect_uri=http%3a%2f%2fwww.imhuzhu.com%2fwxlogin.aspx&state=&login_type=jssdk
+//        https://open.weixin.qq.com/connect/qrconnect?appid=wx0ab6bc88e6d36a93&scope=snsapi_login&redirect_uri=http%3a%2f%2fwww.imhuzhu.com%2fwxlogin.aspx&state=&login_type=jssdk
         header("Location:".$url);
     }
 

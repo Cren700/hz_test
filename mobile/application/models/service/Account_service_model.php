@@ -37,7 +37,7 @@ class Account_service_model extends HZ_Model
         if ($res['code'] == 0) {
             // 保存session
             $res['data']['url'] = getBaseUrl('/home.html');
-            $session = array('m_uid' => $res['data']['uid'], 'm_username' => $res['data']['username'], 'm_type' => $res['data']['user_type'], 'm_log_type' => $res['data']['Flog_type']);
+            $session = array('m_uid' => $res['data']['uid'], 'm_username' => $res['data']['username'], 'm_type' => $res['data']['user_type'], 'm_log_type' => isset($res['data']['Flog_type']) ? $res['data']['Flog_type'] : 0);
             $this->session->set_userdata($session);
         }
         return $res;

@@ -12,6 +12,7 @@ class User extends BaseControllor
     {
         parent::__construct();
         $this->load->model('service/user_service_model', 'user_service');
+        $this->load->model('service/freeback_service_model', 'freeback_service');
     }
 
     public function index()
@@ -406,6 +407,38 @@ class User extends BaseControllor
         $this->smarty->assign('cssArr', $cssArr);
         $this->smarty->assign('user', $res['data']);
         $this->smarty->display('user/adminInfo.tpl');
+    }
+
+    public function freeback()
+    {
+        $jsArr = array(
+            'user/freeback.js'
+        );
+        $this->smarty->assign('jsArr', $jsArr);
+        $this->smarty->display('user/freeback.tpl');
+    }
+
+    public function queryFreeback()
+    {
+        $option = array(
+            'status' => $this->input->get('status'),// 状态
+            'p' => $this->input->get('p') ? : 1,
+            'page_size' => $this->input->get('page_size'),
+        );
+        $user = $this->freeback_service->queryFreeback($option);
+        $this->smarty->assign('info', $user['data']);
+        $this->smarty->assign('page', $this->page($user['data']['count'], $option['p'], $option['page_size'], ''));
+        echo $this->smarty->display('user/freebackList.tpl');
+    }
+
+    public function freebackStatus()
+    {
+        $option = array(
+            'status' => $this->input->get('status'),
+            'id' => $this->input->get('id')
+        );
+        $res = $this->freeback_service->freebackStatus($option);
+        echo json_encode_data($res);
     }
 
 }

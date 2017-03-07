@@ -189,6 +189,9 @@ $config = array(
             'getRuleByType'          => '/promo/getRuleByType', //根据推荐类型获取数据
             'addOrderExpand'         => '/promo/addOrderExpand', //添加返利记录
             'sendReport'             => '/promo/sendReport',    // 用户反馈信息
+            'queryFreeback'          => '/promo/queryFreeback', // 用户反馈列表
+            'freebackStatus'         => '/promo/freebackStatus', // 处理反馈状态
+            'delFreeback'            => '/promo/delFreeback', // 删除反馈状态
         ),
     ),
 );

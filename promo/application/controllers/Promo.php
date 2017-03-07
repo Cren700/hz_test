@@ -154,6 +154,7 @@ class Promo extends HZ_Controller {
         echo outputResponse($res);
     }
 
+    // 用户反馈
     public function sendReport()
     {
         $data = array(
@@ -163,6 +164,41 @@ class Promo extends HZ_Controller {
         );
         $res = $this->promo_service->sendReport($data);
         echo outputResponse($res);
-
     }
+
+    // 反馈信息列表
+    public function queryFreeback()
+    {
+        $option = array(
+            'Fstatus' => $this->input->get('status'),
+            'p' => $this->input->get('p') ? : 1,
+            'page_size' => $this->input->get('page_size'),
+        );
+        $res = $this->promo_service->queryFreeback($option);
+        echo outputResponse($res);
+    }
+
+    // 处理反馈状态
+    public function freebackStatus()
+    {
+        $data = array(
+            'Fstatus' => $this->input->post('status'),
+        );
+        $where = array(
+            'Fid'   => $this->input->post('id')
+        );
+        $res = $this->promo_service->freebackStatus($data, $where);
+        echo outputResponse($res);
+    }
+
+    // 删除反馈状态
+    public function delFreeback()
+    {
+        $where = array('Fid' => $this->input->get('id'));
+        $res = $this->promo_service->delFreeback($where);
+        echo outputResponse($res);
+    }
+
+
+
 }

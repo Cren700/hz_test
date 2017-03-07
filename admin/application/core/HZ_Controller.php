@@ -163,6 +163,12 @@ class HZ_Controller extends CI_Controller
                         'show'      => '0',
                         'name'      => '黑名单列表',
                         'flagName'  => 'blacklist',
+                    ),
+                    array(
+                        'selected'  => '0',
+                        'show'      => '0',
+                        'name'      => '反馈列表',
+                        'flagName'  => 'freeback',
                     )
                 )
             ),

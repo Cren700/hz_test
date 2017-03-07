@@ -260,4 +260,50 @@ class Promo_service_model extends HZ_Model {
         }
         return $ret;
     }
+
+    public function freebackStatus($data, $where)
+    {
+        $ret = array('code' => 0);
+        if (empty($data) || empty($where)) {
+            $ret['code'] = 'system_error_2'; // 无信息
+            return $ret;
+        }
+        $res = $this->promo_dao->freebackStatus($data, $where);
+        if ($res) {
+            return $ret;
+        } else {
+            return $ret['code'] = 'posts_error_7';
+        }
+    }
+
+    //查询广告
+    public function queryFreeback($option) {
+        $res = array('code' => 0);
+        $where = array();
+
+        if(!empty($option['Fstatus'])) {
+            $where['Fstatus'] = $option['Fstatus'];
+        }
+
+        $page = $option['p'] ? : 1;
+        $page_size = $option['page_size'];
+
+        $res['data']['count'] = $this->promo_dao->freebackNum($where);
+        $res['data']['list']  = $this->promo_dao->freebackList($where,$page,$page_size);
+        return $res;
+    }
+
+    public function delFreeback($where) {
+        $ret = array('code' => 0);
+        if (!isset($where['Fid']) && empty($where['Fid'])) {
+            $ret['code'] = 'system_error_2'; // 操作出错
+            return $ret;
+        }
+        $res = $this->promo_dao->delFreeback($where);
+        if ($res) {
+            return $ret;
+        } else {
+            return $ret['code'] = 'promo_error_6';
+        }
+    }
 }

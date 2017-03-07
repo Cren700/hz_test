@@ -111,4 +111,41 @@ class Promo_dao_model extends HZ_Model {
         $_db = $this->load->database('common', true);
         return $_db->insert($this->_report, $data);
     }
+
+    public function freebackNum($where) {//获取某个广告
+        $_db = $this->load->database('common', true);
+        dbEscape($where);
+        $_db->select('count(*) as num');
+        $_db->from($this->_report);
+        $_db->where($where);
+        $count = $_db->count_all_results();
+        return $count;
+    }
+
+    public function freebackStatus($data, $where)
+    {
+        dbEscape($data);
+        dbEscape($where);
+        $_db = $this->load->database('common', true);
+        return $_db->update($this->_report, $data, $where);
+    }
+
+    //查询获取反馈信息
+    public function freebackList($where,$page,$page_size) {
+        $_db = $this->load->database('common', true);
+        dbEscape($where);
+        $_db->select('*');
+        $_db->from($this->_report);
+        $_db->where($where);
+        $_db->limit($page_size, $page_size * ($page - 1));//第一页显示10条
+        $_db->order_by('Fid DESC');
+        $query = $_db->get();
+        $res = $query->result_array();
+        return filterData($res);
+    }
+
+    public function delFreeback($where) {
+        dbEscape($where);
+        return $this->p->delete($this->_report,$where);
+    }
 }

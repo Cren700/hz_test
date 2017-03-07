@@ -58,10 +58,10 @@ class HZ_Model extends CI_Model
         }
 
         $res = curl_exec($ch);
-//         if($control == "queryComment")
-//         {
-//             echo $res;die;
-//         }
+         if($control == "freebackStatus")
+         {
+             echo $res;die;
+         }
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);//print_r($httpCode);exit();
         curl_close($ch);
 
