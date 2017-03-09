@@ -66,7 +66,7 @@ class Order extends BaseControllor
         $id = $this->input->get('id', true);
         $res = $this->order_service->create($id);
         if($res['code'] === 0) {
-            $this->jump(getBaseUrl('/order/wxpay.html?id='.$res['data']['Forder_no']));
+            $this->jump(getBaseUrl('/pay/wxpay.html?out_trade_no='.$res['data']['Forder_no'].'&total_fee='.($res['data']['Fproduct_tol_amt']*100).'&desc='.$res['data']['Fproduct_name']));
         } else {
             $this->jump404($res['msg']);
         }
@@ -80,7 +80,7 @@ class Order extends BaseControllor
         $id = $this->input->get('id', true);
         $res = $this->order_service->insCreate($id);
         if($res['code'] === 0) {
-            $this->jump(getBaseUrl('/order/wxpay.html?id='.$res['data']['Forder_no']));
+            $this->jump(getBaseUrl('/pay/wxpay.html?out_trade_no='.$res['data']['Forder_no']));
         } else {
             $this->jump404($res['msg']);
         }

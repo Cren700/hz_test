@@ -33,11 +33,7 @@ class Order_service_model extends HZ_Model
             return $ret;
         }
         // 查看是否已经购过
-        $whereBuy = array(
-            'Fuser_id' => $option['Fuser_id'],
-            'Fproduct_id' => $option['Fproduct_id']
-        );
-        if ($this->hasBuy($whereBuy)) {
+        if ($this->order_dao->hasBuy($option['Fuser_id'], $option['Fproduct_id'])) {
             $ret['code'] = 'order_error_13';
             return $ret;
         }
@@ -107,11 +103,7 @@ class Order_service_model extends HZ_Model
             return $ret;
         }
         // 查看是否已经购过
-        $whereBuy = array(
-            'Fuser_id' => $option['Fuser_id'],
-            'Fproduct_id' => $cartInfo['Fproduct_id']
-        );
-        if ($this->hasBuy($whereBuy)) {
+        if ($this->order_dao->hasBuy($option['Fuser_id'], $option['Fproduct_id'])) {
             $ret['code'] = 'order_error_13';
             return $ret;
         }
@@ -600,14 +592,6 @@ class Order_service_model extends HZ_Model
         }
         return $ret;
     }
-
-    /**
-     * 是否已经购买过
-     */
-    public function hasBuy($whereBuy)
-    {
-        return $this->order_dao->hasBuy($whereBuy);
-    }
     
     public function hasCommentPower($option)
     {
@@ -643,6 +627,13 @@ class Order_service_model extends HZ_Model
 
         $ret = array('code' => 0);
         $this->order_dao->updateOrderCommentFlag($where, $data);
+        return $ret;
+    }
+
+    public function payInfo($option)
+    {
+        $ret = array('code' => 0);
+        $this->order_dao->payInfo($option);
         return $ret;
     }
 

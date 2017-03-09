@@ -2481,7 +2481,7 @@ section.change_info {
     right: -0.16rem;
 }
 
-.mobile-common-title{position: fixed;height: 1.12rem;background-color: #fff; box-shadow: 0 0 5px #e1e1e1;top: 0;left: 50%;z-index: 9;display: block;width: 100%;transform: translateX(-50%);box-sizing: border-box;max-width:640px;}
+.mobile-common-title{position: fixed;height: 1.12rem;background-color: #fff; box-shadow: 0 0 5px #e1e1e1;top: 0;left: 50%;z-index: 9;display: block;width: 100%;transform: translateX(-50%);box-sizing: border-box;}
 .search-cart-common{float: right;width: 36%;height: 100%;}
 .search-cart-common a{position: relative;float: right;display: block; width: 28%;height: 100%;margin: 0 5% 0 2%;background-position: right center;background-repeat: no-repeat;background-size: 85% auto;}
 .search-cart-common a.icon-cart1{background-image: url(../img/icon-cartn.png);}

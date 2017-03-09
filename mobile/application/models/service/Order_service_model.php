@@ -47,6 +47,18 @@ class Order_service_model extends HZ_Model
         return $this->myCurl($this->_host, 'createByPid', $option, true);
     }
 
+    // 支付数据
+    public function payInfo($option)
+    {
+        return $this->myCurl($this->_host, 'payInfo', $option, true);
+    }
+
+    // 订单状态
+    public function orderStatus($option)
+    {
+        return $this->myCurl($this->_api, 'orderStatus', $option, true);
+    }
+
     /**
      * 保存理赔信息
      * @param $option

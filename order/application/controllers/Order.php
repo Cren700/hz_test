@@ -271,4 +271,24 @@ class Order extends BaseController
         $res = $this->order_service->updateOrderCommentFlag($where);
         echo outputResponse($res);
     }
+    
+    public function payInfo()
+    {
+        // 支付情况
+        $optionPay = array(
+            'Fout_trade_no' => $this->input->post('product_id', true),
+            'Fopenid' => $this->input->post('product_id', true),
+            'Ftrade_type' => $this->input->post('product_id', true),
+            'Fpay_result' => $this->input->post('product_id', true),
+            'Fpay_info' => $this->input->post('product_id', true),
+            'Ftransaction_id' => $this->input->post('product_id', true),
+            'Fout_transaction_id' => $this->input->post('out_transaction_id', true),
+            'Ftotal_fee' => $this->input->post('total_fee', true),
+            'Ffee_type' => $this->input->post('fee_type', true),
+            'Fbank_type' => $this->input->post('bank_type', true),
+            'Fbank_billno' => $this->input->post('bank_billno', true),
+            'Ftime_end' => $this->input->post('time_end', true),
+        );
+        $this->order_service->payInfo($optionPay);
+    }
 }

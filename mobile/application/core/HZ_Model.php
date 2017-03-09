@@ -57,7 +57,7 @@ class HZ_Model extends CI_Model
 
         $res = curl_exec($ch);
  //
-//         if($control == "addAccount")
+//         if($control == "createByPid")
 //         {
 //             echo $res;die;
 //         }

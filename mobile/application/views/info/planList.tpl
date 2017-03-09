@@ -32,7 +32,7 @@
                         <div class="pPrice left">￥<{$l['Fproduct_price']}></div>
                     </div>
                     <div class="right">
-                        <{if $l['Forder_status'] eq 1 || $l['Forder_status'] eq 5}><span class="orderStatus"><a href="<{'/order/wxpay.html?id='|cat:$l['Forder_no']|getBaseUrl}>">马上支付</a></span>
+                        <{if $l['Forder_status'] eq 1 || $l['Forder_status'] eq 5}><span class="orderStatus"><a href="<{'/pay/wxpay.html?out_trade_no='|cat:$l['Forder_no']|getBaseUrl}>">马上支付</a></span>
                         <{elseif $l['Forder_status'] eq 2 || $l['Forder_status'] eq 4}><span class="orderStatus orderError"><a
                                 href="javascript:;">已取消</a></span>
                         <{elseif $l['Forder_status'] eq 3}>

@@ -14,6 +14,7 @@ class Order_dao_model extends HZ_Model
     private $_cart_table = 't_mycart';
     private $_withdraw_table = 't_withdraw_order';
     private $_claim_table = 't_claims';
+    private $_pay_table = 't_pay_channel';
     private $p_db = null; // 产品库
     private $o_db = null; // order库
     public function __construct()
@@ -260,10 +261,10 @@ class Order_dao_model extends HZ_Model
         return $this->o_db->update($this->_claim_table, $option, $where);
     }
 
-    public function hasBuy($whereBuy)
+    public function hasBuy($Fuser_id, $Fproduct_id)
     {
-        dbEscape($whereBuy);
-        return $this->o_db->get_where($this->_order_table, $whereBuy)->row_array();
+        $sql = "SELECT * FROM {$this->_order_table} WHERE Fuser_id = '{$Fuser_id}' AND Fproduct_id = {$Fproduct_id} AND (Forder_status = 1 OR Forder_status = 3)";
+        return $this->o_db->query($sql)->row_array();
     }
 
     public function hasCommentPower($option)
@@ -285,4 +286,9 @@ class Order_dao_model extends HZ_Model
         return $this->o_db->update($this->_order_table, $data, $where);
     }
 
+    public function payInfo($option)
+    {
+        dbEscape($option);
+        return $this->o_db->insert($this->_pay_table, $option);
+    }
 }

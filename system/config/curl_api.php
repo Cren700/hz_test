@@ -162,6 +162,7 @@ $config = array(
             'hasCommentPower'       => '/order/hasCommentPower',    // 是否具有评论权限
             'calClaimsTotal'        => '/order/calClaimsTotal',     // 计算理赔总额
             'updateOrderCommentFlag' => '/order/updateOrderCommentFlag', // 修改订单评论标志
+            'payInfo'               => '/order/payInfo',            // 记录支付数据
         ),
     ),
     //广告模块CURL连接
