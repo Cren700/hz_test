@@ -249,6 +249,12 @@ class Account extends HZ_Controller
         //得到 用户资料
         print_r($arr);
     }
+    
+    public function testWX()
+    {
+        $this->smarty->display('account/test.tpl');
+    }
+    
 
     public function phonePage()
     {

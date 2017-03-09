@@ -10,9 +10,9 @@
 <script>
     var obj = new WxLogin({
         id:"login_container",
-        appid: "wx8630ddb14433ee21",
-        scope: "snsapi_userinfo",
-        redirect_uri: "http://www.dev.huzhu.com/pc/account/wxLogBak.html",
+        appid: "wx0ab6bc88e6d36a93",
+        scope: "snsapi_login",
+        redirect_uri: "http://hztest.imhuzhu.com/pc/account/wxLogBak.html",
         state: "state",
         style: "",
         href: ""

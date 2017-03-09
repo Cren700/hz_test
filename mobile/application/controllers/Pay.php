@@ -8,9 +8,30 @@
  */
 class Pay extends HZ_Controller
 {
+    private $resHandler = null;
+    private $reqHandler = null;
+    private $pay = null;
+    private $cfg = null;
+
     public function __construct()
     {
         parent::__construct();
+        require APPPATH . 'third_party/wxpay/Utils.class.php';
+        require APPPATH . 'third_party/wxpay/wxpay_config.php';
+        require APPPATH . 'third_party/wxpay/RequestHandler.class.php';
+        require APPPATH . 'third_party/wxpay/ClientResponseHandler.class.php';
+        require APPPATH . 'third_party/wxpay/PayHttpClient.class.php';
+        $this->Request();
+    }
+
+    public function Request(){
+        $this->resHandler = new ClientResponseHandler();
+        $this->reqHandler = new RequestHandler();
+        $this->pay = new PayHttpClient();
+        $this->cfg = new Config();
+
+        $this->reqHandler->setGateUrl($this->cfg->C('url'));
+        $this->reqHandler->setKey($this->cfg->C('key'));
     }
 
     /**
@@ -79,28 +100,76 @@ class Pay extends HZ_Controller
 
     }
 
-    public function textPay()
+    /**
+     * 提交订单信息
+     */
+    public function testPay()
     {
+        $post = array(
+            'out_trade_no' => 'trade_no_111111',
+            'sub_openid' => 'sub_openid_111111',
+            'body'  => '商品描述',
+            'total_fee' => 1,
+            'mch_create_ip' => '127.0.0.1',
+        );
+//        $this->reqHandler->setReqParams($_POST,array('method'));
+        $this->reqHandler->setReqParams($post,array('method'));
+        $this->reqHandler->setParameter('service','pay.weixin.jspay');//接口类型：pay.weixin.jspay
+        $this->reqHandler->setParameter('mch_id',$this->cfg->C('mchId'));//必填项，商户号，由威富通分配
+        $this->reqHandler->setParameter('version',$this->cfg->C('version'));
 
-        require_once (APPPATH.'libraries/Wxpay/TestPay.php');
-        $config['appid'] = 'wx426b3015555a46be';
+        //通知地址，必填项，接收威富通通知的URL，需给绝对路径，255字符内格式如:http://wap.tenpay.com/tenpay.asp
+        //$notify_url = 'http://'.$_SERVER['HTTP_HOST'];
+        //$this->reqHandler->setParameter('notify_url',$notify_url.'/payInterface/request.php?method=callback');
+        $this->reqHandler->setParameter('notify_url','http://hztest.imhuzhu.com/mobile/pay/payBack.html');//
+        $this->reqHandler->setParameter('callback_url','http://www.swiftpass.cn');
+        $this->reqHandler->setParameter('nonce_str',mt_rand(time(),time()+rand()));//随机字符串，必填项，不长于 32 位
+        $this->reqHandler->createSign();//创建签名
 
-        $config['mch_id'] = '1900009851';
+        $data = Utils::toXml($this->reqHandler->getAllParameters());
 
-        $config['apikey'] = '8934e7d15453e97507ef794cf7b0519d';
-        //1.统一下单方法
-        $wechatAppPay = new wechatAppPay('wx426b3015555a46be', '1900009851', $notify_url = 'www.huzhu.web.com/mobile', '8934e7d15453e97507ef794cf7b0519d');
-        $params['body'] = '商品描述';                       //商品描述
-        $params['out_trade_no'] = 'O20160617021323-001';    //自定义的订单号
-        $params['total_fee'] = '100';                       //订单金额 只能为整数 单位为分
-        $params['trade_type'] = 'APP';                      //交易类型 JSAPI | NATIVE | APP | WAP
-        $result = $wechatAppPay->unifiedOrder( $params );
-        print_r($result); // result中就是返回的各种信息信息，成功的情况下也包含很重要的prepay_id
-        //2.创建APP端预支付参数
-        /** @var TYPE_NAME $result */
-        $data = @$wechatAppPay->getAppPayParams( $result['prepay_id'] );
-        // 根据上行取得的支付参数请求支付即可
-        print_r($data);
+        $this->pay->setReqContent($this->reqHandler->getGateURL(),$data);
+
+        if($this->pay->call()){
+            $this->resHandler->setContent($this->pay->getResContent());
+            $this->resHandler->setKey($this->reqHandler->getKey());
+            if($this->resHandler->isTenpaySign()){
+                //当返回状态与业务结果都为0时才返回支付二维码，其它结果请查看接口文档
+                if($this->resHandler->getParameter('status') == 0 && $this->resHandler->getParameter('result_code') == 0){
+                    echo json_encode(array('token_id'=>$this->resHandler->getParameter('token_id')));
+                    exit();
+                }else{
+                    echo json_encode(array('status'=>500,'msg'=>'Error Code:'.$this->resHandler->getParameter('err_code').' Error Message:'.$this->resHandler->getParameter('err_msg')));
+                    exit();
+                }
+            }
+            echo json_encode(array('status'=>500,'msg'=>'Error Code:'.$this->resHandler->getParameter('status').' Error Message:'.$this->resHandler->getParameter('message')));
+        }else{
+            echo json_encode(array('status'=>500,'msg'=>'Response Code:'.$this->pay->getResponseCode().' Error Info:'.$this->pay->getErrInfo()));
+        }
+    }
+
+    public function payBack(){
+        $xml = file_get_contents('php://input');
+        $this->resHandler->setContent($xml);
+        //var_dump($this->resHandler->setContent($xml));
+        $this->resHandler->setKey($this->cfg->C('key'));
+        if($this->resHandler->isTenpaySign()){
+            if($this->resHandler->getParameter('status') == 0 && $this->resHandler->getParameter('result_code') == 0){
+                //echo $this->resHandler->getParameter('status');
+                // 11;
+                //更改订单状态
+                ob_clean();//清理缓冲区
+                Utils::dataRecodes('接口回调收到通知参数',$this->resHandler->getAllParameters());
+                echo 'success';
+                exit();
+            }else{
+                echo 'failure';
+                exit();
+            }
+        }else{
+            echo 'failure';
+        }
     }
 
 }
