@@ -41,10 +41,10 @@ class Pay extends HZ_Controller
     public function wxPay()
     {
         $option = array(
-            'out_trade_no' => $this->input->get('out_trade_no', true),
+            'order_no' => $this->input->get('out_trade_no', true),
+            'user_id' => $this->_user_id
         );
-
-        $res = $this->order_service->detail($option);
+        $res = $this->order_service->orderDetail($option);
 
         if ($res['code'] !== 0) {
             $this->jump404($res['msg']);
@@ -60,7 +60,7 @@ class Pay extends HZ_Controller
         $resOption = array(
             'out_trade_no' => $res['data']['Forder_no'],
             'body'  =>  $res['data']['Fproduct_name'],
-            'total_fee' => int($res['data']['Fproduct_tol_amt'] * 100) ? "1" : "1",
+            'total_fee' => (int)$res['data']['Fproduct_tol_amt'] * 100 ? "1" : "1",
             'mch_create_ip' => get_client_ip()
         );
 

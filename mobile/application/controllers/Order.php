@@ -66,7 +66,7 @@ class Order extends BaseControllor
         $id = $this->input->get('id', true);
         $res = $this->order_service->create($id);
         if($res['code'] === 0) {
-            $this->jump(getBaseUrl('/pay/wxpay.html?out_trade_no='.$res['data']['Forder_no'].'&total_fee='.($res['data']['Fproduct_tol_amt']*100).'&desc='.$res['data']['Fproduct_name']));
+            $this->jump(getBaseUrl('/pay/wxpay.html?out_trade_no='.$res['data']['Forder_no']));
         } else {
             $this->jump404($res['msg']);
         }
@@ -84,19 +84,6 @@ class Order extends BaseControllor
         } else {
             $this->jump404($res['msg']);
         }
-    }
-
-    /**
-     * 微信支付
-     * @param string $id
-     */
-    public function wxpay($id ='')
-    {
-        $option = array(
-            'order_no' => !empty($id) ? $id : $this->input->get('id'),
-        );
-        echo "微信支付页面";
-        p($option);
     }
 
     /**
