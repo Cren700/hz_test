@@ -16,6 +16,7 @@ class Pay extends HZ_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('service/order_service_model', 'order_service');
         require APPPATH . 'third_party/wxpay/Utils.class.php';
         require APPPATH . 'third_party/wxpay/wxpay_config.php';
         require APPPATH . 'third_party/wxpay/RequestHandler.class.php';
@@ -101,7 +102,6 @@ class Pay extends HZ_Controller
 
     // 支付通知
     public function payBack(){
-        $this->load->model('service/order_service_model', 'order_service');
         $xml = file_get_contents('php://input');
         $this->resHandler->setContent($xml);
         $this->resHandler->setKey($this->cfg->C('key'));
