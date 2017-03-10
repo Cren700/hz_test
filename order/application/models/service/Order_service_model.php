@@ -215,7 +215,7 @@ class Order_service_model extends HZ_Model
             return $ret;
         }
         $where = array('Forder_no' => $option['Forder_no']);
-        $data = array('Forder_status' => $option['Forder_status'], 'Fupdate_time' => time());
+        $data = array('Forder_status' => $option['Forder_status'], 'Fpay_channel' => $option['Fpay_channel'], 'Fupdate_time' => time());
         $res = $this->order_dao->orderStatus($where, $data);
         if (!$res) {
             $ret['code'] = 'order_error_5';

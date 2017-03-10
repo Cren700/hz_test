@@ -2,7 +2,7 @@
 <body>
 <section class="mobile-common-title clearfix">
     <div style="display: block">
-        <a href="javascript:;" id="js-back-btn" class="p_logo">
+        <a href="<{'/info.html'|getBaseUrl}>" class="p_logo">
             <img src="<{'back_icon.png'|baseImgUrl}>" style="width: auto;" />
         </a>
         <div style="clear: both"></div>

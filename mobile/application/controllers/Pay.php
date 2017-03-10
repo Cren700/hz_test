@@ -102,13 +102,14 @@ class Pay extends HZ_Controller
 
     public function check($f = 0)
     {
-        if ($f !== 1) {
+        if ($f === 0) {
             die;
         }
         //更改订单状态
         $optionOrder = array(
             'order_status' => 3,
             'order_no' => "2017031001174877136322",
+            'pay_channel' => 3, // 微信支付
         );
         $res = $this->order_service->orderStatus($optionOrder);
         echo "更改订单状态:".json_encode_data($res);
@@ -145,6 +146,7 @@ class Pay extends HZ_Controller
                     $optionOrder = array(
                         'order_status' => 3,
                         'order_no' => $this->resHandler->getParameter('out_trade_no'),
+                        'pay_channel' => 3, // 微信支付
                     );
                     $res = $this->order_service->orderStatus($optionOrder);
                     file_put_contents("/tmp/TEST_PAY.log", 'params:'.json_encode_data($optionOrder), FILE_APPEND);

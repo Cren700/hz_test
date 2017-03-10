@@ -32,7 +32,7 @@
                 <td><{$i['Fproduct_price']}></td>
                 <td><{$i['Fproduct_tol_amt']}></td>
                 <td><{$i['Fstore_name']|default:''}></td>
-                <td><{if $i['Fpay_channel'] eq 1}>微信<{elseif $i['Fpay_channel'] eq 2}>支付宝<{/if}></td>
+                <td><{if $i['Fpay_channel'] eq 3}>微信<{elseif $i['Fpay_channel'] eq 2}>支付宝<{/if}></td>
                 <td class="js-order-status"><{if $i['Forder_status'] eq 1}>初始订单<{elseif $i['Forder_status'] eq 2}>订单取消<{elseif $i['Forder_status'] eq 3}>支付成功<{elseif $i['Forder_status'] eq 4}>内部处理<{elseif $i['Forder_status'] eq 5}>渠道支付失败<{/if}></td>
                 <td><{'y-m-d H:i'|date:$i['Fcreate_time']}></td>
                 <td><{'y-m-d H:i'|date:$i['Fupdate_time']}></td>

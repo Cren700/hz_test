@@ -109,6 +109,7 @@ class Order extends BaseController
         $option = array(
             'Forder_status' => $this->input->post('order_status', true),
             'Forder_no' => $this->input->post('order_no', true),
+            'Fpay_channel' => $this->input->post('pay_channel', true) ? : '',
         );
         $res = $this->order_service->orderStatus($option);
         echo outputResponse($res);
@@ -289,6 +290,6 @@ class Order extends BaseController
             'Fbank_billno' => $this->input->post('bank_billno', true),
             'Ftime_end' => $this->input->post('time_end', true),
         );
-        $this->order_service->payInfo($optionPay);
+        return $this->order_service->payInfo($optionPay);
     }
 }
