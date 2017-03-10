@@ -56,7 +56,7 @@ class Order_service_model extends HZ_Model
     // 订单状态
     public function orderStatus($option)
     {
-        return $this->myCurl($this->_api, 'orderStatus', $option, true);
+        return $this->myCurl($this->_host, 'orderStatus', $option, true);
     }
 
     /**

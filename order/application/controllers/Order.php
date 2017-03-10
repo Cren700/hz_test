@@ -276,12 +276,12 @@ class Order extends BaseController
     {
         // 支付情况
         $optionPay = array(
-            'Fout_trade_no' => $this->input->post('product_id', true),
-            'Fopenid' => $this->input->post('product_id', true),
-            'Ftrade_type' => $this->input->post('product_id', true),
-            'Fpay_result' => $this->input->post('product_id', true),
-            'Fpay_info' => $this->input->post('product_id', true),
-            'Ftransaction_id' => $this->input->post('product_id', true),
+            'Fout_trade_no' => $this->input->post('out_trade_no', true),
+            'Fopenid' => $this->input->post('openid', true),
+            'Ftrade_type' => $this->input->post('trade_type', true),
+            'Fpay_result' => $this->input->post('pay_result', true),
+            'Fpay_info' => $this->input->post('pay_info', true),
+            'Ftransaction_id' => $this->input->post('transaction_id', true),
             'Fout_transaction_id' => $this->input->post('out_transaction_id', true),
             'Ftotal_fee' => $this->input->post('total_fee', true),
             'Ffee_type' => $this->input->post('fee_type', true),

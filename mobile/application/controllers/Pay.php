@@ -100,27 +100,56 @@ class Pay extends HZ_Controller
         }
     }
 
+    public function check($f = 0)
+    {
+        if ($f !== 1) {
+            die;
+        }
+        //更改订单状态
+        $optionOrder = array(
+            'order_status' => 3,
+            'order_no' => "2017031001174877136322",
+        );
+        $res = $this->order_service->orderStatus($optionOrder);
+        echo "更改订单状态:".json_encode_data($res);
+        // 支付情况
+        $optionPay = array(
+            'out_trade_no' => "20170115101946463691",
+            'openid' => "oywgtuLueDn4n4vF8xF35ODci2kg",
+            'trade_type' => "pay.weixin.jspay",
+            'pay_result' => 0,
+            'pay_info' => '',
+            'transaction_id' => '7551000001201703104196166403',
+            'out_transaction_id' => '4008312001201703102938775831',
+            'total_fee' => 1,
+            'fee_type' => 'CNY',
+            'bank_type' => 'CFT',
+            'bank_billno' => '',
+            'time_end' => '20170310213807',
+        );
+        $res = $this->order_service->payInfo($optionPay);
+        echo "支付情况:".json_encode_data($res);
+    }
+
     // 支付通知
     public function payBack(){
         $xml = file_get_contents('php://input');
-        file_put_contents("/tmp/TEST_PAY.log", 'payBack/', FILE_APPEND);
         $this->resHandler->setContent($xml);
         $this->resHandler->setKey($this->cfg->C('key'));
         if($this->resHandler->isTenpaySign()){
             if($this->resHandler->getParameter('status') == 0 && $this->resHandler->getParameter('result_code') == 0){
 
-                file_put_contents("/tmp/TEST_PAY.log", 'status:'.$this->resHandler->getParameter('status').'/code:'.$this->resHandler->getParameter('result_code').'/pay_result:'.$this->resHandler->getParameter('pay_result'), FILE_APPEND);
-                file_put_contents("/tmp/TEST_PAY.log", 'content:'.json_encode_data($this->resHandler->getAllParameters()), FILE_APPEND);
-
                 // pay_result Int 支付结果:0—成功;其它—失败
-                if ($this->resHandler->getParameter('pay_result') === 0) {
+                if ($this->resHandler->getParameter('pay_result') === '0') {
                     //更改订单状态
                     $optionOrder = array(
                         'order_status' => 3,
                         'order_no' => $this->resHandler->getParameter('out_trade_no'),
                     );
+                    $res = $this->order_service->orderStatus($optionOrder);
+                    file_put_contents("/tmp/TEST_PAY.log", 'params:'.json_encode_data($optionOrder), FILE_APPEND);
+                    file_put_contents("/tmp/TEST_PAY.log", '更改订单状态:'.json_encode_data($res)."\n", FILE_APPEND);
                 }
-                $this->order_service->orderStatus($optionOrder);
                 // 支付情况
                 $optionPay = array(
                     'out_trade_no' => $this->resHandler->getParameter('out_trade_no'),
@@ -136,7 +165,10 @@ class Pay extends HZ_Controller
                     'bank_billno' => $this->resHandler->getParameter('bank_billno'),
                     'time_end' => $this->resHandler->getParameter('time_end'),
                 );
-                $this->order_service->payInfo($optionPay);
+                $res = $this->order_service->payInfo($optionPay);
+                file_put_contents("/tmp/TEST_PAY.log", 'params:'.json_encode_data($optionPay), FILE_APPEND);
+                file_put_contents("/tmp/TEST_PAY.log", '支付情况:'.json_encode_data($res)."\n", FILE_APPEND);
+
                 ob_clean();//清理缓冲区
                 Utils::dataRecodes('接口回调收到通知参数',$this->resHandler->getAllParameters());
                 echo 'success'; // 处理成功，威富通系统收到此结果后不再进行后续通知
