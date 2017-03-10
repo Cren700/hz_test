@@ -1,6 +1,6 @@
 <{include file="public/header.tpl"}>
 <body>
-<section class="mylogin" style="padding-bottom: 0">
+<section class="mylogin" style="height: auto; padding-bottom:0">
     <div class="user_name">
         <a class="user_avatar" href="<{'/account/detail.html'|getBaseUrl}>">
             <img src="<{if $user['Fimage_path']}><{$user['Fimage_path']}><{else}><{'avatar.jpg'|baseImgUrl}><{/if}>">
