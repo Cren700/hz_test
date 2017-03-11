@@ -10,5 +10,5 @@
 $config = array(
     'appid' => 'wx02fbe28607b32f3f',
     'secret' => 'b68524b9e904e6f7dd994468d57b9522',
-    'log_bak_url' => urlencode(getBaseUrl("/account/wxLogBak.html")),
+    'log_bak_url' => getBaseUrl("/account/wxLogBak"),
 );
