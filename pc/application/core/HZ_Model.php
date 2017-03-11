@@ -57,11 +57,11 @@ class HZ_Model extends CI_Model
 
         $res = curl_exec($ch);
 // //        
-        // // if($control == "queryProduct")
-//         if($control == "sendReport" || $control == 'addProduct')
-//         {
-//             echo $res;die;
-//         }
+        // // if($control == "oauthLogin")
+         if($control == "oauthLogin")
+         {
+             echo $res;die;
+         }
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
 
