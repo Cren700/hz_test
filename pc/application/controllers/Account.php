@@ -253,8 +253,12 @@ class Account extends HZ_Controller
         $user_obj = json_decode($res,true);
 
 //        $type = $this->input->get('type');
-        $user = $this->account_service_model->oauthLogin($user_obj['openid'], $user_obj['nickname'], $user_obj['headimgurl'], $log_type=1, $type);
-        $this->jump($user['data']['url']);
+        $ret = $this->account_service_model->oauthLogin($user_obj['openid'], $user_obj['nickname'], $user_obj['headimgurl'], $log_type=1, $type);
+        if ($ret['code'] == 0) {
+            $this->jump($ret['data']['url']);
+        } else {
+            $this->jump404();
+        }
     }
     
     public function testWX()
