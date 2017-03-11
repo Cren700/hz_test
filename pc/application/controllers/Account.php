@@ -218,14 +218,15 @@ class Account extends HZ_Controller
         $bakUrl = urlencode($this->config->item('log_bak_url') . '/'.$type);
 
         $this->smarty->assign('appid', $appid);
+        $this->smarty->assign('state', $state);
         $this->smarty->assign('backUrl', $bakUrl);
         $this->smarty->display('account/test.tpl');
     }
 
-    public function wxLogBak($type)
+    public function wxLogBak($type = 4)
     {
         if($_GET['state']!=$_SESSION["wx_state"]){
-            exit("5001");
+            $this->jump404();
         }
         $this->config->load('wx_conf');
         $appid = $this->config->item('appid');

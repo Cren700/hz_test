@@ -20,7 +20,7 @@
         appid: "<{$appid}>",
         scope: "snsapi_login",
         redirect_uri: "<{$backUrl}>",
-        state: "state",
+        state: "<{$state}>",
         style: "",
         href: ""
     });
