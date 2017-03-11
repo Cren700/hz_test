@@ -23,7 +23,7 @@
     </form>
     <span>或</span>
     <a href="<{'/account.html'|getBaseUrl}>" class="other_login">使用账号登录</a>
-    <a href="" class="other_login">使用微信登录</a>
+    <a href="javascript:;" class="other_login login_regit_wechat">使用微信登录</a>
     <!--<a href="" class="other_login">使用QQ登录</a>-->
 </div>
 <!--角色选择框-->

@@ -11,6 +11,10 @@ HZ.Account_phone = (function() {
             sendSms($(this));
         });
 
+        $('.login_regit_wechat').on('click', function(){
+            window.location= baseUrl+ '/account/logwx.html?type=' + $('#js-type').val();
+        });
+        
         //选择角色登陆
         $('.mid a').each(function(index){
             $(this).on('click', function () {

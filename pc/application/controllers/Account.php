@@ -210,17 +210,19 @@ class Account extends HZ_Controller
 
     public function logwx()
     {
+        $type = $this->input->get('type');
         $this->config->load('wx_conf');
         $state  = md5(uniqid(rand(), TRUE));
         $this->session->set_userdata(array('wx_state' => $state));
         $appid = $this->config->item('appid');
-        $bakUrl = $this->config->item('log_bak_url');
-        $url = 'https://open.weixin.qq.com/connect/qrconnect?appid='.$appid.'&redirect_uri='.$bakUrl.'&response_type=code&scope=snsapi_login&state='.$state.'#wechat_redirect';
-//        https://open.weixin.qq.com/connect/qrconnect?appid=wx0ab6bc88e6d36a93&scope=snsapi_login&redirect_uri=http%3a%2f%2fwww.imhuzhu.com%2fwxlogin.aspx&state=&login_type=jssdk
-        header("Location:".$url);
+        $bakUrl = urlencode($this->config->item('log_bak_url') . '/'.$type);
+
+        $this->smarty->assign('appid', $appid);
+        $this->smarty->assign('backUrl', $bakUrl);
+        $this->smarty->display('account/test.tpl');
     }
 
-    public function wxLogBak()
+    public function wxLogBak($type)
     {
         if($_GET['state']!=$_SESSION["wx_state"]){
             exit("5001");
@@ -243,11 +245,14 @@ class Account extends HZ_Controller
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
         curl_setopt($ch, CURLOPT_URL, $url);
-        $json =  curl_exec($ch);
+        $res =  curl_exec($ch);
         curl_close($ch);
-        $arr=json_decode($json,1);
-        //得到 用户资料
-        print_r($arr);
+
+        //解析json
+        $user_obj = json_decode($res,true);
+//        $type = $this->input->get('type');
+        $user = $this->account_service_model->oauthLogin($user_obj['openid'], $user_obj['nickname'], $user_obj['headimgurl'], $log_type=1, $type);
+        $this->jump($user['data']['url']);
     }
     
     public function testWX()

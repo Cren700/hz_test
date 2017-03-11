@@ -13,6 +13,10 @@ HZ.Account_login = (function() {
                 $('#js-type').val(type);
             });
         });
+        
+        $('.login_regit_wechat').on('click', function(){
+            window.location= baseUrl+ '/account/logwx.html?type=' + $('#js-type').val();
+        });
 
         $('#loginform').submit(function(e){
             e.preventDefault();
