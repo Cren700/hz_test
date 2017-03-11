@@ -66,6 +66,7 @@
                     <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
                         <h5>产品信息</h5>
                         <a class="label label-info js-btn-add-product" href="<{'/product/add.html'|getBaseUrl}>">添加产品</a>
+                        <a class="label label-important js-btn-batch-del" href="javascript:;">批量删除</a>
                     </div>
                     <div id="product-list-content">
 

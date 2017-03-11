@@ -108,6 +108,15 @@ class Product_dao_model extends HZ_Model
         return $this->p->delete($this->_product_table, $where);
     }
 
+    public function batchDelProduct($ids)
+    {
+        $where = 'Fproduct_id in ('.join(',', $ids).')';
+        $data = array(
+            'Fis_del' => 1
+        );
+        return $this->p->update($this->_product_table, $data, $where);
+    }
+
     public function changeStatus($data, $where)
     {
         dbEscape($data);
@@ -236,6 +245,12 @@ class Product_dao_model extends HZ_Model
     public function delComment($where)
     {
         dbEscape($where);
+        return $this->p->delete($this->_pro_comments_table, $where);
+    }
+
+    public function batchDelComment($ids)
+    {
+        $where = 'Fcomment_id in ('.join(',', $ids).')';
         return $this->p->delete($this->_pro_comments_table, $where);
     }
     

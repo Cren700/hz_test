@@ -79,6 +79,16 @@ class Promo extends HZ_Controller {
         echo outputResponse($res);
     }
 
+    /**
+     * 批量删除广告
+     */
+    public function batchDelPromo()
+    {
+        $ids = $this->input->post('ids', true);
+        $res = $this->promo_service->batchDelPromo($ids);
+        echo outputResponse($res);
+    }
+
     public function getPromoRandom()
     {
         $res = $this->promo_service->getPromoRandom();

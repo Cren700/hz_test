@@ -144,6 +144,15 @@ class Posts extends BaseControllor
         echo json_encode_data($res);
     }
 
+    public function batchDelPosts()
+    {
+        $option = array(
+            'ids' => $this->input->post('ids')
+        );
+        $res = $this->posts_service->batchDelPosts($option);
+        echo json_encode_data($res);
+    }
+
     /**
      * 产品分类
      */
@@ -303,6 +312,15 @@ class Posts extends BaseControllor
         echo json_encode_data($res);
     }
 
+    public function batchDelComment()
+    {
+        $option = array(
+            'ids' => $this->input->post('ids')
+        );
+        $res = $this->posts_service->batchDelComment($option);
+        echo json_encode_data($res);
+    }
+
     public function praise()
     {
         $cssArr = array('datepicker.css');
@@ -424,6 +442,15 @@ class Posts extends BaseControllor
             'id' => $this->input->post('id')
         );
         $res = $this->posts_service->delTheme($data);
+        echo json_encode_data($res);
+    }
+
+    public function batchDelThemes()
+    {
+        $option = array(
+            'ids' => $this->input->post('ids')
+        );
+        $res = $this->posts_service->batchDelThemes($option);
         echo json_encode_data($res);
     }
 

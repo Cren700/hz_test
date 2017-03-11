@@ -43,12 +43,15 @@
                                     <div class="controls">
                                         <{assign var=ids value=','|explode:$role['Faction_ids']|default:array()}>
                                         <{assign var=idsCount value=count($ids)}>
-                                        <{assign var=allCount value=count($action['list'])}>
+                                        <{assign var=allCount value=count($actions['list'])}>
                                         <div style="display: block">
                                             <label class="span2" style="margin-left:0" for="js-all-action"><input id="js-all-action" type="checkbox" name="all_action" value="" <{if $idsCount == $allCount}>checked<{/if}>><b>全选</b></label>
                                         </div>
-                                        <{foreach $action['list'] as $a}>
-                                        <label class="span2" style="display: inline; margin-left:0" for="<{$a['Fid']}>"><input id="<{$a['Fid']}>" type="checkbox" name="action" value="<{$a['Fid']}>" <{if in_array($a['Fid'], $ids)}>checked<{/if}>><{$a['Faction_name']}></label>
+                                        <{foreach $action as $ac}>
+                                        <div style="clear: both"><h5>-- <{$ac['Ftype_name']}></h5></div>
+                                            <{foreach $ac['list'] as $a}>
+                                            <label class="span2" style="display: inline; margin-left:0" for="<{$a['Fid']}>"><input id="<{$a['Fid']}>" type="checkbox" name="action" value="<{$a['Fid']}>" <{if in_array($a['Fid'], $ids)}>checked<{/if}>><{$a['Faction_name']}></label>
+                                            <{/foreach}>
                                         <{/foreach}>
                                     </div>
                                 </div>

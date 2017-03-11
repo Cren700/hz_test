@@ -166,6 +166,15 @@ class Product extends BaseControllor
         echo json_encode_data($res);
     }
 
+    public function batchDelProduct()
+    {
+        $option = array(
+            'ids' => $this->input->post('ids')
+        );
+        $res = $this->product_service->batchDelProduct($option);
+        echo json_encode_data($res);
+    }
+
     /**
      * 产品分类
      */
@@ -349,6 +358,15 @@ class Product extends BaseControllor
             'comment_id' => $this->input->post('comment_id')
         );
         $res = $this->product_service->delComment($data);
+        echo json_encode_data($res);
+    }
+
+    public function batchDelComment()
+    {
+        $option = array(
+            'ids' => $this->input->post('ids')
+        );
+        $res = $this->product_service->batchDelComment($option);
         echo json_encode_data($res);
     }
 

@@ -40,6 +40,11 @@ class Promo_service_model extends HZ_Model {
         return $this->myCurl($this->_api, 'promoDel', $data, false);
     }
 
+    public function batchDelPromo($option)
+    {
+        return $this->myCurl($this->_api, 'batchDelPromo', $option, true);
+    }
+
     //连接curl获取分类
     public function category() {
         return $this->myCurl($this->_api, 'category',array());

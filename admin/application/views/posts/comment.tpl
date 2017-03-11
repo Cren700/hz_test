@@ -56,6 +56,7 @@
                 <div class="widget-box">
                     <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
                         <h5>评论信息</h5>
+                        <a class="label label-important js-btn-batch-del" href="javascript:;">批量删除</a>
                     </div>
                     <div id="comment-list-content">
 

@@ -64,6 +64,7 @@
                     <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
                         <h5>广告信息</h5>
                         <a class="label label-info js-btn-add-promo" href="<{'/promo/add.html'|getBaseUrl}>">添加广告</a>
+                        <a class="label label-important js-btn-batch-del" href="javascript:;">批量删除</a>
                     </div>
                     <div id="promo-list-content">
 

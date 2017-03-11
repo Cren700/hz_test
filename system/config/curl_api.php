@@ -77,10 +77,12 @@ $config = array(
             'maybeLike'             => '/product/maybeLike',            // 猜你喜欢
             'getCommentListByPid'   => '/product/getCommentListByPid',  // 获取产品评论信息
             'getStoreProduct'       => '/product/getStoreProduct',      // 商户所有产品
-            'submitComment'         => '/product/submitComment',       // 提交评论
+            'submitComment'         => '/product/submitComment',        // 提交评论
             'queryComment'          => '/product/queryComment',           // 查询评论
             'statusComment'         => '/product/statusComment',          // 评论状态
             'delComment'            => '/product/delComment',             // 删除评论
+            'batchDelProduct'       => '/product/batchDelProduct',        // 批量删除产品
+            'batchDelComment'       => '/product/batchDelComment',        // 批量删除评论
         ),
     ),
     'posts' => array(
@@ -131,6 +133,9 @@ $config = array(
             'getBanners'            => '/posts/getBanners',               // 首页banner
             'getThreeNews'          => '/posts/getThreeNews',               // 获取前三条新闻
             'hasPostsPower'         => '/posts/hasPostsPower',          // 文章发布权限
+            'batchDelPosts'         => '/posts/batchDelPosts',        // 批量删除资讯
+            'batchDelThemes'        => '/posts/batchDelThemes',        // 批量删除资讯
+            'batchDelComment'       => '/posts/batchDelComment',        // 批量删除评论
         ),
     ),
     'order' => array(
@@ -193,6 +198,7 @@ $config = array(
             'queryFreeback'          => '/promo/queryFreeback', // 用户反馈列表
             'freebackStatus'         => '/promo/freebackStatus', // 处理反馈状态
             'delFreeback'            => '/promo/delFreeback', // 删除反馈状态
+            'batchDelPromo'          => '/promo/batchDelPromo',        // 批量删除广告
         ),
     ),
 );

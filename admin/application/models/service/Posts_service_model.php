@@ -49,6 +49,11 @@ class Posts_service_model extends HZ_Model
         return $this->myCurl($this->_api, 'delPosts', $data, false);
     }
 
+    public function batchDelPosts($option)
+    {
+        return $this->myCurl($this->_api, 'batchDelPosts', $option, true);
+    }
+
     public function category()
     {
         return $this->myCurl($this->_api, 'category', array());
@@ -97,6 +102,11 @@ class Posts_service_model extends HZ_Model
         return $this->myCurl($this->_api, 'delComment', $data, true);
     }
 
+    public function batchDelComment($option)
+    {
+        return $this->myCurl($this->_api, 'batchDelComment', $option, true);
+    }
+
     // 获取关注列表
     public function queryPraise($data)
     {
@@ -131,6 +141,11 @@ class Posts_service_model extends HZ_Model
     public function delTheme($data)
     {
         return $this->myCurl($this->_api, 'delTheme', $data, false);
+    }
+
+    public function batchDelThemes($option)
+    {
+        return $this->myCurl($this->_api, 'batchDelThemes', $option, true);
     }
 
     public function getThemeByPid($data)

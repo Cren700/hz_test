@@ -47,10 +47,23 @@
                             </div>
                         </form>
                     </div>
-                    <div id="product-list-content">
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span12">
+                    <div class="widget-box">
+                        <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
+                            <h5>产品信息</h5>
+                            <a class="label label-important js-btn-batch-del" href="javascript:;">批量删除</a>
+                        </div>
+                        <div id="product-list-content">
 
+                        </div>
                     </div>
                 </div>
+            </div>
+            <div id="product-list-content">
+
             </div>
         </div>
     </div>

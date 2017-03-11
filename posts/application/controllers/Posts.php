@@ -123,6 +123,16 @@ class Posts extends HZ_Controller
     }
 
     /**
+     * 批量删除资讯
+     */
+    public function batchDelPosts()
+    {
+        $ids = $this->input->post('ids', true);
+        $res = $this->posts_service->batchDelPosts($ids);
+        echo outputResponse($res);
+    }
+
+    /**
      * 更新状态
      */
     public function changeStatus()
@@ -265,6 +275,16 @@ class Posts extends HZ_Controller
     }
 
     /**
+     * 批量删除资讯
+     */
+    public function batchDelComment()
+    {
+        $ids = $this->input->post('ids', true);
+        $res = $this->posts_service->batchDelComment($ids);
+        echo outputResponse($res);
+    }
+
+    /**
      * 评论列表
      */
     public function queryPraise()
@@ -316,6 +336,15 @@ class Posts extends HZ_Controller
         echo outputResponse($res);
     }
 
+    /**
+     * 批量删除资讯
+     */
+    public function batchDelThemes()
+    {
+        $ids = $this->input->post('ids', true);
+        $res = $this->posts_service->batchDelThemes($ids);
+        echo outputResponse($res);
+    }
 
     /**
      * 添加专题

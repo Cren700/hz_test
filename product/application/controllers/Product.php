@@ -148,6 +148,13 @@ class Product extends HZ_Controller
         echo outputResponse($res);
     }
 
+    public function batchDelProduct()
+    {
+        $ids = $this->input->post('ids', true);
+        $res = $this->product_service->batchDelProduct($ids);
+        echo outputResponse($res);
+    }
+
     /**
      * 更新状态
      */
@@ -301,6 +308,13 @@ class Product extends HZ_Controller
             'Fcomment_id' => $this->input->post('comment_id', true),
         );
         $res = $this->product_service->delComment($where);
+        echo outputResponse($res);
+    }
+
+    public function batchDelComment()
+    {
+        $ids = $this->input->post('ids', true);
+        $res = $this->product_service->batchDelComment($ids);
         echo outputResponse($res);
     }
 

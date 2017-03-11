@@ -105,6 +105,15 @@ class Posts_dao_model extends HZ_Model
         return $this->_news->delete($this->_posts_table, $where);
     }
 
+    public function batchDelPosts($ids)
+    {
+        $where = 'Fid in ('.join(',', $ids).')';
+        $data = array(
+            'Fis_del' => 1
+        );
+        return $this->_news->update($this->_posts_table, $data, $where);
+    }
+
     public function changeStatus($data, $where)
     {
         dbEscape($data);
@@ -258,6 +267,12 @@ class Posts_dao_model extends HZ_Model
         return $this->_news->delete($this->_post_comments_table, $where);
     }
 
+    public function batchDelComment($ids)
+    {
+        $where = 'Fcomment_id in ('.join(',', $ids).')';
+        return $this->_news->delete($this->_post_comments_table, $where);
+    }
+
     public function search($where1, $where2)
     {
         $res = $this->_news->or_where($where1)->or_where($where2)->where('Fis_del = 0')->get($this->_posts_table)->result_array();
@@ -289,6 +304,12 @@ class Posts_dao_model extends HZ_Model
     public function delTheme($where)
     {
         dbEscape($where);
+        return $this->_news->delete($this->_theme_table, $where);
+    }
+
+    public function batchDelThemes($ids)
+    {
+        $where = 'Fid in ('.join(',', $ids).')';
         return $this->_news->delete($this->_theme_table, $where);
     }
 

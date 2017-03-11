@@ -446,6 +446,17 @@ class Product_service_model extends HZ_Model
             return $ret;
         }
     }
+    
+    public function batchDelProduct($ids)
+    {
+        $ret = array('code' => 0);
+        $res = $this->product_dao->batchDelProduct($ids);
+        if (empty($res)) {
+            $ret['code'] = 'system_error_2'; // 操作出错
+            return $ret;
+        }
+        return $ret;
+    }
 
     public function changeStatus($data, $where)
     {
@@ -700,6 +711,17 @@ class Product_service_model extends HZ_Model
         } else {
             return $ret['code'] = 'posts_error_12';
         }
+    }
+
+    public function batchDelComment($ids)
+    {
+        $ret = array('code' => 0);
+        $res = $this->product_dao->batchDelComment($ids);
+        if (empty($res)) {
+            $ret['code'] = 'system_error_2'; // 操作出错
+            return $ret;
+        }
+        return $ret;
     }
 
     public function maybeLike($option)

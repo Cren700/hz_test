@@ -51,7 +51,10 @@ class Product_service_model extends HZ_Model
         return $this->myCurl($this->_api, 'delProduct', $data, false);
     }
 
-
+    public function batchDelProduct($option)
+    {
+        return $this->myCurl($this->_api, 'batchDelProduct', $option, true);
+    }
 
     public function category()
     {
@@ -100,5 +103,10 @@ class Product_service_model extends HZ_Model
     public function delComment($data)
     {
         return $this->myCurl($this->_api, 'delComment', $data, true);
+    }
+
+    public function batchDelComment($option)
+    {
+        return $this->myCurl($this->_api, 'batchDelComment', $option, true);
     }
 }

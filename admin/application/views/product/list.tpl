@@ -10,6 +10,7 @@
     <table class="table table-bordered table-striped">
         <thead>
         <tr>
+            <th><input type="checkbox" id="bacth_selected">&nbsp;全选</th>
             <th>ID</th>
             <th>产品名称</th>
             <th>分类</th>
@@ -24,6 +25,7 @@
         <tbody>
         <{foreach $info['list'] as $i}>
             <tr rel="<{$i['Fproduct_id']}>">
+                <td><input type="checkbox" class="js-checkbox-sub" ref="<{$i['Fproduct_id']}>"></td>
                 <td><{$i['Fproduct_id']}></td>
                 <td><a href="<{"/product/detail/"|cat:$i['Fproduct_id']|getBaseUrl}>" title="<{$i['Fproduct_name']}>"><{$i['Fproduct_name']}></a></td>
                 <td><{$cate[$i['Fcategory_id']]}></td>

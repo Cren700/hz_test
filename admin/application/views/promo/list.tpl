@@ -10,6 +10,7 @@
     <table class="table table-bordered table-striped">
         <thead>
         <tr>
+            <th><input type="checkbox" id="bacth_selected">&nbsp;全选</th>
             <th>ID</th>
             <th>广告名称</th>
             <th>广告分类</th>
@@ -25,6 +26,7 @@
         <tbody>
         <{foreach $info['list'] as $i}>
             <tr rel="<{$i['Factive_id']}>">
+                <td><input type="checkbox" class="js-checkbox-sub" ref="<{$i['Factive_id']}>"></td>
                 <td><{$i['Factive_id']}></td>
                 <td><a href="<{"/promo/detail/"|cat:$i['Factive_id']|getBaseUrl}>" title="<{$i['Factive_name']}>"><{$i['Factive_name']}></a></td>
                 <td><{$cate[$i['Fcategory_id']]}></td>

@@ -254,9 +254,17 @@ class User extends BaseControllor
             'user/role_detail.js'
         );
         $action = $this->user_service->adminAction();
+        $tmp = array();
+        foreach ($action['data']['list'] as $list) {
+            if (!in_array($list['Faction_type'], $tmp)) {
+                $tmp[$list['Faction_type']]['Ftype_name'] = $list['Ftype_name'];
+            }
+            $tmp[$list['Faction_type']]['list'][] = $list;
+        }
         $this->smarty->assign('is_new', 1);
         $this->smarty->assign('jsArr', $jsArr);
-        $this->smarty->assign('action', $action['data']);
+        $this->smarty->assign('action', $tmp);
+        $this->smarty->assign('actions', $action['data']);
         $this->smarty->display('user/role_detail.tpl');
     }
 
@@ -268,12 +276,20 @@ class User extends BaseControllor
         );
         $action = $this->user_service->adminAction();
 
+        $tmp = array();
+        foreach ($action['data']['list'] as $list) {
+            if (!in_array($list['Faction_type'], $tmp)) {
+                $tmp[$list['Faction_type']]['Ftype_name'] = $list['Ftype_name'];
+            }
+            $tmp[$list['Faction_type']]['list'][] = $list;
+        }
         $role = $this->user_service->getRole($option);
         !$role['data'] ? $this->jump404():'';
         $this->smarty->assign('is_new', 0);
         $this->smarty->assign('jsArr', $jsArr);
         $this->smarty->assign('role', $role['data']);
-        $this->smarty->assign('action', $action['data']);
+        $this->smarty->assign('action', $tmp);
+        $this->smarty->assign('actions', $action['data']);
         $this->smarty->display('user/role_detail.tpl');
     }
 

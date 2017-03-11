@@ -124,6 +124,15 @@ class Promo extends HZ_Controller {
         echo json_encode_data($res);
     }
 
+    public function batchDelPromo()
+    {
+        $option = array(
+            'ids' => $this->input->post('ids')
+        );
+        $res = $this->promo_service->batchDelPromo($option);
+        echo json_encode_data($res);
+    }
+
     public function verify() {
         $cate = $this->promo_service->category();
         $cssArr = array('datepicker.css');

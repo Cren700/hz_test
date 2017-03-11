@@ -10,6 +10,7 @@
     <table class="table table-bordered table-striped">
         <thead>
         <tr>
+            <th><input type="checkbox" id="bacth_selected">&nbsp;全选</th>
             <th>ID</th>
             <th>标题</th>
             <th>发布者</th>
@@ -25,6 +26,7 @@
         <tbody>
         <{foreach $info['list'] as $i}>
             <tr rel="<{$i['Fid']}>">
+                <td><{if $i['Fis_del'] != 1}><input type="checkbox" class="js-checkbox-sub" ref="<{$i['Fid']}>"><{/if}></td>
                 <td><{$i['Fid']}></td>
                 <td><a href="<{"/posts/detail/"|cat:$i['Fid']|getBaseUrl}>" title="<{$i['Fpost_title']}>"><{$i['Fpost_title']}></a></td>
                 <td><{$i['Fuser_name']}></td>

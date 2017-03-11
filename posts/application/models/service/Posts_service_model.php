@@ -205,6 +205,17 @@ class Posts_service_model extends HZ_Model
         }
     }
 
+    public function batchDelPosts($ids)
+    {
+        $ret = array('code' => 0);
+        $res = $this->posts_dao->batchDelPosts($ids);
+        if (empty($res)) {
+            $ret['code'] = 'system_error_2'; // 操作出错
+            return $ret;
+        }
+        return $ret;
+    }
+
     public function changeStatus($data, $where)
     {
         $ret = array('code' => 0);
@@ -405,6 +416,17 @@ class Posts_service_model extends HZ_Model
         }
     }
 
+    public function batchDelComment($ids)
+    {
+        $ret = array('code' => 0);
+        $res = $this->posts_dao->batchDelComment($ids);
+        if (empty($res)) {
+            $ret['code'] = 'system_error_2'; // 操作出错
+            return $ret;
+        }
+        return $ret;
+    }
+
     /**
      * 关注列表
      * @param $option
@@ -581,6 +603,16 @@ class Posts_service_model extends HZ_Model
         }
     }
 
+    public function batchDelThemes($ids)
+    {
+        $ret = array('code' => 0);
+        $res = $this->posts_dao->batchDelThemes($ids);
+        if (empty($res)) {
+            $ret['code'] = 'system_error_2'; // 操作出错
+            return $ret;
+        }
+        return $ret;
+    }
     public function queryThemes($option)
     {
         $res = array('code' => 0);

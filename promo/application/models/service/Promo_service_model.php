@@ -154,6 +154,17 @@ class Promo_service_model extends HZ_Model {
         }
     }
 
+    public function batchDelPromo($ids)
+    {
+        $ret = array('code' => 0);
+        $res = $this->promo_dao->batchDelPromo($ids);
+        if (empty($res)) {
+            $ret['code'] = 'system_error_2'; // 操作出错
+            return $ret;
+        }
+        return $ret;
+    }
+
 	public function getPromoRandom()
 	{
 		$ret = array('code' => 0);
