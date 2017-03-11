@@ -220,7 +220,7 @@ class Account extends HZ_Controller
         $this->smarty->assign('appid', $appid);
         $this->smarty->assign('state', $state);
         $this->smarty->assign('backUrl', $bakUrl);
-        $this->smarty->display('account/test.tpl');
+        $this->smarty->display('account/logwx.tpl');
     }
 
     public function wxLogBak($type = 4)
@@ -251,6 +251,7 @@ class Account extends HZ_Controller
 
         //解析json
         $user_obj = json_decode($res,true);
+
 //        $type = $this->input->get('type');
         $user = $this->account_service_model->oauthLogin($user_obj['openid'], $user_obj['nickname'], $user_obj['headimgurl'], $log_type=1, $type);
         die;

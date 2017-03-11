@@ -5,7 +5,6 @@
     <a href="" class="logo">
         <img src="<{'logo.png'|baseImgUrl}>">
     </a>
-    <p class="welogin">微信登录</p>
     <div id="login_container"></div>
     <span>或</span>
     <a href="<{'/account.html'|getBaseUrl}>" class="other_login">使用账号登录</a>
