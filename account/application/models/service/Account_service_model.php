@@ -348,6 +348,7 @@ class Account_service_model extends HZ_Model
             'Fuser_id' => $option['Fuser_id'],
         );
         $res = $this->account_dao_model->getInfoByOp($where);
+        echo json_encode_data($res);die;
         if (!$res) {
             // 没有用户则添加用户
             $data_base = array(
