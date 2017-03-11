@@ -345,8 +345,8 @@ class Account_service_model extends HZ_Model
     {
         $ret = array('code' => 0);
         $where = array(
-            'Fuser_id' => $option['Fuser_id'],
-            'Flog_type' => $option['Flog_type']
+            't1.Fuser_id' => $option['Fuser_id'],
+            't1.Flog_type' => $option['Flog_type']
         );
         $res = $this->account_dao_model->getAccountTotalInfo($where);
         if (!$res) {
@@ -366,7 +366,7 @@ class Account_service_model extends HZ_Model
                 'Fimage_path' => $option['Fimage_path']
             );
             $this->account_dao_model->addDetail($data_detail);
-            $ret['data'] = $this->account_dao_model->getInfoByOp($where);
+            $ret['data'] = $this->account_dao_model->getAccountTotalInfo($where);
         } else {
             $ret['data'] = $res;
         }
