@@ -108,7 +108,7 @@ class Promo_service_model extends HZ_Model {
         	$like['Factive_name'] = $option['Factive_name'];
         }
 
-        if(!empty($option['Fstatus'])) {
+        if(!empty($option['Fstatus']) || $option['Fstatus'] === '0') {
         	$where['Fstatus'] = $option['Fstatus'];
         }
 

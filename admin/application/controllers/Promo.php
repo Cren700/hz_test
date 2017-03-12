@@ -58,7 +58,7 @@ class Promo extends HZ_Controller {
             'page_size'   => $this->input->get('n') ? : 10,//每页显示10条
             'active_name' => $this->input->get('active_name') ? : '',
             'category_id' => $this->input->get('category_id') ? : '',
-            'status'       => $this->input->get('status') ? : '',
+            'status'       => $this->input->get('status'),
             'min_date' => $this->input->get('min_date'),
             'max_date' => $this->input->get('max_date'),
         );
