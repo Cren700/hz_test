@@ -16,12 +16,14 @@ class Errors extends HZ_Controller
     public function error_404()
     {
         $msg = $this->input->get('msg');
+        $code = $this->input->get('_c');
         $cssArr = array(
             'bootstrap.min.css',
             'swiper.min.css',
             'font-awesome.css'
         );
         $this->smarty->assign('msg', $msg);
+        $this->smarty->assign('code', $code);
         $this->smarty->assign('cssArr', $cssArr);
         $this->smarty->display('errors/page.tpl');
     }

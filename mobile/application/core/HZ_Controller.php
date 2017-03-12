@@ -78,9 +78,13 @@ class HZ_Controller extends CI_Controller
         exit();
     }
 
-    public function jump404($msg ='')
+    public function jump404($msg ='', $code = '')
     {
-        $this->jump(getBaseUrl('/404.html?msg='.$msg));
+        $url = '/404.html?msg='.$msg;
+        if ($code) {
+            $url .= '&_c='.$code;
+        }
+        $this->jump(getBaseUrl($url));
         exit();
     }
 

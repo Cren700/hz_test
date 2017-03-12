@@ -68,7 +68,7 @@ class Order extends BaseControllor
         if($res['code'] === 0) {
             $this->jump(getBaseUrl('/pay/wxpay.html?out_trade_no='.$res['data']['Forder_no']));
         } else {
-            $this->jump404($res['msg']);
+            $this->jump404($res['msg'], $res['code']);
         }
     }
     
@@ -82,7 +82,7 @@ class Order extends BaseControllor
         if($res['code'] === 0) {
             $this->jump(getBaseUrl('/pay/wxpay.html?out_trade_no='.$res['data']['Forder_no']));
         } else {
-            $this->jump404($res['msg']);
+            $this->jump404($res['msg'], $res['code']);
         }
     }
 

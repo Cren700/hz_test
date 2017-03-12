@@ -2098,6 +2098,9 @@ section.sub_info {
     margin-top: 0.53333333rem;
     text-align: center;
 }
+.nodata_txt a {
+    color: #4797db;
+}
 .J_recom_top {
     width: 100%;
     height: 6.66666667rem;

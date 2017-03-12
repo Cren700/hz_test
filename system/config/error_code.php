@@ -88,13 +88,13 @@ $config = array(
     'order_error_4' => array( 'code' => 50004, 'msg' => 'oh,库存不足了'), //库存不足 
     'order_error_5' => array( 'code' => 50005, 'msg' => '更改状态失败'), //更改状态失败 
     'order_error_6' => array( 'code' => 50006, 'msg' => '获取订单列表失败'), //获取订单列表失败 
-    'order_error_7' => array( 'code' => 50007, 'msg' => '未通过认证'),                // 未通过认证
+    'order_error_7' => array( 'code' => 50007, 'msg' => '您还未通过认证'),                // 未通过认证
     'order_error_8' => array( 'code' => 50008, 'msg' => '没有该订单信息'),                // 没有该订单信息
     'order_error_9' => array( 'code' => 50009, 'msg' => '保存理赔订单出错'),                // 保存理赔订单出错
     'order_error_10' => array( 'code' => 50010, 'msg' => '理赔已经处理中，请稍等'),                // 已经理赔处理中，请稍等
     'order_error_11' => array( 'code' => 50011, 'msg' => '理赔单获取失败'),                // 理赔单获取失败
     'order_error_12' => array( 'code' => 50012, 'msg' => '理赔单更新失败'),                // 理赔单更新失败
-    'order_error_13' => array( 'code' => 50013, 'msg' => '该产品您已经下单了，请直接到订单中心查看或支付'),
+    'order_error_13' => array( 'code' => 50013, 'msg' => '您已下单，请直接到订单中心查看或支付'),
 
 
     // promo 60000 ~ 69999
