@@ -89,6 +89,7 @@ class Product extends BaseControllor
         );
 
         $product = $this->product_service->getProductByPid($data);
+//        p($product);
         if (empty($product['data'])) {
             $this->jump404();
         }
@@ -120,6 +121,7 @@ class Product extends BaseControllor
             'store_id' => $this->_uid,
             'store_type' => 0, //后台类型为0
             'product_name' => $this->input->post('product_name'),
+            'url' => $this->input->post('url'),
             'product_price' => $this->input->post('product_price'),
             'category_id' => $this->input->post('category_id'),
             'description' => $this->input->post('description'),
