@@ -183,6 +183,12 @@ HZ.ProductDetail = (function() {
             'removeCompleted':true,//是否将已完成任务从队列中删除
             'width': 60,
             'height': 26,
+            'onFallback' :function(){ //Flash无法加载错误
+                alert("您未安装FLASH控件，无法上传！请安装FLASH控件后再试。");
+            },
+            'onSelectError' : function(file,errorCode){  //选择文件出错
+                alert('图片类型出错,请选择jpg,jpeg,gif,png图片上传');
+            },
             'onUploadSuccess' : function(file, data, response) {
                 data = JSON.parse(data);
                 if(data.code == 0){

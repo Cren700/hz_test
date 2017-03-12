@@ -32,6 +32,14 @@
                             </div>
                             <div class="control-group">
                                 <div class="span12">
+                                    <label class="control-label">产品链接</label>
+                                    <div class="controls">
+                                        <input type="text" class="span4" name="url" placeholder="产品链接" value="<{$product['Furl']|default:''}>">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="span12">
                                     <label class="control-label">产品分类</label>
                                     <div class="controls">
                                         <select name="category_id" class="span4" id="category_id">

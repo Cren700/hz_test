@@ -125,6 +125,7 @@ class Store extends BaseControllor
             'store_id' => $this->_uid,
             'store_type' => 1, //前台用户
             'product_name' => $this->input->post('product_name'),
+            'url' => $this->input->post('url'),
             'product_price' => $this->input->post('product_price'),
             'category_id' => $this->input->post('category_id'),
             'description' => $this->input->post('description'),
