@@ -5,7 +5,7 @@
         <img src="<{'back_icon.png'|baseImgUrl}>" style="width: auto;" />
     </a>
     <span class="search-cart-common">
-        <!--<a href="<{'/shop.html'|getBaseUrl}>" class="icon-cart1"></a>-->
+        <a href="<{'/shop.html'|getBaseUrl}>" class="icon-cart1"></a>
         <img src="<{'star_copy_3.png'|baseImgUrl}>" class="shareBtn" />
     </span>
 </section>
@@ -371,11 +371,11 @@
             </p>
         </div>
         <{if $info['Fproduct_status'] eq 2}>
-        <!--
+
         <a href="javascript:;" class="plan_join" id="js-btn-join-cart">放入购物车</a>
         <a href="<{'/order/insPreview.html?pid='|cat:$info['Fproduct_id']|getBaseUrl}>" class="plan_join_dd" >马上加入</a>
-        -->
-        <a href="<{$info['Furl']}>" class="plan_join_dd" >马上加入</a>
+
+        <!--<a href="<{$info['Furl']}>" class="plan_join_dd" >马上加入</a>-->
         <{else}>
         <a href="javascript:;" class="plan_join" style='background-color: #999;'>已下架</a>
         <{/if}>
