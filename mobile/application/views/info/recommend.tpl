@@ -11,7 +11,7 @@
 <div class="J_recom_con">
     <div class="J_recom_erweima">
         <div class="J_recom_erweiImg">
-            <img id="myQr" src="<{'/posts/code/'|cat:('/info/recommendPage.html'|getMobileUrl)|getBaseUrl}>" width="100%">
+            <img id="myQr" src="<{'/posts/code/'|cat:('/home/recommendpage.html'|getMobileUrl)|getBaseUrl}>" width="100%">
         </div>
     </div>
     <p class="erweima_zhuanshu">您的专属二维码</p>

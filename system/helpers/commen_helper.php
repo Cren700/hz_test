@@ -339,7 +339,7 @@ function getMobileUrl($uri = '')
         $param .= '?';
     }
     $param .= "_re=" . base64_encode($uid);
-    return urlencode(HOST_URL . '/moblie' . $uri . $param);
+    return urlencode(HOST_URL . '/mobile' . $uri . $param);
 }
 
 /**
