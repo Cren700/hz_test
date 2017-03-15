@@ -20,7 +20,9 @@
         <{foreach $info['list'] as $i}>
             <tr >
                 <td><{$i['Fproduct_id']}></td>
-                <td><a href="<{"/product/detail/"|cat:$i['Fproduct_id']|getBaseUrl}>" title="<{$i['Fproduct_name']}>"><{$i['Fproduct_name']}></a></td>
+                <td>
+                    <a href="<{"/product/detail/"|cat:$i['Fproduct_id']|cat:'?_d=1'|getBaseUrl}>" title="<{$i['Fproduct_name']}>"><{$i['Fproduct_name']}></a>
+                </td>
                 <td><{$i['Fuser_id']}></td>
                 <td><{'Y-m-d H:i:s'|date:$i['Fcreate_time']}></td>
             </tr>

@@ -157,6 +157,7 @@ class User extends BaseControllor
     public function info($uid)
     {
         $uid = $uid ? : $this->input->get('id');
+        $do = $this->input->get('_d') == 1 ? 1 : 0 ;
         $jsArr = array(
             'plugin/jquery.placeholder.min.js',
             'plugin/jquery.validate.js',
@@ -169,6 +170,8 @@ class User extends BaseControllor
         );
         !$uid ? $this->jump404():'';
         $info = $this->user_service->getInfo($option);
+        $do = $this->input->get('_d') == 1 ? 1 : 0 ;
+        $this->smarty->assign('do', $do);
         $this->smarty->assign('jsArr', $jsArr);
         $this->smarty->assign('cssArr', $cssArr);
         $this->smarty->assign('user', $info['data']);
@@ -285,6 +288,8 @@ class User extends BaseControllor
         }
         $role = $this->user_service->getRole($option);
         !$role['data'] ? $this->jump404():'';
+        $do = $this->input->get('_d') == 1 ? 1 : 0 ;
+        $this->smarty->assign('do', $do);
         $this->smarty->assign('is_new', 0);
         $this->smarty->assign('jsArr', $jsArr);
         $this->smarty->assign('role', $role['data']);

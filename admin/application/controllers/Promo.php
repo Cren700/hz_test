@@ -1,5 +1,5 @@
 <?php
-class Promo extends HZ_Controller {
+class Promo extends BaseControllor {
     public function __construct() {
         parent::__construct();
         $this->load->model('service/promo_service_model','promo_service');
@@ -100,6 +100,8 @@ class Promo extends HZ_Controller {
             'uploadify/jquery.uploadify.min.js',
             'promo/detail.js'
         );
+        $do = $this->input->get('_d') == 1 ? 1 : 0 ;
+        $this->smarty->assign('do', $do);
         $this->smarty->assign('is_new', 0);
         $this->smarty->assign('cate', $cate['data']);
         $this->smarty->assign('promo', $promo['data']);

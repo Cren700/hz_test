@@ -29,10 +29,10 @@ HZ.UserQuery = (function() {
                     switch (status){
                         case 0:
                             _this.removeClass().addClass('btn btn-primary btn-mini js-btn-status').data('status', 1).text('启用');
-                            _this.parents('tr').find('.js-user-status').text('禁用');
+                            _this.parents('tr').find('.js-user-status').text('删除');
                             break;
                         case 1:
-                            _this.removeClass().addClass('btn btn-danger btn-mini js-btn-status').data('status', 0).text('禁用');
+                            _this.removeClass().addClass('btn btn-danger btn-mini js-btn-status').data('status', 0).text('删除');
                             _this.parents('tr').find('.js-user-status').text('使用中');
                             break;
                         default:

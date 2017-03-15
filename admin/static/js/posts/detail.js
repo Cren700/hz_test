@@ -11,6 +11,11 @@ HZ.PostsDetail = (function() {
         _upload();
 
         _ueditir();
+        
+        // 禁止操作
+        if ($('#js-do-val').val() == 1) {
+            $('body textarea, body select, body input').attr('disabled', true);
+        }
     }
 
     function _form()

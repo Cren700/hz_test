@@ -27,7 +27,13 @@
             <tr rel="<{$i['Fproduct_id']}>">
                 <td><input type="checkbox" class="js-checkbox-sub" ref="<{$i['Fproduct_id']}>"></td>
                 <td><{$i['Fproduct_id']}></td>
-                <td><a href="<{"/product/detail/"|cat:$i['Fproduct_id']|getBaseUrl}>" title="<{$i['Fproduct_name']}>"><{$i['Fproduct_name']}></a></td>
+                <td>
+                    <{if 'product/detail'|hasPower}>
+                        <a href="<{"/product/detail/"|cat:$i['Fproduct_id']|getBaseUrl}>" title="<{$i['Fproduct_name']}>"><{$i['Fproduct_name']}></a>
+                    <{else}>
+                        <a href="<{"/product/detail/"|cat:$i['Fproduct_id']|cat:'?_d=1'|getBaseUrl}>" title="<{$i['Fproduct_name']}>"><{$i['Fproduct_name']}></a>
+                    <{/if}>
+                </td>
                 <td><{$cate[$i['Fcategory_id']]}></td>
                 <td><{$i['Fstore_name']}></td>
                 <td><{$i['Fproduct_price']}></td>
@@ -35,6 +41,7 @@
                 <td><{'Y-m-d H:i'|date:$i['Fupdate_time']}></td>
                 <td class="js-product-status"><{if $i['Fis_del']}>已删除<{elseif $i['Fproduct_status'] eq 1}>待审核<{elseif $i['Fproduct_status'] eq 2}>已上架<{elseif $i['Fproduct_status'] eq 3}>下架<{elseif $i['Fproduct_status'] eq 4}>已完成<{else}>审核不通过<{/if}></td>
                 <td>
+                    <{if 'product/status'|hasPower}>
                     <{if $i['Fis_del']}>
                         <button class="btn btn-danger btn-mini js-btn-recycle">还原</button>
                     <{elseif $i['Fproduct_status'] eq 1}>
@@ -55,6 +62,7 @@
                     <{else}>
                         <button class="btn btn-primary btn-mini js-btn-status" data-status="2">重新上架</button>
                         <button class="btn btn-danger btn-mini js-btn-delete">删除</button>
+                    <{/if}>
                     <{/if}>
                 </td>
             </tr>

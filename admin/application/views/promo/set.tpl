@@ -18,7 +18,8 @@
                 <div class="widget-box">
                     <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
                         <h5>推荐规则</h5>
-                        <a class="label label-info js-btn-add-promo" href="<{'/promo/addPromoRule.html'|getBaseUrl}>">添加推荐规则</a>
+                        <{if 'promo/addpromorule'|hasPower}><a class="label label-info js-btn-add-promo" href="<{'/promo/addPromoRule.html'|getBaseUrl}>">添加推荐规则</a>
+                        <{/if}>
                     </div>
                     <div id="promo-list-content">
                         <!--table info-->
@@ -44,11 +45,14 @@
                                     <td><{$i.Fintegral}></td>
                                     <td class='js-status'><{if $i.Fstatus eq 0}>禁用<{else}>启用<{/if}></td>
                                     <td><{"Y-m-d H:i:s"|date:$i.Fcreate_time}></td>
-                                    <td><a href="<{'/promo/ruleDetail/'|cat:$i.Frule_id|getBaseUrl}>" class="btn btn-primary btn-mini js-btn-delete">编辑</a>
+                                    <td>
+                                        <{if 'promo/ruledetail'|hasPower}><a href="<{'/promo/ruleDetail/'|cat:$i.Frule_id|getBaseUrl}>" class="btn btn-primary btn-mini js-btn-delete">编辑</a><{/if}>
+                                        <{if 'promo/rulestatus'|hasPower}>
                                         <{if $i['Fstatus'] eq 0}>
                                         <button class="btn btn-primary btn-mini js-btn-status" data-status="1">启用</button>
                                         <{else}>
                                         <button class="btn btn-danger btn-mini js-btn-status" data-status="0">禁用</button>
+                                        <{/if}>
                                         <{/if}>
                                     </td>
                                 </tr>

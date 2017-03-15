@@ -18,7 +18,7 @@
                 <div class="widget-box">
                     <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
                         <h5>行业动态信息</h5>
-                        <a class="label label-info js-btn-add-posts" href="<{'/posts/addEvent.html'|getBaseUrl}>">添加</a>
+                        <{if 'posts/addevent'|hasPower}><a class="label label-info js-btn-add-posts" href="<{'/posts/addEvent.html'|getBaseUrl}>">添加</a><{/if}>
                     </div>
                     <div id="posts-list-content">
 

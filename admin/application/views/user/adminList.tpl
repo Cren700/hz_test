@@ -23,13 +23,15 @@
                     <td><{$i['Fuser_id']}></td>
                     <td><{$i['Frole_name']}></td>
                     <td><{'Y-m-d H:i:s'|date:$i['Fcreate_time']}></td>
-                    <td class="js-user-status"><{if $i['Fstatus'] eq 0 }>禁用<{else}>使用中<{/if}></td>
+                    <td class="js-user-status"><{if $i['Fstatus'] eq 0 }>已删除<{else}>使用中<{/if}></td>
                     <td>
-                        <a href="<{"/user/getAdminInfo.html?id="|cat:$i['Fid']|getBaseUrl}>" title="点击查看用户详情">查看</a>
-                        <{if $i['Fstatus'] eq 0}>
-                        <button class="btn btn-primary btn-mini js-btn-status" data-status="1">启用</button>
-                        <{else}>
-                        <button class="btn btn-danger btn-mini js-btn-status" data-status="0">禁用</button>
+                        <{if 'user/updateadminrole'|hasPower}><a href="<{"/user/getAdminInfo.html?id="|cat:$i['Fid']|getBaseUrl}>" title="点击查看用户详情">查看</a><{/if}>
+                        <{if 'user/updateadminrole'|hasPower}>
+                            <{if $i['Fstatus'] eq 0}>
+                            <button class="btn btn-primary btn-mini js-btn-status" data-status="1">恢复</button>
+                            <{else}>
+                            <button class="btn btn-danger btn-mini js-btn-status" data-status="0">删除</button>
+                            <{/if}>
                         <{/if}>
                     </td>
                 </tr>

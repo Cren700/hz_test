@@ -18,8 +18,8 @@
                 <div class="widget-box">
                     <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
                         <h5>专题信息</h5>
-                        <a class="label label-info js-btn-add-posts" href="<{'/posts/addTheme.html'|getBaseUrl}>">添加专题</a>
-                        <a class="label label-important js-btn-batch-del" href="javascript:;">批量删除</a>
+                        <{if 'posts/addtheme'|hasPower}><a class="label label-info js-btn-add-posts" href="<{'/posts/addTheme.html'|getBaseUrl}>">添加专题</a><{/if}>
+                        <{if 'posts/statustheme'|hasPower}><a class="label label-important js-btn-batch-del" href="javascript:;">批量删除</a><{/if}>
                     </div>
                     <div id="posts-list-content">
 

@@ -104,6 +104,8 @@ class Posts extends BaseControllor
             'ueditor/lang/zh-cn/zh-cn.js'
         );
         $cssArr = array('uploadify.css');
+        $do = $this->input->get('_d') == 1 ? 1 : 0 ;
+        $this->smarty->assign('do', $do);
         $this->smarty->assign('is_new', 0);
         $this->smarty->assign('cate', isset($cate['data']) ? $cate['data'] : array());
         $this->smarty->assign('posts', $posts['data']);

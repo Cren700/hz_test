@@ -11,6 +11,7 @@ class HZ_Controller extends CI_Controller
     protected $_uid = null;
     protected $_user_id = null;
     protected $_user_type = null;
+    public $_powerUrl = array();
     public function __construct(){
         parent::__construct();
         $this->load->library("session");
@@ -51,6 +52,8 @@ class HZ_Controller extends CI_Controller
         $this->_uid = $this->session->userdata('a_uid');
         $this->_user_id = $this->session->userdata('a_username');
         $this->_user_type = $this->session->userdata('a_user_type');
+        $this->_powerUrl = $this->session->userdata('powerUrl') ? : array();
+
         $this->smarty->assign('username', $this->_user_id);
         $this->smarty->assign('uid', $this->_uid);
         // 目录结构
@@ -405,7 +408,7 @@ class HZ_Controller extends CI_Controller
         $cont = $rsegments[1];
         $method = $rsegments[2];
 
-        $powerUrl = $this->session->userdata('powerUrl') ? : array();
+        $powerUrl = $this->_powerUrl;
 
         foreach ($menu as &$m) {
             if (strtolower($cont) ===$m['flagName']) {
@@ -429,6 +432,7 @@ class HZ_Controller extends CI_Controller
 class BaseControllor extends HZ_Controller{
     public function __construct(){
         parent::__construct();
+//        $this->hasPower();// 判断访问权限
         if(empty($this->_uid)){
             $uri = rawurlencode($_SERVER['REQUEST_URI']);
             $this->jump(getBaseUrl('/login?url='.$uri));

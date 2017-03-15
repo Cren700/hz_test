@@ -37,12 +37,14 @@
                 <td><{'y-m-d H:i'|date:$i['Fupdate_time']}></td>
                 <td><a href="<{'/posts/postsTheme.html?id='|cat:$i['Fid']|getBaseUrl}>">查看资讯</a></td>
                 <td>
+                    <{if 'posts/statustheme'|hasPower}>
                     <{if $i['Ftheme_status'] eq 0}>
                         <button class="btn btn-success btn-mini js-btn-status" data-status="1">上架</button>
                         <button class="btn btn-danger btn-mini js-btn-delete">删除</button>
                     <{elseif $i['Ftheme_status'] eq 1}>
                         <button class="btn btn-primary btn-mini js-btn-status" data-status="0">下架</button>
                         <button class="btn btn-danger btn-mini js-btn-delete">删除</button>
+                    <{/if}>
                     <{/if}>
                 </td>
             </tr>

@@ -104,6 +104,8 @@ class Product extends BaseControllor
             'ueditor/lang/zh-cn/zh-cn.js',
         );
         $cssArr = array('uploadify.css');
+        $do = $this->input->get('_d') == 1 ? 1 : 0 ;
+        $this->smarty->assign('do', $do);
         $this->smarty->assign('is_new', 0);
         $this->smarty->assign('cate', $cate['data']);
         $this->smarty->assign('product', $product['data']);
@@ -212,6 +214,8 @@ class Product extends BaseControllor
         !$data['category_id'] ? $this->jump404():'';
         $cate = $this->product_service->getCategory($data);
         empty($cate['data']) ? $this->jump404() : '';
+        $do = $this->input->get('_d') == 1 ? 1 : 0 ;
+        $this->smarty->assign('do', $do);
         $this->smarty->assign('cate', $cate['data']);
         $this->smarty->assign('is_new', 0);
         $this->smarty->assign('jsArr', $jsArr);

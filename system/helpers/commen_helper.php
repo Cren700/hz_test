@@ -425,3 +425,13 @@ function getCurrentUrl()
 {
     return urlencode('http://'.$_SERVER['SERVER_NAME'].$_SERVER["REQUEST_URI"]);
 }
+
+function hasPower($uri = '')
+{
+    $ci = &get_instance();
+    $ret = false;
+    if (in_array(strtolower($uri), $ci->_powerUrl)) {
+        $ret = true;
+    }
+    return $ret;
+}

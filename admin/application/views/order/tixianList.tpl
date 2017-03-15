@@ -37,9 +37,11 @@
                 <td><{'y-m-d H:i'|date:$i['Fcreate_time']}></td>
                 <td><{'y-m-d H:i'|date:$i['Fupdate_time']}></td>
                 <td>
-                    <{if $i['Forder_status'] eq 1}>
-                        <button class="btn btn-danger btn-mini js-btn-cancel" data-status="2">取消订单</button>
-                        <button class="btn btn-success btn-mini js-btn-success" data-status="3">提现成功</button>
+                    <{if 'order/txorderstatus'|hasPower}>
+                        <{if $i['Forder_status'] eq 1}>
+                            <button class="btn btn-danger btn-mini js-btn-cancel" data-status="2">取消订单</button>
+                            <button class="btn btn-success btn-mini js-btn-success" data-status="3">提现成功</button>
+                        <{/if}>
                     <{/if}>
                 </td>
             </tr>

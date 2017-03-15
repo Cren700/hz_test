@@ -23,8 +23,10 @@ HZ.UserQuery = (function() {
                 return ;
             }
         });
-
-
+        
+        if ($('#js-do-val').val() == 1) {
+            $('body textarea, body select, body input').attr('disabled', true);
+        }
 
         $('.js-btn-submit').on('click', function(e) {
             e.preventDefault();

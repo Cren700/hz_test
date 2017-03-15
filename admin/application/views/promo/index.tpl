@@ -63,8 +63,8 @@
                 <div class="widget-box">
                     <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
                         <h5>广告信息</h5>
-                        <a class="label label-info js-btn-add-promo" href="<{'/promo/add.html'|getBaseUrl}>">添加广告</a>
-                        <a class="label label-important js-btn-batch-del" href="javascript:;">批量删除</a>
+                        <{if 'promo/add'|hasPower}><a class="label label-info js-btn-add-promo" href="<{'/promo/add.html'|getBaseUrl}>">添加广告</a><{/if}>
+                        <{if 'promo/status'|hasPower}><a class="label label-important js-btn-batch-del" href="javascript:;">批量删除</a><{/if}>
                     </div>
                     <div id="promo-list-content">
 

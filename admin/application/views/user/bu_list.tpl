@@ -24,17 +24,24 @@
         <tbody>
         <{foreach $info['list'] as $i}>
             <tr rel="<{$i['Fid']}>">
-                <td><a href="<{"/user/info/"|cat:$i['Fid']|getBaseUrl}>" title="<{$i['Fuser_id']}>"><{$i['Fid']}></a></td>
+                <td><a href="<{"/user/info/"|cat:$i['Fid']|cat:'?_d=1'|getBaseUrl}>" title="<{$i['Fuser_id']}>"><{$i['Fid']}></a></td>
                 <td><{$i['Fuser_id']}></td>
                 <td><{$i['Freal_name']}></td>
                 <td><{$cate[$i['Fuser_type']]}></td>
                 <td><{'Y-m-d H:i'|date:$i['Fcreate_time']}></td>
                 <td><{'Y-m-d H:i'|date:$i['bFcreate_time']}></td>
-                <td class="js-user-status"><{if $i['Fstatus'] eq 0 }>禁用<{else}>使用中<{/if}></td>
+                <td class="js-user-status"><{if $i['Fstatus'] eq 0 }>已删除<{else}>使用中<{/if}></td>
                 <td class="js-user-atte-status"><{if $i['Fatte_status'] eq 0 }>未认证<{else}>已认证<{/if}></td>
                 <td>
-                    <a href="<{"/user/info/"|cat:$i['Fid']|getBaseUrl}>" title="点击查看用户详情">查看</a>
-                    <!--<button class="btn btn-primary btn-mini js-btn-black" data-status="1">移出黑名单</button>-->
+                    <{if 'user/info'|hasPower}><a href="<{"/user/info/"|cat:$i['Fid']|cat:'?_d=1'|getBaseUrl}>" title="点击查看用户详情">查看</a><{/if}>
+                    <{if 'user/changestatus'|hasPower}>
+                        <{if $i['Fstatus'] eq 0}>
+                        <button class="btn btn-primary btn-mini js-btn-status" data-status="1">启用</button>
+                        <{else}>
+                        <button class="btn btn-danger btn-mini js-btn-status" data-status="0">删除</button>
+                        <{/if}>
+                        <button class="btn btn-primary btn-mini js-btn-unblack" data-status="1">移出黑名单</button>
+                    <{/if}>
                 </td>
             </tr>
             <{/foreach}>

@@ -63,8 +63,8 @@
                                 <div class="span12">
                                     <label class="control-label">性别</label>
                                     <div class="controls">
-                                        男:<input type="radio" class="span1" name="sex" value="1" <{if ($user['Fsex']|default:1) eq 1 }>checked<{/if}>>
-                                        女:<input type="radio" class="span1" name="sex" value="2" <{if ($user['Fsex']|default:1) eq 2 }>checked<{/if}>>
+                                        男:<input type="radio" style="width: 15px" class="span1" name="sex" value="1" <{if ($user['Fsex']|default:1) eq 1 }>checked<{/if}>>
+                                        女:<input type="radio" style="width: 15px" class="span1" name="sex" value="2" <{if ($user['Fsex']|default:1) eq 2 }>checked<{/if}>>
                                     </div>
                                 </div>
                             </div>
@@ -142,8 +142,8 @@
                                 <div class="span12">
                                     <label class="control-label">实名认证状态</label>
                                     <div class="controls">
-                                        未认证:<input type="radio" class="span1" name="atte_status" value="0" <{if ($user['Fatte_status']|default:0) eq 0 }>checked<{/if}>>
-                                        已认证:<input type="radio" class="span1" name="atte_status" value="1" <{if ($user['Fatte_status']|default:0) eq 1 }>checked<{/if}>>
+                                        未认证:<input type="radio" style="width: 15px" class="span1" name="atte_status" value="0" <{if ($user['Fatte_status']|default:0) eq 0 }>checked<{/if}>>
+                                        已认证:<input type="radio" style="width: 15px" class="span1" name="atte_status" value="1" <{if ($user['Fatte_status']|default:0) eq 1 }>checked<{/if}>>
                                     </div>
                                 </div>
                             </div>
@@ -157,12 +157,15 @@
                             </div>
                             <div class="control-group">
                                 <div class="form-actions">
+                                    <{if !isset($do) || $do neq 1}>
                                     <input type="submit" class="btn btn-success js-btn-submit" value="提 交" />
                                     <input type="reset" class="btn btn-success" value="重 置">
+                                    <{/if}>
                                     <input type="button" class="btn js-btn-return" value="返回上一页">
                                 </div>
                             </div>
                             <input type="hidden" name="id" value="<{$user['Fid']}>">
+                            <input type="hidden" id="js-do-val" value="<{$do|default:''}>">
                     </form>
                 </div>
             </div>

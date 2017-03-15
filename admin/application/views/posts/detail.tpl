@@ -111,6 +111,7 @@
                             <input type="hidden" name="id" value="<{$posts['Fid']|default:''}>">
                             <input type="hidden" name="user_id" value="<{$posts['Fuser_id']|default:''}>">
                             <input type="hidden" name="is_new" value="<{$is_new}>">
+                            <input type="hidden" id="js-do-val" value="<{$do|default:''}>">
                         </div>
                     </form>
                 </div>

@@ -23,9 +23,11 @@
                 <td><{$i['Fpartners_name']}></td>
                 <td class="js-txt-num"><{$i['Fnum']}></td>
                 <td>
+                    <{if 'posts/delevent'|hasPower}>
                     <button class="btn btn-success btn-mini js-btn-submit" style="display: none">确认修改</button>
                     <button class="btn btn-primary btn-mini js-btn-status">编辑</button>
                     <button class="btn btn-danger btn-mini js-btn-delete">删除</button>
+                    <{/if}>
                 </td>
             </tr>
             <{/foreach}>

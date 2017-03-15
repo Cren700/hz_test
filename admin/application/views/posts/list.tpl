@@ -28,7 +28,13 @@
             <tr rel="<{$i['Fid']}>">
                 <td><{if $i['Fis_del'] != 1}><input type="checkbox" class="js-checkbox-sub" ref="<{$i['Fid']}>"><{/if}></td>
                 <td><{$i['Fid']}></td>
-                <td><a href="<{"/posts/detail/"|cat:$i['Fid']|getBaseUrl}>" title="<{$i['Fpost_title']}>"><{$i['Fpost_title']}></a></td>
+                <td>
+                    <{if 'posts/detail'|hasPower}>
+                    <a href="<{"/posts/detail/"|cat:$i['Fid']|getBaseUrl}>" title="<{$i['Fpost_title']}>"><{$i['Fpost_title']}></a>
+                    <{else}>
+                    <a href="<{"/posts/detail/"|cat:$i['Fid']|cat:'?_d=1'|getBaseUrl}>" title="<{$i['Fpost_title']}>"><{$i['Fpost_title']}></a>
+                    <{/if}>
+                </td>
                 <td><{$i['Fuser_name']}></td>
                 <td><{$i['Fpost_author']}></td>
                 <td><{$cate[$i['Fpost_category_id']]|default:''}></td>
@@ -37,6 +43,7 @@
                 <td><{'y-m-d H:i'|date:$i['Fcreate_time']}></td>
                 <td><{'y-m-d H:i'|date:$i['Fupdate_time']}></td>
                 <td>
+                    <{if 'posts/status'|hasPower}>
                     <{if $i['Fis_del']}>
                         <button class="btn btn-danger btn-mini js-btn-recycle">还原</button>
                     <{elseif $i['Fpost_status'] eq 1}>
@@ -52,6 +59,7 @@
                     <{else}>
                         <button class="btn btn-warning btn-mini js-btn-status" data-status="1">提交审核</button>
                         <button class="btn btn-danger btn-mini js-btn-delete">删除</button>
+                    <{/if}>
                     <{/if}>
                 </td>
             </tr>

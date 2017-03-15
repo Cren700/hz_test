@@ -36,7 +36,7 @@
                                     <label style="display: inline-block">会员状态</label>
                                     <select class="span8" name="status">
                                         <option value="">请选择会员状态</option>
-                                        <option value="0">禁用</option>
+                                        <option value="0">已删除</option>
                                         <option value="1">使用中</option>
                                     </select>
                                 </div>

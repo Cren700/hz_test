@@ -18,7 +18,7 @@
                 <div class="widget-box">
                     <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
                         <h5>专题中资讯列表</h5>
-                        <a class="label label-info" id="js-btn-add-posts" href="javascript:;">添加资讯</a>
+                        <{if 'posts/statustheme'|hasPower}><a class="label label-info" id="js-btn-add-posts" href="javascript:;">添加资讯</a><{/if}>
                     </div>
                     <div id="posts-list-content">
                         <!--table info-->
@@ -35,9 +35,11 @@
                                 <{foreach $posts as $i}>
                                     <tr rel="<{$i['Fid']}>">
                                         <td><{$i['Fid']}></td>
-                                        <td><a href="<{"/posts/detail/"|cat:$i['Fid']|getBaseUrl}>" title="<{$i['Fpost_title']}>"><{$i['Fpost_title']}></a></td>
+                                        <td><a href="<{"/posts/detail/"|cat:$i['Fid']|cat:'?_d=1'|getBaseUrl}>" title="<{$i['Fpost_title']}>"><{$i['Fpost_title']}></a></td>
                                         <td>
+                                            <{if 'posts/statustheme'|hasPower}>
                                             <button class="btn btn-danger btn-mini js-btn-delete">删除</button>
+                                            <{/if}>
                                         </td>
                                     </tr>
                                 <{/foreach}>

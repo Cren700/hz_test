@@ -18,7 +18,8 @@
                 <div class="widget-box">
                     <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
                         <h5>资讯分类</h5>
-                        <a class="label label-info js-btn-add-product" href="<{'/posts/addCate.html'|getBaseUrl}>">添加资讯分类</a>
+                        <{if 'posts/addcate'|hasPower}><a class="label label-info js-btn-add-product" href="<{'/posts/addCate.html'|getBaseUrl}>">添加资讯分类</a>
+                        <{/if}>
                     </div>
                     <div id="product-list-content">
                         <!--table info-->
@@ -42,11 +43,13 @@
                                     <td><{if $c.Fis_special eq 0}>否<{else}>是<{/if}></td>
                                     <td class="js-status"><{if $c['Fstatus'] eq 0 }>禁用<{else}>使用中<{/if}></td>
                                     <td>
-                                        <a href="<{'/posts/getcate/'|cat:$c.Fpost_category_id|getBaseUrl}>" class="btn btn-primary btn-mini js-btn-delete">编辑</a>
+                                        <{if 'posts/getcate'|hasPower}><a href="<{'/posts/getcate/'|cat:$c.Fpost_category_id|getBaseUrl}>" class="btn btn-primary btn-mini js-btn-delete">编辑</a><{/if}>
+                                        <{if 'posts/catestatus'|hasPower}>
                                         <{if $c['Fstatus'] eq 0}>
                                         <button class="btn btn-primary btn-mini js-btn-status" data-status="1">启用</button>
                                         <{else}>
                                         <button class="btn btn-danger btn-mini js-btn-status" data-status="0">禁用</button>
+                                        <{/if}>
                                         <{/if}>
                                     </td>
                                 </tr>

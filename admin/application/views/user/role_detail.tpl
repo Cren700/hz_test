@@ -62,6 +62,7 @@
                             </div>
                             <input type="hidden" name="id" value="<{$role['Frole_id']|default:''}>">
                             <input type="hidden" name="is_new" value="<{$is_new}>">
+                            <input type="hidden" id="js-do-val" value="<{$do|default:''}>">
                         </div>
                     </form>
                 </div>

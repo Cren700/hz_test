@@ -44,14 +44,24 @@
                 <td><{$i['Fremark']}></td>
                 <td>
                     <{if $i['Fstatus'] eq 1}>
-                        <a href="<{'/order/claimsDetail.html?id='|cat:$i['Fid']|getBaseUrl}>">编辑</a>
+                        <{if 'order/claimsdetail'|hasPower}>
+                            <a href="<{'/order/claimsDetail.html?id='|cat:$i['Fid']|getBaseUrl}>">编辑</a>
+                        <{/if}>
+                        <{if 'order/claimorderstatus'|hasPower}>
                         <button class="btn btn-danger btn-mini js-btn-cancel" data-status="2">理赔失败</button>
                         <button class="btn btn-success btn-mini js-btn-success" data-status="3">已完成</button>
+                        <{/if}>
                     <{elseif $i['Fstatus'] eq 2}>
+                    <{if 'order/claimsdetail'|hasPower}>
                         <a href="<{'/order/claimsDetail.html?id='|cat:$i['Fid']|getBaseUrl}>">编辑</a>
+                    <{/if}>
+                    <{if 'order/claimorderstatus'|hasPower}>
                         <button class="btn btn-danger btn-mini js-btn-cancel" data-status="1">重启订单</button>
+                    <{/if}>
                     <{elseif $i['Fstatus'] eq 3 }>
+                    <{if 'order/claimsdetail'|hasPower}>
                         <a href="<{'/order/claimsDetail.html?id='|cat:$i['Fid']|getBaseUrl}>">编辑</a>
+                    <{/if}>
                     <{/if}>
                 </td>
             </tr>

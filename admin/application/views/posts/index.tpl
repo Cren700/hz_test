@@ -65,8 +65,9 @@
                 <div class="widget-box">
                     <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
                         <h5>资讯信息</h5>
-                        <a class="label label-info js-btn-add-posts" href="<{'/posts/add.html'|getBaseUrl}>">添加资讯</a>
-                        <a class="label label-important js-btn-batch-del" href="javascript:;">批量删除</a>
+                        <{if 'posts/add'|hasPower}><a class="label label-info js-btn-add-posts" href="<{'/posts/add.html'|getBaseUrl}>">添加资讯</a><{/if}>
+
+                        <{if 'posts/status'|hasPower}><a class="label label-important js-btn-batch-del" href="javascript:;">批量删除</a><{/if}>
                     </div>
                     <div id="posts-list-content">
 

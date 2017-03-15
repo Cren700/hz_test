@@ -8,6 +8,11 @@ HZ.PromoDetail = (function() {
 
         _upload();
 
+        // 禁止操作
+        if ($('#js-do-val').val() == 1) {
+            $('body textarea, body select, body input').attr('disabled', true);
+        }
+
         $('#form').validate({
             submitHandler:function(form){
                 HZ.Form.btnSubmit({

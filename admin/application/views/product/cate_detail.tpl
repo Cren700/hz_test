@@ -43,6 +43,7 @@
                             </div>
                             <input type="hidden" name="category_id" value="<{$cate['Fcategory_id']|default:''}>">
                             <input type="hidden" name="is_new" value="<{$is_new}>">
+                            <input type="hidden" id="js-do-val" value="<{$do|default:''}>">
                         </div>
                     </form>
                 </div>

@@ -86,6 +86,7 @@
                             </div>
                             <input type="hidden" name="active_id" value="<{$promo['Factive_id']|default:''}>">
                             <input type="hidden" name="is_new" value="<{$is_new}>">
+                            <input type="hidden" id="js-do-val" value="<{$do|default:''}>">
                         </div>
                     </form>
                 </div>

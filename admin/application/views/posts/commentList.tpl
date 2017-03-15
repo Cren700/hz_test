@@ -31,6 +31,7 @@
                 <td class="js-comment-status"><{if $i['Fcomment_approved'] eq 0}>待审核<{elseif $i['Fcomment_approved'] eq 1 }>通过审核<{elseif $i['Fcomment_approved'] eq 2}>审核不通过<{/if}></td>
                 <td><{'y-m-d H:i'|date:$i['Fcomment_date']}></td>
                 <td>
+                    <{if 'posts/statuscomment'|hasPower}>
                     <{if $i['Fcomment_approved'] eq 0}>
                         <button class="btn btn-primary btn-mini js-btn-status" data-status="1">通过审核</button>
                         <button class="btn btn-warning btn-mini js-btn-status" data-status="2">审核不通过</button>
@@ -43,6 +44,7 @@
                     <button class="btn btn-warning btn-mini js-btn-status" data-status="0">待审核</button>
                     <button class="btn btn-primary btn-mini js-btn-status" data-status="1">通过审核</button>
                     <button class="btn btn-danger btn-mini js-btn-delete">删除</button>
+                    <{/if}>
                     <{/if}>
                 </td>
             </tr>

@@ -322,6 +322,7 @@
                             </div>
                             <input type="hidden" name="product_id" value="<{$product['Fproduct_id']|default:''}>">
                             <input type="hidden" name="is_new" value="<{$is_new}>">
+                            <input type="hidden" id="js-do-val" value="<{$do|default:''}>">
                         </div>
                     </form>
                 </div>

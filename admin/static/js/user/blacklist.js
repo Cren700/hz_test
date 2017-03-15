@@ -19,6 +19,48 @@ HZ.UserQuery = (function() {
             e.preventDefault();
             _getList();
         });
+
+        $(document).on('click', '.js-btn-unblack', function (){
+            var _this = $(this);
+            var url = baseUrl + '/user/changeStatus.html';
+            var data = {is_blackuser: 0, id: _this.parents('tr').attr('rel')};
+            HZ.Form.btnSubmit({
+                t: 'get',
+                u: url,
+                e: _this,
+                d: data,
+                callback: function(){
+                    _this.parents('tr').remove();
+                }
+            })
+        });
+
+        $(document).on('click', '.js-btn-status', function () {
+            var _this = $(this);
+            var url = baseUrl + '/user/changeStatus.html';
+            var status = _this.data('status');
+            var data = {status: status, id: _this.parents('tr').attr('rel')};
+            HZ.Form.btnSubmit({
+                t: 'get',
+                u: url,
+                e: _this,
+                d: data,
+                callback: function(){
+                    switch (status){
+                        case 0:
+                            _this.removeClass().addClass('btn btn-primary btn-mini js-btn-status').data('status', 1).text('启用');
+                            _this.parents('tr').find('.js-user-status').text('删除');
+                            break;
+                        case 1:
+                            _this.removeClass().addClass('btn btn-danger btn-mini js-btn-status').data('status', 0).text('删除');
+                            _this.parents('tr').find('.js-user-status').text('使用中');
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            })
+        });
     }
 
     function _getList(p){

@@ -18,7 +18,7 @@
                 <div class="widget-box">
                     <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
                         <h5>角色列表</h5>
-                        <a class="label label-info js-btn-add-product" href="<{'/user/addRole.html'|getBaseUrl}>">添加角色</a>
+                        <{if 'user/addrole'|hasPower}><a class="label label-info js-btn-add-product" href="<{'/user/addRole.html'|getBaseUrl}>">添加角色</a><{/if}>
                     </div>
                     <div id="users-list-content">
                         <!--table info-->
@@ -40,7 +40,12 @@
                                 <tbody>
                                 <{foreach $role['list'] as $i}>
                                     <tr rel="<{$i['Frole_id']}>">
-                                        <td><a href="<{'/user/getRole.html?id='|cat:$i['Frole_id']|getBaseUrl}>"><{$i['Frole_name']}></a></td>
+                                        <td>
+                                            <{if 'user/getrole'|hasPower}>
+                                                <a href="<{'/user/getRole.html?id='|cat:$i['Frole_id']|getBaseUrl}>"><{$i['Frole_name']}></a>
+                                            <{else}><a href="<{'/user/getRole.html?id='|cat:$i['Frole_id']|cat:'&_d=1'|getBaseUrl}>"><{$i['Frole_name']}></a>
+                                            <{/if}>
+                                        </td>
                                         <td><{$i['Fdesc']}></td>
                                         <td><{$i['Faction_name']}></td>
                                     </tr>

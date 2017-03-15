@@ -18,7 +18,7 @@
                 <div class="widget-box">
                     <div class="widget-title"> <span class="icon"> <i class="icon-search"></i> </span>
                         <h5>管理员搜索</h5>
-                        <a class="label label-info js-btn-add-admin" href="<{'/user/addAdmin.html'|getBaseUrl}>">添加管理员</a>
+                        <{if 'user/addadmin'|hasPower}><a class="label label-info js-btn-add-admin" href="<{'/user/addAdmin.html'|getBaseUrl}>">添加管理员</a><{/if}>
                     </div>
                     <div class="widget-content nopadding">
                         <form action="#" method="get" class="form-horizontal">
