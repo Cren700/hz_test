@@ -210,5 +210,72 @@ class Promo extends HZ_Controller {
     }
 
 
+    //添加广告
+    public function imageAdd() {
+        $data = array(
+            'Fimage_url' => $this->input->post('image_url',TRUE),
+            'Furl' => $this->input->post('url',TRUE),
+            'Flevel' => $this->input->post('level',TRUE),
+            'Fcreate_time' => time()
+        );
+        $res = $this->promo_service->imageAdd($data);//调用模型验证数据
+        echo outputResponse($res);
+    }
+
+    //保存
+    public function imageSave() {
+        $where = array('Fid' => $this->input->post('id'));
+        $data = array(
+            'Fimage_url' => $this->input->post('image_url',TRUE),
+            'Furl' => $this->input->post('url',TRUE),
+            'Flevel' => $this->input->post('level',TRUE),
+        );
+        $res = $this->promo_service->imageSave($where,$data);
+        echo outputResponse($res);
+    }
+
+    //查询广告
+    public function imageQuery() {
+        $option = array(
+            'p' => $this->input->get('p') ? : 1,
+            'page_size' => $this->input->get('page_size'),
+        );
+        $res = $this->promo_service->imageQuery($option);
+        echo outputResponse($res);
+    }
+
+    public function getImageById() {
+        $where = array(
+            'Fid' => $this->input->get('id')
+        );
+        $res = $this->promo_service->getImageById($where);
+        echo outputResponse($res);
+    }
+
+    // 更新状态
+    public function changeImageStatus() {
+        $data = array(
+            'Fstatus' => $this->input->post('status'),
+        );
+        $where = array(
+            'Fid'   => $this->input->post('id')
+        );
+        $res = $this->promo_service->changeImageStatus($data, $where);
+        echo outputResponse($res);
+    }
+
+    //删除
+    public function delImage()
+    {
+        $where = array('Fid' => $this->input->post('id'));
+        $res = $this->promo_service->delImage($where);
+        echo outputResponse($res);
+    }
+
+    public function getPcImages()
+    {
+        $res = $this->promo_service->getPcImages();
+        echo outputResponse($res);
+    }
 
 }

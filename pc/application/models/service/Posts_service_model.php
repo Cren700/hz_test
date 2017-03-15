@@ -150,4 +150,9 @@ class Posts_service_model extends HZ_Model
     {
         return $this->myCurl('promo', 'sendReport', $option, true);
     }
+
+    public function getPcImages()
+    {
+        return $this->myCurl('promo', 'getPcImages', array());
+    }
 }

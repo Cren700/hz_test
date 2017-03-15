@@ -372,16 +372,12 @@ class HZ_Controller extends CI_Controller
                         'name'      => '推荐设置',
                         'flagName'  => 'set',
                     ),
-//                    array(
-//                        'selected'  => '0',
-//                        'name'      => '*返利管理',
-//                        'flagName'  => 'ret',
-//                    ),
-//                    array(
-//                        'selected'  => '0',
-//                        'name'      => '友情链接',
-//                        'flagName'  => 'links',
-//                    )
+                    array(
+                        'selected'  => '0',
+                        'show'      => '0',
+                        'name'      => '侧栏图片管理',
+                        'flagName'  => 'image',
+                    ),
                 )
             ),
 //            array(

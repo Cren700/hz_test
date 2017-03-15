@@ -101,4 +101,38 @@ class Promo_service_model extends HZ_Model {
             return $this->myCurl($this->_api,'savePromoRule', $data, true);
         }
     }
+
+    //保存广告
+    public function imageSave($data) {
+        $is_new = $data['is_new'];
+        unset($data['is_new']);
+        if($is_new) {
+            $res = $this->myCurl($this->_api,'imageAdd',$data,true);
+        } else {
+            $res = $this->myCurl($this->_api,'imageSave',$data,true);
+        }
+        if($res['code'] === 0) {
+            $res['data']['url'] = getBaseUrl('/promo/image.html');
+        }
+        return $res;
+    }
+
+    //查询广告
+    public function queryImage($option) {
+        return $this->myCurl($this->_api,'imageQuery',$option,false);
+    }
+
+    public function getImageById($data) {
+        return $this->myCurl($this->_api,'getImageById',$data,false);
+    }
+    
+    public function imageStatus($data)
+    {
+        return $this->myCurl($this->_api, 'changeImageStatus', $data, true);
+    }
+
+    public function delImage($data)
+    {
+        return $this->myCurl($this->_api, 'delImage', $data, true);
+    }
 }

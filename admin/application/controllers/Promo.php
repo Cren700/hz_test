@@ -287,4 +287,94 @@ class Promo extends BaseControllor {
         }
         echo json_encode_data($res);
     }
+
+    // pc首页图片
+    public function image() {
+        $jsArr =  array(
+            'promo/image.js'
+        );
+        $this->smarty->assign('jsArr',$jsArr);
+        $this->smarty->display('promo/image.tpl');
+    }
+
+    //添加pc首页图片
+    public function imageAdd() {
+        $cssArr = array('uploadify.css');
+        $jsArr = array(
+            'plugin/jquery.placeholder.min.js',
+            'plugin/jquery.validate.js',
+            'uploadify/jquery.uploadify.min.js',
+            'promo/imageDetail.js'
+        );
+        $this->smarty->assign('is_new',1);
+        $this->smarty->assign('jsArr',$jsArr);
+        $this->smarty->assign('cssArr', $cssArr);
+        $this->smarty->display('promo/detailImage.tpl');
+    }
+
+    public function imageDetail($id = '') {
+        $data = array(
+            'id' => $id ? : $this->input->get('id')
+        );
+        $cssArr = array('uploadify.css');
+
+        $image = $this->promo_service->getImageById($data);
+        if (empty($image['data'])) {
+            $this->jump404();
+        }
+        $jsArr = array(
+            'plugin/jquery.placeholder.min.js',
+            'plugin/jquery.validate.js',
+            'uploadify/jquery.uploadify.min.js',
+            'promo/imageDetail.js'
+        );
+        $do = $this->input->get('_d') == 1 ? 1 : 0 ;
+        $this->smarty->assign('do', $do);
+        $this->smarty->assign('is_new', 0);
+        $this->smarty->assign('info', $image['data']);
+        $this->smarty->assign('jsArr', $jsArr);
+        $this->smarty->assign('cssArr', $cssArr);
+        $this->smarty->display('promo/detailImage.tpl');
+    }
+
+    //保存pc首页图片
+    public function imageSave() {
+        $data = array(
+            'is_new'      => $this->input->post('is_new'),
+            'id'   => $this->input->post('id'),
+            'image_url'  => $this->input->post('image_url'),
+            'url'  => $this->input->post('url'),
+            'level'       => $this->input->post('level')? : 1,// 最高
+        );
+        $res = $this->promo_service->imageSave($data);
+        echo json_encode_data($res);
+    }
+
+    //查询pc首页图片
+    public function queryImage() {
+        $option = array(
+            'p'           => $this->input->get('p') ? : 1,//分页第1页
+            'page_size'   => $this->input->get('n') ? : 10,//每页显示10条
+        );
+        $promo = $this->promo_service->queryImage($option);
+        $this->smarty->assign('info',$promo['data']);
+        $this->smarty->assign('page',$this->page($promo['data']['count'],$option['p'],$option['page_size'],''));
+        $this->smarty->display('promo/imageList.tpl');
+    }
+
+    public function imageStatus() {
+        $data = array(
+            'status'    => $this->input->post('status'),
+            'id'       => $this->input->post('id'),
+        );
+        $res = $this->promo_service->imageStatus($data);
+        echo json_encode_data($res);
+    }
+
+    public function delImage()
+    {
+        $data = array( 'id' => $this->input->get('id'));
+        $res = $this->promo_service->delImage($data);
+        echo json_encode_data($res);
+    }
 }

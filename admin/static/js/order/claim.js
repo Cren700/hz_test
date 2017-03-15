@@ -45,16 +45,10 @@ HZ.Order = (function() {
                         callback: function(){
                             var _p = _this.parent();
                             var s1 = '\
-                                <a href="'+baseUrl+'/order/claimsDetail.html?id='+id+'">编辑</a>\
                                 <button class="btn btn-danger btn-mini js-btn-cancel" data-status="2">理赔失败</button>\
                                 <button class="btn btn-success btn-mini js-btn-success" data-status="3">已完成</button>';
                             var s2 = '\
-                                <a href="'+baseUrl+'/order/claimsDetail.html?id='+id+'">编辑</a>\
                                 <button class="btn btn-danger btn-mini js-btn-cancel" data-status="1">重启订单</button>';
-                            var s3 = '\
-                                <a href="'+baseUrl+'/order/claimsDetail.html?id='+id+'">编辑</a>\
-                                <button class="btn btn-danger btn-mini js-btn-cancel" data-status="1">重启订单</button>';
-                            console.log(status);
                             switch (status){
                                 case 1:
                                     _this.parents('tr').find('.js-order-status').text('理赔中');
@@ -63,10 +57,6 @@ HZ.Order = (function() {
                                 case 2:
                                     _this.parents('tr').find('.js-order-status').text('理赔失败');
                                     _p.html(s2);
-                                    break;
-                                case 3:
-                                    _this.parents('tr').find('.js-order-status').text('理赔完成');
-                                    _p.html(s3);
                                     break;
                                 default:
                                     break;

@@ -46,9 +46,9 @@
                                 <div class="span12">
                                     <label class="control-label">图片路径</label>
                                     <div class="controls">
-                                        <input type="hidden" value="<{$posts['Fimage_path']|default:''}>" name="image_path">
-                                        <img style="width: 200px; height:150px; <{if !isset($posts['Fimage_path']) || !$posts['Fimage_path']}>display: none<{/if}>" src="<{$posts['Fimage_path']|default:''}>" id="js-img-cover" alt="">
-                                        <input class="btn btn-danger js-btn-del-cover" style="padding-right:20px; <{if !isset($posts['Fimage_path']) || !$posts['Fimage_path']}>display: none<{/if}>" type="button" value="删除"/>
+                                        <input type="hidden" value="<{$promo['Fimage_path']|default:''}>" name="image_path">
+                                        <img style="width: 200px; height:150px; <{if !isset($promo['Fimage_path']) || !$promo['Fimage_path']}>display: none<{/if}>" src="<{$promo['Fimage_path']|default:''}>" id="js-img-cover" alt="">
+                                        <input class="btn btn-danger js-btn-del-cover" style="padding-right:20px; <{if !isset($promo['Fimage_path']) || !$promo['Fimage_path']}>display: none<{/if}>" type="button" value="删除"/>
                                         <input type="file" id="file_upload">
                                     </div>
                                 </div>

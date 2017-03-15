@@ -107,4 +107,9 @@ $config = array(
     'promo_error_7' => array( 'code' => 60007, 'msg' => '更新广告状态出错'),                 // 更新广告状态出错
     'promo_error_8' => array( 'code' => 60008, 'msg' => '更新推广规则出错'),                 // 更新推广规则出错
     'promo_error_9' => array( 'code' => 60009, 'msg' => '推广类型已经存在，不能添加相同的推广类型'),                 // 推广类型已经存在，不能添加相同的推广类型
+    'promo_error_10' => array( 'code' => 60010, 'msg' => '首页图片添加出错'),                 // 首页图片添加出错
+    'promo_error_11' => array( 'code' => 60011, 'msg' => '没有找到相应信息'),                 // 没有找到相应信息
+    'promo_error_12' => array( 'code' => 60012, 'msg' => '首页图片保存出错'),                 // 首页图片保存出错
+
+
 );

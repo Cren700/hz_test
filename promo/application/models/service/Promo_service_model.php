@@ -317,4 +317,97 @@ class Promo_service_model extends HZ_Model {
             return $ret['code'] = 'promo_error_6';
         }
     }
+
+    //验证提交的广告数据
+    public function imageAdd($data) {
+        $ret = array('code' => 0);//命令码
+        $res = $this->promo_dao->imageAdd($data);
+        if (!$res) {
+            $ret['code'] = 'promo_error_10';
+        }
+        return $ret;
+    }
+
+    public function imageSave($where,$data) {
+        $ret = array('code' => 0);
+        if(!isset($where['Fid']) && empty($where['Fid'])) {
+            $ret['code'] = 'system_error_2';
+            return $ret;
+        }
+        $promo = $this->promo_dao->getImageInfoById($where);
+        if(empty($promo)) {
+            $ret['code'] = 'promo_error_11';
+            return $ret;
+        }
+        $res = $this->promo_dao->imageSave($where,$data);
+        if(!$res) {
+            return $ret['code'] = 'promo_error_5';
+        }
+        return $ret;
+    }
+
+    public function getImageById($where) {
+        $ret = array('code' => 0);
+        $res = $this->promo_dao->getImageInfoById($where);
+        $ret['data'] = $res;
+        return $ret;
+    }
+
+    //查询广告
+    public function imageQuery($option) {
+        $res = array('code' => 0);
+
+        $page = $option['p'] ? : 1;
+        $page_size = $option['page_size'];
+
+        $res['data']['count'] = $this->promo_dao->imageNum();
+        $res['data']['list']  = $this->promo_dao->imageList($page,$page_size);
+        return $res;
+    }
+
+    public function changeImageStatus($data, $where)
+    {
+        $ret = array('code' => 0);
+        if (empty($data) || empty($where)) {
+            $ret['code'] = 'system_error_2'; // 无信息
+            return $ret;
+        }
+        $promo = $this->promo_dao->getImageInfoById($where);
+        if(empty($promo)) {
+            $ret['code'] = 'promo_error_11';
+            return $ret;
+        }
+        $res = $this->promo_dao->changeImageStatus($data, $where);
+        if ($res) {
+            return $ret;
+        } else {
+            return $ret['code'] = 'system_error_2';
+        }
+    }
+
+    public function delImage($where) {
+        $ret = array('code' => 0);
+        if (!isset($where['Fid']) && empty($where['Fid'])) {
+            $ret['code'] = 'system_error_2'; // 操作出错
+            return $ret;
+        }
+        $promo = $this->promo_dao->getImageInfoById($where);
+        if (empty($promo)) {
+            $ret['code'] = 'promo_error_2'; // 不存在
+            return $ret;
+        }
+        $res = $this->promo_dao->delImage($where);
+        if ($res) {
+            return $ret;
+        } else {
+            return $ret['code'] = 'promo_error_11';
+        }
+    }
+
+    public function getPcImages()
+    {
+        $ret = array('code' => 0);
+        $ret['data'] = $this->promo_dao->getPcImages();
+        return $ret;
+    }
 }

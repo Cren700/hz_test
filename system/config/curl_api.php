@@ -199,6 +199,13 @@ $config = array(
             'freebackStatus'         => '/promo/freebackStatus', // 处理反馈状态
             'delFreeback'            => '/promo/delFreeback', // 删除反馈状态
             'batchDelPromo'          => '/promo/batchDelPromo',        // 批量删除广告
+            'imageAdd'               => '/promo/imageAdd', //添加首页图片
+            'imageSave'              => '/promo/imageSave', //更新首页图片
+            'imageQuery'             => '/promo/imageQuery',//查询广告
+            'getImageById'           => '/promo/getImageById',//获取单条
+            'changeImageStatus'      => '/promo/changeImageStatus', // 更改状态
+            'delImage'               => '/promo/delImage', // 删除
+            'getPcImages'            => '/promo/getPcImages',// pc首页获取图片
         ),
     ),
 );

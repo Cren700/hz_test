@@ -23,6 +23,7 @@
             <th>状态</th>
             <th>修改时间</th>
             <th>备注</th>
+            <th>编辑信息</th>
             <th>操作</th>
         </tr>
         </thead>
@@ -43,24 +44,19 @@
                 <td><{'y-m-d H:i'|date:$i['Fcreate_time']}></td>
                 <td><{$i['Fremark']}></td>
                 <td>
+                    <{if 'order/claimsdetail'|hasPower}>
+                    <a href="<{'/order/claimsDetail.html?id='|cat:$i['Fid']|getBaseUrl}>">编辑</a>
+                    <{/if}>
+                </td>
+                <td>
                     <{if $i['Fstatus'] eq 1}>
-                        <{if 'order/claimsdetail'|hasPower}>
-                            <a href="<{'/order/claimsDetail.html?id='|cat:$i['Fid']|getBaseUrl}>">编辑</a>
-                        <{/if}>
                         <{if 'order/claimorderstatus'|hasPower}>
                         <button class="btn btn-danger btn-mini js-btn-cancel" data-status="2">理赔失败</button>
                         <button class="btn btn-success btn-mini js-btn-success" data-status="3">已完成</button>
                         <{/if}>
                     <{elseif $i['Fstatus'] eq 2}>
-                    <{if 'order/claimsdetail'|hasPower}>
-                        <a href="<{'/order/claimsDetail.html?id='|cat:$i['Fid']|getBaseUrl}>">编辑</a>
-                    <{/if}>
                     <{if 'order/claimorderstatus'|hasPower}>
                         <button class="btn btn-danger btn-mini js-btn-cancel" data-status="1">重启订单</button>
-                    <{/if}>
-                    <{elseif $i['Fstatus'] eq 3 }>
-                    <{if 'order/claimsdetail'|hasPower}>
-                        <a href="<{'/order/claimsDetail.html?id='|cat:$i['Fid']|getBaseUrl}>">编辑</a>
                     <{/if}>
                     <{/if}>
                 </td>

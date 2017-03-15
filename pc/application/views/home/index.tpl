@@ -58,14 +58,15 @@
         </div>
     </div>
     <div class="sidebar">
+        <{if isset($images['list'])}>
+        <{foreach $images['list'] as $i}>
         <div class="sidebarTopics">
-            <a href="http://www.imhuzhu.com/SpecialDetail.aspx?id=2" target="_blank">
-                <img src="http://www.imhuzhu.com/upload/mg/imadmin/2017/01/12/180416839.png_300x300.png" height="170px" width="300px" alt="sfsdfsd"></a>
+            <a href="<{$i['Furl']}>" target="_blank">
+                <img src="<{$i['Fimage_url']}>" height="170px" width="300px">
+            </a>
         </div>
-        <div class="sidebarTopics">
-            <a href="http://www.imhuzhu.com/SpecialDetail.aspx?id=2" target="_blank">
-                <img src="http://www.imhuzhu.com/upload/mg/imadmin/2017/01/12/180416839.png_300x300.png" height="170px" width="300px" alt="sfsdfsd"></a>
-        </div>
+        <{/foreach}>
+        <{/if}>
         <div class="platform">
             <a href="javascript:void(0);">平台寻求报道</a>
         </div>
