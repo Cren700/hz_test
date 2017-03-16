@@ -14,6 +14,8 @@
                 <th>用户联系方式</th>
                 <th>反馈类型</th>
                 <th>反馈信息</th>
+                <th>反馈时间</th>
+                <th>最后处理时间</th>
                 <th>状态</th>
                 <th>操作</th>
             </tr>
@@ -25,6 +27,8 @@
                     <td><{$i['Frelation']}></td>
                     <td><{if $i['Ftype'] eq 1 }>需求报道<{/if}></td>
                     <td><{$i['Fcontent']}></td>
+                    <td><{'Y-m-d H:i:s'|date:$i['Fcreate_time']}></td>
+                    <td><{'Y-m-d H:i:s'|date:$i['Fupdate_time']}></td>
                     <td class="js-user-status"><{if $i['Fstatus'] eq 0 }>未处理<{else}>已处理<{/if}></td>
                     <td>
                         <{if 'user/freebackstatus'|hasPower}>

@@ -35,7 +35,9 @@
                 <td><{$i['Freal_name']}></td>
                 <td><{$i['Fidentity']}></td>
                 <td><{$i['Fphone']}></td>
-                <td><{$i['Fproduct_name']}></td>
+                <td>
+                    <a href="<{"/product/detail/"|cat:$i['Fproduct_id']|cat:'?_d=1'|getBaseUrl}>" title="<{$i['Fproduct_name']}>"><{$i['Fproduct_name']}></a>
+                </td>
                 <td><{$i['Famount']}></td>
                 <td><{$i['Freason']}></td>
                 <td><{$i['Fevidence']}></td>

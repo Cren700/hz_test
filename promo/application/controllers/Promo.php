@@ -170,7 +170,9 @@ class Promo extends HZ_Controller {
         $data = array(
             'Ftype' => $this->input->post('type'),
             'Frelation' => $this->input->post('relation'),
-            'Fcontent' => $this->input->post('content')
+            'Fcontent' => $this->input->post('content'),
+            'Fcreate_time' => time(),
+            'Fupdate_time' => time(),
         );
         $res = $this->promo_service->sendReport($data);
         echo outputResponse($res);
@@ -193,6 +195,7 @@ class Promo extends HZ_Controller {
     {
         $data = array(
             'Fstatus' => $this->input->post('status'),
+            'Fupdate_time' => time()
         );
         $where = array(
             'Fid'   => $this->input->post('id')
