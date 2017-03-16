@@ -44,6 +44,13 @@ class Product_dao_model extends HZ_Model
         return filterData($res);
     }
 
+    public function getProCateCount()
+    {
+        $sql = 'select Fcategory_id, count(*) as cnt FROM t_product group by Fcategory_id;';
+        $res = $this->p->query($sql)->result_array();
+        return filterData($res);
+    }
+
     public function updateProductCnt($where, $data)
     {
         $this->p->where($where);

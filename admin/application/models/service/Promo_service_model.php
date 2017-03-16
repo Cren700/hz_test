@@ -50,6 +50,11 @@ class Promo_service_model extends HZ_Model {
         return $this->myCurl($this->_api, 'category',array());
     }
 
+    public function getPromoCateCount()
+    {
+        return $this->myCurl($this->_api, 'getPromoCateCount', array());
+    }
+
     //获取分类
     public function cateGet($data) {
         return $this->myCurl($this->_api,'cateGet',$data,false);

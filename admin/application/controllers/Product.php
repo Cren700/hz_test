@@ -184,7 +184,16 @@ class Product extends BaseControllor
      */
     public function cate()
     {
+        $cate_count = $this->product_service->getProCateCount();
+        $cate_count = isset($cate_count['data']['list']) ? $cate_count['data']['list'] : array();
+        $tmp_cate_count = array();
+        foreach($cate_count as $l) {
+            $tmp_cate_count[$l['Fcategory_id']] = $l['cnt'];
+        }
         $cate = $this->product_service->category();
+        $jsArr = array('product/cateStatus.js');
+        $this->smarty->assign('jsArr', $jsArr);
+        $this->smarty->assign('cate_count', $tmp_cate_count);
         $this->smarty->assign('cate', $cate['data']);
         $this->smarty->display('product/cateList.tpl');
     }

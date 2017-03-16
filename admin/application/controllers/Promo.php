@@ -150,8 +150,17 @@ class Promo extends BaseControllor {
 
     //广告类型列表
     public function cateList() {
+        $cate_count = $this->promo_service->getPromoCateCount();
+        $cate_count = isset($cate_count['data']['list']) ? $cate_count['data']['list'] : array();
+        $tmp_cate_count = array();
+        foreach($cate_count as $l) {
+            $tmp_cate_count[$l['Fcategory_id']] = $l['cnt'];
+        }
+        $jsArr = array('promo/cateStatus.js');
+        $this->smarty->assign('jsArr', $jsArr);
         $cate = $this->promo_service->category();
         $this->smarty->assign('cate',$cate['data']);
+        $this->smarty->assign('cate_count', $tmp_cate_count);
         $this->smarty->display('promo/cateList.tpl');
     }
 

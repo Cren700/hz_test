@@ -155,7 +155,7 @@ HZ.Dialog = (function() {
         }
 
         if(t.type !== 'confirm') {
-            setTimeout(closeMsg, 3000); //  3s关闭窗口
+            setTimeout(closeMsg, 2000); //  3s关闭窗口
         }
 
         $('.js-dialog-btn-sure').on('click', function () {

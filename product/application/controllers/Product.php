@@ -36,6 +36,12 @@ class Product extends HZ_Controller
         echo outputResponse($res);
     }
 
+    public function getProCateCount()
+    {
+        $res = $this->product_service->getProCateCount();
+        echo outputResponse($res);
+    }
+
     /**
      * 获取某产品
      */

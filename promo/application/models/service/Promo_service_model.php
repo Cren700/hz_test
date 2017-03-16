@@ -410,4 +410,11 @@ class Promo_service_model extends HZ_Model {
         $ret['data'] = $this->promo_dao->getPcImages();
         return $ret;
     }
+
+    public function getPromoCateCount()
+    {
+        $res = array('code' => 0);
+        $res['data'] = $this->promo_dao->getPromoCateCount();
+        return $res;
+    }
 }

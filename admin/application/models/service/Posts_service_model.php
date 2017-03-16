@@ -59,6 +59,10 @@ class Posts_service_model extends HZ_Model
         return $this->myCurl($this->_api, 'category', array());
     }
 
+    public function getPostsCateCount()
+    {
+        return $this->myCurl($this->_api, 'getPostsCateCount', array());
+    }
 
     public function getCategory($data)
     {
@@ -81,7 +85,7 @@ class Posts_service_model extends HZ_Model
         return $this->myCurl($this->_api, 'cateStatus', $data, true);
     }
 
-    public function delCate($data)
+    public function cateDel($data)
     {
         return $this->myCurl($this->_api, 'delCategory', $data, false);
     }

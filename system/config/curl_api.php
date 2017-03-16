@@ -61,6 +61,7 @@ $config = array(
             'addCategory'           => '/category/add',                 // add
             'updateCategory'        => '/category/update',              // 更新
             'delCategory'           => '/category/del',                 // 删除
+            'getProCateCount'       => '/product/getProCateCount',      // 各资讯分类数量
             // 产品
             'queryProduct'          => '/product/query',                // 列表list
             'getProductByPid'       => '/product/getProductByPid',      // 某个product
@@ -94,7 +95,8 @@ $config = array(
             'addCategory'           => '/category/add',                 // add
             'updateCategory'        => '/category/update',              // 更新
             'delCategory'           => '/category/del',                 // 删除
-            'cateStatus'            => '/category/cateStatus',          // 更新状态   
+            'cateStatus'            => '/category/cateStatus',          // 更新状态  
+            'getPostsCateCount'     => '/posts/getPostsCateCount',      // 各资讯分类数量 
             // 资讯
             'queryPosts'            => '/posts/query',                // 列表list
             'getPostsByPid'         => '/posts/getPostsByPid',      // 某个product
@@ -179,6 +181,7 @@ $config = array(
             'cateSave'               => '/category/cateSave',//保存分类
             'cateUpdate'             => '/category/cateUpdate',//更新分类
             'cateDel'                => '/category/cateDel',//删除分类
+            'getPromoCateCount'      => '/promo/getPromoCateCount', // 各广告分类数量
             'promoAdd'               => '/promo/add',//添加广告
             'promoSave'              => '/promo/save',//更新广告
             'promoDel'               => '/promo/del',//删除广告

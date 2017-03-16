@@ -46,6 +46,13 @@ class Posts_dao_model extends HZ_Model
         return filterData($res);
     }
 
+    public function getPostsCateCount()
+    {
+        $sql = 'select Fpost_category_id, count(*) as cnt FROM t_posts group by Fpost_category_id;';
+        $res = $this->_news->query($sql)->result_array();
+        return filterData($res);
+    }
+
     public function postsNumByCate($where) {
         dbEscape($where);
         $count = $this->_news->select('count(*) as num')

@@ -61,6 +61,10 @@ class Product_service_model extends HZ_Model
         return $this->myCurl($this->_api, 'category', array());
     }
 
+    public function getProCateCount()
+    {
+        return $this->myCurl($this->_api, 'getProCateCount', array());
+    }
 
     public function getCategory($data)
     {

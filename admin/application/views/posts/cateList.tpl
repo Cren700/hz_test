@@ -35,6 +35,7 @@
                                     <th>操作</th>
                                 </tr>
                                 </thead>
+                                <{if isset($cate['list'])}>
                                 <{foreach $cate['list'] as $c}>
                                 <tr rel="<{$c.Fpost_category_id}>">
                                     <td><{$c.Fpost_category_id}></td>
@@ -43,7 +44,10 @@
                                     <td><{if $c.Fis_special eq 0}>否<{else}>是<{/if}></td>
                                     <td class="js-status"><{if $c['Fstatus'] eq 0 }>禁用<{else}>使用中<{/if}></td>
                                     <td>
-                                        <{if 'posts/getcate'|hasPower}><a href="<{'/posts/getcate/'|cat:$c.Fpost_category_id|getBaseUrl}>" class="btn btn-primary btn-mini js-btn-delete">编辑</a><{/if}>
+                                        <{if 'posts/getcate'|hasPower}><a href="<{'/posts/getcate/'|cat:$c.Fpost_category_id|getBaseUrl}>" class="btn btn-primary btn-mini">编辑</a><{/if}>
+                                        <{if !isset($cate_count[$c.Fpost_category_id]) || $cate_count[$c.Fpost_category_id] == 0}>
+                                        <a href="javascript:;" class="btn btn-danger btn-mini js-btn-delete">删除</a>
+                                        <{/if}>
                                         <{if 'posts/catestatus'|hasPower}>
                                         <{if $c['Fstatus'] eq 0}>
                                         <button class="btn btn-primary btn-mini js-btn-status" data-status="1">启用</button>
@@ -54,6 +58,7 @@
                                     </td>
                                 </tr>
                                 <{/foreach}>
+                                <{/if}>
                             </table>
                         </div>
                         <!--end table info-->

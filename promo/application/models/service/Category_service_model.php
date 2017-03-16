@@ -84,7 +84,7 @@ class Category_service_model extends HZ_Model {
 			$ret['code'] = 'promo_error_2';
 			return $ret;
 		}
-		$cate = $this->cata_dao->cateDel($where['Fcategory_id']);
+		$cate = $this->cata_dao->cateDel($where);
 		if($cate) {
 			return $ret;
 		} else {

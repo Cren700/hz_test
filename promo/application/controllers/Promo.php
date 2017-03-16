@@ -51,6 +51,12 @@ class Promo extends HZ_Controller {
         echo outputResponse($res);
     }
 
+    public function getPromoCateCount()
+    {
+        $res = $this->promo_service->getPromoCateCount();
+        echo outputResponse($res);
+    }
+
     public function getPromoById() {
         $where = array(
             'Factive_id' => $this->input->get('active_id')

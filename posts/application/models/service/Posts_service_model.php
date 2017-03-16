@@ -68,6 +68,13 @@ class Posts_service_model extends HZ_Model
         return $res;
     }
 
+    public function getPostsCateCount()
+    {
+        $res = array('code' => 0);
+        $res['data'] = $this->posts_dao->getPostsCateCount();
+        return $res;
+    }
+
     public function postsListByCate($option)
     {
         $res = array('code' => 0);

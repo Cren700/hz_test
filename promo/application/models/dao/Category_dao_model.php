@@ -40,7 +40,7 @@ class Category_dao_model extends HZ_Model {
 	}
 
 	//删除
-	public function cateDel($cate_id) {
-		return $this->p->delete($this->_cate_table,$cate_id);
+	public function cateDel($where) {
+		return $this->p->delete($this->_cate_table, $where);
 	}
 }

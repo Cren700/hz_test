@@ -69,6 +69,13 @@ class Product_service_model extends HZ_Model
         return $res;
     }
 
+    public function getProCateCount()
+    {
+        $res = array('code' => 0);
+        $res['data'] = $this->product_dao->getProCateCount();
+        return $res;
+    }
+
     public function add($data)
     {
         $ret = array('code' => 0);

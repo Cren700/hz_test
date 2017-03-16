@@ -28,6 +28,12 @@ class Posts extends HZ_Controller
         echo outputResponse($res);
     }
 
+    public function getPostsCateCount()
+    {
+        $res = $this->posts_service->getPostsCateCount();
+        echo outputResponse($res);
+    }
+
     /**
      * 查询
      */

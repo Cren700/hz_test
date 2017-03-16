@@ -58,7 +58,7 @@ class HZ_Model extends CI_Model
         }
 
         $res = curl_exec($ch);
-//         if($control == "delImage")
+//         if($control == "cateDel")
 //         {
 //             echo $res;die;
 //         }

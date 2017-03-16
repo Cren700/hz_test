@@ -221,6 +221,12 @@ class Promo_dao_model extends HZ_Model {
         $query = $_db->get();
         $res = $query->result_array();
         return filterData($res);
+    }
 
+    public function getPromoCateCount()
+    {
+        $sql = 'select Fcategory_id, count(*) as cnt FROM t_adv_prom group by Fcategory_id;';
+        $res = $this->p->query($sql)->result_array();
+        return filterData($res);
     }
 }

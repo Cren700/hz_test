@@ -161,9 +161,16 @@ class Posts extends BaseControllor
     public function cate()
     {
         $cate = $this->posts_service->category();
+        $cate_count = $this->posts_service->getPostsCateCount();
+        $cate_count = isset($cate_count['data']['list']) ? $cate_count['data']['list'] : array();
+        $tmp_cate_count = array();
+        foreach($cate_count as $l) {
+            $tmp_cate_count[$l['Fpost_category_id']] = $l['cnt'];
+        }
         $jsArr = array('posts/cateStatus.js');
         $this->smarty->assign('jsArr', $jsArr);
         $this->smarty->assign('cate', isset($cate['data']) ? $cate['data'] : array());
+        $this->smarty->assign('cate_count', $tmp_cate_count);
         $this->smarty->display('posts/cateList.tpl');
     }
 
@@ -224,6 +231,18 @@ class Posts extends BaseControllor
             'id' => $this->input->get('id')
         );
         $res = $this->posts_service->cateStatus($option);
+        echo json_encode_data($res);
+    }
+
+    /**
+     * 删除
+     */
+    public function cateDel()
+    {
+        $option = array(
+            'id' => $this->input->get('id')
+        );
+        $res = $this->posts_service->cateDel($option);
         echo json_encode_data($res);
     }
 

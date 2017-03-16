@@ -61,7 +61,7 @@ class Category extends BaseController {
      */
     public function del()
     {
-        $where = array('Fid' => $this->input->get('id'));
+        $where = array('Fcategory_id' => $this->input->get('id'));
         $res = $this->cate_service->del($where);
         echo outputResponse($res);
     }
