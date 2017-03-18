@@ -19,7 +19,7 @@ HZ.roleStatus = (function() {
                         u: url,
                         d: data,
                         callback: function(){
-                            // location.reload();
+                            location.reload();
                         }
                     });
                 }
