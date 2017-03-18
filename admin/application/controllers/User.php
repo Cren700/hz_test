@@ -246,8 +246,19 @@ class User extends BaseControllor
      */
     public function role()
     {
+        $jsArr = array(
+            'user/roleStatus.js'
+        );
+        $role_count = $this->user_service->getRoleCount();
+        $role_count = isset($role_count['data']['list']) ? $role_count['data']['list'] : array();
+        $tmp_role_count = array();
+        foreach($role_count as $l) {
+            $tmp_role_count[$l['Frole_id']] = $l['cnt'];
+        }
         $role = $this->user_service->role();
+        $this->smarty->assign('jsArr', $jsArr);
         $this->smarty->assign('role', $role['data']);
+        $this->smarty->assign('role_count', $tmp_role_count);
         $this->smarty->display('user/role.tpl');
     }
 
@@ -269,6 +280,18 @@ class User extends BaseControllor
         $this->smarty->assign('action', $tmp);
         $this->smarty->assign('actions', $action['data']);
         $this->smarty->display('user/role_detail.tpl');
+    }
+
+    /**
+     * 删除
+     */
+    public function delRole()
+    {
+        $option = array(
+            'id' => $this->input->get('id')
+        );
+        $res = $this->user_service->delRole($option);
+        echo json_encode_data($res);
     }
 
     public function getRole()

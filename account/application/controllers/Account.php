@@ -348,6 +348,15 @@ class Account extends BaseController {
         echo outputResponse($res);
     }
 
+    public function delRole()
+    {
+        $option = array(
+            'Frole_id' => $this->input->post('id'),
+        );
+        $res = $this->account_service->delRole($option);
+        echo outputResponse($res);
+    }
+
     public function saveRole()
     {
         $where = array(
@@ -367,6 +376,12 @@ class Account extends BaseController {
         $where = array('Frole_id' => $this->input->get('id'));
 
         $res = $this->account_service->getRole($where);
+        echo outputResponse($res);
+    }
+
+    public function getRoleCount()
+    {
+        $res = $this->account_service->getRoleCount();
         echo outputResponse($res);
     }
     

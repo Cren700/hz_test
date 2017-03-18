@@ -40,6 +40,7 @@ $config = array(
             'role'                  => '/account/role',                 // 角色管理
             'addRole'               => '/account/addRole',             // 添加角色
             'saveRole'              => '/account/saveRole',             // 保存角色
+            'delRole'              => '/account/delRole',             // 删除角色
             'getRole'               => '/account/getRole',              // 获取角色信息
             'adminList'             => '/account/adminList',             // 管理列表
             'changeAdminStatus'     => '/account/changeAdminStatus',     // 修改管理员状态
@@ -49,7 +50,8 @@ $config = array(
             'powerUrl'              => '/account/powerUrl',               // 用户权限目录
             'modifyAccountInfo'     => '/info/modifyAccountInfo',         // 添加账户数据
             'getUserDetailByWhere'  => '/account/getUserDetailByWhere',   // 获取用户信息
-            'getAccountTotalInfo'   => '/account/getAccountTotalInfo'    // 用户完整信息
+            'getAccountTotalInfo'   => '/account/getAccountTotalInfo',    // 用户完整信息
+            'getRoleCount'          => '/account/getRoleCount',      // 各角色数量
         ),
     ),
     'product' => array(

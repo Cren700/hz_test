@@ -46,7 +46,7 @@
                                         <{else}>
                                         <a href="<{'/product/getcate/'|cat:$c.Fcategory_id|cat:'?_d=1'|getBaseUrl}>" class="btn btn-primary btn-mini">编辑</a>
                                         <{/if}>
-                                        <{if !isset($cate_count[$c.Fcategory_id]) || $cate_count[$c.Fcategory_id] == 0}>
+                                        <{if 'product/delcate'|hasPower && (!isset($cate_count[$c.Fcategory_id]) || $cate_count[$c.Fcategory_id] == 0)}>
                                         <a href="javascript:;" class="btn btn-danger btn-mini js-btn-delete">删除</a>
                                         <{/if}>
                                     </td>

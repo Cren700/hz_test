@@ -39,7 +39,7 @@
                                     <td><{$c.Fremark}></td>
                                     <td>
                                         <{if 'promo/categet'|hasPower}><a href="<{'/promo/cateGet/'|cat:$c.Fcategory_id|getBaseUrl}>" class="btn btn-primary btn-mini ">编辑</a><{/if}>
-                                        <{if !isset($cate_count[$c.Fcategory_id]) || $cate_count[$c.Fcategory_id] == 0}>
+                                        <{if 'promo/catedel'|hasPower && (!isset($cate_count[$c.Fcategory_id]) || $cate_count[$c.Fcategory_id] == 0)}>
                                         <a href="javascript:;" class="btn btn-danger btn-mini js-btn-delete">删除</a>
                                         <{/if}>
                                     </td>

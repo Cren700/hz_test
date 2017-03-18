@@ -547,11 +547,25 @@ class Account_service_model extends HZ_Model
         return $ret;
     }
 
+    public function delRole($where)
+    {
+        $ret = array('code' => 0);
+        $this->account_dao_model->delRole($where);
+        return $ret;
+    }
+
     public function getRole($where)
     {
         $ret = array('code' => 0);
         $ret['data'] = $this->account_dao_model->getRole($where);
         return $ret;
+    }
+
+    public function getRoleCount()
+    {
+        $res = array('code' => 0);
+        $res['data'] = $this->account_dao_model->getRoleCount();
+        return $res;
     }
 
     public function adminList($option)

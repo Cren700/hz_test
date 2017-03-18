@@ -84,10 +84,21 @@ class User_service_model extends HZ_Model
         return $this->myCurl('account', 'addRole', $option, true);
     }
 
+    public function delRole($option)
+    {
+        return $this->myCurl('account', 'delRole', $option, true);
+    }
+
     public function getRole($option)
     {
         return $this->myCurl('account', 'getRole', $option, false);
     }
+
+    public function getRoleCount()
+    {
+        return $this->myCurl('account', 'getRoleCount', array());
+    }
+
 
     public function adminList($option)
     {

@@ -224,6 +224,12 @@ class Account_dao_model extends HZ_Model
         return $res;
     }
 
+    public function delRole($option)
+    {
+        $res = $this->account->delete('t_admin_role', $option);
+        return $res;
+    }
+
     public function saveRole($where, $option)
     {
         $this->account->update('t_admin_role', $option, $where);
@@ -232,6 +238,13 @@ class Account_dao_model extends HZ_Model
     public function getRole($where)
     {
         return $this->account->get_where('t_admin_role', $where)->row_array();
+    }
+
+    public function getRoleCount()
+    {
+        $sql = 'select Frole_id, count(*) as cnt FROM t_admin group by Frole_id;';
+        $res = $this->account->query($sql)->result_array();
+        return filterData($res);
     }
 
     public function getActions($ids)

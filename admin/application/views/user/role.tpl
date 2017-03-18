@@ -35,6 +35,7 @@
                                     <th>角色名称</th>
                                     <th>描述</th>
                                     <th>操作范围</th>
+                                    <th>操作</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -48,6 +49,11 @@
                                         </td>
                                         <td><{$i['Fdesc']}></td>
                                         <td><{$i['Faction_name']}></td>
+                                        <td>
+                                            <{if 'user/delrole'|hasPower && (!isset($role_count[$i.Frole_id]) || $role_count[$i.Frole_id] == 0)}>
+                                            <a href="javascript:;" class="btn btn-danger btn-mini js-btn-delete">删除</a>
+                                            <{/if}>
+                                        </td>
                                     </tr>
                                     <{/foreach}>
                                 </tbody>
