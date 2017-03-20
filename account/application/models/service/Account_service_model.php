@@ -396,24 +396,15 @@ class Account_service_model extends HZ_Model
             $res_detail = array(
                 'Fid' => $uid,
                 'Fuser_id' => $option['Fuser_id'],
-                'Fuser_type' => $option['Fuser_type'],
+                'Fuser_type' => $res['Fuser_type'],
                 'Fimage_path' => ''
             );
             $ret['data'] = $res_detail;
         } else {
-            $where = array(
-                'Fuser_id' => $option['Fuser_id'],
-                'Flog_type' => $option['Flog_type'],
-                'Fuser_type' => $option['Fuser_type'],
-            );
-            $re = $this->account_dao_model->getInfoByOp($where);
-            if ($re) {
-                $detail = $this->account_dao_model->getDetailByOp(array('Fuser_id' => $res['Fid']));
-                $ret['data'] = $res;
-                $ret['data']['Fimage_path'] = $detail['Fimage_path'];
-            } else {
-                $ret['code'] = 'account_error_13';
-            }
+            $detail = $this->account_dao_model->getDetailByOp(array('Fuser_id' => $res['Fid']));
+            $ret['data'] = $res;
+            $ret['data']['Fimage_path'] = $detail['Fimage_path'];
+
         }
         return $ret;
     }

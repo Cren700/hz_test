@@ -96,7 +96,7 @@ class HZ_Controller extends CI_Controller
                 die;
             } else {
                 $uri = rawurlencode($_SERVER['REQUEST_URI']);
-                $this->jump(getBaseUrl('/account?url='.$uri));
+                $this->jump(getBaseUrl('/account/phone.html?url='.$uri));
                 exit();
             }
         }
@@ -111,7 +111,7 @@ class BaseControllor extends HZ_Controller{
                 echo json_encode_data(array( 'code' => 10004, 'msg' => '请先登录'));die;
             } else {
                 $uri = rawurlencode($_SERVER['REQUEST_URI']);
-                $this->jump(getBaseUrl('/account.html?url='.$uri));
+                $this->jump(getBaseUrl('/account/phone.html?url='.$uri));
                 exit();
             }
 

@@ -1170,7 +1170,7 @@ footer.plan_join {
 }
 .about_sec {
   color: #333;
-  padding-top: 0.53333333rem;
+  padding-top: 0.73333333rem;
   padding-left: 0.4rem;
   padding-right: 0.4rem;
   padding-bottom: 0.53333333rem;
@@ -1522,7 +1522,7 @@ section.mylogin {
     margin-bottom: 2rem;
 }
 .user_name {
-    height: 4.56rem;
+    height: 3.6rem;
     background: linear-gradient(to bottom, #ffffff 0%, #d8d8d8 100%);
     background: -webkit-linear-gradient(top, #ffffff 0%, #d8d8d8 100%);
     background: -ms-linear-gradient(top, #ffffff 0%, #d8d8d8 100%);
@@ -1582,7 +1582,7 @@ section.mylogin {
     margin: 0 auto;
 }
 .user_set_item {
-    padding-top: 1.06666667rem;
+    /*padding-top: 1.06666667rem;*/
     background-color: #fff;
 }
 .set_item {
@@ -1786,6 +1786,7 @@ section.sub_info {
     -webkit-transition: all 0.4s ease-out;
     -moz-transition: all 0.4s ease-out;
     transition: all 0.4s ease-out;
+    z-index: 999;
 }
 .circle_box.show {
     -webkit-transform: scale(1);
@@ -2039,7 +2040,7 @@ section.sub_info {
     margin: 0 auto;
     position: relative;
     text-align: center;
-    margin-top: 1.09333333rem;
+    margin-top: 0.2rem;
 }
 .login_regit_box > span:before {
     display: block;

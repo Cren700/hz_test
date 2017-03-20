@@ -105,7 +105,7 @@
                                 </div>
                             </div>
                             <div class="form-actions">
-                                <input type="submit" class="btn btn-success js-btn-submit" value="提 交" />
+                                <input type="submit" class="btn btn-success js-btn-submit" disabled="ture" value="提 交" />
                                 <a href="<{'/posts.html'|getBaseUrl}>" class="btn" title="返回列表">返回列表</a>
                             </div>
                             <input type="hidden" name="id" value="<{$posts['Fid']|default:''}>">

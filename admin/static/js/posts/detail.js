@@ -16,6 +16,10 @@ HZ.PostsDetail = (function() {
         if ($('#js-do-val').val() == 1) {
             $('body textarea, body select, body input').attr('disabled', true);
         }
+
+        $(document).ready(function(){
+            $('.js-btn-submit').attr('disabled', false);
+        })
     }
 
     function _form()

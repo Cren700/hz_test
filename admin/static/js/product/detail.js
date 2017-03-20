@@ -5,6 +5,10 @@ if (typeof (HZ) == "undefined" || !HZ) {
 HZ.ProductDetail = (function() {
     function _init(){
 
+        $(document).ready(function(){
+            $('.js-btn-submit').attr('disabled', false);
+        })
+
         _upload();
 
         var _index_rule = $('.js-txt-rule-count').length,
@@ -154,7 +158,7 @@ HZ.ProductDetail = (function() {
         var ue = UE.getEditor(el, {
             autoHeightEnabled: true,
             autoFloatEnabled: true,
-            initialFrameHeight: 100,
+            initialFrameHeight: 150,
             toolbars: [[
             	'undo', 'redo' , '|',
             	'bold','italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat',  'forecolor' , 'autotypeset', 'pasteplain' , '|', '|',

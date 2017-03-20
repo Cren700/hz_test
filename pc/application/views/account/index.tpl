@@ -4,7 +4,7 @@
     <a href="" class="logo">
         <img src="<{'logo.png'|baseImgUrl}>">
     </a>
-    <p class="welogin">用户登录</p>
+    <p class="welogin">账户登录</p>
     <form id="loginform" method="post" action="">
         <div class="phone_form">
             <input type="text" class="phone_t" name="user_id" placeholder="请输入您的账号"/>

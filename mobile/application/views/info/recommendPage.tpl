@@ -25,7 +25,7 @@
             <div class="swiper_img swiper_img_6">
                 <img src="<{'swiper_img6.png'|baseImgUrl}>">
             </div>
-            <a class="experience_btn" href="<{'/account.html'|getBaseUrl}>">立即体验</a>
+            <a class="experience_btn" href="<{'/account/phone.html'|getBaseUrl}>">立即体验</a>
         </div>
     </div>
     <!-- Add Pagination -->

@@ -56,7 +56,7 @@
                 <div class="list_item_nav">
                     <ul class="clearfix">
                         <li class="js-my-info active"><a href="">账号信息</a></li>
-                        <li class="js-my-info"><a href="<{'/account/center.html'|getBaseUrl}>">账户中心</a></li>
+                        <!--<li class="js-my-info"><a href="<{'/account/center.html'|getBaseUrl}>">账户中心</a></li>-->
                     </ul>
                 </div>
                 <div class="list_item_list">

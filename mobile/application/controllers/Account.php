@@ -51,6 +51,8 @@ class Account extends HZ_Controller
      */
     public function register()
     {
+        $url = $this->input->get('url');
+        $this->smarty->assign('url', $url);
         $jsArr = array('account_register.js');
         $this->smarty->assign('jsArr', $jsArr);
         $this->smarty->display('account/register.tpl');

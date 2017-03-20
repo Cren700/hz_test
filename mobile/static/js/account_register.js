@@ -15,6 +15,10 @@ HZ.Account_register = (function() {
             });
         });
 
+        $('.login_regit_wechat').on('click', function(){
+            window.location= baseUrl+ '/account/logwx.html?type=' + $('#js-type').val();
+        });
+
         $('#form').submit(function(e){
             e.preventDefault();
             var name = $('input[name="user_id"]').val();

@@ -1,19 +1,13 @@
 <{include file="public/header.tpl"}>
 <body>
 <section class="mobile-common-title clearfix">
-    <div style="display: block">
-        <a href="<{'/info.html'|getBaseUrl}>" class="p_logo">
-            <img src="<{'back_icon.png'|baseImgUrl}>" style="width: auto;" />
-        </a>
-        <div style="clear: both"></div>
-    </div>
     <div class="head_nav" style="background-color: #FFF; box-shadow: 0 0 5px #e1e1e1;">
         <p class="nav_item js-btn-my-order"><a href="javascript:void(0);">我加入的计划</a></p>
         <P class="nav_item js-btn-my-collect"><a href="javascript:void(0);">我关注的计划</a></P>
     </div>
 </section>
 <{if isset($orderInfo['list']) && count($orderInfo['list']) neq 0}>
-<section class="mobile-index-wrap" id="js-my-order" style="padding-top: 1.2rem">
+<section class="mobile-index-wrap" id="js-my-order" >
     <div class="orderList">
         <ul class="nav_list">
             <{foreach $orderInfo['list'] as $l}>
@@ -70,7 +64,7 @@
 <{/if}>
 
 <{if isset($collectList['list']) && count($collectList['list']) neq 0}>
-<section class="mine_jj" id="js-my-collect" style="padding-top: 2.2rem">
+<section class="mine_jj" id="js-my-collect" style="padding-top: 1.2rem">
     <div class="nav_list">
         <div class="new_item">
             <{foreach $collectList['list'] as $list}>

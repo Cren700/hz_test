@@ -22,9 +22,11 @@
             </label>
         </form>
         <span>更多登录方式</span>
+        <input type="button" class="login_other_sub" value="使用账号登陆" onclick="window.location ='<{'/account.html'|getBaseUrl}>'">
+        <input type="button" class="register_regit_sub" value="使用手机登陆" onclick="window.location ='<{'/account/phone.html'|getBaseUrl}>'">
         <p class="login_regit_icon">
             <i class="login_regit_wechat">&nbsp;</i>
-            <!--<i class="login_regit_qq">&nbsp;</i>-->
+            <i class="login_regit_qq">&nbsp;</i>
         </p>
     </div>
     <!--角色选择框-->

@@ -317,7 +317,7 @@
                             </div>
 
                             <div class="form-actions">
-                                <input type="submit" class="btn btn-success js-btn-submit" value="提 交" />
+                                <input type="submit" class="btn btn-success js-btn-submit" disabled="ture" value="提 交" />
                                 <a href="<{'/product.html'|getBaseUrl}>" class="btn btn-success" title="返回列表">返回列表</a>
                             </div>
                             <input type="hidden" name="product_id" value="<{$product['Fproduct_id']|default:''}>">

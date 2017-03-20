@@ -1,11 +1,10 @@
 <{include file='public/header.tpl'}>
-<body style="overflow:hidden;">
+<body>
 <section class="login_regit">
     <div class="login_regit_box">
         <div class="login_logo">
             <a href="<{'/home'|getBaseUrl}>"><img src="<{'logo.png'|baseImgUrl}>"></a>
         </div>
-        <p id="p_res">手机号码登录</p>
         <form id="loginform" method="post" action="">
             <div class="login_regit_txt">
                 <input type="text" class="login_regit_vertififyTxt" autocomplete="off" placeholder="请输入手机号码" id="phoneNumber" name="user_id">
@@ -34,7 +33,7 @@
         <input type="button" class="register_regit_sub" value="账户注册" id="js-btn-register" onclick="window.location ='<{'/account/register.html'|getBaseUrl}>'">
         <p class="login_regit_icon">
             <i class="login_regit_wechat">&nbsp;</i>
-            <!--<i class="login_regit_qq">&nbsp;</i>-->
+            <i class="login_regit_qq">&nbsp;</i>
         </p>
     </div>
     <!--角色选择框-->

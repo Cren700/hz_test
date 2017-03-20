@@ -56,7 +56,7 @@
                 <div class="list_item_nav">
                     <ul class="clearfix">
                         <li class="js-my-info"><a href="<{'/account/detail.html'|getBaseUrl}>">账号信息</a></li>
-                        <li class="js-my-info active"><a href="">账户中心</a></li>
+                        <!--<li class="js-my-info active"><a href="">账户中心</a></li>-->
                     </ul>
                 </div>
                 <div class="list_item_list">
@@ -64,7 +64,7 @@
                         <div class="account_info">
                             <ul>
                                 <li>
-                                    <span class="lable_text">昵称</span>
+                                    <span class="lable_text">账户资金</span>
                                     <span class="lable_text_left"><{$user['Famount']|default:'0.00'}></span>
                                 </li>
                                 <li>

@@ -16,7 +16,7 @@
             <div class="drop_down clearfix">
                 <{if !$uid}>
                 <div class="login">
-                    <a href="<{'/account.html'|getBaseUrl}>">登录</a>
+                    <a href="<{'/account/phonepage.html'|getBaseUrl}>">登录</a>
                 </div>
                 <{else}>
                 <div class="drop">
@@ -28,13 +28,13 @@
                 <div class="drop_nav">
                     <ul>
                         <li><a href="<{'/account/detail.html'|getBaseUrl}>">用户资料</a></li>
-                        <li><a href="<{'/account/center.html'|getBaseUrl}>">账户中心</a></li>
-                        <li><a href="<{'/info/planList.html'|getBaseUrl}>">我的订单</a></li>
+                        <!--<li><a href="<{'/account/center.html'|getBaseUrl}>">账户中心</a></li>-->
+                        <li><a href="<{'/info/planList.html'|getBaseUrl}>">我的计划</a></li>
                         <li><a href="<{'/info/collectList.html'|getBaseUrl}>">我的收藏</a></li>
 
                         <{if $user_type eq 3}>
                         <!--媒体star-->
-                        <li><a href="<{'/mudium.html'|getBaseUrl}>">文章列表</a></li>
+                        <li><a href="<{'/medium.html'|getBaseUrl}>">文章列表</a></li>
                         <!--媒体end-->
                         <{/if}>
                         <{if $user_type eq 2}>

@@ -5,17 +5,16 @@
         <a class="user_avatar" href="<{'/account/detail.html'|getBaseUrl}>">
             <img src="<{if $user['Fimage_path']}><{$user['Fimage_path']}><{else}><{'avatar.jpg'|baseImgUrl}><{/if}>">
         </a>
-        <p></p>
     </div>
     <div class="user_item">
         <p>
             <a href="<{'/account/detail.html'|getBaseUrl}>">用户资料</a>
         </p>
-        <p>
+        <!--<p>
             <a href="<{'/account/center.html'|getBaseUrl}>">账户中心</a>
-        </p>
+        </p>-->
         <p>
-            <a href="<{'/info/planList.html'|getBaseUrl}>">我的订单</a><!--订单+关注-->
+            <a href="<{'/info/planList.html'|getBaseUrl}>">我的计划</a><!--订单+关注-->
         </p>
         <p>
             <a href="<{'/info/collectList.html'|getBaseUrl}>">我的收藏</a>
