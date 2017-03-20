@@ -74,7 +74,7 @@ class Medium extends BaseControllor
             'admin/uploadify/jquery.uploadify.min.js',
             'admin/posts/detail.js',
             'admin/ueditor/ueditor.config.js',
-            'admin/ueditor/ueditor.all.js',
+            'admin/ueditor/ueditor.all.min.js',
             'admin/ueditor/lang/zh-cn/zh-cn.js'
         );
         $cssArr = array('admin/uploadify.css');
@@ -104,7 +104,7 @@ class Medium extends BaseControllor
             'admin/uploadify/jquery.uploadify.min.js',
             'admin/posts/detail.js',
             'admin/ueditor/ueditor.config.js',
-            'admin/ueditor/ueditor.all.js',
+            'admin/ueditor/ueditor.all.min.js',
             'admin/ueditor/lang/zh-cn/zh-cn.js'
         );
         $cssArr = array('uploadify.css');

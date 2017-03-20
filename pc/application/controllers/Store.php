@@ -76,7 +76,7 @@ class Store extends BaseControllor
             'admin/plugin/jquery.validate.js',
             'admin/product/detail.js',
             'admin/ueditor/ueditor.config.js',
-            'admin/ueditor/ueditor.all.js',
+            'admin/ueditor/ueditor.all.min.js',
             'admin/ueditor/lang/zh-cn/zh-cn.js',
             'admin/uploadify/jquery.uploadify.min.js',
         );

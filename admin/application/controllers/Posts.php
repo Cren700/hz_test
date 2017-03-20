@@ -73,7 +73,7 @@ class Posts extends BaseControllor
             'uploadify/jquery.uploadify.min.js',
             'posts/detail.js',
             'ueditor/ueditor.config.js',
-            'ueditor/ueditor.all.js',
+            'ueditor/ueditor.all.min.js',
             'ueditor/lang/zh-cn/zh-cn.js'
         );
         $cssArr = array('uploadify.css');
@@ -100,7 +100,7 @@ class Posts extends BaseControllor
             'uploadify/jquery.uploadify.min.js',
             'posts/detail.js',
             'ueditor/ueditor.config.js',
-            'ueditor/ueditor.all.js',
+            'ueditor/ueditor.all.min.js',
             'ueditor/lang/zh-cn/zh-cn.js'
         );
         $cssArr = array('uploadify.css');

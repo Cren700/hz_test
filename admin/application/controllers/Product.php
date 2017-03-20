@@ -71,7 +71,7 @@ class Product extends BaseControllor
             'plugin/jquery.validate.js',
             'product/detail.js',
             'ueditor/ueditor.config.js',
-            'ueditor/ueditor.all.js',
+            'ueditor/ueditor.all.min.js',
             'ueditor/lang/zh-cn/zh-cn.js',
             'uploadify/jquery.uploadify.min.js',
         );
@@ -100,7 +100,7 @@ class Product extends BaseControllor
             'uploadify/jquery.uploadify.min.js',
             'product/detail.js',
             'ueditor/ueditor.config.js',
-            'ueditor/ueditor.all.js',
+            'ueditor/ueditor.all.min.js',
             'ueditor/lang/zh-cn/zh-cn.js',
         );
         $cssArr = array('uploadify.css');
