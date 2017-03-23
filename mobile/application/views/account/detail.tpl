@@ -53,13 +53,17 @@
             <p>证件照片</p>
             <span ><img style="<{if $user['Fannex_path']}>width: 2.5rem; height: 2rem;<{/if}>" src="<{$user['Fannex_path']}>" alt=""></span>
         </div>
-        <div class="set_item">
+        <div class="set_item" style="padding-bottom: 1.6rem">
             <p>实名认证状态</p>
             <span style="color: red">
                 <{if ($user['Fatte_status']|default:0) eq 0 }>未通过认证<{else}>已通过认证<{/if}>
             </span>
         </div>
-        <{if ($user['Fatte_status']|default:0) eq 0 }><a href="<{'/account/modify.html'|getBaseUrl}>" class="logout" style="margin-bottom: 1rem; color: #0a83e6">马上去认证</a><{/if}>
+        <{if ($user['Fatte_status']|default:0) eq 0 }>
+            <div>
+                <a href="<{'/account/modify.html'|getBaseUrl}>" class="logout" style="padding: .6rem 0; color: #0a83e6;position: fixed;width:100%;left:0;bottom:0;background-color: #fff;z-index: 99; border-top: 1px solid #eaeaea">马上去认证</a>
+            </div>
+        <{/if}>
     </div>
 </section>
 <{include file="public/no_nav_footer.tpl"}>
