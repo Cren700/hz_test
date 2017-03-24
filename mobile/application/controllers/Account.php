@@ -23,6 +23,8 @@ class Account extends HZ_Controller
     {
         $url = $this->input->get('url');
         $this->smarty->assign('url', $url);
+        $cssArr = array('bootstrap.min.css');
+        $this->smarty->assign('cssArr', $cssArr);
         $jsArr = array('account_login.js');
         $this->smarty->assign('jsArr', $jsArr);
         $this->smarty->display('account/index.tpl');
@@ -53,6 +55,8 @@ class Account extends HZ_Controller
     {
         $url = $this->input->get('url');
         $this->smarty->assign('url', $url);
+        $cssArr = array('bootstrap.min.css');
+        $this->smarty->assign('cssArr', $cssArr);
         $jsArr = array('account_register.js');
         $this->smarty->assign('jsArr', $jsArr);
         $this->smarty->display('account/register.tpl');
@@ -90,6 +94,8 @@ class Account extends HZ_Controller
         $jsArr = array(
             'account_pwd.js'
         );
+        $cssArr = array('bootstrap.min.css');
+        $this->smarty->assign('cssArr', $cssArr);
         $this->smarty->assign('jsArr', $jsArr);
         $this->smarty->display('account/pwd.tpl');
     }
