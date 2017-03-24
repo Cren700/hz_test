@@ -13,9 +13,9 @@ class Posts_service_model extends HZ_Model
         parent::__construct();
     }
 
-    public function getCate($is_special = 0)
+    public function getCate()
     {
-        return $this->myCurl('posts', 'category', array('status' => '1', 'is_special' => $is_special));
+        return $this->myCurl('posts', 'category', array('status' => '1'));
     }
     
     public function getPostsList($option)
