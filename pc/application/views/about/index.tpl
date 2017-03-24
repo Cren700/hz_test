@@ -2,12 +2,12 @@
 <body>
 <{include file="public/nav.tpl"}>
 <div class="container about_container clearfix">
-    <div class="side_about" style="margin-top: 1825px;">
+    <div class="side_about">
         <ul>
-            <li class="">关于互助之家</li>
+            <li class="active">关于互助之家</li>
             <li class="">欢迎投稿</li>
             <li class="">联系我们</li>
-            <li class="active">免责声明</li>
+            <li class="">免责声明</li>
         </ul>
     </div>
     <div class="about_content">
