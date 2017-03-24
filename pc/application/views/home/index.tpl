@@ -40,9 +40,13 @@
         </div>
         <div class="nav_tab">
             <ul class="clearfix">
-                <li class="<{if $cate_id eq ''}> active<{/if}>"><a href="<{''|getBaseUrl}>">最新</a></li>
-                <{foreach $cate as $c}>
-                <li class="<{if $cate_id eq $c['Fpost_category_id']}>active<{/if}>"><a href="<{'/home/index?id='|cat:$c['Fpost_category_id']|getBaseUrl}>" ><{$c['Fcategory_name']}></a></li>
+                <{foreach $cate as $k => $c}>
+                <{if !$cate_id && $k == 0}>
+                    <a href="<{'/home/index?id='|cat:$c['Fpost_category_id']|getBaseUrl}>"><li class="active"><{$c['Fcategory_name']}></li></a>
+                    <{assign var='cate_id' value=$c['Fpost_category_id']}>
+                <{else}>
+                <a href="<{'/home/index?id='|cat:$c['Fpost_category_id']|getBaseUrl}>" ><li class="<{if $cate_id eq $c['Fpost_category_id']}>active<{/if}>"><{$c['Fcategory_name']}></li></a>
+                <{/if}>
                 <{/foreach}>
             </ul>
         </div>

@@ -38,6 +38,8 @@ class Posts_service_model extends HZ_Model
 
         if ($option['Fis_del'] === '0' || !empty($option['Fis_del'])) {
             $where['Fis_del'] = $option['Fis_del'];
+        } else {
+            $where['Fis_del'] = 0;
         }
 
         if ($option['Fuser_type'] === '0' || !empty($option['Fuser_type'])) {

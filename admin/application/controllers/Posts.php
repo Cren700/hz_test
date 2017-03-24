@@ -212,6 +212,7 @@ class Posts extends BaseControllor
             'category_id' => $this->input->post('category_id'),
             'category_name' => $this->input->post('category_name'),
             'is_special' => $this->input->post('is_special'),
+            'priority' => $this->input->post('priority'),
             'remark' => $this->input->post('remark'),
         );
         $res = $this->posts_service->saveCate($data);

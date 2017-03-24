@@ -1,6 +1,6 @@
 <{include file="public/header.tpl"}>
 <body>
-<section class="content_one">
+<section class="content_one" style="margin-bottom: 2rem">
     <div class="user_set_item">
         <div class="set_item">
             <p>昵称</p>
@@ -53,7 +53,7 @@
             <p>证件照片</p>
             <span ><img style="<{if $user['Fannex_path']}>width: 2.5rem; height: 2rem;<{/if}>" src="<{$user['Fannex_path']}>" alt=""></span>
         </div>
-        <div class="set_item" style="padding-bottom: 1.6rem">
+        <div class="set_item">
             <p>实名认证状态</p>
             <span style="color: red">
                 <{if ($user['Fatte_status']|default:0) eq 0 }>未通过认证<{else}>已通过认证<{/if}>

@@ -19,9 +19,10 @@ class Category_dao_model extends HZ_Model
     public function lists($where)
     {
         dbEscape($where);
-        $query = $this->_news->get_where($this->_cate_table, $where);
+        $query = $this->_news->order_by('Fpriority', 'ASC')->get_where($this->_cate_table, $where);
         $res = $query->result_array();
         return filterData($res);
+
     }
 
     public function getCategory($where)

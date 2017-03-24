@@ -533,7 +533,7 @@ footer.footer a.active i.mine {
 }
 /*article css*/
 section.article {
-    padding: 1.30666667rem 0;
+    padding: 0.30666667rem 0;
 }
 .article_cont {
     padding-left: 0.4rem;
@@ -1170,11 +1170,9 @@ footer.plan_join {
 }
 .about_sec {
   color: #333;
-  padding-top: 0.73333333rem;
   padding-left: 0.4rem;
   padding-right: 0.4rem;
   padding-bottom: 0.53333333rem;
-  margin-bottom: 1rem;
   background-color: #fff;
 }
 .about_sec > h2 {
@@ -2543,11 +2541,11 @@ section.change_info {
 .cart-content-add-gift{width: 94%;margin: 0.2rem auto;padding: 0.2rem;border: 1px solid #c7c7c7;border-radius: 0.1rem;color: #918f8d;font-size: 0.3rem;word-break: break-all;}
 .cart-content-add-gift span{float: left;width: 93%;}
 .cart-content-add-gift label{float: right;}
-.cart-content-none-ship{position: relative;width: 100%;padding: 0 0 0;background-color: #f5f5f5;}
+.cart-content-none-ship{position: relative;width: 100%;padding: 0 0 0;}
 .cart-content-none-ship img{display: block;width: 3.2rem;margin: 0 auto;}
-.cart-content-none-ship p{margin: 0.7rem 0 0;font-size: 0.4rem;color: #c2c3c3;text-align: center;}
+.cart-content-none-ship p{font-size: 0.4rem;color: #898c8c;text-align: center;}
 .cart-content-none-ship input{width: 100%;height: 0.95rem;background-color: #dae8f6;font-size: 0.4rem;color: #6098ed;line-height: 0.94rem;text-align: center;border: 1px solid #8eb6df;border-radius: 0.2rem;-webkit-appearance: none;}
-.cart-content-image-inner{padding: 1.6rem 0;}
+.cart-content-image-inner{margin: 4rem 0;}
 .cart-item-float-wrap{position: fixed;left: 0;bottom: 0;width: 100%;}
 
 
@@ -2711,8 +2709,9 @@ section.change_info {
     margin-bottom: 0.3rem; }
 
 .myInfoList {
-    padding: 1.2rem 0.21368rem;
-    font-size: 14px; }
+    padding: 0.2rem 0.21368rem;
+    margin-bottom: 2rem;
+    font-size: 0.34666667rem; }
 
 .input_box label {
     width: 2rem;
@@ -2787,7 +2786,7 @@ section.change_info {
     left: -9999px; }
 
 .select_box {
-    /*padding-left: 0.51282rem; */
+    padding-left: 0.3rem;
 }
 
 select#selectPointOfInterest {
@@ -2883,10 +2882,15 @@ label#lblSelect::after {
     margin-top: 0.2rem;
 }
 .submit_box {
-    width: 2rem;
-    height: 1rem;
-    margin: 0 auto;
-    border-top: 1px solid #ceced2
+    width: 100%;
+    height: 2rem;
+    color: #0a83e6;
+    position: fixed;
+    left:0;
+    bottom:0;
+    background-color: #fff;
+    z-index: 99;
+    border-top: 1px solid #eaeaea
 }
 .submit_box button{
     width: 2rem;
@@ -2897,6 +2901,8 @@ label#lblSelect::after {
     color: #fff !important;
     border: 0;
     border-radius: 3px;
+    display: block;
+    margin: 0.5rem auto;
 }
 
 .buyCount{

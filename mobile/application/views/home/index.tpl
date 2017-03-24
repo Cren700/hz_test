@@ -4,10 +4,16 @@
     <{include file="public/header_box.tpl"}>
     <nav class="home_nav">
         <div class="nav_list">
-            <a href="<{''|getBaseUrl}>" class="header_nav <{if $cate_id eq ''}> select<{/if}>">最新</a>
-            <a href="<{'/theme.html'|getBaseUrl}>" class="header_nav">专题</a>
-            <{foreach $cate as $c}>
+            <{foreach $cate as $k => $c}>
+                <{if !$cate_id && $k == 0}>
+                <a href="<{'/home/index?id='|cat:$c['Fpost_category_id']|getBaseUrl}>" class="header_nav select"><{$c['Fcategory_name']}></a>
+                <{assign var='cate_id' value=$c['Fpost_category_id']}>
+                <{else}>
                 <a href="<{'/home/index?id='|cat:$c['Fpost_category_id']|getBaseUrl}>" class="header_nav <{if $cate_id eq $c['Fpost_category_id']}> select<{/if}>"><{$c['Fcategory_name']}></a>
+                <{/if}>
+                <{if $k == 0}>
+                    <a href="<{'/theme.html'|getBaseUrl}>" class="header_nav">专题</a>
+                <{/if}>
             <{/foreach}>
         </div>
         <div class="top_menu_more">

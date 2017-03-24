@@ -1,9 +1,9 @@
 <{include file="public/header.tpl"}>
 <body>
 <section class="mobile-common-title clearfix">
-    <a href="javascript:;" id="js-back-btn" class="p_logo">
+    <!--<a href="javascript:;" id="js-back-btn" class="p_logo">
         <img src="<{'back_icon.png'|baseImgUrl}>" style="width: auto;" />
-    </a>
+    </a>-->
     <span class="search-cart-common">
         <a href="<{'/shop.html'|getBaseUrl}>" class="icon-cart1"></a>
         <img src="<{'star_copy_3.png'|baseImgUrl}>" class="shareBtn" />
@@ -293,7 +293,7 @@
 
 <div id="problem-page" class="problem_section">
     <div class="problem">
-        <div class="return_box"><a href="javascript:;" class="return_btn">返回详情</a></div>
+        <div class="return_box"><a href="javascript:;" class="return_btn">< 返回详情</a></div>
         <{if isset($info['Fjoint_pledge'])}>
         <div class="problem_box">
             <{foreach $info['Fjoint_pledge'] as $k => $pledge}>
@@ -314,7 +314,7 @@
 
 <div id="plan-page" class="problem_section">
     <div class="problem">
-        <div class="return_box"><a href="javascript:;" class="return_btn">返回详情</a></div>
+        <div class="return_box"><a href="javascript:;" class="return_btn">< 返回详情</a></div>
         <{if isset($info['Fplan_tk'])}>
         <div class="problem_box">
             <{foreach $info['Fplan_tk'] as $k => $tk}>
@@ -335,7 +335,7 @@
 
 <div id="demand-page" class="problem_section">
     <div class="problem">
-        <div class="return_box"><a href="javascript:;" class="return_btn">返回详情</a></div>
+        <div class="return_box"><a href="javascript:;" class="return_btn">< 返回详情</a></div>
         <{if isset($info['Fdemand'])}>
         <div class="problem_box">
             <{foreach $info['Fdemand'] as $k => $demand}>

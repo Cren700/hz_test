@@ -43,7 +43,8 @@ class Category extends BaseController {
         $data['Fcategory_name'] = $this->input->post('category_name');
         $data['Fremark'] = $this->input->post('remark');
         $data['Fis_special'] = $this->input->post('is_special'); //是否为专栏分类
-        $data['Fstatus'] = 1; //状态0:禁用，1启用
+        $data['Fpriority'] = $this->input->post('priority');
+        $data['Fstatus'] = 0; //状态0:禁用，1启用
         $data['Fcreate_time'] = time();
         $data['Fupdate_time'] = time();
         $res = $this->cate_service->add($data);
@@ -59,6 +60,7 @@ class Category extends BaseController {
             'Fcategory_name' => $this->input->post('category_name'),
             'Fis_special' => $this->input->post('is_special'), //是否为专栏分类
             'Fremark' => $this->input->post('remark'),
+            'Fpriority' => $this->input->post('priority'),
             'Fupdate_time' => time(),
         );
         $where = array('Fpost_category_id' => $this->input->post('category_id'));

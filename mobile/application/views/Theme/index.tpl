@@ -1,7 +1,6 @@
 <{include file="public/header.tpl"}>
 <body>
-<{include file="public/header_back.tpl"}>
-<section class="content" style="padding-top: 1rem">
+<section class="content" style="padding-top: 0rem">
     <div class="topic_content">
         <div class="topic_content_list">
             <ul id="container">

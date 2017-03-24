@@ -1,6 +1,5 @@
 <{include file="public/header.tpl"}>
 <body>
-<{include file="public/header_back.tpl"}>
 <section class="article">
     <div class="article_cont">
         <h1><{$info.Fpost_title}></h1>

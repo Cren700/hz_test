@@ -1,7 +1,6 @@
 <{include file="public/header.tpl"}>
 <body>
-<{include file="public/header_back.tpl"}>
-<section class="sub_info" style="margin-top: 1rem">
+<section class="sub_info">
     <div class="sub_content">
         <div class="form_con">
             <form>

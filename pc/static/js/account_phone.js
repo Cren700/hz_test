@@ -61,7 +61,7 @@ HZ.Account_phone = (function() {
                 HZ.Dialog.showMsg({title: '请输入手机码号'});
                 return false;
             }
-            var repg = /^(13[0-9]|15[0|1|3|6|7|8|9]|18[8|9])\d{8}$/;
+            var repg = /^1(3[0-9]|4[57]|5[0-35-9]|7[01678]|8[0-9])\d{8}$/;
             if (repg.test(phone)) {
                 if (!checkVC()) {
                     alertInfo("请输入正确的验证码", function () {
@@ -80,7 +80,6 @@ HZ.Account_phone = (function() {
                     }
                 }, 'json')
             } else {
-                checkVC();
                 HZ.Dialog.showMsg({title: '请输入正确的手机码号'});
             }
         }

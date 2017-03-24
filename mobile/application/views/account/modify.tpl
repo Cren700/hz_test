@@ -1,6 +1,5 @@
 <{include file="public/header.tpl"}>
 <body xmlns="http://www.w3.org/1999/html">
-<{include file="public/header_back.tpl"}>
 <div class="myInfoList">
     <form action="<{'/account/saveInfo.html'|getBaseUrl}>" method="post" enctype="multipart/form-data">
         <div class="input_box box">
@@ -64,9 +63,11 @@
             <div class="button" id="annex_path"></div>
             <img src="<{$user['Fannex_path']|default:''}>" class="js-img-show" style="<{if !$user['Fannex_path']}>display:none;<{/if}>" alt="">
         </div>
-        <hr/>
-        <div class="submit_box box">
-            <button id="js-btn-submit">提交</button>
+        <div class="submit_box">
+            <div style="margin: 0 auto">
+                <button id="js-btn-submit">提交</button>
+            </div>
+
         </div>
     </form>
 </div>

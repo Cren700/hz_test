@@ -25,7 +25,7 @@
                                 <div class="span12">
                                     <label class="control-label">分类名称</label>
                                     <div class="controls">
-                                        <input type="text" class="span11" name="category_name" placeholder="分类名称" value="<{$cate['Fcategory_name']|default:''}>">
+                                        <input type="text" class="span4" name="category_name" placeholder="分类名称" value="<{$cate['Fcategory_name']|default:''}>">
                                     </div>
                                 </div>
                             </div>
@@ -33,7 +33,26 @@
                                 <div class="span12">
                                     <label class="control-label">分类说明</label>
                                     <div class="controls">
-                                        <textarea class="span11" name="remark" placeholder="分类说明"><{$cate['Fremark']|default:''}></textarea>
+                                        <textarea class="span4" name="remark" placeholder="分类说明"><{$cate['Fremark']|default:''}></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="span3">
+                                    <label class="control-label">分类优先级</label>
+                                    <div class="controls">
+                                        <select name="priority" id="">
+                                            <option value="1" <{if isset($cate['Fpriority']) && $cate['Fpriority'] eq 1}>selected<{/if}>>1</option>
+                                            <option value="2" <{if isset($cate['Fpriority']) && $cate['Fpriority'] eq 2}>selected<{/if}>>2</option>
+                                            <option value="3" <{if isset($cate['Fpriority']) && $cate['Fpriority'] eq 3}>selected<{/if}>>3</option>
+                                            <option value="4" <{if isset($cate['Fpriority']) && $cate['Fpriority'] eq 4}>selected<{/if}>>4</option>
+                                            <option value="5" <{if isset($cate['Fpriority']) && $cate['Fpriority'] eq 5}>selected<{/if}>>5</option>
+                                            <option value="6" <{if isset($cate['Fpriority']) && $cate['Fpriority'] eq 6}>selected<{/if}>>6</option>
+                                            <option value="7" <{if isset($cate['Fpriority']) && $cate['Fpriority'] eq 7}>selected<{/if}>>7</option>
+                                            <option value="8" <{if isset($cate['Fpriority']) && $cate['Fpriority'] eq 8}>selected<{/if}>>8</option>
+                                            <option value="9" <{if isset($cate['Fpriority']) && $cate['Fpriority'] eq 9}>selected<{/if}>>9</option>
+                                            <option value="10" <{if isset($cate['Fpriority']) && $cate['Fpriority'] eq 10}>selected<{/if}>>10</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>

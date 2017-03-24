@@ -1,6 +1,5 @@
 <{include file="public/header.tpl"}>
 <body>
-<{include file="public/header_back.tpl"}>
 <div class="J_recom_top">
     <img src="<{'Slice3.png'|baseImgUrl}>">
     <div class="J_recom_top_txt">

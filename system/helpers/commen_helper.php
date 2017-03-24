@@ -179,7 +179,7 @@ function validationData($data, $rules, $field = '')
                 }
                 break;
             case 'phone':
-                if (!preg_match('/^(13[0-9]|15[0|1|3|6|7|8|9]|18[8|9])\d{8}$/', $data, $match)) {
+                if (!preg_match('/^1(3[0-9]|4[57]|5[0-35-9]|7[01678]|8[0-9])\d{8}$/', $data, $match)) {
                     $res['field'] = '';
                     $res['code'] = 'validation_error_7'; // 电话号码不正确
                 }

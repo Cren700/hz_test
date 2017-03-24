@@ -58,7 +58,7 @@ class HZ_Model extends CI_Model
         }
 
         $res = curl_exec($ch);
-//         if($control == "delRole")
+//         if($control == "category")
 //         {
 //             echo $res;die;
 //         }
