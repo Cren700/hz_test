@@ -636,7 +636,7 @@ section.article {
 .comment_txt_no {
     padding-top: 0.26666667rem;
     padding-bottom: 0.53333333rem;
-    margin: 0 auto;
+    margin: 0 auto 1rem;
 }
 .comment_txt_no p {
     text-align: center;
