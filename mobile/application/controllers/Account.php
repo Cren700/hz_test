@@ -211,6 +211,8 @@ class Account extends HZ_Controller
     {
         $url = $this->input->get('url');
         $this->smarty->assign('url', $url);
+        $cssArr = array('bootstrap.min.css');
+        $this->smarty->assign('cssArr', $cssArr);
         $jsArr = array('account_phone.js');
         $this->smarty->assign('jsArr', $jsArr);
         $this->smarty->display('account/phone.tpl');
