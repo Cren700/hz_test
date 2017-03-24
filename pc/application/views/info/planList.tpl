@@ -44,7 +44,7 @@
                     <p>个人信息</p>
                 </div>
             </a>
-            <a href="">
+            <a href="<{'/info/recommend.html'|getBaseUrl}>">
                 <div class="personal_nav_item">
                     <i class="recommend">&nbsp;</i>
                     <p>推荐好友</p>
