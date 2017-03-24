@@ -122,7 +122,8 @@ class Account extends HZ_Controller
         $this->is_login();
         $info = $this->user_service_model->detail();
 //        p($info);
-        $jsArr = array('account_modify.js');
+        $cssArr = array('bootstrap.min.css');
+        $this->smarty->assign('cssArr', $cssArr);
         $this->smarty->assign('user', $info['data']);
         $this->smarty->display('account/detail.tpl');
     }
