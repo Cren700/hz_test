@@ -1923,6 +1923,7 @@ section.sub_info {
     background-color: #fff;
     font-size: 0.4rem;
     height: 1.12rem;
+    line-height: 1.12rem;
     border-left: 1px solid #ccc;
     padding-left: 0.26666667rem;
 }
