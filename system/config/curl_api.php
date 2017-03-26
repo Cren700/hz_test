@@ -213,4 +213,14 @@ $config = array(
             'getPcImages'            => '/promo/getPcImages',// pc首页获取图片
         ),
     ),
+    'conf' => array(
+        'host' => HOST_URL.'/promo',
+        'api' => array(
+            'queryConf'             => '/conf/queryConf', // 查询配置信息
+            'getConfById'           => '/conf/getConfById',//获取配置信息
+            'addConf'               => '/conf/addConf',//保存配置信息
+            'updateConf'            => '/conf/updateConf',//更新配置信息
+            'delConf'               => '/conf/delConf',//删除配置信息
+        ),
+    ),
 );

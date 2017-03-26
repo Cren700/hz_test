@@ -380,24 +380,26 @@ class HZ_Controller extends CI_Controller
                     ),
                 )
             ),
-//            array(
-//                'selected'  => '0',
-//                'name'      => '安全配置',
-//                'flagName'  => 'set',
-//                'icon'      => 'icon-info-sign',
-//                'sub'       => array(
-//                    array(
-//                        'selected'  => '0',
-//                        'name'      => '数据库配置',
-//                        'flagName'  => 'add'
-//                    ),
+            array(
+                'selected'  => '0',
+                'show'      => '0',
+                'name'      => '配置',
+                'flagName'  => 'conf',
+                'icon'      => 'icon-info-sign',
+                'sub'       => array(
+                    array(
+                        'show'      => '0',
+                        'selected'  => '0',
+                        'name'      => '公司信息',
+                        'flagName'  => 'index'
+                    ),
 //                    array(
 //                        'selected'  => '0',
 //                        'name'      => '短信设置',
 //                        'flagName'  => 'msg',
 //                    )
-//                )
-//            ),
+                )
+            ),
         );
 
         $rsegments = $this->uri->rsegments;

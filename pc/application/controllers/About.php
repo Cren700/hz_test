@@ -11,6 +11,7 @@ class About extends HZ_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('service/conf_service_model');
     }
 
     /**
@@ -22,7 +23,9 @@ class About extends HZ_Controller
             'about.js',
             'personal.js'
         );
+        $res = $this->conf_service_model->query();
         $this->smarty->assign('jsArr', $jsArr);
+        $this->smarty->assign('info', isset($res['data']['list']) ? $res['data']['list'] : array());
         $this->smarty->display('about/index.tpl');
     }
 }
