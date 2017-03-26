@@ -45,9 +45,11 @@
         //     'horizontal', 'date', 'time', 'spechars', 'snapscreen', 'wordimage', '|',
         //     'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', 'charts','print'
         // ]]
-		,toolbars: [[
+        ,toolbars: [[
 
 			'undo', 'redo' , '|',
+
+			'customstyle', 'paragraph', 'fontfamily', 'fontsize', '|',
 
 			'bold','italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat',  'forecolor' , 'removeformat', 'autotypeset', 'pasteplain' , '|', '|',
 
@@ -60,7 +62,7 @@
 			'wordimage', '|' ,
 
 			'inserttable', 'insertrow' , 'deleterow', 'insertcol', 'deletecol' , 'mergecells', 'splittocells', '|' , 'mybtn1','mydialog1'
-		]]
+        ]]
         //当鼠标放在工具栏上时显示的tooltip提示,留空支持自动多语言配置，否则以配置值为准
         //,labelMap:{
         //    'anchor':'', 'undo':''

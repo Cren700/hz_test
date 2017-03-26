@@ -21,7 +21,7 @@ class Product extends HZ_Controller
         $cate = $this->product_service->getCate();
         $cateData = array();
         if ($cate['code']===0) {
-            $cateData = $cate['data']['list'];
+            $cateData = isset($cate['data']['list']) ? $cate['data']['list'] : array();
         }
         $jsArr = array('product_index.js');
         $cssArr = array('bootstrap.min.css');

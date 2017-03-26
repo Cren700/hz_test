@@ -7,7 +7,6 @@ class Medium extends BaseControllor
         parent::__construct();
         $this->load->model('service/posts_service_model', 'post_service');
 
-        $this->hasMediumPower();
         // 目录结构
         $menu = $this->getMediumMenu() ? : array();
         $this->smarty->assign('menu', $menu);
@@ -66,6 +65,7 @@ class Medium extends BaseControllor
 
     public function add()
     {
+        $this->hasMediumPower();
 
         $cate = $this->post_service->getCate();
         $jsArr = array(

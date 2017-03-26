@@ -35,7 +35,11 @@ class Home extends HZ_Controller
     public function getPostsList()
     {
         $cate = $this->posts_service->getCate(); // 资讯分类
-        if($cate['code'] == 0 && count($cate['data']['list'])) {
+        $cateList = array();
+        if (isset($cate['data']['list'])) {
+            $cateList = $cate['data']['list'];
+        }
+        if($cate['code'] == 0 && count($cateList)) {
             $cate = array_column($cate['data']['list'], 'Fpost_category_id');
         }
         $option = array(

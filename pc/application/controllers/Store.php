@@ -13,7 +13,6 @@ class Store extends BaseControllor
         parent::__construct();
         $this->load->model('service/store_service_model');
 
-        self::hasStorePower();
         // 目录结构
         $menu = $this->getStoreMenu() ? : array();
         $this->smarty->assign('menu', $menu);
@@ -70,6 +69,7 @@ class Store extends BaseControllor
 
     public function add()
     {
+        self::hasStorePower();
         $cate = $this->store_service_model->category();
         $jsArr = array(
             'admin/plugin/jquery.placeholder.min.js',
