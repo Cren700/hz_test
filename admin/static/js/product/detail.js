@@ -6,8 +6,10 @@ HZ.ProductDetail = (function() {
     function _init(){
 
         $(document).ready(function(){
-            $('.js-btn-submit').attr('disabled', false);
-        })
+            if ($('#js-do-val').val() != 1) {
+                $('.js-btn-submit').attr('disabled', false);
+            }
+        });
 
         _upload();
 

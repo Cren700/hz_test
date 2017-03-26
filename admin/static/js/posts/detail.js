@@ -11,15 +11,17 @@ HZ.PostsDetail = (function() {
         _upload();
 
         _ueditir();
-        
+
+        $(document).ready(function(){
+            if ($('#js-do-val').val() != 1) {
+                $('.js-btn-submit').attr('disabled', false);
+            }
+        });
+
         // 禁止操作
         if ($('#js-do-val').val() == 1) {
             $('body textarea, body select, body input').attr('disabled', true);
         }
-
-        $(document).ready(function(){
-            $('.js-btn-submit').attr('disabled', false);
-        })
     }
 
     function _form()
