@@ -169,7 +169,11 @@ class Posts_service_model extends HZ_Model
 
     public function saveEvent($option)
     {
-        return $this->myCurl($this->_api, 'saveEvent', $option, true);
+        $res = $this->myCurl($this->_api, 'saveEvent', $option, true);
+        if ($res['code'] === 0) {
+            $res['data']['url'] = getBaseUrl('/posts/events.html');
+        }
+        return $res;
     }
 
     public function queryEvents($data)

@@ -39,7 +39,7 @@
                 <td><{$i['Fpost_author']}></td>
                 <td><{$cate[$i['Fpost_category_id']]|default:''}></td>
                 <td><img style="width: 100px; height:75px; <{if !isset($i['Fpost_coverimage']) || !$i['Fpost_coverimage']}>display: none<{/if}>" src="<{$i['Fpost_coverimage']|default:''}>" title ="<{$i['Fpost_title']}>" alt="<{$i['Fpost_title']}>" ></td>
-                <td class="js-posts-status"><{if $i['Fis_del']}>已删除<{elseif $i['Fpost_status'] eq 1 }>待审核<{elseif $i['Fpost_status'] eq 2}>审核不通过<{elseif $i['Fpost_status'] eq 3}>已发布<{else}>已下架<{/if}></td>
+                <td class="js-posts-status"><{if $i['Fis_del']}>已删除<{elseif $i['Fpost_status'] eq 1 }>待审核<{elseif $i['Fpost_status'] eq 2}>不通过<{elseif $i['Fpost_status'] eq 3}>通过<{else}>已下架<{/if}></td>
                 <td><{'y-m-d H:i'|date:$i['Fcreate_time']}></td>
                 <td><{'y-m-d H:i'|date:$i['Fupdate_time']}></td>
                 <td>
@@ -47,8 +47,8 @@
                     <{if $i['Fis_del']}>
                         <button class="btn btn-danger btn-mini js-btn-recycle">还原</button>
                     <{elseif $i['Fpost_status'] eq 1}>
-                        <button class="btn btn-primary btn-mini js-btn-status" data-status="2">审核不通过</button>
-                        <button class="btn btn-warning btn-mini js-btn-status" data-status="3">发布</button>
+                        <button class="btn btn-primary btn-mini js-btn-status" data-status="2">不通过</button>
+                        <button class="btn btn-warning btn-mini js-btn-status" data-status="3">通过</button>
                         <button class="btn btn-danger btn-mini js-btn-delete">删除</button>
                     <{elseif $i['Fpost_status'] eq 2}>
                         <button class="btn btn-warning btn-mini js-btn-status" data-status="1">提交审核</button>

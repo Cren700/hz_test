@@ -49,6 +49,7 @@ HZ.Order = (function() {
                                 <button class="btn btn-success btn-mini js-btn-success" data-status="3">已完成</button>';
                             var s2 = '\
                                 <button class="btn btn-danger btn-mini js-btn-cancel" data-status="1">重启订单</button>';
+                            var s3 = '';
                             switch (status){
                                 case 1:
                                     _this.parents('tr').find('.js-order-status').text('理赔中');
@@ -57,6 +58,10 @@ HZ.Order = (function() {
                                 case 2:
                                     _this.parents('tr').find('.js-order-status').text('理赔失败');
                                     _p.html(s2);
+                                    break;
+                                case 3:
+                                    _this.parents('tr').find('.js-order-status').text('理赔完成');
+                                    _p.html(s3);
                                     break;
                                 default:
                                     break;

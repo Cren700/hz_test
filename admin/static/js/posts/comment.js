@@ -72,16 +72,13 @@ HZ.Comment = (function() {
                 callback: function(){
                     var _p = _this.parent();
                     var s1 = '\
-                        <button class="btn btn-primary btn-mini js-btn-status" data-status="1">通过审核</button>\
-                        <button class="btn btn-warning btn-mini js-btn-status" data-status="2">审核不通过</button>\
+                        <button class="btn btn-primary btn-mini js-btn-status" data-status="1">通过</button>\
+                        <button class="btn btn-warning btn-mini js-btn-status" data-status="2">不通过</button>\
                         <button class="btn btn-danger btn-mini js-btn-delete">删除</button>';
                     var s2 = '\
-                        <button class="btn btn-warning btn-mini js-btn-status" data-status="0">待审核</button>\
-                        <button class="btn btn-warning btn-mini js-btn-status" data-status="2">审核不通过</button>\
                         <button class="btn btn-danger btn-mini js-btn-delete">删除</button>';
                     var s3 = '\
-                        <button class="btn btn-warning btn-mini js-btn-status" data-status="0">待审核</button>\
-                        <button class="btn btn-primary btn-mini js-btn-status" data-status="1">通过审核</button>\
+                        <button class="btn btn-primary btn-mini js-btn-status" data-status="1">通过</button>\
                         <button class="btn btn-danger btn-mini js-btn-delete">删除</button>';
                     switch (status){
                         case 0:
@@ -89,11 +86,11 @@ HZ.Comment = (function() {
                             _p.html(s1);
                             break;
                         case 1:
-                            _this.parents('tr').find('.js-comment-status').text('通过审核');
+                            _this.parents('tr').find('.js-comment-status').text('通过');
                             _p.html(s2);
                             break;
                         case 2:
-                            _this.parents('tr').find('.js-comment-status').text('审核不通过');
+                            _this.parents('tr').find('.js-comment-status').text('不通过');
                             _p.html(s3);
                             break;
                         default:

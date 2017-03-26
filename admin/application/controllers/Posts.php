@@ -533,7 +533,9 @@ class Posts extends BaseControllor
     public function addEvent()
     {
         $jsArr = array(
-            'posts/addEvents.js',
+            'plugin/jquery.placeholder.min.js',
+            'plugin/jquery.validate.js',
+            'posts/eventDetail.js',
         );
         $this->smarty->assign('jsArr', $jsArr);
         $this->smarty->display('posts/addEvent.tpl');

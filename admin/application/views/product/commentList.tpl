@@ -34,7 +34,7 @@
                         用户喜爱度: <{$i['Fstart4']}>
                     </p>
                 </td>
-                <td ><{$i['Fcomment_content']}></td>
+                <td style="width: 100px"><{$i['Fcomment_content']}></td>
                 <td class="js-comment-status"><{if $i['Fcomment_approved'] eq 0}>禁用<{elseif $i['Fcomment_approved'] eq 1 }>启用<{/if}></td>
                 <td><{'y-m-d H:i'|date:$i['Fcomment_date']}></td>
                 <td>

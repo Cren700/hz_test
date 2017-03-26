@@ -26,6 +26,8 @@ class Info_service_model extends HZ_Model
 
         if ($option['Fstatus'] === '0' || !empty($option['Fstatus'])) {
             $where['u.Fstatus'] = $option['Fstatus'];
+        } else {
+            $where['u.Fstatus'] = 1;
         }
 
         if (!empty($option['min_date'])) {

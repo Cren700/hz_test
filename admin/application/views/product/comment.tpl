@@ -23,10 +23,10 @@
                         <form action="#" method="get" class="form-horizontal">
                             <div class="control-group" style="padding: 10px">
                                 <div class="span2">
-                                    <input class="span12"  type="text" name="pro_id" placeholder="产品ID">
+                                    <input class="span8"  type="text" name="pro_id" placeholder="产品ID">
                                 </div>
                                 <div class="span2">
-                                    <input class="span12" type="text" name="author_name" placeholder="评论者名称">
+                                    <input class="span8" type="text" name="author_name" placeholder="评论者名称">
                                 </div>
                                 <div class="span3">
                                     <input type="text" data-date-format="yyyy-mm-dd" name="min_date"  class="datepicker span5" placeholder="开始时间">
@@ -34,7 +34,7 @@
                                     <input class="datepicker span5" data-date-format="yyyy-mm-dd" type="text" name="max_date" placeholder="结束时间">
                                 </div>
                                 <div class="span3">
-                                    <select class="span12" name="comment_approved">
+                                    <select class="span8" name="comment_approved">
                                         <option value="">请选择评论状态</option>
                                         <option value="0">禁止</option>
                                         <option value="1">启用</option>

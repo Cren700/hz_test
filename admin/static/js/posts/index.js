@@ -72,8 +72,8 @@ HZ.Posts = (function() {
                 callback: function(){
                     var _p = _this.parent();
                     var s1 = '\
-                        <button class="btn btn-primary btn-mini js-btn-status" data-status="2">审核不通过</button>\
-                        <button class="btn btn-warning btn-mini js-btn-status" data-status="3">发布</button>\
+                        <button class="btn btn-primary btn-mini js-btn-status" data-status="2">不通过</button>\
+                        <button class="btn btn-warning btn-mini js-btn-status" data-status="3">通过</button>\
                         <button class="btn btn-danger btn-mini js-btn-delete">删除</button>';
                     var s2 = '\
                         <button class="btn btn-warning btn-mini js-btn-status" data-status="1">提交审核</button>\
@@ -88,11 +88,11 @@ HZ.Posts = (function() {
                             _p.html(s1);
                             break;
                         case 2:
-                            _this.parents('tr').find('.js-posts-status').text('审核不通过');
+                            _this.parents('tr').find('.js-posts-status').text('不通过');
                             _p.html(s2);
                             break;
                         case 3:
-                            _this.parents('tr').find('.js-posts-status').text('已发布');
+                            _this.parents('tr').find('.js-posts-status').text('通过');
                             _p.html(s3);
                             break;
                         case 4:

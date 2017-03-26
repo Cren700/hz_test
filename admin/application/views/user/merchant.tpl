@@ -22,9 +22,9 @@
                     <div class="widget-content nopadding">
                         <form action="#" method="get" class="form-horizontal">
                             <div class="control-group" style="padding: 10px">
-                                <div class="span4">
+                                <div class="span3">
                                     <label style="display: inline-block">商户名称</label>
-                                    <input type="text" name="user_id" placeholder="商户名称">
+                                    <input type="text" class="span8" name="user_id" placeholder="商户名称">
                                 </div>
                                 <div class="span3">
                                     <label style="display: inline-block">注册</label>
@@ -34,7 +34,7 @@
                                 </div>
                                 <div class="span3">
                                     <label style="display: inline-block">商户状态</label>
-                                    <select class="span8" name="status">
+                                    <select class="span6" name="status">
                                         <option value="">请选择商户状态</option>
                                         <option value="0">禁用</option>
                                         <option value="1">使用中</option>

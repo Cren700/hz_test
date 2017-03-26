@@ -34,8 +34,6 @@
                         <{if 'user/freebackstatus'|hasPower}>
                             <{if $i['Fstatus'] eq 0}>
                             <button class="btn btn-primary btn-mini js-btn-status" data-status="1">已处理</button>
-                            <{else}>
-                            <button class="btn btn-danger btn-mini js-btn-status" data-status="0">未处理</button>
                             <{/if}>
                         <{/if}>
                     </td>

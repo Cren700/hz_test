@@ -73,19 +73,17 @@ HZ.Product = (function() {
                 callback: function(){
                     var _p = _this.parent();
                     var s1 = '\
-                        <button class="btn btn-warning btn-mini js-btn-status" data-status="5">审核不通过</button>\
-                        <button class="btn btn-primary btn-mini js-btn-status" data-status="2">上架</button>\
+                        <button class="btn btn-warning btn-mini js-btn-status" data-status="5">不通过</button>\
+                        <button class="btn btn-primary btn-mini js-btn-status" data-status="2">通过</button>\
                         <button class="btn btn-danger btn-mini js-btn-delete">删除</button>';
                     var s2 = '\
                         <button class="btn btn-warning btn-mini js-btn-status" data-status="3">下架</button>\
-                        <button class="btn btn-success btn-mini js-btn-status" data-status="4">已完成</button>\
                         <button class="btn btn-danger btn-mini js-btn-delete">删除</button>';
                     var s3 = '\
                         <button class="btn btn-info btn-mini js-btn-status" data-status="1">待审核</button>\
-                        <button class="btn btn-primary btn-mini js-btn-status" data-status="2">重新上架</button>\
+                        <button class="btn btn-primary btn-mini js-btn-status" data-status="2">通过</button>\
                         <button class="btn btn-danger btn-mini js-btn-delete">删除</button>';
                     var s4 = '\
-                        <button class="btn btn-primary btn-mini js-btn-status" data-status="2">重新上架</button>\
                         <button class="btn btn-danger btn-mini js-btn-delete">删除</button>';
                     var s5 = '\
                         <button class="btn btn-primary btn-mini js-btn-status" data-status="1">待审核</button>\
@@ -97,7 +95,7 @@ HZ.Product = (function() {
                             _p.html(s1);
                             break;
                         case 2:
-                            _this.parents('tr').find('.js-product-status').text('已上架');
+                            _this.parents('tr').find('.js-product-status').text('通过');
                             _p.html(s2);
                             break;
                         case 3:
@@ -109,7 +107,7 @@ HZ.Product = (function() {
                             _p.html(s4);
                             break;
                         case 5:
-                            _this.parents('tr').find('.js-product-status').text('审核不通过');
+                            _this.parents('tr').find('.js-product-status').text('不通过');
                             _p.html(s5);
                             break;
                         default:
