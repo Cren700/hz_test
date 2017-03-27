@@ -392,7 +392,7 @@ class Product extends BaseControllor
     {
         $data = array(
             'product_id' => $this->input->post('id'),
-            'appr_remark' => $this->input->post('remark'),
+            'remark' => $this->input->post('remark'),
         );
         $res = $this->product_service->notApproved($data);
         echo json_encode_data($res);
