@@ -42,8 +42,8 @@
                                     <select class="span12" name="post_status">
                                         <option value="">请选择资讯状态</option>
                                         <option value="1">待审核</option>
-                                        <option value="2">审核不通过</option>
-                                        <option value="3">已发布</option>
+                                        <option value="2">不通过</option>
+                                        <option value="3">通过</option>
                                         <option value="4">下架</option>
                                     </select>
                                 </div>

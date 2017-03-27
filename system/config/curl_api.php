@@ -86,6 +86,7 @@ $config = array(
             'delComment'            => '/product/delComment',             // 删除评论
             'batchDelProduct'       => '/product/batchDelProduct',        // 批量删除产品
             'batchDelComment'       => '/product/batchDelComment',        // 批量删除评论
+            'notApproved'           => '/product/notApproved',          // 审核不通过添加备注信息
         ),
     ),
     'posts' => array(
@@ -140,6 +141,7 @@ $config = array(
             'batchDelPosts'         => '/posts/batchDelPosts',        // 批量删除资讯
             'batchDelThemes'        => '/posts/batchDelThemes',        // 批量删除资讯
             'batchDelComment'       => '/posts/batchDelComment',        // 批量删除评论
+            'notApproved'           => '/posts/notApproved',          // 审核不通过添加备注信息
         ),
     ),
     'order' => array(

@@ -796,4 +796,11 @@ class Posts_service_model extends HZ_Model
         $ret['data'] = $res;
         return $ret;
     }
+
+    public function notApproved($data, $where)
+    {
+        $ret = array('code' => 0);
+        $this->posts_dao->update($where, $data);
+        return $ret;
+    }
 }

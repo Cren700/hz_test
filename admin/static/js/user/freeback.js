@@ -30,8 +30,9 @@ HZ.UserQuery = (function() {
                 d: data,
                 callback: function(){
                     switch (status){
-                        case 0:
-                            _this.parents('tr').find('.js-user-status').text('未处理');
+                        case 1:
+                            _this.parents('tr').find('.js-user-status').text('已处理');
+                            _this.remove('.js-btn-status');
                             break;
                         default:
                             break;

@@ -33,10 +33,8 @@ HZ.Product = (function() {
                         <button class="btn btn-danger btn-mini js-btn-delete">删除</button>';
                     var s2 = '\
                         <button class="btn btn-warning btn-mini js-btn-status" data-status="3">下架</button>\
-                        <button class="btn btn-success btn-mini js-btn-status" data-status="4">已完成</button>\
                         <button class="btn btn-danger btn-mini js-btn-delete">删除</button>';
                     var s3 = '\
-                        <button class="btn btn-info btn-mini js-btn-status" data-status="1">待审核</button>\
                         <button class="btn btn-danger btn-mini js-btn-delete">删除</button>';
                     var s4 = '\
                         <button class="btn btn-danger btn-mini js-btn-delete">删除</button>';
@@ -50,7 +48,7 @@ HZ.Product = (function() {
                             _p.html(s1);
                             break;
                         case 2:
-                            _this.parents('tr').find('.js-product-status').text('已上架');
+                            _this.parents('tr').find('.js-product-status').text('通过');
                             _p.html(s2);
                             break;
                         case 3:
@@ -62,7 +60,7 @@ HZ.Product = (function() {
                             _p.html(s4);
                             break;
                         case 5:
-                            _this.parents('tr').find('.js-product-status').text('审核不通过');
+                            _this.parents('tr').find('.js-product-status').text('不通过');
                             _p.html(s5);
                             break;
                         default:
@@ -121,6 +119,17 @@ HZ.Product = (function() {
             e.preventDefault();
             _getList();
         });
+
+        // 查看审核原因
+        $(document).on('click', '.checkNotApproved', function() {
+            var remark = $(this).siblings('p').text();
+            HZ.Dialog.showMsg({
+                title: '审核备注信息',
+                msg: remark,
+                type: 'confirm',
+                btnConfirm: function(){}
+            });
+        })
 
     }
 

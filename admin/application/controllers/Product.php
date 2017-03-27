@@ -385,4 +385,17 @@ class Product extends BaseControllor
         echo json_encode_data($res);
     }
 
+    /**
+     * 审核不通过添加备注信息
+     */
+    public function notApproved()
+    {
+        $data = array(
+            'product_id' => $this->input->post('id'),
+            'appr_remark' => $this->input->post('remark'),
+        );
+        $res = $this->product_service->notApproved($data);
+        echo json_encode_data($res);
+    }
+
 }

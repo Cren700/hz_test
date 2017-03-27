@@ -347,5 +347,19 @@ class Product extends HZ_Controller
         $res = $this->product_service->query($option);
         echo outputResponse($res);
     }
+    
+    public function notApproved()
+    {
+        $where = array(
+            'Fproduct_id' => $this->input->post('product_id')
+        );
+        $data = array(
+            'Fremark' => $this->input->post('remark'),
+            'Fproduct_status' => 5, // 不通过
+            'Fupdate_time' => time()
+        );
+        $res = $this->product_service->notApproved($data, $where);
+        echo json_encode_data($res);
+    }
 
 }

@@ -53,6 +53,7 @@ HZ.Form = (function () {
             e: null,
             u: null,
             d: null,
+            r: true,
             callback: null,
         };
         $.extend(t, f); // 传递参数
@@ -61,6 +62,7 @@ HZ.Form = (function () {
             dataType: 'json',
             type: t.t,
             url: t.u,
+            rsync: t.r,
             success: function (res) {
                 if(res.code != 0) {
                     HZ.Dialog.showMsg({
@@ -170,6 +172,49 @@ HZ.Dialog = (function() {
         });
     }
 
+    function submitMsg(f) {
+        var t = {
+            title: '温馨提示',
+            yesText: "确 定",
+            closeText: "关 闭",
+            url: null,  // 跳转URL
+            btnConfirm: null, // 确定按钮
+            btnCancel: null // 取消按钮
+        };
+        $.extend(t, f);
+        closeUrl = t.url;
+
+        var tmpDialogStart = '\
+        <div class="js-window-dialog modal-backdrop  in"></div>\
+        <div class="js-window-dialog modal hide in" aria-hidden="false" style="display: block;">\
+            <div class="modal-header">\
+            <button data-dismiss="modal" class="close js-dialog-btn-cancel" type="button">×</button>\
+        <h3>{title}</h3>\
+        </div>\
+        <div class="modal-body">\
+            <textarea style="width:500px;" id="msg_content" value=""></textarea>\
+        </div>';
+        var btnDialog = '<div class="modal-footer"><a data-dismiss="modal" class="btn btn-primary js-dialog-btn-sure" href="#">{yesText}</a> <a data-dismiss="modal" class="btn js-dialog-btn-cancel" href="#">{closeText}</a> </div>';
+        var tmpDialogEnd = '</div>';
+
+        // 处理弹窗
+        tmpDialogStart = tmpDialogStart.replace('{title}', t.title).replace('{showMsg}', t.msg);
+        btnDialog = btnDialog.replace('{yesText}', t.yesText).replace('{closeText}', t.closeText);
+        tmpDialogStart += btnDialog; // 弹窗按钮
+        $(document).find('body').append(tmpDialogStart+tmpDialogEnd); // 完成了弹窗的样式
+
+        $('.js-dialog-btn-sure').on('click', function () {
+            t.btnConfirm();
+            closeMsg();
+        });
+        $('.js-dialog-btn-cancel').on('click', function () {
+            if(t.btnCancel){
+                t.btnCancel();
+            }
+            closeMsg();
+        });
+    }
+
     function closeMsg() {
         $(document).find('body').find('.js-window-dialog').remove();
         if(closeUrl) {
@@ -179,6 +224,7 @@ HZ.Dialog = (function() {
     return {
         init: init,
         showMsg: showMsg,
+        submitMsg: submitMsg,
         closeMsg: closeMsg
     }
 })();

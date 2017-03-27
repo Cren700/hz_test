@@ -583,4 +583,17 @@ class Posts extends BaseControllor
         echo $this->smarty->display('posts/eventList.tpl');
     }
 
+    /**
+     * 审核不通过添加备注信息
+     */
+    public function notApproved()
+    {
+        $data = array(
+            'id' => $this->input->post('id'),
+            'appr_remark' => $this->input->post('remark'),
+        );
+        $res = $this->posts_service->notApproved($data);
+        echo json_encode_data($res);
+    }
+
 }

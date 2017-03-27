@@ -36,7 +36,7 @@
                 <td><{$i['Fproduct_price']}></td>
                 <td><{'Y-m-d H:i'|date:$i['Fcreate_time']}></td>
                 <td><{'Y-m-d H:i'|date:$i['Fupdate_time']}></td>
-                <td class="js-product-status"><{if $i['Fis_del']}>已删除<{elseif $i['Fproduct_status'] eq 1}>待审核<{elseif $i['Fproduct_status'] eq 2}>通过<{elseif $i['Fproduct_status'] eq 3}>下架<{elseif $i['Fproduct_status'] eq 4}>已完成<{else}>不通过<{/if}></td>
+                <td class="js-product-status"><{if $i['Fis_del']}>已删除<{elseif $i['Fproduct_status'] eq 1}>待审核<{elseif $i['Fproduct_status'] eq 2}>通过<{elseif $i['Fproduct_status'] eq 3}>下架<{elseif $i['Fproduct_status'] eq 4}>已完成<{else}>不通过<br><span class="checkNotApproved min-btn btn-primary" style="cursor: pointer">查看原因</span><p style="display: none"><{$i['Fremark']}></p><{/if}></td>
                 <td>
                     <{if 'product/detail'|hasPower}>
                     <a href="<{"/product/detail/"|cat:$i['Fproduct_id']|getBaseUrl}>" title="<{$i['Fproduct_name']}>">编辑</a>

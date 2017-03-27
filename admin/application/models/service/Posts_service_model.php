@@ -190,4 +190,9 @@ class Posts_service_model extends HZ_Model
     {
         return $this->myCurl($this->_api, 'modifyEvent', $option, true);
     }
+
+    public function notApproved($option)
+    {
+        return $this->myCurl($this->_api, 'notApproved', $option, true);
+    }
 }

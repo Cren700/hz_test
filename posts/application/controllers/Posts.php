@@ -540,4 +540,18 @@ class Posts extends HZ_Controller
         $res = $this->posts_service->getThreeNews();
         echo outputResponse($res);
     }
+
+    public function notApproved()
+    {
+        $where = array(
+            'Fid' => $this->input->post('id')
+        );
+        $data = array(
+            'Fappr_remark' => $this->input->post('appr_remark'),
+            'Fpost_status' => 2, // 不通过
+            'Fupdate_time' => time()
+        );
+        $res = $this->posts_service->notApproved($data, $where);
+        echo json_encode_data($res);
+    }
 }

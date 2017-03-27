@@ -63,47 +63,52 @@ HZ.Posts = (function() {
             var _this = $(this);
             var url = baseUrl + '/posts/status.html';
             var status = _this.data('status');
-            var data = {status: status, pid: _this.parents('tr').attr('rel')};
-            HZ.Form.btnSubmit({
-                t: 'post',
-                u: url,
-                e: _this,
-                d: data,
-                callback: function(){
-                    var _p = _this.parent();
-                    var s1 = '\
+            var id = _this.parents('tr').attr('rel');
+            var data = {status: status, pid: id};
+            if (status == 2) {
+                submitMsg(id);
+            } else {
+                HZ.Form.btnSubmit({
+                    t: 'post',
+                    u: url,
+                    e: _this,
+                    d: data,
+                    callback: function () {
+                        var _p = _this.parent();
+                        var s1 = '\
                         <button class="btn btn-primary btn-mini js-btn-status" data-status="2">不通过</button>\
                         <button class="btn btn-warning btn-mini js-btn-status" data-status="3">通过</button>\
                         <button class="btn btn-danger btn-mini js-btn-delete">删除</button>';
-                    var s2 = '\
+                        var s2 = '\
                         <button class="btn btn-warning btn-mini js-btn-status" data-status="1">提交审核</button>\
                         <button class="btn btn-danger btn-mini js-btn-delete">删除</button>';
-                    var s3 = '\
+                        var s3 = '\
                         <button class="btn btn-primary btn-mini js-btn-status" data-status="4">下架</button>\
                         <button class="btn btn-danger btn-mini js-btn-delete">删除</button>';
-                    var s4 = '<button class="btn btn-warning btn-mini js-btn-status" data-status="1">提交审核</button><button class="btn btn-danger btn-mini js-btn-delete">删除</button>';
-                    switch (status){
-                        case 1:
-                            _this.parents('tr').find('.js-posts-status').text('待审核');
-                            _p.html(s1);
-                            break;
-                        case 2:
-                            _this.parents('tr').find('.js-posts-status').text('不通过');
-                            _p.html(s2);
-                            break;
-                        case 3:
-                            _this.parents('tr').find('.js-posts-status').text('通过');
-                            _p.html(s3);
-                            break;
-                        case 4:
-                            _this.parents('tr').find('.js-posts-status').text('已下架');
-                            _p.html(s4);
-                            break;
-                        default:
-                            break;
+                        var s4 = '<button class="btn btn-warning btn-mini js-btn-status" data-status="1">提交审核</button><button class="btn btn-danger btn-mini js-btn-delete">删除</button>';
+                        switch (status) {
+                            case 1:
+                                _this.parents('tr').find('.js-posts-status').text('待审核');
+                                _p.html(s1);
+                                break;
+                            case 2:
+                                _this.parents('tr').find('.js-posts-status').text('不通过');
+                                _p.html(s2);
+                                break;
+                            case 3:
+                                _this.parents('tr').find('.js-posts-status').text('通过');
+                                _p.html(s3);
+                                break;
+                            case 4:
+                                _this.parents('tr').find('.js-posts-status').text('已下架');
+                                _p.html(s4);
+                                break;
+                            default:
+                                break;
+                        }
                     }
-                }
-            })
+                })
+            }
         });
 
         $(document).on('click', '.js-btn-delete', function() {
@@ -156,6 +161,16 @@ HZ.Posts = (function() {
             _getList();
         });
 
+        // 查看审核原因
+        $(document).on('click', '.checkNotApproved', function() {
+            var remark = $(this).siblings('p').text();
+            HZ.Dialog.showMsg({
+                title: '审核备注信息',
+                msg: remark,
+                type: 'confirm',
+                btnConfirm: function(){}
+            });
+        })
     }
 
     function _getList(p){
@@ -179,6 +194,26 @@ HZ.Posts = (function() {
                 }
             }
         });
+    }
+
+    function submitMsg(id) {
+        HZ.Dialog.submitMsg({
+            title: '系统提示 -- 填写不通过原因',
+            btnConfirm: function(){
+                var url = baseUrl + '/posts/notApproved.html';
+                var data = {id: id, remark: $('#msg_content').val()};
+                HZ.Form.btnSubmit({
+                    t: 'post',
+                    u: url,
+                    d: data,
+                    r: false,
+                    callback: function () {
+                        location.reload();
+                    }
+                });
+            }
+        });
+        return true;
     }
 
     return {

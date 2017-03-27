@@ -744,4 +744,11 @@ class Product_service_model extends HZ_Model
         }
         return $ret;
     }
+
+    public function notApproved($data, $where)
+    {
+        $ret = array('code' => 0);
+        $this->product_dao->update($where, $data);
+        return $ret;
+    }
 }

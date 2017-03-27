@@ -109,6 +109,17 @@ HZ.Posts = (function() {
             _getList();
         });
 
+        // 查看审核原因
+        $(document).on('click', '.checkNotApproved', function() {
+            var remark = $(this).siblings('p').text();
+            HZ.Dialog.showMsg({
+                title: '审核备注信息',
+                msg: remark,
+                type: 'confirm',
+                btnConfirm: function(){}
+            });
+        })
+
     }
 
     function _getList(p){

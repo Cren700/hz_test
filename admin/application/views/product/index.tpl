@@ -36,9 +36,9 @@
                                     <select class="span8" name="status" id="category_id">
                                         <option value="">请选择产品状态</option>
                                         <option value="1">待审核</option>
-                                        <option value="2">已上架</option>
+                                        <option value="2">通过</option>
                                         <option value="3">下架</option>
-                                        <option value="4">已完成</option>
+                                        <option value="5">不通过</option>
                                     </select>
                                 </div>
                                 <div class="span3">
