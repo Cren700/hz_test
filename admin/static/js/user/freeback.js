@@ -31,11 +31,7 @@ HZ.UserQuery = (function() {
                 callback: function(){
                     switch (status){
                         case 0:
-                            _this.removeClass().addClass('btn btn-primary btn-mini js-btn-status').data('status', 1).text('已处理');
                             _this.parents('tr').find('.js-user-status').text('未处理');
-                            break;
-                        case 1:
-                            _this.parents('tr').find('.js-user-status').text('已处理');
                             break;
                         default:
                             break;
