@@ -25,7 +25,7 @@
         </thead>
         <tbody>
         <{foreach $info['list'] as $i}>
-            <tr rel="<{$i['Fproduct_id']}>">
+            <tr rel="<{$i['Fproduct_id']}>" class="tdWrap">
                 <td><input type="checkbox" class="js-checkbox-sub" ref="<{$i['Fproduct_id']}>"></td>
                 <td><{$i['Fproduct_id']}></td>
                 <td>

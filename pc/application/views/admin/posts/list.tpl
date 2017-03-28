@@ -24,7 +24,7 @@
         </thead>
         <tbody>
         <{foreach $info['list'] as $i}>
-            <tr rel="<{$i['Fid']}>">
+            <tr rel="<{$i['Fid']}>" class="tdWrap">
                 <td><{$i['Fid']}></td>
                 <td><a href="<{"/medium/detail/"|cat:$i['Fid']|getBaseUrl}>" title="<{$i['Fpost_title']}>"><{$i['Fpost_title']}></a></td>
                 <td><{$i['Fuser_name']}></td>

@@ -18,7 +18,7 @@
         </thead>
         <tbody>
         <{foreach $info['list'] as $i}>
-            <tr >
+            <tr class="tdWrap">
                 <td><{$i['Fproduct_id']}></td>
                 <td>
                     <a href="<{"/product/detail/"|cat:$i['Fproduct_id']|cat:'?_d=1'|getBaseUrl}>" title="<{$i['Fproduct_name']}>"><{$i['Fproduct_name']}></a>

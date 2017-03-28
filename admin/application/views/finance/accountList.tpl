@@ -22,7 +22,7 @@
             </thead>
             <tbody>
             <{foreach $info['list'] as $i}>
-                <tr >
+                <tr class="tdWrap">
                     <td><{$i['Fuser_id']}></td>
                     <td><{if $i['Fuser_type'] eq 1}>内部管理用户<{elseif $i['Fuser_type'] eq 2}>合作商户<{elseif $i['Fuser_type'] eq 3}>媒体用户<{else}>普通用户<{/if}></td>
                     <td><{$i['Famount']}></td>

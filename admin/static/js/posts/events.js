@@ -26,6 +26,7 @@ HZ.Posts = (function() {
             var _tr = _this.parents('tr');
             var url = baseUrl + '/posts/modifyEvent.html';
             var num = _tr.find('input[name="num"]').val();
+            num = isNaN(parseInt(num, 10)) ? 0 : parseInt(num, 10);
             var data = {id: _tr.attr('rel'), num: num};
             HZ.Form.btnSubmit({
                 t: 'post',

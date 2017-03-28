@@ -22,7 +22,7 @@
         </thead>
         <tbody>
         <{foreach $info['list'] as $i}>
-            <tr rel="<{$i['Fid']}>">
+            <tr rel="<{$i['Fid']}>" class="tdWrap">
                 <td><{$i['Fid']}></td>
                 <td><img src="<{$i['Fimage_url']}>" style="width: 150px; height: 120px;" alt=""></td>
                 <td><{$i['Furl']}></td>

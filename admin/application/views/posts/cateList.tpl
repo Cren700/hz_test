@@ -38,7 +38,7 @@
                                 </thead>
                                 <{if isset($cate['list'])}>
                                 <{foreach $cate['list'] as $c}>
-                                <tr rel="<{$c.Fpost_category_id}>">
+                                <tr rel="<{$c.Fpost_category_id}>" class="tdWrap">
                                     <td><{$c.Fpost_category_id}></td>
                                     <td><{$c.Fcategory_name}></td>
                                     <td><{$c.Fremark}></td>

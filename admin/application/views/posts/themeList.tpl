@@ -25,7 +25,7 @@
         </thead>
         <tbody>
         <{foreach $info['list'] as $i}>
-            <tr rel="<{$i['Fid']}>">
+            <tr rel="<{$i['Fid']}>" class="tdWrap">
                 <td><input type="checkbox" class="js-checkbox-sub" ref="<{$i['Fid']}>"></td>
                 <td><{$i['Fid']}></td>
                 <td><a href="<{"/posts/detailTheme/"|cat:$i['Fid']|getBaseUrl}>" title="<{$i['Ftheme_title']}>"><{$i['Ftheme_title']}></a></td>

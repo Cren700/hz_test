@@ -7,7 +7,7 @@
 </div>
 <{else}>
 <div class="widget-content nopadding">
-    <table class="table table-bordered table-striped">
+    <table class="table table-bordered table-striped" >
         <thead>
         <tr>
             <th><input type="checkbox" id="bacth_selected">&nbsp;全选</th>
@@ -25,7 +25,7 @@
         </thead>
         <tbody>
         <{foreach $info['list'] as $i}>
-            <tr rel="<{$i['Fid']}>">
+            <tr rel="<{$i['Fid']}>" class="tdWrap">
                 <td><{if $i['Fis_del'] != 1}><input type="checkbox" class="js-checkbox-sub" ref="<{$i['Fid']}>"><{/if}></td>
                 <td><{$i['Fid']}></td>
                 <td>

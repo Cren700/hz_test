@@ -1591,3 +1591,7 @@ div.dataTables_wrapper .ui-widget-header {
 .form-actions {
 	padding: 5px 20px;
 }
+
+.tdWrap {
+	word-break: break-all; word-wrap: break-word
+}

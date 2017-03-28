@@ -18,7 +18,7 @@
         </thead>
         <tbody>
         <{foreach $info['list'] as $i}>
-            <tr rel="<{$i['Fid']}>">
+            <tr rel="<{$i['Fid']}>" class="tdWrap">
                 <td><{$i['Fpartners_id']}></td>
                 <td><{$i['Fpartners_name']}></td>
                 <td class="js-txt-num"><{$i['Fnum']}></td>

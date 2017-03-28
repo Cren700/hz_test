@@ -22,7 +22,7 @@
             </thead>
             <tbody>
             <{foreach $info['list'] as $i}>
-                <tr rel="<{$i['Fid']}>">
+                <tr rel="<{$i['Fid']}>" class="tdWrap">
                     <td><{$i['Fid']}></td>
                     <td><{$i['Frelation']}></td>
                     <td><{if $i['Ftype'] eq 1 }>需求报道<{/if}></td>

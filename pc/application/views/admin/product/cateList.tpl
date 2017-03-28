@@ -19,7 +19,6 @@
                 <div class="widget-box">
                     <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
                         <h5>产品分类</h5>
-                        <a class="label label-info js-btn-add-product" href="/product/addCate.html">添加产品分类</a>
                     </div>
                     <div id="product-list-content">
                         <!--table info-->
@@ -34,7 +33,7 @@
                                 </tr>
                                 </thead>
                                 <{foreach $cate['list'] as $c}>
-                                <tr>
+                                <tr class="tdWrap">
                                     <td><{$c.Fcategory_id}></td>
                                     <td><{$c.Fcategory_name}></td>
                                     <td><{$c.Fremark}></td>

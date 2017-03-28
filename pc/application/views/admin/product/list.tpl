@@ -23,7 +23,7 @@
         </thead>
         <tbody>
         <{foreach $info['list'] as $i}>
-            <tr rel="<{$i['Fproduct_id']}>">
+            <tr rel="<{$i['Fproduct_id']}>" class="tdWrap">
                 <td><{$i['Fproduct_id']}></td>
                 <td><a href="<{"/store/detail/"|cat:$i['Fproduct_id']|getBaseUrl}>" title="<{$i['Fproduct_name']}>"><{$i['Fproduct_name']}></a></td>
                 <td><{$cate[$i['Fcategory_id']]}></td>

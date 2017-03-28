@@ -29,7 +29,7 @@
         </thead>
         <tbody>
         <{foreach $info['list'] as $i}>
-            <tr rel="<{$i['Fid']}>">
+            <tr rel="<{$i['Fid']}>" class="tdWrap">
                 <td style="text-align: center"><{$i['Forder_no']}></td>
                 <td><{$i['Fuser_id']}></td>
                 <td><{$i['Freal_name']}></td>

@@ -33,7 +33,7 @@
                                 </tr>
                                 </thead>
                                 <{foreach $cate['list'] as $c}>
-                                <tr rel="<{$c.Fcategory_id}>">
+                                <tr rel="<{$c.Fcategory_id}>" class="tdWrap">
                                     <td><{$c.Fcategory_id}></td>
                                     <td><{$c.Fcategory_name}></td>
                                     <td><{$c.Fremark}></td>

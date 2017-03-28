@@ -19,7 +19,7 @@
             </thead>
             <tbody>
             <{foreach $info['list'] as $i}>
-                <tr rel="<{$i['Fid']}>">
+                <tr rel="<{$i['Fid']}>" class="tdWrap">
                     <td><{$i['Fuser_id']}></td>
                     <td><{$i['Frole_name']}></td>
                     <td><{'Y-m-d H:i:s'|date:$i['Fcreate_time']}></td>
