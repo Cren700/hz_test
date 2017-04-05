@@ -129,4 +129,9 @@ class User_service_model extends HZ_Model
     {
         return $this->myCurl('account', 'addAccountAdmin', $option, true);
     }
+
+    public function batchDelUser($option)
+    {
+        return $this->myCurl('account', 'batchDelUser', $option, true);
+    }
 }

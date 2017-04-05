@@ -292,4 +292,14 @@ class Account_dao_model extends HZ_Model
 
         return filterData($res);
     }
+
+    public function batchDelUser($ids)
+    {
+        $where = 'Fid in ('.join(',', $ids).')';
+        $data = array(
+            'Fstatus' => 0
+        );
+        return $this->account->update($this->_user_table, $data, $where);
+    }
+
 }

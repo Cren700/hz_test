@@ -69,7 +69,6 @@ class Account_service_model extends HZ_Model
     /**
      * 登录
      * @param $data
-     * @param $type 'admin':为后台登录
      * @return array
      */
     public function login($data)
@@ -94,8 +93,9 @@ class Account_service_model extends HZ_Model
                 return $resValidation;
             }
         }
-        $info = $this->account_dao_model->getInfoByOp(array('Fuser_id' => $data['Fuser_id'], 'Fstatus' => 1, 'Fuser_type' => $data['Fuser_type']), $type);
-        if (!$info) return array('code' => 'account_error_0'); // 账户不存在
+        $info = $this->account_dao_model->getInfoByOp(array('Fuser_id' => $data['Fuser_id'], 'Fstatus' => 1, 'Fis_blackuser' => 0, 'Fuser_type' => $data['Fuser_type']), $type);
+        if (!$info)
+            return array('code' => 'account_error_0'); // 账户不存在
         $pwdCode = encodePwd($info['Fsalt'], $data['Fpasswd']);
         if ($info['Fpasswd'] !== $pwdCode) {
             return array('code' => 'account_error_1');         // 账户密码不一致
@@ -641,6 +641,17 @@ class Account_service_model extends HZ_Model
     {
         $ret = array('code' => 0);
         $ret['data'] = $this->account_dao_model->powerUrl($where);
+        return $ret;
+    }
+
+    public function batchDelUser($ids)
+    {
+        $ret = array('code' => 0);
+        $res = $this->account_dao_model->batchDelUser($ids);
+        if (empty($res)) {
+            $ret['code'] = 'system_error_2'; // 操作出错
+            return $ret;
+        }
         return $ret;
     }
 

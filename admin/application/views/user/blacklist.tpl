@@ -27,7 +27,7 @@
                                     <input type="text" name="user_id" placeholder="名称">
                                 </div>
                                 <div class="span3">
-                                    <label style="display: inline-block">注册</label>
+                                    <label style="display: inline-block">时间</label>
                                     <input type="text" data-date-format="yyyy-mm-dd" name="min_date"  class="datepicker span5" placeholder="开始时间">
                                     <label style="display: inline-block"> - </label>
                                     <input class="datepicker span5" data-date-format="yyyy-mm-dd" type="text" name="max_date" placeholder="结束时间">
@@ -56,9 +56,9 @@
                 <div class="widget-box">
                     <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
                         <h5>黑名单列表</h5>
+                        <{if 'user/changestatus'|hasPower}><a class="label label-important js-btn-batch-del" href="javascript:;">批量删除</a><{/if}>
                     </div>
                     <div id="users-list-content">
-
                     </div>
                 </div>
             </div>

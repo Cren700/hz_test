@@ -22,4 +22,14 @@ class Freeback_service_model extends HZ_Model
     {
         return $this->myCurl('promo', 'freebackStatus', $option, true);
     }
+
+    public function delFreeback($option)
+    {
+        return $this->myCurl('promo', 'delFreeback', $option, true);
+    }
+
+    public function batchDelFreeback($option)
+    {
+        return $this->myCurl('promo', 'batchDelFreeback', $option, true);
+    }
 }

@@ -439,4 +439,15 @@ class Account extends BaseController {
         echo outputResponse($res);
     }
 
+    /**
+     * 批量删除user
+     */
+    public function batchDelUser()
+    {
+        $ids = $this->input->post('ids', true);
+        $res = $this->account_service->batchDelUser($ids);
+        echo outputResponse($res);
+    }
+
+
 }

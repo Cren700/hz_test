@@ -20,6 +20,50 @@ HZ.UserQuery = (function() {
             _getList();
         });
 
+        // 批量选择
+        $(document).on('click', '#bacth_selected', function (e) {
+            var v = $(this).attr('checked') === 'checked' ? 'checked' : false;
+            $('.js-checkbox-sub').each(function(){
+                $(this).attr('checked', v);
+            })
+        });
+
+        // 确认批量删除
+        $('.js-btn-batch-del').on('click', function(){
+            var ids = [];
+            $('.js-checkbox-sub').each(function(){
+                if ($(this).is(':checked')) {
+                    var pid = $(this).attr('ref');
+                    ids.push(pid);
+                }
+            });
+            if (ids.length === 0) {
+                HZ.Dialog.showMsg({
+                    title: '系统提示',
+                    type: 'warm',
+                    msg: '没有选择要删除的用户'
+                });
+                return false;
+            }
+            HZ.Dialog.showMsg({
+                title: '系统提示',
+                msg: "是否批量删除用户?",
+                type: 'confirm',
+                btnConfirm: function(){
+                    var url = baseUrl + '/user/batchDelUser.html';
+                    var data = {ids: ids};
+                    HZ.Form.btnSubmit({
+                        t: 'post',
+                        u: url,
+                        d: data,
+                        callback: function(){
+                            location.reload();
+                        }
+                    });
+                }
+            });
+        });
+
         $(document).on('click', '.js-btn-unblack', function (){
             var _this = $(this);
             var url = baseUrl + '/user/changeStatus.html';

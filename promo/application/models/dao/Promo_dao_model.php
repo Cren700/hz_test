@@ -153,7 +153,15 @@ class Promo_dao_model extends HZ_Model {
 
     public function delFreeback($where) {
         dbEscape($where);
-        return $this->p->delete($this->_report,$where);
+        $_db = $this->load->database('common', true);
+        return $_db->delete($this->_report, $where);
+    }
+
+    public function batchDelFreeback($ids)
+    {
+        $_db = $this->load->database('common', true);
+        $where = 'Fid in ('.join(',', $ids).')';
+        return $_db->delete($this->_report, $where);
     }
 
     public function imageAdd($data) {

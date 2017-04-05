@@ -16,7 +16,6 @@ class HZ_Controller extends CI_Controller
 
     public function __construct(){
         parent::__construct();
-
 //        $this->filterPostAndGet();
         $this->load->library("session");
         //Smarty
@@ -55,6 +54,9 @@ class HZ_Controller extends CI_Controller
 
         $this->smarty->assign('cssArr', array());
         $this->smarty->assign('jsArr', array());
+        // 读取cookie数据
+        $this->load->model('service/account_service_model');
+        $this->account_service_model->setUserCookie();
 
         $this->_uid = $this->session->userdata('w_uid');
         $this->_user_id = $this->session->userdata('w_username');

@@ -10,6 +10,7 @@
     <table class="table table-bordered table-striped">
         <thead>
         <tr>
+            <th><input type="checkbox" id="bacth_selected">&nbsp;全选</th>
             <th>用户ID</th>
             <th>用户名称</th>
             <th>真实姓名</th>
@@ -24,6 +25,7 @@
         <tbody>
         <{foreach $info['list'] as $i}>
             <tr rel="<{$i['Fid']}>" class="tdWrap">
+                <td><input type="checkbox" class="js-checkbox-sub" ref="<{$i['Fid']}>"></td>
                 <td><a href="<{"/user/info/"|cat:$i['Fid']|cat:'?_d=1'|getBaseUrl}>" title="<{$i['Fuser_id']}>"><{$i['Fid']}></a></td>
                 <td><{$i['Fuser_id']}></td>
                 <td><{$i['Freal_name']}></td>
@@ -40,7 +42,7 @@
                         <{else}>
                         <button class="btn btn-danger btn-mini js-btn-status" data-status="0">删除</button>
                         <{/if}>
-                        <button class="btn btn-primary btn-mini js-btn-unblack" data-status="1">移出黑名单</button>
+                        <!--<button class="btn btn-primary btn-mini js-btn-unblack" data-status="1">移出黑名单</button>-->
                     <{/if}>
                 </td>
             </tr>

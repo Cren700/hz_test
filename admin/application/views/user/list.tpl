@@ -3,7 +3,7 @@
 <{if count($info['list']) eq 0}>
 <div class="alert alert-block"> <a class="close" data-dismiss="alert" href="#">×</a>
     <h4 class="alert-heading">温馨提示!</h4>
-    无相应的资讯信息
+    无相应的用户信息
 </div>
 <{else}>
 <div class="widget-content nopadding">
@@ -31,7 +31,7 @@
                 <td class="js-user-status"><{if $i['Fstatus'] eq 0 }>已删除<{else}>使用中<{/if}></td>
                 <td class="js-user-atte-status"><{if $i['Fatte_status'] eq 0 }>未认证<{else}>已认证<{/if}></td>
                 <td>
-                    <{if 'user/info'|hasPower}><a href="<{"/user/info/"|cat:$i['Fid']|getBaseUrl}>" title="点击查看用户详情">查看</a><{/if}>
+                    <{if 'user/info'|hasPower}><a href="<{"/user/info/"|cat:$i['Fid']|cat:'?_d=1'|getBaseUrl}>" title="点击查看用户详情">查看</a><{/if}>
                     <{if 'user/changestatus'|hasPower}>
                         <{if $i['Fstatus'] eq 0}>
                             <button class="btn btn-primary btn-mini js-btn-status" data-status="1">启用</button>
@@ -40,8 +40,6 @@
                         <{/if}>
                         <{if $i['Fatte_status'] eq 0}>
                         <button class="btn btn-primary btn-mini js-btn-atte-status" data-status="1">通过认证</button>
-                        <{else}>
-                            <button class="btn btn-danger btn-mini js-btn-atte-status" data-status="0">取消认证</button>
                         <{/if}>
                         <button class="btn btn-danger btn-mini js-btn-black" data-status="1">移至黑名单</button>
                     <{/if}>

@@ -10,6 +10,7 @@
         <table class="table table-bordered table-striped">
             <thead>
             <tr>
+                <th><input type="checkbox" id="bacth_selected">&nbsp;全选</th>
                 <th>反馈ID</th>
                 <th>用户联系方式</th>
                 <th>反馈类型</th>
@@ -23,10 +24,11 @@
             <tbody>
             <{foreach $info['list'] as $i}>
                 <tr rel="<{$i['Fid']}>" class="tdWrap">
+                    <td><input type="checkbox" class="js-checkbox-sub" ref="<{$i['Fid']}>"></td>
                     <td><{$i['Fid']}></td>
                     <td><{$i['Frelation']}></td>
                     <td><{if $i['Ftype'] eq 1 }>需求报道<{/if}></td>
-                    <td><{$i['Fcontent']}></td>
+                    <td style="width:45%"><{$i['Fcontent']}></td>
                     <td><{'Y-m-d H:i:s'|date:$i['Fcreate_time']}></td>
                     <td><{'Y-m-d H:i:s'|date:$i['Fupdate_time']}></td>
                     <td class="js-user-status"><{if $i['Fstatus'] eq 0 }>未处理<{else}>已处理<{/if}></td>

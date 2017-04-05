@@ -73,6 +73,7 @@ class Account extends HZ_Controller
     public function logOut()
     {
         $this->session->sess_destroy();
+        setcookie('_ca', '', time() - 10, '/');
         $this->jump(getBaseUrl('/home.html'));
     }
 

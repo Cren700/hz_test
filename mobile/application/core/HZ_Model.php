@@ -57,7 +57,7 @@ class HZ_Model extends CI_Model
 
         $res = curl_exec($ch);
  //
-//         if($control == "payInfo")
+//         if($control == "login")
 //         {
 //             echo $res;die;
 //         }
@@ -70,5 +70,44 @@ class HZ_Model extends CI_Model
 
         }
         return json_decode($res, true);
+    }
+
+    public function saveInfoToSession($info)
+    {
+        $data = array(
+            'm_uid'                => $info['m_uid'],
+            'm_username'           => $info['m_username'],
+            'm_type'               => $info['m_type'],
+            'm_log_type'           => $info['m_log_type'],
+        );
+        $this->session->set_userdata($data);
+        $info = $info['m_uid'] . ',' . $info['m_username'] . ',' . $info['m_type'] . ','. $info['m_log_type'];
+        $this->setUserCookie($info);
+    }
+
+    public function setUserCookie($info = null)
+    {
+        if($info == null)
+        {
+            $info = isset($_COOKIE['_ca']) ? base64_decode($_COOKIE['_ca']) : null;
+        }
+        if($info !== null)
+        {
+            $time = time() + 3600 * 24 * 7;
+            setcookie('_ca', base64_encode($info), $time, '/');
+
+            if($this->session->userdata('m_uid') == false)
+            {
+                $info = explode(',', $info);
+
+                $tmp = array(
+                    'm_uid'               => $info[0],
+                    'm_username'          => $info[1],
+                    'm_type'              => $info[2],
+                    'm_log_type'          => $info[3],
+                );
+                $this->saveInfoToSession($tmp);
+            }
+        }
     }
 }

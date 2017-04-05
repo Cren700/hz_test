@@ -159,6 +159,14 @@ class Info_service_model extends HZ_Model
         if ($option['Fuser_id'] === '0' || !empty($option['Fuser_id'])) {
             $like['u.Fuser_id'] = $option['Fuser_id'];
         }
+
+
+//        if ($option['Fstatus'] === '0' || !empty($option['Fstatus'])) {
+//            $where['u.Fstatus'] = $option['Fstatus'];
+//        } else {
+            $where['u.Fstatus'] = 1;
+//        }
+
         $page = $option['p'] ? : 1;
         $page_size = $option['page_size'];
         $where['Fis_blackuser'] = 1;

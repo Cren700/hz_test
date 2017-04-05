@@ -13,7 +13,7 @@ $config = array(
     'system_error_2' => array( 'code' => 2, 'msg' => '操作出错'),                     //操作出错
 
     // account 10000 ~ 19999
-    'account_error_0' => array( 'code' => 10000, 'msg' => '用户账号不存在或用户类型出错'),                //用户账号不存在
+    'account_error_0' => array( 'code' => 10000, 'msg' => '用户账号禁用或用户类型出错'),                //用户账号不存在
     'account_error_1' => array( 'code' => 10001, 'msg' => '用户账号密码不一致'),            //用户账号密码不一致
     'account_error_2' => array( 'code' => 10002, 'msg' => '用户名已存在'),                 //用户名已存在
     'account_error_3' => array( 'code' => 10003, 'msg' => '添加数据错误'),                 //添加数据错误

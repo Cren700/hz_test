@@ -48,7 +48,7 @@
                                             <{/if}>
                                         </td>
                                         <td><{$i['Fdesc']}></td>
-                                        <td><{$i['Faction_name']}></td>
+                                        <td style="width:40%"><{$i['Faction_name']}></td>
                                         <td>
                                             <{if 'user/delrole'|hasPower && (!isset($role_count[$i.Frole_id]) || $role_count[$i.Frole_id] == 0)}>
                                             <a href="javascript:;" class="btn btn-danger btn-mini js-btn-delete">删除</a>

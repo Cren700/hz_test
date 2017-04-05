@@ -37,8 +37,8 @@ class Account_service_model extends HZ_Model
         if ($res['code'] == 0) {
             // 保存session
             $res['data']['url'] = getBaseUrl('/home.html');
-            $session = array('w_uid' => $res['data']['uid'], 'w_username' => $res['data']['username'], 'w_type' => $res['data']['user_type'], 'w_image_path' => $res['data']['image_path']);
-            $this->session->set_userdata($session);
+            $data = array('w_uid' => $res['data']['uid'], 'w_username' => $res['data']['username'], 'w_type' => $res['data']['user_type'], 'w_image_path' => $res['data']['image_path']);
+            $this->saveInfoToSession($data);
         }
         return $res;
     }
@@ -124,8 +124,8 @@ class Account_service_model extends HZ_Model
         if ($res['code'] == 0) {
             // 保存session
             $ret['data']['url'] = getBaseUrl('/home.html');
-            $session = array('w_uid' => $res['data']['Fid'], 'w_username' => $res['data']['Fuser_id'], 'w_type' => $res['data']['Fuser_type'], 'w_image_path' => isset($res['data']['Fimage_path']) ? $res['data']['Fimage_path'] : '' );
-            $this->session->set_userdata($session);
+            $data = array('w_uid' => $res['data']['Fid'], 'w_username' => $res['data']['Fuser_id'], 'w_type' => $res['data']['Fuser_type'], 'w_image_path' => isset($res['data']['Fimage_path']) ? $res['data']['Fimage_path'] : '' );
+            $this->saveInfoToSession($data);
         } else {
             $ret['code'] = $res['code'];
             $ret['msg'] = $res['msg'];
@@ -156,8 +156,8 @@ class Account_service_model extends HZ_Model
         if ($res['code'] == 0) {
             // 保存session
             $res['data']['url'] = getBaseUrl('/home.html');
-            $session = array('w_uid' => $res['data']['Fid'], 'w_username' => $res['data']['Fuser_id'], 'w_type' => $res['data']['Fuser_type'], 'w_log_type' => $res['data']['Flog_type'],'w_image_path' => isset($res['data']['Fimage_path']) ? $res['data']['Fimage_path'] : '' );
-            $this->session->set_userdata($session);
+            $data = array('w_uid' => $res['data']['Fid'], 'w_username' => $res['data']['Fuser_id'], 'w_type' => $res['data']['Fuser_type'], 'w_log_type' => $res['data']['Flog_type'],'w_image_path' => isset($res['data']['Fimage_path']) ? $res['data']['Fimage_path'] : '' );
+            $this->saveInfoToSession($data);
         }
         return $res;
     }

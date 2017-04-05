@@ -18,6 +18,9 @@
                 <div class="widget-box">
                     <div class="widget-title"> <span class="icon"> <i class="icon-th"></i> </span>
                         <h5>反馈列表</h5>
+                        <{if 'user/freebackstatus'|hasPower}>
+                            <a class="label label-important js-btn-batch-del" href="javascript:;">批量删除</a>
+                        <{/if}>
                     </div>
                     <div id="users-list-content">
 

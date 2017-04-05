@@ -52,6 +52,7 @@ $config = array(
             'getUserDetailByWhere'  => '/account/getUserDetailByWhere',   // 获取用户信息
             'getAccountTotalInfo'   => '/account/getAccountTotalInfo',    // 用户完整信息
             'getRoleCount'          => '/account/getRoleCount',      // 各角色数量
+            'batchDelUser'          => '/account/batchDelUser',           // 批量删除用户
         ),
     ),
     'product' => array(
@@ -204,7 +205,8 @@ $config = array(
             'sendReport'             => '/promo/sendReport',    // 用户反馈信息
             'queryFreeback'          => '/promo/queryFreeback', // 用户反馈列表
             'freebackStatus'         => '/promo/freebackStatus', // 处理反馈状态
-            'delFreeback'            => '/promo/delFreeback', // 删除反馈状态
+            'delFreeback'            => '/promo/delFreeback', // 删除反馈
+            'batchDelFreeback'       => '/promo/batchDelFreeback',   // 批量删除反馈
             'batchDelPromo'          => '/promo/batchDelPromo',        // 批量删除广告
             'imageAdd'               => '/promo/imageAdd', //添加首页图片
             'imageSave'              => '/promo/imageSave', //更新首页图片

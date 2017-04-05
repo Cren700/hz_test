@@ -57,8 +57,7 @@ class HZ_Model extends CI_Model
 
         $res = curl_exec($ch);
 // //        
-        // // if($control == "oauthLogin")
-//         if($control == "oauthLogin")
+//         if($control == "doPhoneLogin")
 //         {
 //             echo $res;die;
 //         }
@@ -71,5 +70,46 @@ class HZ_Model extends CI_Model
 
         }
         return json_decode($res, true);
+    }
+
+    public function saveInfoToSession($info)
+    {
+        $data = array(
+            'w_uid'                => $info['w_uid'],
+            'w_username'           => $info['w_username'],
+            'w_type'               => $info['w_type'],
+            'w_log_type'           => isset($info['w_log_type']) ? $info['w_log_type'] : '',
+            'w_image_path'         => isset($info['image_path']) ? $info['image_path'] : '',
+        );
+        $this->session->set_userdata($data);
+        $info = $data['w_uid'] . ',' . $data['w_username'] . ',' . $data['w_type'] . ','. $data['w_log_type'] . ','. $data['w_image_path'];
+        $this->setUserCookie($info);
+    }
+
+    public function setUserCookie($info = null)
+    {
+        if($info == null)
+        {
+            $info = isset($_COOKIE['_ca']) ? base64_decode($_COOKIE['_ca']) : null;
+        }
+        if($info !== null)
+        {
+            $time = time() + 3600 * 24 * 7;
+            setcookie('_ca', base64_encode($info), $time, '/');
+
+            if($this->session->userdata('w_uid') == false)
+            {
+                $info = explode(',', $info);
+
+                $tmp = array(
+                    'w_uid'               => $info[0],
+                    'w_username'          => $info[1],
+                    'w_type'              => $info[2],
+                    'w_log_type'          => $info[3],
+                    'w_image_path'        => $info[4],
+                );
+                $this->saveInfoToSession($tmp);
+            }
+        }
     }
 }

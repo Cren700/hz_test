@@ -55,6 +55,9 @@ class HZ_Controller extends CI_Controller
 
         $this->smarty->assign('cssArr', array());
         $this->smarty->assign('jsArr', array());
+        // 读取cookie数据
+        $this->load->model('service/account_service_model');
+        $this->account_service_model->setUserCookie();
 
         $this->_uid = $this->session->userdata('m_uid');
         $this->_user_id = $this->session->userdata('m_username');

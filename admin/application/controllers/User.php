@@ -485,4 +485,24 @@ class User extends BaseControllor
         echo json_encode_data($res);
     }
 
+    /**
+     * 删除
+     */
+    public function batchDelFreeback()
+    {
+        $option = array(
+            'ids' => $this->input->post('ids')
+        );
+        $res = $this->freeback_service->batchDelFreeback($option);
+        echo json_encode_data($res);
+    }
+
+    public function batchDelUser()
+    {
+        $option = array(
+            'ids' => $this->input->post('ids')
+        );
+        $res = $this->user_service->batchDelUser($option);
+        echo json_encode_data($res);
+    }
 }

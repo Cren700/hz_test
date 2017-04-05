@@ -218,6 +218,16 @@ class Promo extends HZ_Controller {
         echo outputResponse($res);
     }
 
+    /**
+     * 批量删除Freeback
+     */
+    public function batchDelFreeback()
+    {
+        $ids = $this->input->post('ids', true);
+        $res = $this->promo_service->batchDelFreeback($ids);
+        echo outputResponse($res);
+    }
+
 
     //添加广告
     public function imageAdd() {

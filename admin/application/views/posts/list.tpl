@@ -28,7 +28,7 @@
             <tr rel="<{$i['Fid']}>" class="tdWrap">
                 <td><{if $i['Fis_del'] != 1}><input type="checkbox" class="js-checkbox-sub" ref="<{$i['Fid']}>"><{/if}></td>
                 <td><{$i['Fid']}></td>
-                <td>
+                <td style="width:40%">
                     <{if 'posts/detail'|hasPower}>
                     <a href="<{"/posts/detail/"|cat:$i['Fid']|getBaseUrl}>" title="<{$i['Fpost_title']}>"><{$i['Fpost_title']}></a>
                     <{else}>

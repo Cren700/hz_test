@@ -318,6 +318,17 @@ class Promo_service_model extends HZ_Model {
         }
     }
 
+    public function batchDelFreeback($ids)
+    {
+        $ret = array('code' => 0);
+        $res = $this->promo_dao->batchDelFreeback($ids);
+        if (empty($res)) {
+            $ret['code'] = 'system_error_2'; // 操作出错
+            return $ret;
+        }
+        return $ret;
+    }
+
     //验证提交的广告数据
     public function imageAdd($data) {
         $ret = array('code' => 0);//命令码
