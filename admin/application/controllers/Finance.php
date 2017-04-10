@@ -94,6 +94,10 @@ class Finance extends BaseControllor
         $this->smarty->display('finance/saleStatList.tpl');
     }
 
+    public function payType()
+    {
+        $this->smarty->display('finance/paytype.tpl');
+    }
 
 
 }

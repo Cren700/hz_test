@@ -3,7 +3,7 @@
 <{if count($info['list']) eq 0}>
     <div class="alert alert-block"> <a class="close" data-dismiss="alert" href="#">×</a>
         <h4 class="alert-heading">温馨提示!</h4>
-        无相应的关注信息
+        无相应信息
     </div>
     <{else}>
     <div class="widget-content nopadding">

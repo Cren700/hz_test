@@ -161,7 +161,7 @@
                                     <input type="submit" class="btn btn-success js-btn-submit" value="提 交" />
                                     <input type="reset" class="btn btn-success" value="重 置">
                                     <{/if}>
-                                    <input type="button" class="btn js-btn-return" value="返回上一页">
+                                    <a herf='javascript:;' class="btn btn-success js-btn-return" >返回上一页</a>
                                 </div>
                             </div>
                             <input type="hidden" name="id" value="<{$user['Fid']}>">
