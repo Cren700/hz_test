@@ -22,9 +22,9 @@
                     <div class="widget-content nopadding">
                         <form action="#" method="get" class="form-horizontal">
                             <div class="control-group" style="padding: 10px">
-                                <div class="span4">
+                                <div class="span3">
                                     <label style="display: inline-block">名称</label>
-                                    <input type="text" name="user_id" placeholder="名称">
+                                    <input type="text" class="span8" name="user_id" placeholder="名称">
                                 </div>
                                 <div class="span3">
                                     <label style="display: inline-block">时间</label>

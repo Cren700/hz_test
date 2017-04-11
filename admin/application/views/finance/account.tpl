@@ -23,7 +23,8 @@
                         <form action="#" method="get" class="form-horizontal">
                             <div class="control-group" style="padding: 10px">
                                 <div class="span3">
-                                    <input class="span11"  type="text" name="user_id" placeholder="用户ID">
+                                    <label style="display: inline-block">用户ID</label>
+                                    <input class="span6"  type="text" name="user_id" placeholder="用户ID">
                                 </div>
                                 <div class="span3">
                                     <label style="display: inline-block">类型</label>

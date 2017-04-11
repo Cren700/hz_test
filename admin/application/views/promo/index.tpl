@@ -27,6 +27,7 @@
                                     <input class="span6" type="text" name="active_name" placeholder="广告名称">
                                 </div>
                                 <div class="span3">
+                                    <label style="display: inline-block">时间</label>
                                     <input type="text" data-date-format="yyyy-mm-dd" name="min_date"  class="datepicker span5" placeholder="开始时间">
                                     <label style="display: inline-block"> - </label>
                                     <input class="datepicker span5" data-date-format="yyyy-mm-dd" type="text" name="max_date" placeholder="结束时间">

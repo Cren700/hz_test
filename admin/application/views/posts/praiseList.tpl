@@ -19,7 +19,7 @@
         <{foreach $info['list'] as $i}>
             <tr class="tdWrap">
                 <td><{$i['Fpraise_post_id']}></td>
-                <td><a href="<{"/posts/detail/"|cat:$i['Fpraise_post_id']|getBaseUrl}>" title="<{$i['Fpost_title']}>"><{$i['Fpost_title']}></a></td>
+                <td><a href="<{"/posts/detail/"|cat:$i['Fpraise_post_id']|cat:'?_d=1'|getBaseUrl}>" title="<{$i['Fpost_title']}>"><{$i['Fpost_title']}></a></td>
                 <td><{$i['Fuser_id']}></td>
             </tr>
             <{/foreach}>

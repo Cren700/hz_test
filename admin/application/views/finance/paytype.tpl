@@ -23,6 +23,7 @@
                         <form action="#" method="get" class="form-horizontal">
                             <div class="control-group" style="padding: 10px">
                                 <div class="span5">
+                                    <label style="display: inline-block">时间</label>
                                     <input type="text" data-date-format="yyyy-mm-dd" name="min_date"  class="datepicker span5" placeholder="开始时间">
                                     <label style="display: inline-block"> - </label>
                                     <input class="datepicker span5" data-date-format="yyyy-mm-dd" type="text" name="max_date" placeholder="结束时间">

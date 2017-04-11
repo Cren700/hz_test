@@ -22,11 +22,13 @@
                     <div class="widget-content nopadding">
                         <form action="#" method="get" class="form-horizontal">
                             <div class="control-group" style="padding: 10px">
-                                <div class="span2">
-                                    <input class="span12"  type="text" name="post_id" placeholder="资讯ID">
+                                <div class="span3">
+                                    <label style="display: inline-block">资讯ID</label>
+                                    <input class="span6"  type="text" name="post_id" placeholder="资讯ID">
                                 </div>
-                                <div class="span2">
-                                    <input class="span12" type="text" name="user_id" placeholder="用户名称">
+                                <div class="span3">
+                                    <label style="display: inline-block">用户名称</label>
+                                    <input class="span6" type="text" name="user_id" placeholder="用户名称">
                                 </div>
                             </div>
                             <div class="form-actions">

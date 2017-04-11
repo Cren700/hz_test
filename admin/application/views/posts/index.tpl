@@ -23,9 +23,11 @@
                         <form action="#" method="get" class="form-horizontal">
                             <div class="control-group" style="padding: 10px">
                                 <div class="span2">
+                                    <label style="display: inline-block">标题</label>
                                     <input class="span8"  type="text" name="post_title" placeholder="资讯标题">
                                 </div>
                                 <div class="span2">
+                                    <label style="display: inline-block">作者</label>
                                     <input class="span8" type="text" name="post_author" placeholder="作者">
                                 </div>
                                 <div class="span3">

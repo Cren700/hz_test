@@ -23,12 +23,15 @@
                         <form action="#" method="get" class="form-horizontal">
                             <div class="control-group" style="padding: 10px">
                                 <div class="span2">
-                                    <input class="span11"  type="text" name="order_no" placeholder="订单号">
+                                    <label style="display: inline-block">订单号</label>
+                                    <input class="span8"  type="text" name="order_no" placeholder="订单号">
                                 </div>
                                 <div class="span2">
-                                    <input class="span11" type="text" name="user_id" placeholder="用户名">
+                                    <label style="display: inline-block">用户名</label>
+                                    <input class="span8" type="text" name="user_id" placeholder="用户名">
                                 </div>
                                 <div class="span3">
+                                    <label style="display: inline-block">时间</label>
                                     <input type="text" data-date-format="yyyy-mm-dd" name="min_date"  class="datepicker span5" placeholder="开始时间">
                                     <label style="display: inline-block"> - </label>
                                     <input class="datepicker span5" data-date-format="yyyy-mm-dd" type="text" name="max_date" placeholder="结束时间">
